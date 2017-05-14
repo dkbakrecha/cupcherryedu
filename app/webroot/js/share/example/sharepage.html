@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery SharePage plugin example</title>
+  <meta name="description" content="jQuery SharePage plugin example">
+  <meta name="author" content="Michael Hohlovich">
+  <link rel="stylesheet" type="text/css" href="../css/jquery.sharepage.css">
+  <style type="text/css">
+    .share-page {
+      width: 500px;
+      margin: 100px auto 0;
+    }
+  </style>
+  <script src="js/jquery.min.js"></script>
+  <script src="../js/jquery.sharepage.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#share-buttons").sharepage({
+        networks: ["facebook", "twitter", "googleplus", "linkedin"],
+        url: "http://cupcherry.com/posts/view/IBPS-Section-wise-tips",
+        title: "SharePage example title",
+        source: "SharePage example page",
+        width: 650,
+        height: 600,
+        design: "buttons"
+      });
+    });
+  </script>
+</head>
+<body>
+  
+    <div id="share-buttons"></div>
+  
+<div class="share-page">
+  <section class="author-box">
+    <img alt="" src="http://1.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=70&amp;d=mm&amp;r=g" class="avatar avatar-70 photo" height="70" width="70">
+    
+    <h4 class="author-box-title">
+      <a href="" class="aboutauthor" rel="author">About the Editorial Staff</a>
+    </h4>
+
+    <div class="author-box-content" itemprop="description">
+      <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Page maintained by <a href="">Syed Balkhi</a>.
+      </p>
+    </div>
+  </section>
+</div>
+</body>
+</html>

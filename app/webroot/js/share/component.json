@@ -1,0 +1,16 @@
+{
+  "name": "sharepage",
+  "version": "1.1.1",
+  "main": [
+    "js/jquery.sharepage.min.js",
+    "css/jquery.sharepage.css",
+    "images/social-icons-color.svg",
+    "images/social-icons-white.svg"
+  ],
+  "dependencies": {
+    "jquery" : ">=1.8.3"
+  },
+  "ignore": [
+    "example"
+  ]
+}

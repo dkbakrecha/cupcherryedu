@@ -57,7 +57,7 @@ h3 {
     line-height: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: 14px; 
+    font-size: 16px; 
     border-bottom: 2px solid transparent;
 }
 
@@ -223,6 +223,32 @@ input[type="submit"], input[type="button"] {
     margin-bottom: 10px;
 }
 
+.box-form input[type="text"]:focus,
+.box-form input[type="email"]:focus,
+.box-form input[type="password"]:focus,
+.box-form textarea:focus{
+    border-color: #bbb;
+    box-shadow: 0 0 2px #c9c9c9;
+}
+
+.fb_login {
+    background-color: #4863ae;
+    border-color: #4863ae;
+    color: white;
+    width: 100%;
+    padding: 12px;
+}
+
+.fb_login:hover {
+    background: #2d4682 none repeat scroll 0 0;
+    border-color: #2d4682;
+    color: #fff;
+}
+
+.fb_login .fa {
+    font-size: 16px;
+    margin-right: 10px;
+}
 /*========================
     Breadcrumb
 ========================*/
@@ -919,6 +945,8 @@ ul.side-links li a{
 
 label.error{
     color: #bf3a2b;
+    font-size: 13px;
+    padding-top: 0;
 }
 
 .option_wrap {
@@ -998,10 +1026,8 @@ label.error{
     height: 100%;
 }
 
-.siteinfo-section{
-    background-color: #337ab7;
+.exam_section .site-info-top-box{
     color: #FFF;
-    padding: 40px 0;
     font-size: 16px;
 }
 
@@ -1037,11 +1063,49 @@ label.error{
     text-decoration: none;
 }
 
+.exam-logo {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    height: 150px;
+    padding: 4px;
+    position: absolute;
+    top: -75px;
+    width: 150px;
+}
+
+.exam-title {
+    font-size: 30px;
+    padding-bottom: 5px;
+    padding-left: 170px;
+    padding-top: 20px;
+}
+
+.exams-view .breadcrumb-wrapper {
+    height: 120px;
+}
+
+.exams-view .breadcrumb {
+    margin-top: 50px;
+}
+.dropdown-menu {
+    min-width: 180px;
+}
+.dropdown-menu > li > a{
+    padding: 10px 20px;
+    font-size: 16px; 
+}
+.dropdown-menu > li > a:hover{
+    background: #337ab7;
+    color: #FFF;
+    font-weight: 600;
+}
+
+
 @media only screen and (max-width: 320px) {
     .navbar-default .navbar-brand{
         width: 250px;
     }
-    
+
     .navbar-default .navbar-brand img{
         width: 100%;
     }

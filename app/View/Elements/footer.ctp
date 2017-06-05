@@ -55,8 +55,8 @@
                         <div class="textwidget">
                             <ul class="side-nav">
                                 <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>">Submit a Note</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'blogs', 'action' => 'index')); ?>">Blog</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'about')); ?>">About Us</a></li>
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Blog</a></li>
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About Us</a></li>
                                 <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Us</a></li>
                             </ul>
                         </div>

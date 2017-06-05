@@ -5,11 +5,16 @@ $sessionUser = $this->Session->read('Auth.User');
 <style>
     .breadcrumb-wrapper {
         background-attachment: fixed;
-        background-image: url("<?php echo $this->webroot; ?>img/slider-bg.jpg");
+        background-image: url("<?php echo $this->webroot; ?>img/sd-bg.png");
         background-position: 50% 0;
         background-repeat: no-repeat;
         background-size: cover;
         /*height: 450px;*/
+    }
+
+    .exams-view .breadcrumb-wrapper {
+        background: rgba(0, 0, 0, 0) url("<?php echo $this->webroot; ?>img/bg-blur.png") repeat scroll 0 0;
+        border-bottom:1px solid #eee;
     }
 </style>
 
@@ -33,7 +38,7 @@ $sessionUser = $this->Session->read('Auth.User');
             <ul class="nav navbar-nav">
                 <?php
                 if (isset($this->request->params['admin'])) {
-
+                    
                 } else {
                     if (!empty($sessionUser['name'])) {
                         ?>
@@ -46,12 +51,25 @@ $sessionUser = $this->Session->read('Auth.User');
                         <?php
                     } else {
                         ?>
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>"><i class="fa fa-graduation-cap"></i> About Us</a></li>
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index'));    ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));    ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book"></i>Learn <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+
+                                <?php
+                                foreach ($examList as $exam) {
+                                    ?>
+                                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </li>
+
+                <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));         ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Blog</a></li>
-                                                <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
                         <?php
                     }
                 }

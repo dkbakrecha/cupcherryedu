@@ -8,11 +8,142 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password');
+        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'socialResponse', 'signup_process');
     }
 
     public function opauth_complete() {
         debug($this->data);
+    }
+
+    public function socialResponse() {
+        $request = $this->request;
+        if ($request->is('post')) {
+            $_data = $request->data;
+            if (!empty($_data)) {
+                $_resData = json_decode($_data['social_response']['resData']);
+                $_socialInfo = array();
+                if ($_data['social_response']['resFrom'] == "IN") {
+                    $_socialInfo['id'] = $_resData->values[0]->id;
+                    $_socialInfo['firstName'] = $_resData->values[0]->firstName;
+                    $_socialInfo['lastName'] = $_resData->values[0]->lastName;
+                    $_socialInfo['emailAddress'] = $_resData->values[0]->emailAddress;
+                    $_socialInfo['resData'] = $_resData;
+                    $_socialInfo['sr_from'] = $_data['social_response']['resFrom'];
+                } elseif ($_data['social_response']['resFrom'] == "FB") {
+                    $_socialInfo['social_key'] = $_resData->id;
+                    $_socialInfo['social_res'] = $_data['social_response']['resData'];
+                    $_socialInfo['social_from'] = $_data['social_response']['resFrom'];
+                } elseif ($_data['social_response']['resFrom'] == "GP") {
+                    $_socialInfo['id'] = $_resData->Ka;
+                    $_socialInfo['firstName'] = $_resData->Za;
+                    $_socialInfo['lastName'] = $_resData->Na;
+                    $_socialInfo['emailAddress'] = $_resData->hg;
+                    $_socialInfo['resData'] = $_resData;
+                    $_socialInfo['sr_from'] = $_data['social_response']['resFrom'];
+                }
+
+                /* Find profile in User table exist or not */
+                $this->loadModel("UserSocial");
+                $userData = $this->UserSocial->find('first', array(
+                    'conditions' => array(
+                        'UserSocial.social_key' => $_socialInfo['social_key']
+                        )));
+                //prd($userData);
+                if (!empty($userData) && $userData['UserSocial']['user_id'] > 0) {
+                    /* if ($userData['User']['payment_status'] == 0) {
+                      /* When payment not done then Go To payment page * /
+                      $this->Session->setFlash('Please make payment for further process.', 'success');
+                      $this->redirect(array('controller' => 'users', 'action' => 'payment', $userData['User']['user_uniqueid']));
+                      } else { */
+                    /* Update Social Info */
+                    //pr($_socialInfo);
+                    //prd($userData);
+                    $_tmpUser = array();
+                    $_tmpUser['User']['id'] = $userData['UserSocial']['user_id'];
+                    if ($_data['social_response']['resFrom'] == "IN") {
+                        $_tmpUser['User']['linkedin_id'] = $_socialInfo['id'];
+                    } elseif ($_data['social_response']['resFrom'] == "GP") {
+                        $_tmpUser['User']['gplus_id'] = $_socialInfo['id'];
+                    }
+                    //prd($_tmpUser);
+                    $_tmpUser['User']['last_login'] = date("Y-m-d H:i:s");
+                    $userData = $this->User->save($_tmpUser);
+
+                    /* Login user HERE */
+                    
+                    $userData = $this->User->find('first', array(
+                        'conditions' => array(
+                            'User.id' => $userData['User']['id']
+                        )
+                            ));
+
+                    $this->Session->write('Auth.User', $userData['User']);
+                    $this->Session->setFlash('Welcome ' . $userData['User']['first_name'], 'default', array('class' => 'alert alert-success'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                    //}
+                } else {
+                    /* Create user as a student account */
+                    $this->Session->write('socialLogin_info', $_socialInfo);
+                    if (empty($userData)) {
+                        $this->UserSocial->save($_socialInfo);
+                    }
+                    $this->redirect(array('controller' => 'users', 'action' => 'signup_process'));
+                }
+            }
+        }
+    }
+
+    public function signup_process() {
+        $this->loadModel("UserSocial");
+        $request = $this->request;
+        /* Read Session Data */
+        $user_social = $this->Session->read('socialLogin_info');
+
+        /* Find profile in User table exist or not */
+        $userData = $this->UserSocial->find('first', array(
+            'conditions' => array(
+                'UserSocial.social_key' => $user_social['social_key']
+                )));
+
+        if ($request->is('post')) {
+            $_data = $request->data;
+            if (!empty($_data)) {
+                $userInfo = $this->User->find('first', array(
+                    'conditions' => array(
+                        'User.email' => $_data['User']['email']
+                    )
+                        ));
+
+                if (!empty($userInfo)) {
+                    /* Mail ID Already exist -- Need to confirm */
+                    $this->User->validationErrors['email'][] = 'It is seam user is alreadty exist';
+                    $this->set('userInfo', $userInfo);
+                } else {
+                    /* Make a new user with mail */
+                    $parts = explode("@", $_data['User']['email']);
+                    $_data['User']['name'] = $parts[0];
+                    $_data['User']['role'] = 2;
+                    $_data['User']['fb_id'] = $user_social['social_key'];
+                    $_data['User']['last_login'] = date("Y-m-d H:i:s");
+                    //pr($_data);
+                    $this->User->create();
+                    $_user = $this->User->save($_data);
+                    //pr($this->User->validationErrors);
+                    //prd($_user);
+                    /* Update UserSocial */
+                    $userData['UserSocial']['user_id'] = $_user['User']['id'];
+                    $this->UserSocial->save($userData);
+
+                    /* Login with newly user */
+                    $this->Session->write('Auth.User', $_user['User']);
+                    //$this->Auth->login($userData['User']);
+                    $this->Session->setFlash('Welcome ' . $_user['User']['first_name'], 'default', array('class' => 'alert alert-success'));
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+            }
+        }
+
+        $this->set('userData', $userData);
     }
 
     public function req_complete() {
@@ -69,8 +200,6 @@ class UsersController extends AppController {
             $data['User']['role'] = '2';
             $data['User']['verification_code'] = substr(md5(microtime()), rand(0, 26), 6);
             $data['User']['status'] = '3';
-
-
 
             if ($this->User->save($data)) {
 
@@ -175,14 +304,14 @@ class UsersController extends AppController {
         $this->loadModel('Category');
         $this->loadModel('Post');
         $this->loadModel('Exam');
-        $this->loadModel('TestType');
+        //$this->loadModel('TestType');
 
-        $testInfo = $this->TestType->find('all', array(
-            'conditions' => array(
-                'TestType.status' => 1,
-                'TestType.quiz_id' => 5
-                )));
-
+        /* $testInfo = $this->TestType->find('all', array(
+          'conditions' => array(
+          'TestType.status' => 1,
+          'TestType.quiz_id' => 5
+          )));
+         */
         $this->Category->bindModel(
                 array('hasMany' => array(
                         'SubCategories' => array(
@@ -211,10 +340,7 @@ class UsersController extends AppController {
             'fields' => array('*')
                 ));
 
-        $examList = $this->Exam->find('all', array(
-            'limits' => array('6'),
-            'fields' => array('*')
-                ));
+
         //pr($blogList);
 
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
@@ -224,8 +350,8 @@ class UsersController extends AppController {
         $this->set('homeContent', $homeContent);
 
 
-        $this->set('examList', $examList);
-        $this->set('testInfo', $testInfo);
+        
+        //$this->set('testInfo', $testInfo);
         $this->set('cateList', $cateList);
         $this->set('blogList', $blogList);
     }

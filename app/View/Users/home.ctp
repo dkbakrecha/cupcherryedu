@@ -6,12 +6,13 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 <style>
     .home_section
     {
-        background-attachment: fixed;
-        background-image: url("<?php echo $this->webroot; ?>img/slider-bg.jpg");
-        background-position: 50% 0;
+        /*background-attachment: fixed;*/
+        background-image: url("<?php echo $this->webroot; ?>img/home.jpg");
+        background-position: bottom center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 350px;
+        /*width: 100%;*/
+        height: 450px;
         position:relative;
     }
 
@@ -28,15 +29,6 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         background-image: url("<?php echo $this->webroot; ?>img/bg-bricks.png");
         background-position: 50% 0;
         position:relative;        
-    }
-
-    .siteinfo-section{
-        background-attachment: fixed;
-        /*background-image: url("<?php //echo $this->webroot;     ?>img/slider-bg.jpg");*/
-        background-position: 50% 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position:relative;
     }
 
     .testlist-section{
@@ -106,6 +98,17 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     <div class="container">
         <h3 class="sub-title be-center">Exam Study Guide</h3>
         <div class="row">
+            <div class="col-lg-4">
+                <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
+            </div>
+            <div class="col-lg-7 col-lg-offset-1">
+                <div class="site-info-top-box">
+                    <?php echo $homeContent['CmsPage']['content']; ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
             <?php
             foreach ($examList as $exam) {
                 //pr($exam);
@@ -126,25 +129,16 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>    
 </div>
-
+<!--
 <div class="siteinfo-section">
     <div class="color-overlay-light"></div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
-            </div>
-            <div class="col-lg-7 col-lg-offset-1">
-                <div class="site-info-top-box">
-                    <?php echo $homeContent['CmsPage']['content']; ?>
-                </div>
-            </div>
-
-        </div>
+        
     </div>    
-</div>
+</div>-->
 
+<?php /*
 
 <div class="testlist-section">
     <div class="container">
@@ -167,7 +161,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-
+*/ ?>
 <div class="category-section">
     <div class="container">
         <h3 class="sub-title be-center">Category List</h3>
@@ -232,7 +226,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-
+<?php /*
 <div class="footer-mailchimp">
     <div class="container text-center">
         <h2>Want more Bootstrap themes &amp; templates?</h2>
@@ -254,3 +248,5 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
     </div>
 </div>
+ * 
+ */?>

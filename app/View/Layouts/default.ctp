@@ -7,8 +7,8 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet"> 
         <!--<link href='https://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>-->
         <?php
         echo $this->Html->meta('icon');
@@ -43,16 +43,22 @@
         echo $this->fetch('script');
         ?>
     </head>
-    <body>
 
-        <?php 
+    <?php
+    $_cont = $this->request->params['controller'];
+    $_act = $this->request->params['action'];
+    $_body_class = $_cont . "-" . $_act;
+    ?>
+    <body class=" <?php echo $_body_class; ?> ">
+
+        <?php
         if (isset($this->request->params['admin'])) {
-            echo $this->element('header_admin'); 
-        }else{
-            echo $this->element('header'); 
-			if(empty($removeBreadcrumb)){
-				echo $this->element('breadcrumb');
-			}
+            echo $this->element('header_admin');
+        } else {
+            echo $this->element('header');
+            if (empty($removeBreadcrumb)) {
+                echo $this->element('breadcrumb');
+            }
         }
         ?>
 

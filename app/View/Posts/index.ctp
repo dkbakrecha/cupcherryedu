@@ -1,10 +1,10 @@
 <style>
-    .m-bottom2 {
+/*    .m-bottom2 {
         margin-bottom: 20px;
     }
     .m-top4 {
         margin-top: 40px;
-    }
+    }*/
 </style>
 
 <div class="row">
@@ -69,5 +69,14 @@
     </div>
     <div class="col-lg-4">
         <!--<div class="fb-page" data-href="https://www.facebook.com/cupcherry" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/cupcherry"><a href="https://www.facebook.com/cupcherry">Cupcherry</a></blockquote></div></div>-->
+        
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Dashboard</h3>
+            </div>
+
+            <div class="box-content">
+            </div>
+        </div>
     </div>
 </div>

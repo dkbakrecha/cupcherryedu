@@ -95,10 +95,10 @@
     }
 
     .testimonials {
-        float: left;
+/*        float: left;
         margin: 5px 25px 40px;
         padding: 0 0 3px;
-        width:100%;
+        width:100%;*/
     }
 
     .testim {
@@ -112,9 +112,11 @@
     }
 
     .testim p {
-        color: #666;
-        line-height: 1.5em;
+        min-height: 70px;
+        color: #575757;
+        font-family: "Droid Serif";
         font-size: 16px;
+        line-height: 22px;
     }
 
     .arrow_box {
@@ -162,38 +164,39 @@
     }
 
 
+    .testinomail-icon{
+        color: #f5f7fa;
+        float: left;
+        font-size: 80px;
+        margin-right: 15px;    
+    }
+
 </style>
 
 <section class="testimonial_wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-offset-1 col-lg-10">
-                <?php
-                //pr($testionialsList);
-                foreach ($testionialsList as $testimonial) {
-                    ?>
-                    <div class="col-xs-12 col-sm-6 clearfix">
-                        <div class="testimonials">
-                            <div class="testim">
-                                <p><i class="fa fa-quote-left"> </i> <?php echo $testimonial['Testimonial']['testimonial_text']; ?></p>
-                                <div class="arrow_box"></div>
-                            </div>
-                            <div class="client">
-                                <?php echo $this->Html->image('no_user.png', array('alt' => 'St.Mary\'s High School')); ?>
-                                <p>
-                                    <span class="name"><?php echo $testimonial['Testimonial']['name']; ?></span>
-                                    <a target="_blank" href="http://www.vidyasoudha.com/" class="inst">Vidya Soudha Public School, Bangalore</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
+
+    <?php
+    //pr($testionialsList);
+    foreach ($testionialsList as $testimonial) {
+        ?>
+        <div class="col-xs-12 col-sm-6">
+            <div class="testimonials">
+                <div class="testim">
+                    <p><i class="fa fa-quote-left testinomail-icon"> </i> <?php echo $testimonial['Testimonial']['testimonial_text']; ?></p>
+                    <div class="arrow_box"></div>
+                </div>
+                <div class="client">
+                    <?php echo $this->Html->image('no_user.png', array('alt' => 'St.Mary\'s High School')); ?>
+                    <p>
+                        <span class="name"><?php echo $testimonial['Testimonial']['name']; ?></span>
+                        <a target="_blank" href="http://www.vidyasoudha.com/" class="inst">Vidya Soudha Public School, Bangalore</a>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-
+        <?php
+    }
+    ?>
 </section>
 <?php /*
   <section class="testimonial-comment">

@@ -24,11 +24,19 @@ class ExamsController extends AppController {
     }
 
     public function view($exam_id) {
+        $this->loadModel("ExamPost");
+
         $examInfo = $this->Exam->find('first', array(
             'conditions' => array('id' => $exam_id)
                 ));
-        
+
         $this->set('examInfo', $examInfo);
+
+        $examposts = $this->ExamPost->find('all', array(
+            'conditions' => array('exam_id' => $exam_id)
+                ));
+
+        $this->set('examposts', $examposts);
     }
 
     public function add() {

@@ -14,16 +14,16 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-6 col-md-6">
                 <?php echo $this->Form->input('name'); ?>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-6 col-md-6">
                 <?php echo $this->Form->input('email'); ?>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-8 col-md-8">
+            <div class="col-lg-12 col-md-12">
                 <?php
                 echo $this->Form->input('comment', array(
                     'type' => 'textarea'

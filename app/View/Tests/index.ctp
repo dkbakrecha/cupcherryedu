@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-8">
         <?php
-        pr($testInfo);
+        //pr($testInfo);
         if (!empty($all_posts)) {
             foreach ($all_posts as $postData) {
                 ?>

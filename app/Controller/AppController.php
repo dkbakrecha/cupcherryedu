@@ -92,6 +92,8 @@ class AppController extends Controller {
 
     protected function SiteSettings() {
         $this->loadModel('Sitesetting');
+        $this->loadModel('Exam');
+        
         $site_settings = $this->Sitesetting->find('all', array(
             'fields' => array('key', 'value'),
                 )
@@ -103,6 +105,13 @@ class AppController extends Controller {
 
         $adminEmail = Configure::read('Site.email');
         Configure::write('ADMIN_MAIL', $adminEmail);
+
+        $examList = $this->Exam->find('all', array(
+            'limits' => array('6'),
+            'fields' => array('*')
+                ));
+
+        $this->set('examList', $examList);
     }
 
     public function __update_asnwer($unique_id, $question_id, $answer_status) {

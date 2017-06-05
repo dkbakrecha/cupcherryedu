@@ -1,7 +1,10 @@
 <!--//app/View/Users/login.ctp-->
 <div class="box login-box">
     <h3 class="be-center">Log In</h3> 
-    <div class="col-lg-4 col-lg-offset-4">
+    <div class="col-lg-3 col-lg-offset-3">
+        <div class="btn btn-default fb_login"><i class="fa fa-facebook"></i>Sign in with Facebook</div>
+    </div>
+    <div class="col-lg-4 ">
         <div class="users box-form">
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User'); ?>
@@ -11,7 +14,7 @@
                 echo $this->Form->input('password', array('label' => false, 'placeholder' => 'Password'));
                 ?>
             </fieldset>
-            <div class="btn fb_login">facebook</div>
+
             <?php echo $this->Form->end(__('Login')); ?>
             <div class="box-form-action">
                 <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Register</a> | 
@@ -41,7 +44,11 @@
         }
     });
 </script>
-
 <?php
+echo $this->Form->create('social_response', array('url' => array('controller' => 'users', 'action' => 'socialResponse')));
+echo $this->Form->hidden('resData');
+echo $this->Form->hidden('resFrom');
+echo $this->Form->end();
+
 echo $this->element('fb-js');
 ?>

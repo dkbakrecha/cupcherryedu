@@ -22,10 +22,9 @@ class PostsController extends AppController {
         $this->paginate['conditions'] = array(
             'Post.status' => '1'
         );
-
+        
         $this->Paginator->settings = $this->paginate;
         $all_posts = $this->Paginator->paginate('Post');
-
         $this->set('all_posts', $all_posts);
     }
 

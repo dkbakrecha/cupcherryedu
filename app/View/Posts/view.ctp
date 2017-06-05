@@ -22,8 +22,6 @@
         <?php
         if (!empty($postDetail)) {
             $_linkUrl = $this->Html->url(array('controller' => 'posts', 'action' => 'view', $postDetail['Post']['title_slug']), TRUE);
-
-            //pr($postDetail);
             ?>
             <div class="post-detail"> 
                 <div class='post-header'>
@@ -52,6 +50,22 @@
                     ?>
                 </div>
                 <div class="share-article"></div>
+
+
+                <section class="author-box">
+                    <?php echo $this->Html->image('user.png', array('class' => 'avatar photo', 'height' => '70', 'width' => '70')); ?>
+
+                    <h4 class="author-box-title">
+                        <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'profile' , $postDetail['User']['name'])); ?>" class="aboutauthor" rel="author">
+                            About <?php echo $postDetail['User']['name']; ?>
+                        </a>
+                    </h4>
+
+                    <div class="author-box-content" itemprop="description">
+                        <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Page maintained by <a href="">Syed Balkhi</a>.
+                        </p>
+                    </div>
+                </section>
             </div>
 
             <?php

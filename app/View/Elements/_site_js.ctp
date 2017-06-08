@@ -48,12 +48,14 @@
         $(".comment_form").on("submit", "#commentForm", function (e) {
             e.preventDefault();
             var _formData = $("#commentForm").serialize();
-            $.ajax({
-                url: "<?php echo $this->Html->url(array('controller' => 'comment', 'action' => 'update')) ?>",
-                type: "POST",
-                data: {'formData': _formData},
+            $(this).ajaxSubmit({
                 success: function (rd) {
-                    alert(rd);
+                    var resData = $.parseJSON(rd);
+                    if (resData.status == 0) {
+                        alert(resData.msg);
+                    } else {
+                        alert(resData.msg);
+                    }
                 },
                 error: function (xhr) {
                 }

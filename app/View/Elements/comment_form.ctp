@@ -1,24 +1,34 @@
 <div class="box comment_form">
     <div class="box-header">
-        <h3 class="box-title">Post a comment</h3>
+        <h3 class="box-title">Add your thoughts</h3>
+        <span class="box-infotext">Your email address will not be published. Required fields are marked *</span>
     </div>
     <div class="box-content">
-        <?php echo $this->Form->create('Comment', array('id' => 'commentForm')); ?>
-        <?php echo $this->Form->hidden('type', array('value' => $type)); ?>
-        <?php echo $this->Form->hidden('type_id', array('value' => $type_id)); ?>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <span class="infotext">Your contact info will not be show</span>
-            </div>
-        </div>
+        <?php
+        echo $this->Form->create('Comment', array(
+            'id' => 'commentForm', 'class' => 'from vertical-form',
+            "url" => array("controller" => "comments", "action" => "update"),
+        ));
+        ?>
+<?php echo $this->Form->hidden('type', array('value' => $type)); ?>
+<?php echo $this->Form->hidden('type_id', array('value' => $type_id)); ?>
 
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <?php echo $this->Form->input('name'); ?>
+                <?php
+                echo $this->Form->input('name', array(
+                    'label' => false,
+                    'placeholder' => 'Name *'
+                ));
+                ?>
             </div>
             <div class="col-lg-6 col-md-6">
-                <?php echo $this->Form->input('email'); ?>
+                <?php
+                echo $this->Form->input('email', array(
+                    'label' => false,
+                    'placeholder' => 'Email *'
+                ));
+                ?>
             </div>
         </div>
 
@@ -26,7 +36,9 @@
             <div class="col-lg-12 col-md-12">
                 <?php
                 echo $this->Form->input('comment', array(
-                    'type' => 'textarea'
+                    'type' => 'textarea',
+                    'label' => false,
+                    'placeholder' => 'Comment *'
                 ));
                 ?>
             </div>
@@ -34,11 +46,11 @@
 
         <div class="row">
             <div class="col-lg-8">
-                <?php echo $this->Form->submit('Post It!'); ?>
+<?php echo $this->Form->submit('Post It!'); ?>
             </div>
         </div>
 
-        <?php echo $this->Form->end(); ?>
+<?php echo $this->Form->end(); ?>
 
     </div>
 </div>

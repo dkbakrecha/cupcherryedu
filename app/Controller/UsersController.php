@@ -8,7 +8,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'socialResponse', 'signup_process');
+        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'socialResponse', 'signup_process', 'profile');
     }
 
     public function opauth_complete() {
@@ -70,7 +70,7 @@ class UsersController extends AppController {
                     $userData = $this->User->save($_tmpUser);
 
                     /* Login user HERE */
-                    
+
                     $userData = $this->User->find('first', array(
                         'conditions' => array(
                             'User.id' => $userData['User']['id']
@@ -290,11 +290,25 @@ class UsersController extends AppController {
         }
     }
 
+    public function profile($username) {
+        if (!empty($username)) {
+            $userData = $this->User->find('first', array(
+                'conditions' => array(
+                    'user.name' => $username
+                )
+                    ));
+            
+            //pr($userData);
+            $this->set('userData', $userData);
+        }
+    }
+
     public function dashboard() {
         
     }
 
     public function home() {
+        $this->set("title_for_layout","Cupcherry Education");
         $this->layout = "home";
         if (!empty($this->loggedinUser)) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -350,7 +364,7 @@ class UsersController extends AppController {
         $this->set('homeContent', $homeContent);
 
 
-        
+
         //$this->set('testInfo', $testInfo);
         $this->set('cateList', $cateList);
         $this->set('blogList', $blogList);

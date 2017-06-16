@@ -95,10 +95,10 @@
     }
 
     .testimonials {
-/*        float: left;
-        margin: 5px 25px 40px;
-        padding: 0 0 3px;
-        width:100%;*/
+        /*        float: left;
+                margin: 5px 25px 40px;
+                padding: 0 0 3px;
+                width:100%;*/
     }
 
     .testim {
@@ -173,135 +173,32 @@
 
 </style>
 
-<section class="testimonial_wrapper">
+<div class="home-text">
+    <h3>A few Happy <span>cupcherry Users</span></h3> 
 
-    <?php
-    //pr($testionialsList);
-    foreach ($testionialsList as $testimonial) {
-        ?>
-        <div class="col-xs-12 col-sm-6">
-            <div class="testimonials">
-                <div class="testim">
-                    <p><i class="fa fa-quote-left testinomail-icon"> </i> <?php echo $testimonial['Testimonial']['testimonial_text']; ?></p>
-                    <div class="arrow_box"></div>
-                </div>
-                <div class="client">
-                    <?php echo $this->Html->image('no_user.png', array('alt' => 'St.Mary\'s High School')); ?>
-                    <p>
-                        <span class="name"><?php echo $testimonial['Testimonial']['name']; ?></span>
-                        <a target="_blank" href="http://www.vidyasoudha.com/" class="inst">Vidya Soudha Public School, Bangalore</a>
-                    </p>
+    <section class="testimonial_wrapper">
+
+        <?php
+        //pr($testionialsList);
+        foreach ($testionialsList as $testimonial) {
+            ?>
+            <div class="col-xs-12 col-sm-6">
+                <div class="testimonials">
+                    <div class="testim">
+                        <p><i class="fa fa-quote-left testinomail-icon"> </i> <?php echo $testimonial['Testimonial']['testimonial_text']; ?></p>
+                        <div class="arrow_box"></div>
+                    </div>
+                    <div class="client">
+                        <?php echo $this->Html->image('no_user.png', array('alt' => 'St.Mary\'s High School')); ?>
+                        <p>
+                            <span class="name"><?php echo $testimonial['User']['first_name'] . " " . $testimonial['User']['last_name']; ?></span>
+                            <a class="inst"><?php echo $testimonial['User']['profession']; ?></a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php
-    }
-    ?>
-</section>
-<?php /*
-  <section class="testimonial-comment">
-
-  <div class="container">
-  <div class="row">
-  <?php echo $this->Form->create('Testimonial', array('class' => 'wpcf7-form')); ?>
-
-  <div class="col-xs-12 col-lg-offset-1 col-sm-8">
-  <div class="heading-wrap">
-  <h2>Post testimonial</h2>
-  <span>Post Your testimonial now</span>
-  </div>
-  <span class="wpcf7-form-control-wrap your-name">
-  <?php
-  echo $this->Form->input('name', array(
-  'placeholder' => 'Name*',
-  'class' => 'form-control',
-  'size' => 40,
-  'label' => false,
-  'div' => false
-  ));
-  ?>
-  <!--<input class="form-control" size="40" value="" name="your-name">-->
-  </span>
-  <span class="wpcf7-form-control-wrap your-email">
-  <?php
-  echo $this->Form->input('email', array(
-  'placeholder' => 'Email*',
-  'class' => 'form-control',
-  'size' => 40,
-  'label' => false,
-  'div' => false
-  ));
-  ?>
-  <!--<input type="email" placeholder="Email*" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" size="40" value="" name="your-email">-->
-  </span>
-  <span class="wpcf7-form-control-wrap your-message">
-  <?php
-  echo $this->Form->input('testimonial_text', array(
-  'placeholder' => 'Comment*',
-  'class' => 'form-control',
-  'size' => 40,
-  'label' => false,
-  'div' => false,
-  'type' => 'textarea'
-  ));
-  ?>
-  <!--<textarea placeholder="comment" aria-invalid="false" class="wpcf7-form-control wpcf7-textarea form-control" rows="10" cols="40" name="your-message"></textarea>-->
-  </span>
-  <?php
-  echo $this->Form->submit('submit now', array(
-  'class' => 'btn btn-default btn-submit',
-  ));
-  ?>
-  <!--<input type="submit" class="wpcf7-form-control wpcf7-submit " >-->
-  </div>
-
-  <?php echo $this->Form->end(); ?>
-  </div>
-
-  <div class="row">
-  <div class="col-xs-12 triangle-img" style="text-align: right;">
-  <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 135 71" xml:space="preserve" class="triangle-svg pos-r svg replaced-svg">
-  <polygon class="triangle-fill" fill="#F4AD23" points="0.2,71.2 66.8,2.2 133.5,71.2 "/>
-  </svg>
-  <img src="http://theemon.com/b/businessplus-wp/LivePreview/wp-content/uploads/2015/11/sky-blue-triangle.png" alt="sky-triangel" class="blue-triangle">
-  </div>
-  </div>
-
-  </div>
-
-  </section>
-
-  <script type="text/javascript">
-  $(document).ready(function () {
-  $('#TestimonialIndexForm .btn-submit').click(function (e) {
-  var _form = $('#TestimonialIndexForm');
-  var _formData = _form.serialize();
-  e.preventDefault();
-  e.stopPropagation();
-
-  $.ajax({
-  url: '<?php echo $this->Html->url(array("controller" => "testimonials", "action" => "create")) ?>',
-  type: 'POST',
-  data: _formData,
-  success: function (data) {
-  //alert(data)
-  try {
-  var pd = $.parseJSON(data);
-  if (pd.status == 0) {
-  alert(pd.msg);
-  window.location = 'https://web.facebook.com/cupcherry/';
-  } else {
-  alert(pd.msg);
-  //window.location = '<?php //echo $this->Html->url(array("controller" => "users", "action" => "index"));              ?>';
-  //window.location.reload();
-  }
-  } catch (e) {
-  window.console && console.log(e);
-  }
-  }
-  });
-  });
-  });
-  </script>
- * 
- */ ?>
+            <?php
+        }
+        ?>
+    </section>
+</div>

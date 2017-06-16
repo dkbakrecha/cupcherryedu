@@ -17,9 +17,12 @@ class TestimonialsController extends AppController {
         $data = $this->request->data;
 
         $testionialsList = $this->Testimonial->find('all', array(
-            'conditions' => array('status' => '1')
-        ));
-        //pr($testionialsList);
+            'conditions' => array(
+                'Testimonial.status' => '1'
+            )
+                )
+        );
+
         $this->set('testionialsList', $testionialsList);
     }
 
@@ -53,7 +56,49 @@ class TestimonialsController extends AppController {
     }
 
     public function admin_add() {
+        $this->loadModel('User');
+
+        if (!empty($this->request->data)) {
+            $data = $this->request->data;
+
+            if ($this->Testimonial->save($data)) {
+                $this->Session->setFlash('Testimonial added successfully.', 'default', array('class' => 'alert alert-success'));
+            } else {
+                $this->Session->setFlash('Testimonial could be added.', 'default', array('class' => 'alert alert-danger'));
+            }
+
+            $this->redirect(array('controller' => 'testimonials', 'action' => 'index'));
+        }
+
+        $userList = $this->User->find('list', array(
+            'conditions' => array('User.status' => '1'),
+                ));
+
+        $this->set('userList', $userList);
+    }
+    
+    public function admin_edit($testimonial_id) {
+        $this->loadModel('User');
+
+        if (!empty($this->request->data)) {
+            $data = $this->request->data;
+
+            if ($this->Testimonial->save($data)) {
+                $this->Session->setFlash('Testimonial added successfully.', 'default', array('class' => 'alert alert-success'));
+            } else {
+                $this->Session->setFlash('Testimonial could be added.', 'default', array('class' => 'alert alert-danger'));
+            }
+
+            $this->redirect(array('controller' => 'testimonials', 'action' => 'index'));
+        }
         
+        $this->request->data = $this->Testimonial->find('first', array('conditions' => array('Testimonial.id' => $testimonial_id)));
+
+        $userList = $this->User->find('list', array(
+            'conditions' => array('User.status' => '1'),
+                ));
+
+        $this->set('userList', $userList);
     }
 
     public function admin_testimonialGrid() {
@@ -97,7 +142,7 @@ class TestimonialsController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-            ));
+                    ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;

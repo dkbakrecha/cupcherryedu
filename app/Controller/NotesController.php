@@ -8,7 +8,7 @@ class NotesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('');
+        $this->Auth->allow('index');
     }
 
     public $components = array('Paginator');
@@ -20,31 +20,24 @@ class NotesController extends AppController {
     );
 
     public function index() {
-        if (!empty($this->request->params['named'])) {
-            $all_questions = array();
-            $_subcate = $this->request->params['named']['subcate'];
+        if (!empty($this->request->query)) {
+            $search_term = $this->request->query['search_term'];
 
-            $this->paginate['conditions'] = array(
-                'Question.status' => '1',
-                'sub_category_id' => $_subcate
+            $paginateCond = array();
+            $paginateCond['or'][] = array('Note.title LIKE' => "%$search_term%");
+            $paginateCond['Note.status'] = 1;
+
+            $this->Paginator->settings = array(
+                'conditions' => array($paginateCond),
+                'limit' => 3
             );
 
-            $this->Paginator->settings = $this->paginate;
-
-            if (!empty($_subcate)) {
-
-                $all_questions = $this->Paginator->paginate('Question');
-
-                /*
-                  $all_questions = $this->Question->find('all',array('conditions' => array(
-                  'status' => '1',
-                  'sub_category_id' => $_subcate
-                  )));
-                 * 
-                 */
+            if (!empty($search_term)) {
+                $notesData = $this->Paginator->paginate('Note');
+              //  prd($this->Paginator);
             }
 
-            $this->set('allQuestions', $all_questions);
+            $this->set('notesData', $notesData);
         } else {
             $notesData = $this->Note->find('all', array(
                 'conditions' => array(
@@ -63,6 +56,99 @@ class NotesController extends AppController {
             )
         ));
         $this->set('cateList', $cateList);
+    }
+
+    public function search($searchData = null) {
+        $this->set('title_for_layout', 'Search Results');
+        $flag = 0;
+        $cond = array();
+        $cond['Note.status !='] = array(0, 2);
+
+        $data = $this->request->data;
+        if (isset($data) && !empty($data)) {
+            //   prd($data);
+        }
+
+        // Requesting Keyword from search box
+        if (!empty($this->request->data)) {
+            $searchData = $this->request->data['s'];
+        }
+        // prd($searchData);
+        if (isset($searchData) && !empty($searchData)) {
+            //  prd($searchData);
+            // Checking Keyword and setting condition for search
+
+            $cond['or'][] = array('Product.title LIKE' => "%$searchData%");
+            $cond['or'][] = array('Product.keywords LIKE' => "%$searchData%");
+            $cond['or'][] = array('Product.product_code LIKE' => "%$searchData%");
+            //$cond['Product.title LIKE'] = "%$data['s']%";
+            //prd($cond);
+
+            $this->Paginator->settings = array(
+                'conditions' => array($cond),
+                'fields' => array('id', 'title', 'product_code', 'specification', 'category_id'),
+                'limit' => 8,
+                    //'paramType' => 'querystring',
+            );
+
+
+            // Setting all required Variables
+            $prdData = $this->Paginator->paginate('Product');
+            // prd($prdData);
+            $paginationQuery = $this->params->paging; // This variable storing pagination information. Which is useful in pagination
+            $this->set('prdData', $prdData);
+            $this->set('searchData', $searchData);
+        }
+
+
+
+        if (!empty($searchData)) {
+
+            $allWords = $this->SearchResult->find('all', array(
+                'fields' => array(
+                    'SearchResult.id',
+                    'SearchResult.search_words',
+                    'SearchResult.hits'),
+            ));
+            //  prd($allWords);
+            $searchResult = array();
+            foreach ($allWords as $words) {
+
+                if ($words['SearchResult']['search_words'] == $searchData) {
+                    $flag = 1;
+                    //  echo $words['SearchResult']['search_words'];
+                    $searchId = $words['SearchResult']['id'];
+                    $searchHits = $words['SearchResult']['hits'];
+                    break;
+                } else {
+                    $flag = 2;
+                }
+            }
+            if ($flag == 1) {
+                // echo 'found';
+                //  echo $searchId;
+                //  echo $searchHits;
+                $data = array(
+                    'id' => $searchId,
+                    'hits' => $searchHits + 1,
+                );
+                $this->SearchResult->save($data);
+                //echo 'Sucess';
+            }
+            if ($flag == 2) {
+                // echo 'not found';
+                //echo $this->Session->setFlash('No result found.');
+                $searchResult['search_words'] = $searchData;
+                $searchResult['hits'] = 1;
+                $this->SearchResult->save($searchResult);
+            }
+        }
+//        if (!empty($this->params->pass[0])) {
+//            $searchData1 = $this->params->pass[0];
+//            $this->request->data['s'] = $searchData1;
+//            $this->params->paging = $paginationQuery;
+//            $this->set('searchData', $this->request->data['s']);
+//        }
     }
 
     public function view($id) {
@@ -137,12 +223,12 @@ class NotesController extends AppController {
 
         if ($request->is(array('post', 'put')) && !empty($request->data)) {
             $_quesArray = $request->data;
-            if(empty($_quesArray['Note']['user_id'])){
+            if (empty($_quesArray['Note']['user_id'])) {
                 $_quesArray['Note']['user_id'] = 1;
             }
 
             if ($ques_res = $this->Note->save($_quesArray)) {
-                $this->Session->setFlash("Note Update Successfully",'success');
+                $this->Session->setFlash("Note Update Successfully", 'success');
                 $this->redirect(array('controller' => 'notes', 'action' => 'index'));
             }
         }
@@ -205,19 +291,15 @@ class NotesController extends AppController {
 
                     $action = '';
                     $status = '';
-                    
-                      if ($row['Note']['status'] == 0)
-                      {
-                      $status .= '<span class="label label-danger" onclick="changeNoteStatus(' . $row['Note']['id'] . ',0)" title="Change Status">Inactive</span>';
-                      }
-                      else if ($row['Note']['status'] == 1)
-                      {
-                      $status .= '<span class="label label-success" onclick="changeNoteStatus(' . $row['Note']['id'] . ',1)" title="Change Status">Active</span>';
-                      }else if ($row['Note']['status'] == 3)
-                      {
-                      $status .= '<span class="label label-warning" onclick="changeNoteStatus(' . $row['Note']['id'] . ',3)" title="Change Status">Pending</span>';
-                      }
-                     
+
+                    if ($row['Note']['status'] == 0) {
+                        $status .= '<span class="label label-danger" onclick="changeNoteStatus(' . $row['Note']['id'] . ',0)" title="Change Status">Inactive</span>';
+                    } else if ($row['Note']['status'] == 1) {
+                        $status .= '<span class="label label-success" onclick="changeNoteStatus(' . $row['Note']['id'] . ',1)" title="Change Status">Active</span>';
+                    } else if ($row['Note']['status'] == 3) {
+                        $status .= '<span class="label label-warning" onclick="changeNoteStatus(' . $row['Note']['id'] . ',3)" title="Change Status">Pending</span>';
+                    }
+
                     //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
                     $action .= $status . '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/notes/edit/' . $row['Note']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';

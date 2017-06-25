@@ -1,4 +1,36 @@
+<?php //prd($this->request->paging);       ?>
+<div class="row top-buffer bottom-buffer">
+    <div class="col-md-12">
+        <?php
+        echo $this->Form->create('SearchForm', array('type' => 'get'));
+        ?>
+        <div class = "input-group input-group-lg">
+            <?php
+            echo $this->Form->input('search_term', array(
+                'div' => false,
+                'class' => 'form-control',
+                'label' => false,
+                'placeholder' => 'Search..',
+                'required' => true,
+                    //'name' => 'q'
+            ));
+            ?>
+            <span class="input-group-btn">
+                <?php
+                echo $this->Form->button('Submit', array(
+                    'type' => 'submit',
+                    'div' => false,
+                    'class' => 'btn btn-secondary',
+                ));
+                ?>  
+            </span>
+        </div>
+        <?php echo $this->Form->end(); ?> 
+    </div> 
+</div>
+
 <div class="row note_list">
+
     <div class="col-lg-8">
         <?php
         if (!empty($notesData)) {
@@ -25,7 +57,7 @@
                         <span><i class="fa fa-eye"></i> View</span>-->
                     </div>
                     <div class="meta-info">
-                        <?php //pr($note); ?>
+                        <?php //pr($note);       ?>
                         <a href="#">By <?php echo $note['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($note['Note']['created'])) ?> | 
                         <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['sub_category_id']); ?></a>
                     </div>
@@ -36,19 +68,44 @@
             }
         }
         ?>
+
+        <ul class="pagination ">
+            <?php
+            // echo $this->paginator->first('First');
+            echo $this->paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            echo $this->paginator->numbers(array(
+                //'before' => '<div ><ul class="pagination">',
+                'separator' => '',
+                'currentClass' => 'active',
+                'tag' => 'li',
+                //  'after' => '</ul></div>',
+                'modulus' => 4, 'currentTag' => 'a'));
+            echo $this->paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&raquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            // echo $this->paginator->last('Last');
+            ?>
+        </ul>
+
+
     </div>
 
     <div class="col-lg-4 side-bar-section">
-
-        <div class="box">
-            <div class="box-content">
-                <ul class="side-links">
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'home')); ?>">My Notes</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>">Submit a Note</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'favorite')); ?>">My Favorite Notes</a></li>
-                </ul>
+        <?php
+        if (!empty($LoggedinUser)) {
+            ?>
+            <div class="box">
+                <div class="box-content">
+                    <ul class="side-links">
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'home')); ?>">My Notes</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>">Submit a Note</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'favorite')); ?>">My Favorite Notes</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+
+            <?php
+        }
+        ?>
+
 
         <div class="box">
             <div class="box-widget-title">

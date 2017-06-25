@@ -29,6 +29,8 @@ class PostsController extends AppController {
     }
 
     public function view($titleslug) {
+        
+        
         if (!empty($titleslug)) {
             $_postDetail = $this->Post->find('first', array(
                 'conditions' => array(
@@ -38,6 +40,7 @@ class PostsController extends AppController {
         }
         $this->set('postDetail', $_postDetail);
 
+        $this->set('title_for_layout', $_postDetail['Post']['title']);
         $this->set('type', 1);
         $this->set('type_id', $_postDetail['Post']['id']);
     }

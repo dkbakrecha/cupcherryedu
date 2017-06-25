@@ -52,11 +52,11 @@
                 <div class="share-article"></div>
 
 
-                <section class="author-box">
+                <section class="author-box bg_blur">
                     <?php echo $this->Html->image('user.png', array('class' => 'avatar photo', 'height' => '70', 'width' => '70')); ?>
 
                     <h4 class="author-box-title">
-                        <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'profile' , $postDetail['User']['name'])); ?>" class="aboutauthor" rel="author">
+                        <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'profile', $postDetail['User']['name'])); ?>" class="aboutauthor" rel="author">
                             About <?php echo $postDetail['User']['name']; ?>
                         </a>
                     </h4>
@@ -76,6 +76,14 @@
 
     <div class="col-lg-4">
         <!--<div class="fb-page" data-href="https://www.facebook.com/cupcherry" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/cupcherry"><a href="https://www.facebook.com/cupcherry">Cupcherry</a></blockquote></div></div>-->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Related Posts</h3>
+            </div>
+
+            <div class="box-content">
+            </div>
+        </div>
     </div>
 
 </div>

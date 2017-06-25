@@ -47,7 +47,24 @@
         
         $(".comment_form").on("submit", "#commentForm", function (e) {
             e.preventDefault();
-            var _formData = $("#commentForm").serialize();
+            
+            $(this).ajaxSubmit({
+                success: function (rd) {
+                    var resData = $.parseJSON(rd);
+                    if (resData.status == 0) {
+                        alert(resData.msg);
+                    } else {
+                        alert(resData.msg);
+                    }
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+        
+        $(".footer-subscribe").on("submit", "#hr-subscribe-form", function (e) {
+            e.preventDefault();
+            
             $(this).ajaxSubmit({
                 success: function (rd) {
                     var resData = $.parseJSON(rd);

@@ -16,7 +16,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         position:relative;
     }
 
-    .exam_section
+    .exam_section, .footer-subscribe
     {
         background : #337ab7;
         background-image: url("<?php echo $this->webroot; ?>img/bg-bricks.png");
@@ -38,7 +38,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
 
 </style>
-
+<?php /*
 <div class="home_section">
     <div class="color-overlay"></div>
     <div class="container">
@@ -93,10 +93,10 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-
+*/ ?>
 <div class="exam_section">
     <div class="container">
-        <h3 class="sub-title be-center">Exam Study Guide</h3>
+        <!--<h3 class="sub-title be-center">Exam Study Guide</h3>-->
         <div class="row">
             <div class="col-lg-4">
                 <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
@@ -226,27 +226,33 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-<?php /*
-<div class="footer-mailchimp">
+
+<div class="footer-subscribe">
     <div class="container text-center">
-        <h2>Want more Bootstrap themes &amp; templates?</h2>
-        <h5>Subscribe to our mailing list to receive an update when new items arrive!</h5>
-        <div id="mc_embed_signup">
-            <form role="form" action="https://startbootstrap.us3.list-manage.com/subscribe/post?u=531af730d8629808bd96cf489&amp;id=afb284632f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+        <h5>Subscribe to our mailing list to receive an update when new exam notification arrive!</h5>
+        <div id="home_subscribe" class="col-lg-6 col-lg-offset-3">
+            <form role="form" id="hr-subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="hr-subscribe-form">
                 <div class="input-group input-group-lg">
-                    <input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Email address...">
+                    <?php 
+                    echo $this->Form->input('email_address',array(
+                        'type' => 'email',
+                        'class' => 'form-control',
+                        'placeholder' => 'Email address...',
+                        'label' => false,
+                        'div' => false
+                    ));
+                    ?>
+                    <!--<input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="">-->
                     <span class="input-group-btn">
                         <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary">Subscribe!</button>
                     </span>
                 </div>
-                <div id="mce-responses">
-                    <div class="response" id="mce-error-response" style="display:none"></div>
-                    <div class="response" id="mce-success-response" style="display:none"></div>
+                <div id="responses">
+                    <div class="response" id="mce-response" style="display:none"></div>
                 </div>
             </form>
         </div>
 
     </div>
 </div>
- * 
- */?>
+ 

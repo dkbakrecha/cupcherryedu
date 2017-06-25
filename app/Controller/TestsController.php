@@ -8,7 +8,7 @@ class TestsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('view', 'result');
+        $this->Auth->allow('');
     }
 
     public function index() {
@@ -23,7 +23,7 @@ class TestsController extends AppController {
          * 
          */
         $this->loadModel('TestType');
-        
+
         $testInfo = $this->TestType->find('all', array(
             'conditions' => array(
                 'TestType.status' => 1,
@@ -34,8 +34,9 @@ class TestsController extends AppController {
 
     public function view($unique_id) {
         $this->loadModel('TestType');
+        $this->loadModel("TestQuestion");
 
-        $quizSession = $this->Session->read('QUIZ_GLOBLE');
+        //$quizSession = $this->Session->read('QUIZ_GLOBLE');
         $testData = $this->TestType->find('first', array(
             'conditions' => array(
                 'TestType.unique_id' => $unique_id
@@ -44,15 +45,26 @@ class TestsController extends AppController {
 
         $uniqueTestId = $testData['TestType']['unique_id'];
 
-        if (!empty($uniqueTestId)) {
-            if (empty($quizSession[$uniqueTestId])) {
-                $this->Session->write('QUIZ_GLOBLE.' . $uniqueTestId, $testData['TestType']);
-            }
+        $testQuestions = $this->TestQuestion->find('all', array(
+            'conditions' => array(
+                'TestQuestion.test_id' => $testData['TestType']['id']
+            )
+                ));
 
-            $question = $this->__findQuestion($uniqueTestId);
-            $this->set('test_id', $testData['TestType']['unique_id']);
-            $this->set('question', $question);
-        }
+        $this->set('testQuestions', $testQuestions);
+
+        /*
+          if (!empty($uniqueTestId)) {
+          //if (empty($quizSession[$uniqueTestId])) {
+          //    $this->Session->write('QUIZ_GLOBLE.' . $uniqueTestId, $testData['TestType']);
+          //}
+
+          $question = $this->__findQuestion($uniqueTestId);
+          $this->set('test_id', $testData['TestType']['unique_id']);
+          $this->set('question', $question);
+          }
+         * 
+         */
     }
 
     public function play() {

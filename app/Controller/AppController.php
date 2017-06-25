@@ -140,11 +140,12 @@ class AppController extends Controller {
 
     public function __findQuestion($unique_id = NULL) {
         $this->loadModel('Question');
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-
+        //$_quiz_data = $this->Session->read('QUIZ_GLOBLE');
+        
         if (!empty($unique_id)) {
+            $this->loadModel('TestQuestion');
             $_ques_info = "";
-            $_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
+            //$_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
             $_bstatus = 0;
 
             // Finding Next unread question
@@ -165,7 +166,7 @@ class AppController extends Controller {
                     }
                 }
             }
-            $this->Session->write('QUIZ_GLOBLE', $_quiz_data);
+            //$this->Session->write('QUIZ_GLOBLE', $_quiz_data);
 
             if (!empty($_ques_info)) {
                 $question = $this->Question->find('first', array('conditions' => array(

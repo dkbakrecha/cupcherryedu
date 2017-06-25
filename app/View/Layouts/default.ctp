@@ -6,6 +6,12 @@
             <?php echo $this->fetch('title'); ?>
         </title>
 
+        <meta name="description" content="Cupcherry.com is an online education portal that provides interactive study material for students and learners. Complete with elaborate interactive exercises, practice tests and expert help, we endeavour to make study easy for students and help them score more.">
+        <meta name="keywords" content="Online study, government exam practice, win exam like pro, ssc, ibps, ldc, exam tips, old papers">
+        <meta name="robots" content="index, nofollow">
+        <meta name="web_author" content="Dharmendra, Jay, Narveer, Shashank and Cupcherry Team">
+        <meta name="language" content="English, Hindi">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet"> 

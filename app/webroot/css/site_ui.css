@@ -1411,6 +1411,19 @@ input[type="password"], input[type="text"], input[type="search"], input[type="ur
     border-bottom: 3px solid #ccc;
 }
 
+.question_index {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    border: 1px solid #999;
+    color: #999;
+    line-height: 25px;
+    text-align: center;
+    margin: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 320px) {
     .navbar-default .navbar-brand{
         width: 250px;

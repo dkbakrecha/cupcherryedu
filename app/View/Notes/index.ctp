@@ -1,4 +1,7 @@
-<?php //prd($this->request->paging);       ?>
+<?php
+//pr($this->Paginator->params());
+//pr($search_term);
+?>
 <div class="row top-buffer bottom-buffer">
     <div class="col-md-12">
         <?php
@@ -6,7 +9,7 @@
         ?>
         <div class = "input-group input-group-lg">
             <?php
-            echo $this->Form->input('search_term', array(
+            echo $this->Form->input('q', array(
                 'div' => false,
                 'class' => 'form-control',
                 'label' => false,
@@ -69,8 +72,15 @@
         }
         ?>
 
+
         <ul class="pagination ">
             <?php
+            //This is important which converts
+            $this->paginator->options(array(
+                'url' => $this->request->query,
+                'convertKeys' => array_keys($this->request->query)
+            ));
+            
             // echo $this->paginator->first('First');
             echo $this->paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
             echo $this->paginator->numbers(array(
@@ -81,7 +91,7 @@
                 //  'after' => '</ul></div>',
                 'modulus' => 4, 'currentTag' => 'a'));
             echo $this->paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&raquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
-            // echo $this->paginator->last('Last');
+            //  echo $this->paginator->last('Last');
             ?>
         </ul>
 

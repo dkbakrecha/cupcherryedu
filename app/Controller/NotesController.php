@@ -20,8 +20,9 @@ class NotesController extends AppController {
     );
 
     public function index() {
+
         if (!empty($this->request->query)) {
-            $search_term = $this->request->query['search_term'];
+            $search_term = $this->request->query['q'];
 
             $paginateCond = array();
             $paginateCond['or'][] = array('Note.title LIKE' => "%$search_term%");
@@ -29,22 +30,31 @@ class NotesController extends AppController {
 
             $this->Paginator->settings = array(
                 'conditions' => array($paginateCond),
+                'paramType' => 'querystring',
                 'limit' => 3
             );
 
             if (!empty($search_term)) {
                 $notesData = $this->Paginator->paginate('Note');
-              //  prd($this->Paginator);
-            }
+                //  prd($this->Paginator);
 
-            $this->set('notesData', $notesData);
+                if (isset($notesData) && !empty($notesData)) {
+                    $this->set(compact('notesData', 'search_term'));
+                }
+            }
         } else {
-            $notesData = $this->Note->find('all', array(
-                'conditions' => array(
-                    'Note.status' => 1
-                )
-            ));
-            //prd($notesData);
+
+            $paginateCond = array();
+            $paginateCond['Note.status'] = 1;
+
+            $this->Paginator->settings = array(
+                'conditions' => array($paginateCond),
+                //'paramType' => 'querystring',
+                'limit' => 5
+            );
+
+            $notesData = $this->Paginator->paginate('Note');
+
             $this->set('notesData', $notesData);
         }
 

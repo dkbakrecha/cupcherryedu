@@ -12,16 +12,6 @@ class TestsController extends AppController {
     }
 
     public function index() {
-        /*
-          $allQuiz = $this->Quiz->query('
-          SELECT
-          Quiz.*,
-          (SELECT COUNT(*) FROM questions as ques WHERE ques.quiz_id = Quiz.id) AS TOT
-          FROM quizzes as Quiz
-          ');
-          $this->set('allQuiz', $allQuiz);
-         * 
-         */
         $this->loadModel('TestType');
 
         $testInfo = $this->TestType->find('all', array(
@@ -43,7 +33,30 @@ class TestsController extends AppController {
             )
                 ));
 
-        $uniqueTestId = $testData['TestType']['unique_id'];
+        $testDetails = $this->Test->find('first', array(
+            'conditions' => array(
+                'user_id' => $this->loggedinUser['id'],
+                'test_code' => 'TA',
+                'test_type_id' => $testData['TestType']['id'],
+                'test_status' => 1
+            )
+                ));
+
+        if (!empty($testDetails)) {
+            //prd($testDetails);
+        } else {
+            /* Create row for Test user */
+            $testArr = array();
+            $testArr['Test']['user_id'] = $this->loggedinUser['id'];
+            $testArr['Test']['test_code'] = 'TA';
+            $testArr['Test']['test_type_id'] = $testData['TestType']['id'];
+            $testArr['Test']['test_status'] = 1;
+
+            $this->Test->create();
+            $testDetails = $this->Test->save($testArr);
+        }
+
+        //$uniqueTestId = $testData['TestType']['unique_id'];
 
         $testQuestions = $this->TestQuestion->find('all', array(
             'conditions' => array(
@@ -52,19 +65,26 @@ class TestsController extends AppController {
                 ));
 
         $this->set('testQuestions', $testQuestions);
+        $this->set('test_id', $testDetails['Test']['id']);
+    }
 
-        /*
-          if (!empty($uniqueTestId)) {
-          //if (empty($quizSession[$uniqueTestId])) {
-          //    $this->Session->write('QUIZ_GLOBLE.' . $uniqueTestId, $testData['TestType']);
-          //}
+    public function showquestion() {
+        $this->layout = FALSE;
+        $requestData = $this->request->data;
+        if (!empty($requestData['ques'])) {
+            $question = $this->__findTestQuestion($requestData['ques']);
+            $this->set('question', $question);
+            $this->set('test_id', $requestData['test_id']);
+        }
+    }
 
-          $question = $this->__findQuestion($uniqueTestId);
-          $this->set('test_id', $testData['TestType']['unique_id']);
-          $this->set('question', $question);
-          }
-         * 
-         */
+    public function __findTestQuestion($question_id = NULL) {
+        $this->loadModel('Question');
+        $question = $this->Question->find('first', array('conditions' => array(
+                'Question.id' => $question_id
+                )));
+
+        return $question;
     }
 
     public function play() {

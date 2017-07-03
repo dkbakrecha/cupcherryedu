@@ -31,44 +31,73 @@ class QuestionsController extends AppController {
         }
 
         $all_questions = $this->Paginator->paginate('Question');
-
         $this->set('allQuestions', $all_questions);
     }
 
     public function getanswer() {
         $this->layout = false;
-        $request = $this->request;
-        parse_str($request->data['formData'], $data);
-        $fromData = $data['data']['Quiz'];
-        
-        if (!empty($fromData)) {
+        $requestData = $this->request->data;
+
+
+        if (!empty($requestData['Quiz'])) {
             $this->loadModel('Answer');
-            $_question_id = $fromData['question_id'];
-            $_answer_id = $fromData['answers'];
-            $_test_id = $fromData['test_id'];
-            
+            $this->loadModel('Test');
+            $_question_id = $requestData['Quiz']['question_id'];
+            $_answer_id = $requestData['Quiz']['answers'];
+            $_test_id = $requestData['Quiz']['test_id'];
+
             $answer = $this->Answer->find('first', array(
                 'conditions' => array(
                     'answer.id' => $_answer_id,
                     'answer.question_id' => $_question_id
                 )
-            ));
-            
-            
-            
-            if(!empty($answer) && $answer['Answer']['correct'] == 1){
+                    ));
+
+            $testDetail = $this->Test->find('first', array('conditions' => array('id' => $_test_id)));
+
+            $userStatus = json_decode($testDetail['Test']['question_summery'], true);
+
+            $userStatus[$_question_id]['user_answer'] = $_answer_id;
+
+            if (!empty($answer) && $answer['Answer']['correct'] == 1) {
                 //Answer is correct
-                $this->__update_asnwer($_test_id, $_question_id, 1);
-            }else{
+                //$this->__update_asnwer($_test_id, $_question_id, 1);
+                $userStatus[$_question_id]['answer_status'] = 1;
+            } else {
                 //Answer is incorrect
-                $this->__update_asnwer($_test_id, $_question_id, 0);
+                //$this->__update_asnwer($_test_id, $_question_id, 0);
+                $userStatus[$_question_id]['answer_status'] = 0;
             }
-            
-            $question = $this->__findQuestion($_test_id);
+
+            $testDetail['Test']['question_summery'] = json_encode($userStatus);
+            $this->Test->save($testDetail);
+
+            //$question = $this->__findQuestion($_test_id);
+            $question = $this->__findUserTestQuestion($testDetail['Test']['test_type_id'], $_question_id);
             $this->set('test_id', $_test_id);
             $this->set('question', $question);
         }
         //exit;
+    }
+
+    public function __findUserTestQuestion($test_id, $question_id) {
+        $this->loadModel('TestQuestion');
+        $this->loadModel('Question');
+
+        $testQues = $this->TestQuestion->find('first', array('conditions' => array(
+                'TestQuestion.test_id' => $test_id,
+                'TestQuestion.question_id' => $question_id,
+                )));
+
+        $neighbors = $this->TestQuestion->find(
+                'neighbors', array('field' => 'id', 'value' => $testQues['TestQuestion']['id'])
+        );
+        //prd($neighbors);
+        $question = $this->Question->find('first', array('conditions' => array(
+                'Question.id' => $neighbors['next']['TestQuestion']['question_id']
+                )));
+
+        return $question;
     }
 
     public function add() {

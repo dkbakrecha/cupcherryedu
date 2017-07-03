@@ -114,8 +114,8 @@ class AppController extends Controller {
         $this->set('examList', $examList);
     }
 
+    /*
     public function __update_asnwer($unique_id, $question_id, $answer_status) {
-
         $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
         $_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
 
@@ -131,10 +131,11 @@ class AppController extends Controller {
                 }
             }
         }
-
         $_quiz_data[$unique_id]['questions_summery'] = json_encode($_testArray);
         $this->Session->write('QUIZ_GLOBLE', $_quiz_data);
     }
+     * 
+     */
 
     /* Find Next Question on test */
 

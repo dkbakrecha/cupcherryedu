@@ -3,12 +3,21 @@
         <?php
         //pr($testInfo);
         if (!empty($testInfo)) {
+
+            $color = array('#4A647F', '#57CBC8', '#EB6161', '#C12F3C', '#F05D4B', '#343B4D', '#17A3C4', '#45BF55');
+
             foreach ($testInfo as $test) {
+                $onecolor = array_rand($color, 1);
                 ?>
                 <div class="col-lg-4">
-                    <div class="panel panel-body">
+                    <div class="panel" >
                         <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['TestType']['unique_id'])); ?>">
-                            <?php echo $test['TestType']['name']; ?>
+                            <div class="panel-heading" style="background-color: <?php echo $color[$onecolor]; ?>; color:#ffffff;">
+                                <?php echo $test['TestType']['name']; ?>
+                            </div>
+                            <div class="panel-body">
+                                Access hundreds of free podcasts
+                            </div>
                         </a>
                     </div>
                 </div>

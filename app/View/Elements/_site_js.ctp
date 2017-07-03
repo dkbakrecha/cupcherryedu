@@ -25,11 +25,11 @@
         
         $("#TestWrapper").on("submit", "#QuizViewForm", function (e) {
             e.preventDefault();
-            var _formData = $("#QuizViewForm").serialize();
-            $.ajax({
+            //var _formData = $("#QuizViewForm").serialize();
+            $(this).ajaxSubmit({
                 url: "<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'getanswer')) ?>",
                 type: "POST",
-                data: {'formData': _formData},
+                //data: {'formData': _formData},
                 success: function (rd) {
                     $('#questionContent').html(rd);
                     if (rd != 0) {

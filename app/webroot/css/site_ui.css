@@ -950,16 +950,17 @@ ul.side-links {
     width: 100%;
 }
 
-ul.side-links li {
-    border-bottom: 1px dotted #eeeeee;
-    margin-bottom: 7px;
-    padding-bottom: 6px;
-}
-
 ul.side-links li a{
+    color: #707070;
+    display: inline-block;
     text-decoration: none;
+    border-bottom: 1px dotted #eeeeee;
+    padding: 6px 0;
+    width: 100%;
 }
-
+ul.side-links li a:hover{
+    background-color: #f9f9f9;
+}
 label.error{
     color: #bf3a2b;
     font-size: 13px;
@@ -1231,14 +1232,14 @@ label.error{
 }
 
 
-input[type="password"], input[type="text"], input[type="search"], input[type="url"], input[type="email"], input[type="number"], input[type="date"], select {
+/*input[type="password"], input[type="text"], input[type="search"], input[type="url"], input[type="email"], input[type="number"], input[type="date"], select {
         border: 1px solid #ccc;
         font-size: 14px;
         height: 27px;
         line-height: 27px;
         max-width: 100%;
         padding: 3px 6px;
-    }
+    }*/
 
     .testinomail-head {
         padding-left: 30px;

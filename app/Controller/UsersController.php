@@ -297,7 +297,7 @@ class UsersController extends AppController {
                     'user.name' => $username
                 )
                     ));
-            
+
             //pr($userData);
             $this->set('userData', $userData);
         }
@@ -308,7 +308,7 @@ class UsersController extends AppController {
     }
 
     public function home() {
-        $this->set("title_for_layout","Cupcherry Education");
+        $this->set("title_for_layout", "Cupcherry Education");
         $this->layout = "home";
         if (!empty($this->loggedinUser)) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -350,12 +350,9 @@ class UsersController extends AppController {
                 'Post.status' => 1,
             ),
             'order' => array('Post.id DESC'),
-            'limits' => array('6'),
+            'limit' => 6,
             'fields' => array('*')
                 ));
-
-
-        //pr($blogList);
 
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOMEPAGE_LEFT'

@@ -1,4 +1,5 @@
-<div class="row">
+<!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+ <div class="row">
     <div class="col-lg-9">
         <div class="box">
             <div class="box-header">
@@ -6,6 +7,13 @@
             </div>
 
             <div class="box-content">
+                <ul id="short">
+                    <li>D</li>
+                    <li>H</li>
+                    <li>A</li>
+                    <li>R</li>
+                    <li>M</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -14,12 +22,20 @@
         <div class="box">
             <div class="box-content">
                 <ul class="side-links">
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes','action' => 'add')); ?>"> Submit a Note </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions','action' => 'add')); ?>"> Submit a Question </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages','action' => 'feedback')); ?>"> Make a Feedback </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages','action' => 'help')); ?>"> Help </a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>"> Submit a Note </a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Submit a Question </a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'feedback')); ?>"> Make a Feedback </a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'help')); ?>"> Help </a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#short').sortable();
+    });
+    
+    
+</script>

@@ -77,6 +77,7 @@
             </div>
         </div>
 
+        
         <?php
         if (!isset($this->request->params['admin'])) {
             echo $this->element('social');

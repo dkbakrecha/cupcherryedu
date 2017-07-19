@@ -100,9 +100,11 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         <div class="row">
             <div class="col-lg-4">
                 <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
+                <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><div class="new-notification-home-box">New Exam Notifications</div></a>
             </div>
-            <div class="col-lg-7 col-lg-offset-1">
+            <div class="col-lg-8">
                 <div class="site-info-top-box">
+                    <h1>New Education Practice Tests 2017</h1>
                     <?php echo $homeContent['CmsPage']['content']; ?>
                 </div>
             </div>

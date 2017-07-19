@@ -16,7 +16,7 @@ class CommentsController extends AppController {
         if ($request->is('post')) {
             $commentData = $request->data;
             $commentData['Comment']['status'] = 3;
-            
+
             $returnData = array();
             if ($this->Comment->save($commentData)) {
                 $returnData['status'] = 1;
@@ -111,7 +111,7 @@ class CommentsController extends AppController {
         $this->request->data = $examinfo;
     }
 
-    public function admin_griddata() {
+    public function admin_cmsGrid() {
         $request = $this->request;
         $this->autoRender = false;
 
@@ -133,7 +133,7 @@ class CommentsController extends AppController {
 
                 if (isset($column['searchable']) && $column['searchable'] == 'true') {
                     //pr($column);
-                    if ($column['name'] == 'User.date_added' && !empty($column['search']['value'])) {
+                    if ($column['name'] == 'Comment.date_added' && !empty($column['search']['value'])) {
                         $condition['User.date_added LIKE '] = '%' . date('Y-m-d', strtotime($column['search']['value'])) . '%';
                     } elseif (isset($column['name']) && $column['search']['value'] != '') {
                         $condition[$column['name'] . ' LIKE '] = '%' . $column['search']['value'] . '%';
@@ -142,11 +142,11 @@ class CommentsController extends AppController {
             }
 
             //prd($condition);
-            $total_records = $this->Exam->find('count', array('conditions' => $condition));
+            $total_records = $this->Comment->find('count', array('conditions' => $condition));
 
 
-            $fields = array('Exam.id', 'Exam.title', 'Exam.status');
-            $gridData = $this->Exam->find('all', array(
+            $fields = array('Comment.*');
+            $gridData = $this->Comment->find('all', array(
                 'conditions' => $condition,
                 'fields' => $fields,
                 'order' => $orderby,
@@ -177,25 +177,30 @@ class CommentsController extends AppController {
                      */
                     //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
-                    if ($row['Exam']['status'] == 3) {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Exam']['id'] . ')">Publish</span>';
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Exam']['id'] . ')">Discard</span>';
-                    } elseif ($row['Exam']['status'] == 1) {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(0,' . $row['Exam']['id'] . ')">Published</span>';
+                    if ($row['Comment']['status'] == 3) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Comment']['id'] . ')">Publish</span>';
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Comment']['id'] . ')">Discard</span>';
+                    } elseif ($row['Comment']['status'] == 1) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(0,' . $row['Comment']['id'] . ')">Published</span>';
                     } else {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(1,' . $row['Exam']['id'] . ')">Inactive</span>';
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(1,' . $row['Comment']['id'] . ')">Inactive</span>';
+                    }
+                    $action_view = "";
+                    if ($row['Comment']['type'] == 1) {
+                        $action_view = '&nbsp;&nbsp;&nbsp; <a href="' . $this->webroot . 'admin/post/edit/' . $row['Comment']['type_id'] . '" onclick="" title="View related post">VIEW</a>';
                     }
 
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/comments/edit/' . $row['Comment']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
-                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/exams/edit/' . $row['Exam']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
+                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_question(' . $row['Comment']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
 
-                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_question(' . $row['Exam']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
-
-                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Exam']['id'] . '"/></td>';
+                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Comment']['id'] . '"/></td>';
 
                     $return_result['data'][] = array(
-                        $row['Exam']['id'],
-                        $row['Exam']['title'],
+                        $row['Comment']['id'],
+                        $row['Comment']['name'] . "<br>" . $row['Comment']['email'] . "<br>" . $action_view,
+                        $row['Comment']['comment'],
+                        $row['Comment']['created'],
                         $action
                     );
                     $i++;

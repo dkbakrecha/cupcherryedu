@@ -28,6 +28,7 @@ $sessionUser = $this->Session->read('Auth.User');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            
             <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
                 <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
             </a>

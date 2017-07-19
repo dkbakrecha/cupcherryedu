@@ -10,98 +10,121 @@ echo $this->Html->script(array(
         <div class="panel-heading">
             Add New Post
             <a class='btn btn-purple btn-sm pull-right' href='<?php
-            echo $this->Html->url(array('controller' => 'posts', 'action' => 'index',
-                'admin' => true));
-            ?>'>Back</a>
+echo $this->Html->url(array('controller' => 'posts', 'action' => 'index',
+    'admin' => true));
+?>'>Back</a>
         </div>
         <div class="panel-body">
-            <div class="form-horizontal" >
-                <?php
-                echo $this->Form->create('Post', array("role" => "form", 'enctype' => 'multipart/form-data'));
-                echo $this->Form->hidden('id');
-                ?>  
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Title</label>
-                    <div class="col-sm-7">
-                        <?php
-                        echo $this->Form->input('title', array(
-                            'class' => 'form-control',
-                            'label' => false,
-                            'placeholder' => 'Post Title'
-                        ));
-                        ?>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Content</label>
-                    <div class="col-sm-7">
-                        <?php
-                        echo $this->Form->input('content', array(
-                            'class' => 'form-control',
-                            'label' => false,
-                            'placeholder' => 'Content',
-                            'type' => 'textarea'
-                        ));
-                        ?>
+            <div class="col-sm-8">
+                <div class="form-horizontal" >
+                    <?php
+                    echo $this->Form->create('Post', array("role" => "form", 'enctype' => 'multipart/form-data'));
+                    echo $this->Form->hidden('id');
+                    ?>          
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                            <?php
+                            echo $this->Form->input('title', array(
+                                'class' => 'form-control',
+                                'label' => false,
+                                'placeholder' => 'Post Title'
+                            ));
+                            ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Cover Image</label>
-                    <div class="col-sm-7">
-                        <?php
-                        echo $this->Form->input('cover_image', array(
-                            'class' => 'form-control',
-                            'label' => false,
-                            'placeholder' => 'Cover Image',
-                            'options' => $mediaImages
-                        ));
-                        ?>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <?php
+                            echo $this->Form->input('content', array(
+                                'class' => 'form-control',
+                                'label' => false,
+                                'placeholder' => 'Content',
+                                'type' => 'textarea'
+                            ));
+                            ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">User</label>
-                    <div class="col-sm-7">
-                        <?php
-                        echo $this->Form->input('user_id', array(
-                            'class' => 'form-control',
-                            'label' => false,
-                            'placeholder' => 'Select User',
-                            'options' => $userList
-                        ));
-                        ?>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Cover Image</label>
+                        <div class="col-sm-7">
+                            <?php
+                            echo $this->Form->input('cover_image', array(
+                                'class' => 'form-control',
+                                'label' => false,
+                                'placeholder' => 'Cover Image',
+                                'options' => $mediaImages
+                            ));
+                            ?>
+                        </div>
                     </div>
-                </div>
 
-                
-
-                <div class="form-group">
-                    <div class="col-md-2 col-sm-4 col-xs-12 control-label">
-                        <span></span>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">User</label>
+                        <div class="col-sm-7">
+                            <?php
+                            echo $this->Form->input('user_id', array(
+                                'class' => 'form-control',
+                                'label' => false,
+                                'placeholder' => 'Select User',
+                                'options' => $userList
+                            ));
+                            ?>
+                        </div>
                     </div>
-                    <div class="col-md-5 col-sm-6 col-xs-12">
-                        <?=
-                        $this->Form->button(__('Save'), array(
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-2 col-sm-4 col-xs-12 control-label">
+                            <span></span>
+                        </div>
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <?=
+                            $this->Form->button(__('Save'), array(
                             'class' => 'btn btn-primary btn-flat',
                             'type' => 'submit'
-                        ));
-                        ?>
-                        &nbsp;
-                        <?=
-                        $this->Form->button(__('Cancel'), array(
+                            ));
+                            ?>
+                            &nbsp;
+                            <?=
+                            $this->Form->button(__('Cancel'), array(
                             'class' => 'btn btn-default btn-flat',
                             'type' => 'button',
                             'onclick' => 'goBack()',
-                        ));
-                        ?>
+                            ));
+                            ?>
+                        </div>
                     </div>
+                    <?php echo $this->Form->end(); ?> 
                 </div>
-
-
-                <?php echo $this->Form->end(); ?>
             </div>
+            <div class="col-sm-4">
+                <h4>Add In Exam</h4>
+                <?php
+                echo $this->Form->create('ExamPost', array("role" => "form", 'enctype' => 'multipart/form-data'));
+                echo $this->Form->hidden('post_id',array('value' => $this->request->data['Post']['id']));
+
+                echo $this->Form->input('exam_id', array(
+                    'class' => 'form-control',
+                    'label' => false,
+                    'placeholder' => 'Select Exam',
+                    'options' => $examList
+                ));
+
+                echo $this->Form->button(__('Add It'), array(
+                    'class' => 'btn btn-primary btn-flat',
+                    'type' => 'submit'
+                ));
+
+                echo $this->Form->end();
+                ?>
+            </div>
+
+
         </div>
     </div>
 
@@ -109,5 +132,8 @@ echo $this->Html->script(array(
     <script type="text/javascript">
         $(document).ready(function () {
             $('textarea#PostContent').ckeditor();
+            
+            
+            ExamPostAdminEditForm
         });
     </script>

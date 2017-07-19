@@ -1,3 +1,10 @@
+<a href="#0" class="cd-top">Top</a>
+<div id="new-notification-container">
+    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
+        <div id="new-notification-placeholder"><i class="glyphicon glyphicon-bell"></i></div>
+    </a>
+</div>
+
 <footer id="footer">
     <?php /*
       <div class="footer-top-links">
@@ -76,16 +83,16 @@
 
                                 if (!empty($_url_facebook)) {
                                     ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
-                                }
+                            }
 
-                                if (!empty($_url_twitter)) {
+                            if (!empty($_url_twitter)) {
                                     ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
-                                    }
+                            }
 
-                                    if (!empty($_url_youtube)) {
-                                        ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
-                                    }
-                                    ?>
+                            if (!empty($_url_youtube)) {
+                                    ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                            }
+                                ?>
                             </ul>
 
                             <p class="social-media-text" style="display: none;">We can be supported here!</p>

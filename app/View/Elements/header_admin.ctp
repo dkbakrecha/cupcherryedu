@@ -13,7 +13,7 @@ $sessionUser = $this->Session->read('Auth.User');
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
+            <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'dashboard')); ?>">
                 <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
             </a>
         </div>
@@ -33,6 +33,7 @@ $sessionUser = $this->Session->read('Auth.User');
                         <ul class="dropdown-menu">
                             <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'categories', 'action' => 'index')); ?>">Categories</a></li>
                             <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'exams', 'action' => 'index')); ?>">Exams</a></li>
+                            <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'exam_notifications', 'action' => 'index')); ?>">Exam Notification</a></li>
                             <li><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'testimonials', 'action' => 'index')); ?>">Testimonials</a></li>
                             <li><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'posts', 'action' => 'index')); ?>">Blogs</a></li>
                             <li><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'media', 'action' => 'index')); ?>">Media</a></li>
@@ -59,8 +60,8 @@ $sessionUser = $this->Session->read('Auth.User');
                         ?>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>"><i class="fa fa-comments-o"></i> About Us</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-comments-o"></i> Features</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index'));    ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>-->
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));    ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index'));     ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));     ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Blog</a></li>
 
                         <?php

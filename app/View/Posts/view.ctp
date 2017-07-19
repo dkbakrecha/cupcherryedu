@@ -1,16 +1,3 @@
-<style>
-    .m-bottom2 {
-        margin-bottom: 20px;
-    }
-    .m-top4 {
-        margin-top: 40px;
-    }
-
-    .post-info {
-        margin: 0 0 20px 0;
-    }
-</style>
-
 <!--<meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />-->
 <!--<meta property="og:type"               content="article" />-->
 <meta property="og:title"              content="CUPCHERRY : <?php echo $postDetail['Post']['title']; ?>" />
@@ -52,7 +39,7 @@
                 <div class="share-article"></div>
 
 
-                <section class="author-box bg_blur">
+                <section class="author-box">
                     <?php echo $this->Html->image('user.png', array('class' => 'avatar photo', 'height' => '70', 'width' => '70')); ?>
 
                     <h4 class="author-box-title">
@@ -62,8 +49,7 @@
                     </h4>
 
                     <div class="author-box-content" itemprop="description">
-                        <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Page maintained by <a href="">Syed Balkhi</a>.
-                        </p>
+                        <p>Software Engineer, Blogger, Roamer, Foodie</p>
                     </div>
                 </section>
             </div>

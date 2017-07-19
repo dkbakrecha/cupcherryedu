@@ -22,15 +22,15 @@ class PostsController extends AppController {
         $this->paginate['conditions'] = array(
             'Post.status' => '1'
         );
-        
+
         $this->Paginator->settings = $this->paginate;
         $all_posts = $this->Paginator->paginate('Post');
         $this->set('all_posts', $all_posts);
     }
 
     public function view($titleslug) {
-        
-        
+
+
         if (!empty($titleslug)) {
             $_postDetail = $this->Post->find('first', array(
                 'conditions' => array(
@@ -64,6 +64,7 @@ class PostsController extends AppController {
     public function admin_edit($post_id) {
         $this->loadModel('Media');
         $this->loadModel('User');
+        $this->loadModel('Exam');
 
         if ($this->request->is('post') || $this->request->is('put')) {
             $postData = $this->request->data;
@@ -98,7 +99,12 @@ class PostsController extends AppController {
         $userList = $this->User->find('list', array(
             'conditions' => array('User.status' => '1'),
                 ));
+        
+        $examList = $this->Exam->find('list', array(
+            'conditions' => array('Exam.status' => '1'),
+                ));
 
+        $this->set('examList', $examList);
         $this->set('userList', $userList);
         $this->set('mediaImages', $mediaImages);
     }

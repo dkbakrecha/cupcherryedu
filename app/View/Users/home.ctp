@@ -115,7 +115,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
             foreach ($examList as $exam) {
                 //pr($exam);
                 ?>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-xs-6">
 
                     <a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>">
                         <div class="exam-block">

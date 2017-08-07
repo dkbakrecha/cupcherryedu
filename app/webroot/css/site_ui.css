@@ -62,12 +62,13 @@ h3 {
 }
 
 .navbar-default .navbar-nav > li > a{
-    color: #337ab7;
+    color: #707070;
+    border-bottom: 3px solid transparent;
 }
 
 .navbar-default .navbar-nav > li > a:hover{
-    color: #ff0033;
-    border-bottom: 2px solid #ff0033;
+    color: #707070;
+    border-bottom: 3px solid #707070;
     background: #eff0f1;
     text-decoration: none;
     outline: none;
@@ -1591,7 +1592,7 @@ label.error{
     font-size: 14px;
     line-height: 21px;
 }
- 
+
 .site-info-top-box strong {
     color: #337ab7;
 }
@@ -1607,12 +1608,179 @@ label.error{
     text-transform: uppercase;
 }
 
-@media only screen and (min-width: 768px) {
-    .cd-top {
-        right: 20px;
-        bottom: 20px;
+.alert-info.welcome-msg{
+    margin-top: 10px;
+}
+
+.alert-success.site-top{
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.headerlgin-prflmenuimg {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 2px;
+}
+
+.dropdown-toggle.profile-mnu-wrapper {
+    padding: 10px;
+}
+
+.m-bottom5{
+  margin-bottom: 5px;  
+}
+
+.m-bottom15{
+  margin-bottom: 15px;  
+}
+
+
+.menu-ipad{
+    display: none;
+}
+.mainmenuulli {
+    float: right;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.mainmenuulli li {
+    float: left;
+    height: 44px;
+    list-style: outside none none;
+    margin-right: 20px;
+}
+
+.mainmenuulli li {
+    border-bottom: 0 solid #fff;
+    border-left: 4px solid #fff;
+    height: auto;
+    padding-left: 10px;
+}
+
+.mainmenuulli li:hover, .mainmenuulli li.active {
+    border-bottom: 0 solid #1caad9;
+    border-left: 4px solid #1caad9;
+}
+
+.mainmenuulli li a {
+    color: #000;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    height: 32px;
+    padding-top: 6px;
+    text-decoration: none;
+}
+
+.mainmenuulli li a:hover {
+    color: #1caad9;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width : 768px) {
+    .menu-desktopmobile{
+        display: none;
+    }
+    .menu-ipad{
+        display: block;
+    }
+    .mainmenucover .navbar-header{
+        width: 100% !important;
+    }
+    .navbar-toggle{
+        display: block;
+        margin: 0;
+    }
+    .navbar-default .navbar-toggle {
+        border-color: #ddd;
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #888;
+    }
+    .ipad-responsive-menu{
+        background: #ffffff none repeat scroll 0 0;
+        float: right;
+        padding: 15px 0;
+        position: fixed;
+        right: -300px;
+        top: 58px;
+        transition: all 0.5s ease-in-out 0s;
+        width: 300px;
+        z-index: 999;
+        height: 100%;
+        overflow:auto;
+        /*border-top:1px solid #333;*/
+    }
+    .no-scroll{
+        overflow:hidden;
+    }
+    .ipad-responsive-menu-show{
+        height: 100%;
+        position: fixed;
+        right: 0;
+        top: 58px;
+        transition: all 0.5s ease-in-out 0s;
+    }
+    .ipad-responsive-menu-outer{
+        position:absolute;
+        right:20px;
+        top:12px;
+    }
+    .ipad-responsive-menu .mainmenuulli li{
+        width:100%;
+    }
+    .mainmenuulli li:nth-child(8){
+        margin:0px !important;
+    }
+    .mainmenuulli li a, .mainmenuulli li a:hover{
+        font-size:14px !important;
+    }
+    .mainmenuulli li span{
+        display:none !important;
+    }
+    .mainmenuulli li:last-child a, .mainmenuulli li:last-child a:hover{
+        font-size:14px !important;
+        height:32px;
+        width:100% !important;
+    }
+    .practice-lastsection .two .innertwo{
+        margin-top: 20px;
     }
 }
+
+@media (min-width : 1024px) and (max-width : 1199px) {
+    /*HEADER*/
+    .mainmenucover .navbar-header{
+        width: 130px;
+    }
+    .mainmenucover .navbar-brand img{
+        width: 100%
+    }
+    .mainmenuulli li a, .mainmenuulli li a:hover{
+        font-size: 12px;
+    }
+    .mainmenuulli li span{
+        margin-right: 3px;
+        margin-left: 3px;
+        font-size: 12px;
+    }
+    .mainmenuulli li:nth-child(8){
+        margin-right: 5px;
+        margin-left: 10px;
+    }
+    .mainmenuulli li:last-child a, .mainmenuulli li:last-child a:hover{
+        height: 28px;
+        width: 52px;
+
+        font-size: 10px;
+    }
+}
+
 @media only screen and (min-width: 1024px) {
     .cd-top {
         height: 60px;
@@ -1623,6 +1791,14 @@ label.error{
 }
 
 
+@media only screen and (min-width: 768px) {
+    .cd-top {
+        right: 20px;
+        bottom: 20px;
+    }
+
+}
+
 @media only screen and (max-width: 320px) {
     .navbar-default .navbar-brand{
         width: 250px;
@@ -1630,5 +1806,18 @@ label.error{
 
     .navbar-default .navbar-brand img{
         width: 100%;
+    }
+
+    #new-notification-container{
+        display: none;
+    }
+
+    #footer{
+        display: none;
+    }
+
+    .category-section{
+        display: none;
+
     }
 }

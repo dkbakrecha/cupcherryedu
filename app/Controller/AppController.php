@@ -64,14 +64,15 @@ class AppController extends Controller {
         }
 
         //Check Quiz session and make globle Settings
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
+        /*$_quiz_data = $this->Session->read('QUIZ_GLOBLE');
         if (empty($_quiz_data)) {
             $this->_quiz_globle['CurrentQuiz'] = "1";
             $this->Session->write('QUIZ_GLOBLE', $this->_quiz_globle);
-        }
+        }*/
         /* END Check session */
 
         $LoggedinUser = $this->Session->read('Auth.User');
+        //pr($LoggedinUser);
         $this->loggedinUser = $LoggedinUser;
         $this->set('LoggedinUser', $LoggedinUser);
 

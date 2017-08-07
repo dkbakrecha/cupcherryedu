@@ -1,7 +1,7 @@
 <div class="warper container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Comments
+            Words <a href="<?php echo $this->Html->url(array('controller' => 'words', 'action' => 'add' , 'admin' => true)); ?>">Add New</a>
         </div>
         <div class="panel-body">
             <div class="dataTable_wrapper">
@@ -9,9 +9,9 @@
                     <thead>
                         <tr class="heading" >
                             <th style="min-width: 22px;">#ID</th>
-                            <th>Name</th>
-                            <th>Comment</th>
-                            <th>Created</th>
+                            <th>Words</th>
+                            <th>Hint</th>
+                            <th>Example</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -47,13 +47,13 @@
             "lengthMenu": [10, 20, 50, 100], //[[2,3,10, 25, 50, -1], [2,3,10, 25, 50, "All"]],
             "pageLength": 10, ////echo $record_pr_pg;,
             //"filter":false,        
-            "ajax": '<?php echo $this->Html->url(array("controller" => "comments", "action" => "cmsGrid", "admin" => TRUE)); ?>',
+            "ajax": '<?php echo $this->Html->url(array("controller" => "words", "action" => "cmsGrid", "admin" => TRUE)); ?>',
             "columns": [
-                {"name": "Comment.id", "orderable": false, "searchable": false, 'width': '5%', 'sClass': 'text-center'},
-                {"name": "Comment.name", 'width': '20%'},
-                {"name": "Comment.comment", 'width': '60%'},
-                {"name": "Comment.created", 'width': '15%'},
-                {"name": "Comment.common", "orderable": false, "searchable": false, 'width': '15%', 'sClass': 'text-center'},
+                {"name": "Word.id", "orderable": false, "searchable": false, 'width': '5%', 'sClass': 'text-center'},
+                {"name": "Word.word", 'width': '15%'},
+                {"name": "Word.description", 'width': '40%'},
+                {"name": "Word.example", 'width': '40%'},
+                {"name": "Word.common", "orderable": false, "searchable": false, 'width': '15%', 'sClass': 'text-center'},
             ],
             "order": [
                 [0, "asc"]//4 is here column name

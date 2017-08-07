@@ -1,5 +1,5 @@
 <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
- <div class="row">
+<div class="row">
     <div class="col-lg-9">
         <div class="box">
             <div class="box-header">
@@ -7,13 +7,10 @@
             </div>
 
             <div class="box-content">
-                <ul id="short">
-                    <li>D</li>
-                    <li>H</li>
-                    <li>A</li>
-                    <li>R</li>
-                    <li>M</li>
-                </ul>
+                <div class="alert alert-info welcome-msg" role="alert">
+                    <?php echo $dashContent['CmsPage']['content']; ?>
+                </div>
+
             </div>
         </div>
     </div>

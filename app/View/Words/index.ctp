@@ -9,6 +9,7 @@
         padding: 0; 
         display: inline-block;
     }
+
     #sortable-1 li { 
         background: #355c7d;
         border: 1px solid #EFEFEF;
@@ -21,35 +22,83 @@
         line-height: 40px;
         width: 40px;
         height: 40px;
-        font-size: 18px; }
+        font-size: 18px; 
+    }
 
+    .jumbbleword-wrapper{
+        background: rgba(0, 0, 0, 0) url("<?php echo $this->webroot; ?>img/bg-blur.png") repeat scroll 0 0;
+        border:2px solid #355c7d ;
+        margin-top: 40px;
+        border-radius: 4px;
+    }   
+
+    .word-time-wrapper{
+        position: relative;
+    }
+
+    .word-time-wrapper .word-time {
+        background: #fff none repeat scroll 0 0;
+        border: 2px solid;
+        border-radius: 4px;
+        font-size: 30px;
+        left: 30px;
+        line-height: 30px;
+        padding: 5px;
+        position: absolute;
+        top: -75px;
+        width: 150px;
+    }
+
+    .wordresult-box {
+        padding: 40px 100px 0;
+    }
 </style>
+
 <script src = "https://rawgit.com/carlo/jquery-base64/master/jquery.base64.min.js"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-
 <?php echo $this->Html->script(array('jquery.ui.touch-punch.min')); ?>
 
-<div class="row">	
-    <div class="col-lg-8">	
-        <div class="jumbbleword-wrapper">
-            <?php
-            if (!empty($codeArry)) {
-                ?><ul id="sortable-1" data-key="<?php echo $codeWord; ?>"><?php
-            foreach ($codeArry as $_c) {
-                    ?><li id="<?php echo $_c; ?>"><?php echo $_c; ?></li><?php
-            }
-                ?></ul><?php
-            }
-            ?>
+<div class="home-text">
+    <h3>Word <span>Jumble</span></h3> 
 
-            <label id="minutes">00</label>:<label id="seconds">00</label>
+    <div class="content-text">
+        <div class="row">	
+            <div class="col-lg-12">
+                <div class="alert alert-info top-message">
+                    <?php echo $wordContent['CmsPage']['content']; ?>
+                </div>
+                <div class="jumbbleword-wrapper">
+                    <div class="word-time-wrapper">
+                        <div class="word-time">
+                            <label id="minutes">00</label>:<label id="seconds">00</label>
+                        </div>
+                    </div>
+                    <?php
+                    if (!empty($codeArry)) {
+                        ?><ul id="sortable-1" data-key="<?php echo $codeWord; ?>"><?php
+                    foreach ($codeArry as $_c) {
+                            ?><li id="<?php echo $_c; ?>"><?php echo $_c; ?></li><?php
+                    }
+                        ?></ul><?php
+                    }
+                    ?>
+                    <div class="hind-box">
+                        <?php echo $codeRow['Word']['description']; ?>
+                    </div>
+
+                    <div class="wordresult-box">
+                        <?php echo $wordContentBottom['CmsPage']['content']; ?>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div>
-            <?php echo $codeRow['Word']['description']; ?>
-        </div>
+
     </div>
 </div>
+
+
 
 <script>    
     var minutesLabel = document.getElementById("minutes");
@@ -66,7 +115,7 @@
                 var productOrder = $(this).sortable('toArray');
                 _productOrder = productOrder.join("");
                 if(_productOrder == _decodedString){
-                    alert(_productOrder);
+                    $(".wordresult-box").show();
                     clearInterval(wordTimer);
                 }
             }

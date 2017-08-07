@@ -21,15 +21,18 @@ class QuestionsController extends AppController {
 
     public function index() {
         $request = $this->request;
-        $this->Paginator->settings = $this->paginate;
+        
 
         $this->paginate['conditions']['Question.status'] = 1;
+        $this->paginate['order'] = array('id' => 'DESC');
 
         if (!empty($this->request->params['named']['subcate'])) {
             $_subcate = $this->request->params['named']['subcate'];
             $this->paginate['conditions']['sub_category_id'] = $_subcate;
         }
 
+        $this->Paginator->settings = $this->paginate;
+        
         $all_questions = $this->Paginator->paginate('Question');
         $this->set('allQuestions', $all_questions);
     }

@@ -8,7 +8,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'socialResponse', 'signup_process', 'profile');
+        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'update_password', 'socialResponse', 'signup_process', 'profile');
     }
 
     public function opauth_complete() {
@@ -173,10 +173,18 @@ class UsersController extends AppController {
     }
 
     public function edit_profile() {
-        if ($this->request->is('post')) {
+        $_user = $this->Session->read("Auth.User");
+        //pr($_user);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            //prd($this->request->data);
             if ($this->User->save($this->request->data)) {
+                /* Update session after update profile */
+                $userData = $this->User->findById($_user['id']);
+                unset($userData['User']['password']);
+                $this->Session->write("Auth.User", $userData['User']);
+
                 $this->Session->setFlash(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'dashboard'));
             }
             $this->Session->setFlash(
                     __('The user could not be saved. Please, try again.')
@@ -211,7 +219,7 @@ class UsersController extends AppController {
                 //$emailObj->registrationMail($name, $email, $key);
                 $this->EmailContent->registrationMail($name, $email, $key);
 
-                $this->Session->setFlash(__('User is created successfully. Please check your mail for activication link.'));
+                $this->Session->setFlash(__('User is created successfully. Please check your mail for activication link.'), 'default', array('class' => 'alert alert-success site-top'));
                 return $this->redirect(array('action' => 'home'));
             }
             $this->Session->setFlash(
@@ -239,12 +247,44 @@ class UsersController extends AppController {
 
                 $this->EmailContent->forgetPassword($name, $email, $key);
 
-                $this->Session->setFlash(__('Please check your mail for reset password link.'));
+                $this->Session->setFlash('Please check your mail for reset password link.', 'default', array('class' => 'alert alert-success'));
                 return $this->redirect(array('action' => 'home'));
             }
             $this->Session->setFlash(
                     __('The user could not be saved. Please, try again.')
             );
+        }
+    }
+
+    public function update_password($key = NULL) {
+        $this->set('title', 'Update Password');
+        $request = $this->request;
+
+        $_site_user = $this->User->find('first', array(
+            'conditions' => array(
+                'User.verification_code' => $key
+            )
+                ));
+
+        if (!empty($_site_user)) {
+            if ($request->is(['post', 'put']) && !empty($request->data)) {
+                $saveData = $request->data;
+                $saveData['User']['id'] = $_site_user['User']['id'];
+                //prd($saveData);
+                $this->User->set($saveData);
+                if ($this->User->validates()) {
+                    $this->User->save($saveData);
+
+                    $this->Session->setFlash(__('Password has been updated.'), 'success');
+                    return $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+                }
+            }
+
+            unset($_site_user['User']['password']);
+            $this->request->data = $_site_user;
+        } else {
+            $this->Session->setFlash("Invalid Request");
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
         }
     }
 
@@ -285,9 +325,7 @@ class UsersController extends AppController {
     }
 
     public function index() {
-        if (!empty($this->loggedinUser)) {
-            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-        }
+        
     }
 
     public function profile($username) {
@@ -304,12 +342,18 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-        
+        $this->loadModel('CmsPage');
+        $dashContent = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'WELCOMEDAASHBOARD'
+                )));
+
+        $this->set('dashContent', $dashContent);
     }
 
     public function home() {
         $this->set("title_for_layout", "Cupcherry Education");
         $this->layout = "home";
+        //prd($this->loggedinUser);
         if (!empty($this->loggedinUser)) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
         }
@@ -453,7 +497,9 @@ class UsersController extends AppController {
     public function admin_logout() {
         $user = $this->Auth->user();
         $this->Session->destroy();
-        $this->Session->setFlash(sprintf(__d('users', '%s you have successfully logged out'), $user[$this->{$this->modelClass}->displayField]), 'default', array('class' => 'alert alert-success'));
+        $_msg = $user['name'] . " you have successfully logged out";
+
+        $this->Session->setFlash($_msg, 'default', array('class' => 'alert alert-success'));
         $this->redirect($this->Auth->logout());
     }
 

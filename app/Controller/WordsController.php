@@ -12,149 +12,31 @@ class WordsController extends AppController {
     }
 
     public function index() {
-        $word = $this->Word->find('first');
+        $this->set("title_for_layout", "Word Jumble");
+        $this->set('removeBreadcrumb', 1);
         
+        $word = $this->Word->find('first', array(
+            'order' => array('Word.id DESC')
+                ));
+
         $_codeWord = base64_encode($word['Word']['word']);
         $_codeArry = str_split(str_shuffle($word['Word']['word']));
-        
+
         $this->set('codeWord', $_codeWord);
         $this->set('codeArry', $_codeArry);
         $this->set('codeRow', $word);
-    }
 
-    public function play($quiz_id = 0) {
-        $this->loadModel('Question');
-        $this->loadModel('QuizResult');
-        $request = $this->request;
+        $this->loadModel('CmsPage');
+        $wordContent = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'WORDHEADING'
+                )));
+        
+        $wordContentBottom = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'WORDBOTTOMMSG'
+                )));
 
-        if ($quiz_id > 0) {
-            $this->_quiz_globle['CurrentQuiz'] = $quiz_id;
-            $this->Session->write('QUIZ_GLOBLE', $this->_quiz_globle);
-        }
-
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-        //pr($_quiz_data);
-
-        if (!empty($request->data)) {
-            $reqData = $request->data;
-            $answer_status = $this->checkAnswer($reqData['Quiz']['question_id'], $reqData['Quiz']['answers']);
-
-            $_ansData = array();
-            $_ansData['QuizResult']['user_id'] = $this->loggedinUser['id'];
-            $_ansData['QuizResult']['quiz_id'] = $_quiz_data['CurrentQuiz'];
-            $_ansData['QuizResult']['question_id'] = $reqData['Quiz']['question_id'];
-            $_ansData['QuizResult']['answer_id'] = $reqData['Quiz']['answers'];
-            $_ansData['QuizResult']['answer_status'] = $answer_status;
-
-            $res_status = $this->QuizResult->save($_ansData);
-        }
-
-        $quiz_result = $this->Question->query(
-                'SELECT 
-			sum(answer_status) as currect_answer, 
-			count(*) as total_question 
-			FROM `quiz_results` 
-			WHERE user_id = ' . $this->loggedinUser['id'] .
-                ' and quiz_id =' . $_quiz_data['CurrentQuiz']);
-
-        $totalQuestion = $this->Question->find('count', array(
-            'conditions' => array(
-                'Question.quiz_id' => $_quiz_data['CurrentQuiz']
-            )
-                ));
-
-        //pr($totalQuestion);
-
-        $question = $this->findQuestion();
-        $this->set('question', $question);
-        $this->set('quiz_result', $quiz_result[0][0]);
-        $this->set('totalQuestion', $totalQuestion);
-    }
-
-    public function reset() {
-        $this->loadModel('ResultLog');
-        $this->loadModel('QuizResult');
-
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-        if (!empty($_quiz_data['CurrentQuiz'])) {
-            //$this->loggedinUser['id']
-            $quiz_result = $this->ResultLog->query(
-                    'SELECT 
-			sum(answer_status) as currect_answer, 
-			count(*) as total_question 
-			FROM `quiz_results` 
-			WHERE user_id = ' . $this->loggedinUser['id'] .
-                    ' and quiz_id =' . $_quiz_data['CurrentQuiz']);
-
-            $quiz_result = $quiz_result[0][0];
-
-            $_logArr = array();
-            $_logArr['ResultLog']['quiz_id'] = $_quiz_data['CurrentQuiz'];
-            $_logArr['ResultLog']['user_id'] = $this->loggedinUser['id'];
-            $_logArr['ResultLog']['currect_questions'] = $quiz_result['currect_answer'];
-            $_logArr['ResultLog']['total_questions'] = $quiz_result['total_question'];
-            $_logArr['ResultLog']['result_status'] = 'R';
-
-            $logRes = $this->ResultLog->save($_logArr);
-            if (!empty($logRes)) {
-                /* Remove Detailed History */
-                $this->QuizResult->deleteAll(array(
-                    'QuizResult.user_id' => $this->loggedinUser['id'],
-                    'QuizResult.quiz_id' => $_quiz_data['CurrentQuiz']
-                        ), false);
-
-                $this->redirect(array('controller' => 'quiz', 'action' => 'play', $_quiz_data['CurrentQuiz']));
-            } else {
-                $this->Session->setFlash("Result log not save successfully");
-                $this->redirect(array('controller' => 'quiz', 'action' => 'index'));
-            }
-        }
-    }
-
-    public function result() {
-        $this->loadModel('ResultLog');
-
-        $resultList = $this->ResultLog->find('all', array(
-            'ResultLog.user_id' => $this->loggedinUser['id']
-                ));
-
-        $this->set('resultList', $resultList);
-    }
-
-    public function findQuestion() {
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-
-        $this->loadModel('Question');
-        /* Finding Next Question */
-        //SELECT * FROM `cs_commands` WHERE `id` not in (SELECT distinct `command_id` FROM `cs_commands_status` WHERE `user_id` = 15 
-        $nextQuesionQry = 'SELECT `Question`.`id`, `Question`.`quiz_id`, `Question`.`question`, `Question`.`sort_order`, `Quiz`.`id`, `Quiz`.`title`, `Quiz`.`created`, `Quiz`.`status` '
-                . 'FROM `questions` AS `Question` '
-                . 'LEFT JOIN `quizzes` AS `Quiz` ON (`Question`.`quiz_id` = `Quiz`.`id`) '
-                . 'WHERE 1 = 1 and `Quiz`.`id` = ' . $_quiz_data['CurrentQuiz'] . ' and '
-                . '`Question`.`id` not in (SELECT distinct `question_id` FROM `quiz_results` WHERE `quiz_results`.user_id = ' . $this->loggedinUser['id'] . ')'
-                . 'LIMIT 1';
-        $question = $this->Question->query($nextQuesionQry);
-        if (!empty($question)) {
-            //prd($question);
-            $_q_answers = $this->Question->query('	SELECT `Answers`.`id`, `Answers`.`question_id`, `Answers`.`answer`, `Answers`.`correct`, `Answers`.`sort_order` FROM `answers` AS `Answers` WHERE `Answers`.`question_id` = (' . $question[0]['Question']['id'] . ')');
-            $question[0]['Answers'] = $_q_answers;
-            $question = $question[0];
-            return $question;
-        } else {
-            return "";
-        }
-    }
-
-    public function checkAnswer($question_id, $answer_id) {
-        $this->loadModel('Answer');
-
-        $answer = $this->Answer->findById($answer_id);
-
-        if ($answer['Answer']['question_id'] == $question_id) {
-            return $answer['Answer']['correct'];
-        } else {
-            return "Invalid Question";
-        }
+        $this->set('wordContent', $wordContent);
+        $this->set('wordContentBottom', $wordContentBottom);
     }
 
     /*     * ******** ADMIN SECTION  ********* */
@@ -164,7 +46,107 @@ class WordsController extends AppController {
     }
 
     public function admin_add() {
-        
+        if ($this->request->is('post')) {
+            $postData = $this->request->data;
+
+            $this->Word->create();
+            if ($this->Word->save($postData)) {
+                $this->Session->setFlash(__('The Word has been saved'));
+                return $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(
+                    __('The Word could not be saved. Please, try again.')
+            );
+        }
+    }
+
+    public function admin_cmsGrid() {
+        $request = $this->request;
+        $this->autoRender = false;
+
+        if ($request->is('ajax')) {
+            $this->layout = 'ajax';
+
+            $page = $request->query('draw');
+            $limit = $request->query('length');
+            $start = $request->query('start');
+
+            //for order
+            $colName = $this->request->query['order'][0]['column'];
+            $orderby[$this->request->query['columns'][$colName]['name']] = $this->request->query['order'][0]['dir'];
+            //prd($this->request);          
+            $condition = array();
+
+            //pr($this->request->query['columns']);
+            foreach ($this->request->query['columns'] as $column) {
+
+                if (isset($column['searchable']) && $column['searchable'] == 'true') {
+                    //pr($column);
+                    if ($column['name'] == 'Word.date_added' && !empty($column['search']['value'])) {
+                        $condition['User.date_added LIKE '] = '%' . date('Y-m-d', strtotime($column['search']['value'])) . '%';
+                    } elseif (isset($column['name']) && $column['search']['value'] != '') {
+                        $condition[$column['name'] . ' LIKE '] = '%' . $column['search']['value'] . '%';
+                    }
+                }
+            }
+
+            //prd($condition);
+            $total_records = $this->Word->find('count', array('conditions' => $condition));
+
+
+            $fields = array('Word.*');
+            $gridData = $this->Word->find('all', array(
+                'conditions' => $condition,
+                'fields' => $fields,
+                'order' => $orderby,
+                'limit' => $limit,
+                'offset' => $start
+                    ));
+
+            $return_result['draw'] = $page;
+            $return_result['recordsTotal'] = $total_records;
+            $return_result['recordsFiltered'] = $total_records;
+
+            $return_result['data'] = array();
+            if (isset($gridData[0])) {
+                $i = $start + 1;
+                foreach ($gridData as $row) {
+
+                    $action = '';
+                    $status = '';
+
+                    if ($row['Word']['status'] == 3) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Word']['id'] . ')">Publish</span>';
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Word']['id'] . ')">Discard</span>';
+                    } elseif ($row['Word']['status'] == 1) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(0,' . $row['Word']['id'] . ')">Published</span>';
+                    } else {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(1,' . $row['Word']['id'] . ')">Inactive</span>';
+                    }
+
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/words/edit/' . $row['Word']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
+
+                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_question(' . $row['Word']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
+
+                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Word']['id'] . '"/></td>';
+
+                    $return_result['data'][] = array(
+                        $row['Word']['id'],
+                        $row['Word']['word'],
+                        $row['Word']['description'],
+                        $row['Word']['example'],
+                        $action
+                    );
+                    $i++;
+                }
+            }
+            // pr($return_result);
+            echo json_encode($return_result);
+            exit;
+        } else {
+            $this->set('title_for_layout', __('Access Denied'));
+            $this->render('/nodirecturl');
+        }
     }
 
 }

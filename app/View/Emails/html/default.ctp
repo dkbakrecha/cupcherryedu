@@ -14,10 +14,80 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?php
-$content = explode("\n", $content);
+<!-- HEADER -->
+<table class="head-wrap" bgcolor="#337ab7">
+    <tr>
+        <td></td>
+        <td class="header container" >
 
-foreach ($content as $line):
-	echo '<p> ' . $line . "</p>\n";
-endforeach;
-?>
+            <div class="content">
+                <table bgcolor="#337ab7">
+                    <tr>
+                        <td style="height: 32px;"><img src="http://cupcherry.com/img/The-Most-Complete-Education-Solution.png" style="background: #ffffff; height: 50px; padding: 10px; width: 250px;" /></td>
+                        <td align="right"><h6 class="collapse">Basic</h6></td>
+                    </tr>
+                </table>
+            </div>
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap" bgcolor="#EEEEEE">
+    <tr>
+        <td></td>
+        <td class="container" bgcolor="#FFFFFF">
+
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>
+                            <?php
+                            $content = explode("\n", $content);
+
+                            foreach ($content as $line):
+                                echo '<p> ' . $line . "</p>\n";
+                            endforeach;
+                            ?>						
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /BODY -->
+
+
+<!-- FOOTER -->
+<table class="footer-wrap" bgcolor="#EEEEEE">
+    <tr>
+        <td></td>
+        <td class="container">
+
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <p>
+                                <a href="#">Terms</a> |
+                                <a href="#">Privacy</a> |
+                                <a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /FOOTER -->
+
+</body>
+</html>

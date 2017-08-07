@@ -47,23 +47,20 @@ class EmailConfig {
         'password' => 'yahoooooo',
         'transport' => 'Smtp'
     );
-	
-	public $gmail = array(
+    public $gmail = array(
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'cgtdharm@gmail.com',
         'password' => '#Dharm123456',
         'transport' => 'Smtp'
     );
-   
     public $default = array(
         'transport' => 'Mail',
         'from' => 'cgtdharm@gmail.com',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
     );
-	
-	public $smtp = array(
+    public $smtp = array(
         'host' => 'sg2plcpnl0173.prod.sin2.se',
         'port' => 465,
         'auth' => 'plain',
@@ -79,8 +76,6 @@ class EmailConfig {
         'charset' => 'utf-8',
         'headerCharset' => 'utf-8',
     );
-
-	
     public $smtp_old = array(
         'transport' => 'Smtp',
         'from' => array('admin@cupcherry.com' => 'CupCherry Team'),
@@ -89,12 +84,11 @@ class EmailConfig {
         'timeout' => 45,
         'username' => 'admin@cupcherry.com',
         'password' => '#Mail123',
-        //'client' => null,
-        //'log' => false,
+            //'client' => null,
+            //'log' => false,
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
     );
-	
     public $fast = array(
         'from' => 'you@localhost',
         'sender' => null,

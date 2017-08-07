@@ -27,7 +27,7 @@ $sessionUser = $this->Session->read('Auth.User');
                     <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'questions', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Questions</a></li>
                     <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'tests', 'action' => 'index')); ?>"><i class="fa fa-graduation-cap"></i> Tests</a></li>
                     <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
-                    <li class="active"><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'users', 'action' => 'index')); ?>"><i class="fa fa-user"></i> Users</a></li>
+                    <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'users', 'action' => 'index')); ?>"><i class="fa fa-user"></i> Users</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs"></i> Manage CMS <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -45,6 +45,7 @@ $sessionUser = $this->Session->read('Auth.User');
                             <li><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'users', 'action' => 'setting')); ?>">Site Setting</a></li>
                         </ul>
                     </li>
+                    
                     <?php
                 } else {
                     if (!empty($sessionUser['name'])) {
@@ -74,7 +75,9 @@ $sessionUser = $this->Session->read('Auth.User');
             <ul class="nav navbar-nav navbar-right">
                 <?php
                 if (isset($this->request->params['admin'])) {
-                    
+                    ?>
+                        <li><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'users', 'action' => 'logout')); ?>"><i class="fa fa-sign-out"></i></a></li>
+                        <?php
                 } else {
                     if (empty($sessionUser['name'])) {
                         ?>

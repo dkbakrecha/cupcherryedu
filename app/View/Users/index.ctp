@@ -1,6 +1,6 @@
 
 
-<section id="primary" class="content-full-width">
+<section id="primary" class="content-full-width" style="display: none;">
 	<article class="post-2779 page type-page status-publish hentry" id="post-2779">
 		<ul class="side-nav">
 			<li class="">

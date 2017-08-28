@@ -21,8 +21,6 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         background : #337ab7;
         background-image: url("<?php echo $this->webroot; ?>img/bg-bricks.png");
         background-position: 50% 0;
-        position:relative;
-        padding: 40px 0;
     }
 
     .recent-blogs{
@@ -39,66 +37,66 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
 </style>
 <?php /*
-<div class="home_section">
-    <div class="color-overlay"></div>
-    <div class="container">
-        <div class="intro-text type1"> 
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <!--
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                -->
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <h4>Helping you to achieve your aims & dreams in future</h4> 
-                        <h5>One of the best E-learning platform available.</h5> 
-                    </div>
+  <div class="home_section">
+  <div class="color-overlay"></div>
+  <div class="container">
+  <div class="intro-text type1">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <!--
+  <ol class="carousel-indicators">
+  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+  <li data-target="#myCarousel" data-slide-to="1"></li>
+  <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  -->
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+  <div class="item active">
+  <h4>Helping you to achieve your aims & dreams in future</h4>
+  <h5>One of the best E-learning platform available.</h5>
+  </div>
 
-                    <div class="item">
-                        <h4>Online Learning made Easy</h4> 
-                        <h5>Non stop learning whenever you want wherever you want.</h5> 
-                    </div>
+  <div class="item">
+  <h4>Online Learning made Easy</h4>
+  <h5>Non stop learning whenever you want wherever you want.</h5>
+  </div>
 
-                    <div class="item">
-                        <h4>The Best questions like Elsewhere. Come get trained.</h4> 
-                        <h5>You’ll get what you came for!</h5> 
-                    </div>
+  <div class="item">
+  <h4>The Best questions like Elsewhere. Come get trained.</h4>
+  <h5>You’ll get what you came for!</h5>
+  </div>
 
 
-                </div>
+  </div>
 
-                <!-- Left and right controls -->
-                <!--
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a> 
-                -->
-            </div>
+  <!-- Left and right controls -->
+  <!--
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+  </a>
+  -->
+  </div>
 
-            <?php if (empty($LoggedinUser)) { ?>
-                <a class="btn btn-primary btn-home-slider btn-lg register_open" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>" id="">Login</a>
-                <a class="btn btn-primary btn-home-slider btn-lg register_open" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" id="">New Profile</a>
-                            <!--<a class="dt-sc-button small " href="<?php //echo $this->Html->url(array('controller' => 'pages', 'action' => 'about'));                              ?>">Read More</a>-->
-            <?php } ?>
-        </div>
-    </div>
-</div>
-*/ ?>
+  <?php if (empty($LoggedinUser)) { ?>
+  <a class="btn btn-primary btn-home-slider btn-lg register_open" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>" id="">Login</a>
+  <a class="btn btn-primary btn-home-slider btn-lg register_open" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" id="">New Profile</a>
+  <!--<a class="dt-sc-button small " href="<?php //echo $this->Html->url(array('controller' => 'pages', 'action' => 'about'));                              ?>">Read More</a>-->
+  <?php } ?>
+  </div>
+  </div>
+  </div>
+ */ ?>
 <div class="exam_section">
     <div class="container">
         <!--<h3 class="sub-title be-center">Exam Study Guide</h3>-->
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 nomobile">
                 <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
                 <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><div class="new-notification-home-box">New Exam Notifications</div></a>
             </div>
@@ -110,7 +108,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
             </div>
 
         </div>
-        <div class="row">
+        <div class="row" style="display: none;">
             <?php
             foreach ($examList as $exam) {
                 //pr($exam);
@@ -142,29 +140,29 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
 <?php /*
 
-<div class="testlist-section">
-    <div class="container">
-        <h3 class="sub-title be-center">Try our free sample test</h3>
-        <div class="row">
-            <?php
-            foreach ($testInfo as $test) {
-                ?>
-                <div class="col-lg-4">
-                    <div>
-                        <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['TestType']['unique_id'])); ?>">
-                            Test Here
-                        </a>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
+  <div class="testlist-section">
+  <div class="container">
+  <h3 class="sub-title be-center">Try our free sample test</h3>
+  <div class="row">
+  <?php
+  foreach ($testInfo as $test) {
+  ?>
+  <div class="col-lg-4">
+  <div>
+  <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['TestType']['unique_id'])); ?>">
+  Test Here
+  </a>
+  </div>
+  </div>
+  <?php
+  }
+  ?>
 
-        </div>
-    </div>
-</div>
-*/ ?>
-<div class="category-section">
+  </div>
+  </div>
+  </div>
+ */ ?>
+<div class="category-section nomobile">
     <div class="container">
         <h3 class="sub-title be-center">Category List</h3>
         <div class="section-description">The content matter is divided into many different categories and their sub categories based on the pattern of the examination and latest competitive tests.</div>
@@ -197,8 +195,8 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
 <div class="recent-blogs" >
     <div class="container">
-        <h3 class="sub-title be-center">Recent Posts</h3>
-        <div class="section-description">Blog are for user to spread their thoughts and collection of matter to users and updates for currents news.</div>
+        <h3 class="sub-title be-center">Recent Articles</h3>
+        <div class="section-description">Articles are for user to spread their thoughts and collection of matter to users and updates for currents news.</div>
         <div id="resentPost">
             <?php
             foreach ($blogList as $blogpost) {
@@ -226,6 +224,10 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
             }
             ?>
         </div>
+        <div class="callToAction">
+            <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><span class="btn btn-primary ">All Articles</span></a>
+        </div>
+
     </div>
 </div>
 
@@ -235,8 +237,8 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         <div id="home_subscribe" class="col-lg-6 col-lg-offset-3">
             <form role="form" id="hr-subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="hr-subscribe-form">
                 <div class="input-group input-group-lg">
-                    <?php 
-                    echo $this->Form->input('email_address',array(
+                    <?php
+                    echo $this->Form->input('email_address', array(
                         'type' => 'email',
                         'class' => 'form-control',
                         'placeholder' => 'Email address...',
@@ -257,4 +259,3 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
     </div>
 </div>
- 

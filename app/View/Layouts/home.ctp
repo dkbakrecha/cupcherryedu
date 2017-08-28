@@ -7,9 +7,10 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!--<link href='https://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>-->
+        <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet"> 
         <?php
+        echo $this->element('seo_title');
         echo $this->Html->meta('icon');
 
         echo $this->Html->css(array(
@@ -41,13 +42,16 @@
     </head>
     <body>
 
-        <?php echo $this->element('header'); ?>
+        <?php
+        echo $this->element('header');
+        echo $this->element('shortcut-menu');
+        ?>
 
 
         <?php
         echo $this->Session->flash();
         echo $this->fetch('content');
-        
+
         if (!isset($this->request->params['admin'])) {
             echo $this->element('social');
             echo $this->element('footer');

@@ -118,11 +118,11 @@ class NewslettersController extends AppController {
             }
 
             //prd($condition);
-            $total_records = $this->Exam->find('count', array('conditions' => $condition));
+            $total_records = $this->Newsletter->find('count', array('conditions' => $condition));
 
 
-            $fields = array('Exam.id', 'Exam.title', 'Exam.status');
-            $gridData = $this->Exam->find('all', array(
+            $fields = array('Newsletter.*');
+            $gridData = $this->Newsletter->find('all', array(
                 'conditions' => $condition,
                 'fields' => $fields,
                 'order' => $orderby,
@@ -141,37 +141,27 @@ class NewslettersController extends AppController {
 
                     $action = '';
                     $status = '';
-                    /*
-                      if ($row['Question']['status'] == 0)
-                      {
-                      $status .= '<i class="fa fa-dot-circle-o fa-lg clr-red" onclick="changeUserStatus(' . $row['Question']['id'] . ',0)" title="Change Status"></i>';
-                      }
-                      else if ($row['Question']['status'] == 1)
-                      {
-                      $status .= '<i class="fa fa-dot-circle-o fa-lg clr-green" onclick="changeUserStatus(' . $row['Question']['id'] . ',1)" title="Change Status"></i>';
-                      }
-                     */
-                    //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
-
-                    if ($row['Exam']['status'] == 3) {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Exam']['id'] . ')">Publish</span>';
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Exam']['id'] . ')">Discard</span>';
-                    } elseif ($row['Exam']['status'] == 1) {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(0,' . $row['Exam']['id'] . ')">Published</span>';
+                   
+                    if ($row['Newsletter']['status'] == 3) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Newsletter']['id'] . ')">Publish</span>';
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Newsletter']['id'] . ')">Discard</span>';
+                    } elseif ($row['Newsletter']['status'] == 1) {
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(0,' . $row['Newsletter']['id'] . ')">Published</span>';
                     } else {
-                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(1,' . $row['Exam']['id'] . ')">Inactive</span>';
+                        $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-success" onClick="changestatus(1,' . $row['Newsletter']['id'] . ')">Inactive</span>';
                     }
 
 
-                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/exams/edit/' . $row['Exam']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/exams/edit/' . $row['Newsletter']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
-                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_question(' . $row['Exam']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
+                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_question(' . $row['Newsletter']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
 
-                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Exam']['id'] . '"/></td>';
+                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Newsletter']['id'] . '"/></td>';
 
                     $return_result['data'][] = array(
-                        $row['Exam']['id'],
-                        $row['Exam']['title'],
+                        $row['Newsletter']['id'],
+                        $row['Newsletter']['email_address'],
+                        $row['Newsletter']['created'],
                         $action
                     );
                     $i++;

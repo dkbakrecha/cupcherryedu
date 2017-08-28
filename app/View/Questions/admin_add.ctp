@@ -1,3 +1,9 @@
+<?php
+echo $this->Html->script(array(
+    'ckeditor/ckeditor',
+    'ckeditor/adapters/jquery',
+));
+?>
 <div class="box">
     <div class="box-header">
         <h4>Add New Question</h4>
@@ -182,6 +188,11 @@
 <!-- Warper Ends Here (working area) -->    
 
 <script>
+    $(document).ready(function () {
+        $('textarea#QuestionQuestion').ckeditor();
+        $('textarea#QuestionDescription').ckeditor();
+    }); 
+    
     $('#QuestionCategoryId').change(function () {
         if ($(this).val() == '') {
             $('#QuestionSubCategoryId').html('<option value="">' + "<?php echo __('Select Sub Category'); ?>" + '</option>');

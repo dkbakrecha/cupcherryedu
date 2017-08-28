@@ -6,21 +6,30 @@ class ExamNotificationsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index');
+        $this->Auth->allow('index', 'view');
     }
 
     public function index() {
         $notificationList = $this->ExamNotification->find('all', array(
-            'conditions' => array('ExamNotification.status' => 1)
+            'conditions' => array('ExamNotification.status' => 1),
+            'order' => array('id DESC')
                 ));
         //pr($notificationList);
         $this->set('notificationList', $notificationList);
     }
 
+    public function view($id) {
+        $notification = $this->ExamNotification->find('first', array(
+            'conditions' => array('ExamNotification.id' => $id)
+                ));
+        //pr($notificationList);
+        $this->set('notification', $notification);
+    }
+
     /*  ==========  ADMIN SECTION  ==========  */
 
     public function admin_index() {
-        $this->set('title_for_layout','Exam Notification');
+        $this->set('title_for_layout', 'Exam Notification');
     }
 
     public function admin_add() {

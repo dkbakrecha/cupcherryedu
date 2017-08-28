@@ -1,16 +1,35 @@
 <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <div class="row">
     <div class="col-lg-9">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Dashboard</h3>
-            </div>
-
+        <div class="">
             <div class="box-content">
-                <div class="alert alert-info welcome-msg" role="alert">
-                    <?php echo $dashContent['CmsPage']['content']; ?>
+                <div class="col-lg-6">
+                    <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'index')); ?>" class="nodecor">
+                        <div class="dashboard-box">
+                            <?php echo $this->Html->image("dashboardicon03.png", array("class" => "")); ?>
+                            <h4>Exams</h4>
+                            <div>1 Total | 1 Running</div>
+                        </div>
+                    </a>
                 </div>
-
+                <div class="col-lg-6">
+                    <a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'index')); ?>"  class="nodecor">
+                        <div class="dashboard-box">
+                            <?php echo $this->Html->image("dashboardicon04.png", array("class" => "")); ?>
+                            <h4>Questions</h4>
+                            <div>1 My Questions | 1 My Favorite</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"  class="nodecor">
+                        <div class="dashboard-box">
+                            <?php echo $this->Html->image("dashboardicon02.png", array("class" => "")); ?>
+                            <h4>Notes</h4>
+                            <div>1 My Notes | 1 Favorite</div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <div id="gkbytes" class="row gkbytes">
     <div class="col-lg-4">
-        <div class="box no-hight">
+        <div class="box no-hight title">
             <div class="box-content">
                 <h2>GK Bytes of <?php echo date('F Y'); ?></h2>
             </div>
@@ -41,22 +41,25 @@
         if (!empty($allQuestions)) {
             foreach ($allQuestions as $questionData) {
                 ?>
-                <div class="question_title">
-                    <?php
-                    echo "<span>#" . $questionData['Question']['id'] . "</span> " . $questionData['Question']['question'];
-                    ?>
-                </div>
-                <div class="question_option">
-                    <?php
-                    foreach ($questionData['Answers'] as $optList) {
-                        //pr($optList);
-                        $_cls = ($optList['correct'] == 1) ? "correct_ans" : "";
-                        ;
+                <div class="question_wrap">
+                    <div class="question_title">
+                        <?php
+                        echo "<span>#" . $questionData['Question']['id'] . "</span> " . $questionData['Question']['question'];
+                        ?>
+                    </div>
+                    <div class="question_option">
+                        <?php
+                        foreach ($questionData['Answers'] as $optList) {
+                            //pr($optList);
+                            $_cls = ($optList['correct'] == 1) ? "correct_ans" : "";
+                            ;
 
-                        echo "<div class='" . $_cls . "'>" . $optList['answer'] . "</div>";
-                    }
-                    ?>
+                            echo "<div class='" . $_cls . "'>" . $optList['answer'] . "</div>";
+                        }
+                        ?>
+                    </div>
                 </div>
+
                 <?php
             }
         }

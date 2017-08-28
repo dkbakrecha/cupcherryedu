@@ -22,7 +22,8 @@
  */
 Router::connect('/', array('controller' => 'users', 'action' => 'home'));
 Router::connect('/admin', array('controller' => 'users', 'action' => 'login', 'admin' => TRUE));
-Router::connect('/register', array('controller' => 'users', 'action' => 'register'));
+Router::connect('/register_student', array('controller' => 'users', 'action' => 'register'));
+Router::connect('/register_teacher', array('controller' => 'users', 'action' => 'register', 'teacher'));
 Router::connect('/gkbytes', array('controller' => 'questions', 'action' => 'gkbytes'));
 
 

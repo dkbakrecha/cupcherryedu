@@ -1,5 +1,12 @@
 <div class="row">
+    
     <div class="col-lg-8">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Exams<span class="">Test your skills</span></h3>
+            </div>
+
+            <div class="box-content">
         <?php
         //pr($testInfo);
         if (!empty($testInfo)) {
@@ -49,6 +56,9 @@
          * 
          */
         ?>
+                
+            </div>
+        </div>
     </div>
     <div class="col-lg-4">
         <!--<div class="fb-page" data-href="https://www.facebook.com/cupcherry" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/cupcherry"><a href="https://www.facebook.com/cupcherry">Cupcherry</a></blockquote></div></div>-->

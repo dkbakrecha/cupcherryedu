@@ -196,7 +196,15 @@ class UsersController extends AppController {
 
     public function register() {
         $this->loadModel('EmailContent');
-        $this->set('removeBreadcrumb', 1);
+
+        $this->set("title_for_layout", "Student Profile");
+        $_role = 2;
+        if (!empty($this->request->params['pass'][0]) && $this->request->params['pass'][0] == 'teacher') {
+            $this->set("title_for_layout", "Become a Teacher");
+            $_role = 3;
+        }
+        $this->set('role', $_role);
+        //$this->set('removeBreadcrumb', 1);
 
         if ($this->request->is('post')) {
             $this->User->create();
@@ -205,7 +213,7 @@ class UsersController extends AppController {
             $parts = explode("@", $data['User']['email']);
             $data['User']['name'] = $parts[0];
 
-            $data['User']['role'] = '2';
+            $data['User']['role'] = $_role;
             $data['User']['verification_code'] = substr(md5(microtime()), rand(0, 26), 6);
             $data['User']['status'] = '3';
 
@@ -560,8 +568,7 @@ class UsersController extends AppController {
         
     }
 
-    public function admin_userGridData($user_type = 2) {
-
+    public function admin_userGridData() {
         $request = $this->request;
         $this->autoRender = false;
 
@@ -575,14 +582,10 @@ class UsersController extends AppController {
             //for order
             $colName = $this->request->query['order'][0]['column'];
             $orderby[$this->request->query['columns'][$colName]['name']] = $this->request->query['order'][0]['dir'];
-            //prd($this->request);          
+
             $condition = array();
             $condition ['User.status !='] = 2;
-            $condition ['User.role'] = $user_type;
-
-            //pr($this->request->query['columns']);
             foreach ($this->request->query['columns'] as $column) {
-
                 if (isset($column['searchable']) && $column['searchable'] == 'true') {
                     //pr($column);
                     if ($column['name'] == 'User.date_added' && !empty($column['search']['value'])) {
@@ -593,11 +596,9 @@ class UsersController extends AppController {
                 }
             }
 
-            //prd($condition);
             $total_records = $this->User->find('count', array('conditions' => $condition));
+            $fields = array('User.id', 'User.first_name', 'User.role', 'User.status', 'User.last_name', 'User.email', 'User.created');
 
-
-            $fields = array('User.id', 'User.first_name', 'User.status', 'User.last_name', 'User.email', 'User.created');
             $userData = $this->User->find('all', array(
                 'conditions' => $condition,
                 'fields' => $fields,
@@ -615,7 +616,6 @@ class UsersController extends AppController {
             if (isset($userData[0])) {
                 $i = $start + 1;
                 foreach ($userData as $row) {
-
                     $action = '';
                     $status = '';
 
@@ -635,11 +635,17 @@ class UsersController extends AppController {
 
                     $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['User']['id'] . '"/></td>';
 
+                    $_role = "Student";
+                    if ($row['User']['role'] == 3) {
+                        $_role = "Teacher";
+                    }
+
                     $return_result['data'][] = array(
                         $chk, //$row['User']['id'],
                         $row['User']['first_name'],
                         $row['User']['last_name'],
                         $row['User']['email'],
+                        $_role,
                         date(Configure::read('Site.admin_date_format'), strtotime($row['User']['created'])),
                         $status,
                         $action
@@ -654,6 +660,62 @@ class UsersController extends AppController {
             $this->set('title_for_layout', __('Access Denied'));
             $this->render('/nodirecturl');
         }
+    }
+
+    public function admin_add() {
+        $this->set('title', 'Add Student');
+        $request = $this->request;
+
+        if ($request->is(array('post', 'put')) && !empty($request->data)) {
+            $saveData = $request->data;
+
+            $usermax = $this->User->find('first', array(
+                'fields' => array('MAX(User.unique_id) as userkey')
+                    ));
+
+            $parts = explode('@', $saveData['User']['email']);
+            $saveData['User']['username'] = $parts[0];
+            $saveData['User']['unique_prefix'] = "STU";
+            $saveData['User']['unique_id'] = ($usermax[0]['userkey'] + 1);
+            $saveData['User']['dob'] = $this->_dbDate($saveData['User']['dob']);
+
+            $this->User->set($saveData);
+            if ($this->User->save()) {
+                $this->Session->setFlash(__('Profile has been updated.'), 'success');
+                return $this->redirect(array('action' => 'students'));
+            } else {
+                $this->Session->setFlash(__('Unable to update your profile.'), 'error');
+            }
+        }
+    }
+
+    public function admin_edit($id) {
+        $this->set('title', 'Edit Student');
+        $request = $this->request;
+
+        if (empty($id)) {
+            return $this->redirect(array('controller' => 'users', 'action' => 'students'));
+        }
+
+        $userData = $this->User->findById($id);
+        if ($request->is(array('post', 'put')) && !empty($request->data)) {
+            $saveData = $request->data;
+            if (empty($saveData['User']['password'])) {
+                unset($saveData['User']['password']);
+                unset($saveData['User']['confirm_password']);
+            }
+
+            $saveData['User']['dob'] = $this->_dbDate($saveData['User']['dob']);
+
+            if ($this->User->save($saveData)) {
+                $this->Session->setFlash(__('Profile has been updated.'), 'success');
+                return $this->redirect(array('action' => 'students'));
+            }
+            $this->Session->setFlash(__('Unable to update your profile.'), 'error');
+        }
+
+        $request->data = $userData;
+        $this->set(compact('userData'));
     }
 
     public function admin_deleteUser() {

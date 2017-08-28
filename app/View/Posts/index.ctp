@@ -47,7 +47,7 @@
             }
         }
         ?>
-        <div class="row">
+        <div class="row site-pagination">
             <div class="col-lg-6">
                 <?php echo $this->Paginator->counter(); ?>
             </div>

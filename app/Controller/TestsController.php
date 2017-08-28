@@ -43,7 +43,8 @@ class TestsController extends AppController {
                 ));
 
         if (!empty($testDetails)) {
-            //prd($testDetails);
+            $questionSummary = json_decode($testDetails['Test']['question_summery'], TRUE);
+            //prd($questionSummary);
         } else {
             /* Create row for Test user */
             $testArr = array();
@@ -64,6 +65,7 @@ class TestsController extends AppController {
             )
                 ));
 
+        $this->set('questionSummary', $questionSummary);
         $this->set('testQuestions', $testQuestions);
         $this->set('test_id', $testDetails['Test']['id']);
     }

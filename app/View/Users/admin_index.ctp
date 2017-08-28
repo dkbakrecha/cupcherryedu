@@ -22,6 +22,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email Address</th>
+                                <th>Role</th>
                                 <th>Join Date</th>                                
                                 <th>Status</th>
                                 <th>Action</th>
@@ -36,6 +37,8 @@
                                     <input class="search_init" type="text" value="" placeholder="Search Name" name="lname"></td>
                                 <td >
                                     <input class="search_init" type="text" value="" placeholder="Search Email" name="email"></td>
+                                <td >
+                                    <input class="search_init" type="text" value="" placeholder="Search Role" name="role"></td>
                                 <td >
                                     <input class="search_init" type="text" value="" placeholder="Search Date" name="dob"></td>    
                                 <td>
@@ -55,7 +58,6 @@
 
                     <div class="col-lg-12">
                         <form method="post" id="sendMailFrom" action="<?php echo $this->Html->url(array('controller' => 'emails', 'action' => 'compose')); ?>">
-
                             <?php echo $this->Form->hidden('mailAddr', array('id' => 'mailAddr')); ?>
                             <?php echo $this->Form->hidden('ReqFrom', array('value' => 'user')); ?>
                             <?php echo $this->Form->button('Send Mail', array('type' => 'button', 'class' => 'btn btn-primary', 'onCLick' => 'mailSend()')); ?>
@@ -70,7 +72,6 @@
 <?php $record_pr_pg = trim(Configure::read('Site.admin_record_per_page')); ?> 
 
 <script type="text/javascript">
-
     var table;
     $(document).ready(function () {
 
@@ -86,8 +87,9 @@
                 {"name": "User.first_name", 'width': '12%'},
                 {"name": "User.last_name", 'width': '12%'},
                 {"name": "User.email", 'width': '20%'},
-                {"name": "User.created", "orderable": true, "searchable": true, 'width': '12%'},
-                {"name": "User.status", "orderable": false, "searchable": true, 'width': '8%', 'sClass': 'text-center'},
+                {"name": "User.role", 'width': '10%'},
+                {"name": "User.created", "orderable": true, "searchable": true, 'width': '10%'},
+                {"name": "User.status", "orderable": false, "searchable": true, 'width': '5%', 'sClass': 'text-center'},
                 {"name": "User.common", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
             ],
             "order": [

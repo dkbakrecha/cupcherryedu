@@ -45,10 +45,6 @@ h3 {
     padding: 10px 0;
 }
 
-.site-content.testimonial{
-    background: #FFF;
-}
-
 .navbar{
     margin-bottom: 0;
 }
@@ -57,7 +53,7 @@ h3 {
     line-height: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: 16px; 
+    font-size: 14px; 
     border-bottom: 2px solid transparent;
 }
 
@@ -656,6 +652,11 @@ ul.social-media > li:hover a {
     padding-left: 10px;
 }
 
+.exam_section, .footer-subscribe{
+    padding: 40px 0;
+    position: relative;
+}
+
 /* Blog Section */
 
 .post-item {
@@ -694,6 +695,10 @@ ul.social-media > li:hover a {
 
 .post-content a {
     font-weight: bold;
+}
+
+.post-content img {
+    max-width: 100%;
 }
 
 .post-detail {
@@ -1628,12 +1633,17 @@ label.error{
     padding: 10px;
 }
 
+.gkbytes .question_wrap {
+    float: left;
+    width: 100%;
+}
+
 .m-bottom5{
-  margin-bottom: 5px;  
+    margin-bottom: 5px;  
 }
 
 .m-bottom15{
-  margin-bottom: 15px;  
+    margin-bottom: 15px;  
 }
 
 
@@ -1670,9 +1680,9 @@ label.error{
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
-    height: 32px;
-    padding-top: 6px;
+    line-height: 40px;
     text-decoration: none;
+    width: 100%;
 }
 
 .mainmenuulli li a:hover {
@@ -1682,7 +1692,97 @@ label.error{
     text-decoration: none;
 }
 
-@media (max-width : 768px) {
+.shortcut-menu{
+    display: none;
+}
+
+.bs-callout {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eee;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.bs-callout-warning {
+    border-left-color: #aa6708;
+}
+
+.bs-callout-warning h4 {
+    color: #aa6708;
+}
+
+.dashboard-box {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.176);
+    color: #444444;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 40px 15px;
+    text-align: center;
+}
+
+a.nodecor{
+    text-decoration: none;
+}
+
+.nav-tabs.register {
+    margin-bottom: 10px;
+}
+
+.nav-tabs.register li {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    width: 50%;
+}
+
+.nav-tabs.register li.active a {
+    background: #355c7d none repeat scroll 0 0;
+    border-radius: 0;
+    color: #fff;
+}
+
+.callToAction {
+    text-align: center;
+}
+
+.callToAction a .btn {
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px 75px;
+}
+
+.site-pagination {
+    display: inline-block;
+    width: 100%;
+}
+
+@media (min-width : 1024px) and (max-width : 1199px) {
+
+
+    .navbar-default .navbar-nav > li > a {
+        font-size: 14px;
+        padding: 20px 5px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .menu-desktopmobile{
+        display: none;   
+    }
+
+    .menu-ipad{
+        display: block;
+    }
+
     .menu-desktopmobile{
         display: none;
     }
@@ -1751,9 +1851,7 @@ label.error{
     .practice-lastsection .two .innertwo{
         margin-top: 20px;
     }
-}
 
-@media (min-width : 1024px) and (max-width : 1199px) {
     /*HEADER*/
     .mainmenucover .navbar-header{
         width: 130px;
@@ -1779,9 +1877,24 @@ label.error{
 
         font-size: 10px;
     }
-}
 
-@media only screen and (min-width: 1024px) {
+    .navbar-default .navbar-brand{
+        width: 250px;
+    }
+
+    .navbar-default .navbar-brand img{
+        width: 100%;
+    }
+
+    .breadcrumb-wrapper{
+        float: left;
+        width: 100%;
+    }
+
+    #new-notification-container {
+        display: none;
+    }
+
     .cd-top {
         height: 60px;
         width: 60px;
@@ -1791,7 +1904,7 @@ label.error{
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     .cd-top {
         right: 20px;
         bottom: 20px;
@@ -1799,25 +1912,129 @@ label.error{
 
 }
 
-@media only screen and (max-width: 320px) {
-    .navbar-default .navbar-brand{
-        width: 250px;
+@media only screen and (max-width: 360px) {
+    .nomobile{
+        display: none;
     }
 
-    .navbar-default .navbar-brand img{
+    .site-content, #footer, .exam_section, .recent-blogs, .footer-subscribe{
+        float: left;
+        display: inline-block;
         width: 100%;
     }
 
-    #new-notification-container{
+    .home-text {
+        padding: 0;
+    }
+
+    .exam_section{
+        float: left;
+        padding: 0;
+    }
+
+    .shortcut-menu {
+        background: #337ab7 none repeat scroll 0 0;
+        border-bottom: 1px solid #fff;
+        display: block;
+        float: left;
+        width: 100%;
+    }
+    .shortcut-menu a {
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .shortcut-nav {
+        float: left;
+        list-style: outside none none;
+        margin-bottom: 0;
+        padding: 0 15px;
+        width: 100%;
+    }
+
+    .shortcut-nav > li {
+        border-right: 1px solid #fff;
+        float: left;
+        font-size: 16px;
+        text-align: center;
+        width: 24%;
+    }
+
+    .shortcut-nav > li:last-child {
+        border-right: medium none;
+        width: 28%;
+    }
+
+    .shortcut-nav > li .fa {
+        font-size: 20px;
+        line-height: 35px;
+        width: 100%;
+    }
+
+    .breadcrumb-wrapper{
+        display: none;
+
+    }
+
+    .fb_login{
+        margin-bottom: 15px;
+    }
+    .card{
+        width: 100%;
+        margin: 0;
+    }
+
+    .gkbytes .topic-list {
         display: none;
     }
 
-    #footer{
+    .gkbytes .no-hight.title {
+        margin-bottom: 15px;
+    }
+
+    .list-box .user-info{
+        display: none;
+    }
+    .list-box .note-short{
+        width: 100%;
+    }
+    .note_list .list-box .meta-info{
+        padding: 0;
+    }
+
+    .exam-logo{
+        top: 0;
+    }
+
+    .recent-blogs .section-description {
         display: none;
     }
 
-    .category-section{
-        display: none;
-
+    .share-page.share-buttons .network .counter{
+        display: none !important;
     }
+
+    .share-page.share-buttons .network {
+        height: 40px !important;
+        margin: 15px 10px !important;
+        width: 40px !important;
+        padding-left: 12px !important;
+    }
+
+    .sharertitle.sharecount {
+        margin-right: 5px;
+        padding-right: 5px;
+    }
+
+}
+
+@media only screen and (max-width: 320px) {
+
+
+
+
+
+
 }

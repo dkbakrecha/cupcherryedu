@@ -1,8 +1,8 @@
 <!-- app/View/Users/add.ctp -->
 <div class="box login-box">
-    <h3 class="be-center">Sign Up</h3> 
-    <div class="col-lg-6 col-lg-offset-1">
-        <div class="col-lg-12">
+    <div class="col-lg-5 col-lg-offset-1">
+        <?php echo $this->Html->image('register_student.png', array('class' => 'img-responsive')) ?>
+        <div class="col-lg-12" style="display: none;">
             <div class="">
                 <div class="be-center">
                     <?php echo $this->Html->image('feature-icons/students_header.png') ?>
@@ -18,6 +18,21 @@
 
     </div>
     <div class="col-lg-4 ">
+
+        <ul class="nav nav-tabs register">
+
+            <?php
+            $_sel_teacher = $_sel_student = "";
+            if ($role == 3) {
+                $_sel_teacher = "active";
+            } else {
+                $_sel_student = "active";
+            }
+            ?>
+            <li class="<?php echo $_sel_student; ?>"><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Register as Student</a></li>
+            <li class="<?php echo $_sel_teacher; ?>"><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register', 'teacher')); ?>">Register as Teacher</a></li>
+        </ul>
+
         <div class="users box-form">
             <?php echo $this->Form->create('User'); ?>
             <fieldset>
@@ -36,7 +51,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="display: none;">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="col-lg-3">
                 <div class="panel panel-default">

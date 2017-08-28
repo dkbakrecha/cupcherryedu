@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="col-lg-3 col-lg-12" style="padding-top: 10px;">
+                    <div class="col-lg-3 col-lg-12 nomobile" style="padding-top: 10px;">
                         <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
                             <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
                         </a>
@@ -34,7 +34,7 @@
 
 
 
-                    <div class="col-lg-3 col-lg-offset-2 col-md-6">
+                    <div class="col-lg-3 col-lg-offset-2 col-md-6 nomobile">
                         <h3 class="widget-title">Contact Us</h3>
                         <div class="textwidget">
                             <p> 
@@ -84,7 +84,9 @@
                                 if (!empty($_url_facebook)) {
                                     ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
                             }
-
+                            if (!empty($_url_google_plus)) {
+                                    ?> <li><a href="<?php echo $_url_google_plus; ?>" target="_BLANK" class="fa fa-google-plus"></a></li> <?php
+                            }
                             if (!empty($_url_twitter)) {
                                     ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
                             }

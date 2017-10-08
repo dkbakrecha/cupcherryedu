@@ -194,75 +194,20 @@ if ($_passwordShow)
 </div>   
 
 
-<div class="section-seperate"></div>
-
-<h4><?php echo __('Other Details'); ?></h4>
-
 <div class="form-group">
 	<div class="col-md-2 col-sm-4 col-xs-12 control-label">
-		<span><?php echo __("Date of Birth") ?></span>
-	</div>
-	<div class="col-md-5 col-sm-6 col-xs-12">
-
-
-		<div class="input-group">
-			<?php
-			echo $this->Form->input('dob', array(
-				'label' => false,
-				'required' => true,
-				'class' => 'form-control datepick',
-				'placeholder' => __('DOB'),
-				'type' => 'text',
-				'error' => false
-			));
-			?>
-
-                    <!--<input type="text" data-mask="" data-inputmask="'alias': 'mm/dd/yyyy'" class="form-control" >-->
-			<div class="input-group-addon buttonCal">
-				<i class="fa fa-calendar"></i>
-			</div>
-		</div>
-<?php echo $this->Form->error('dob'); ?>
-	</div>
-</div>
-
-<div class="form-group gender">
-	<div class="col-md-2 col-sm-4 col-xs-12 control-label">
-		<span><?php echo __("Gender") ?></span>
-	</div>
-	<div class="col-md-5 col-sm-6 col-xs-12">
-
-		<?php
-		$options = array(
-			'1' => 'Male',
-			'2' => 'Female',
-			'3' => 'Other'
-		);
-
-		$attributes = array(
-			'legend' => false,
-			'class' => 'r-green fa fa-dot-circle-o'
-		);
-
-		echo $this->Form->radio('gender', $options, $attributes);
-		echo $this->Form->error('gender');
-		?>
-	</div>  
-</div>
-
-<div class="form-group">
-	<div class="col-md-2 col-sm-4 col-xs-12 control-label">
-		<span><?php echo __("Contact No.") ?></span>
+		<span><?php echo __("Role") ?></span>
 	</div>
 	<div class="col-md-5 col-sm-6 col-xs-12">
 		<?php
-		echo $this->Form->input('contact', array(
+		echo $this->Form->input('role', array(
 			'label' => false,
 			'required' => true,
 			'class' => 'form-control',
-			'placeholder' => __('Contact number'),
-			'type' => 'text',
-			'maxlength' => '20'
+			'options' => array(
+                            '2' => 'Student',
+                            '3' => 'Teacher'
+                        )
 		));
 		?>
 	</div>

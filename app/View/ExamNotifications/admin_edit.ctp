@@ -30,6 +30,20 @@ echo $this->Html->script(array(
                         ?>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Title Slug</label>
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('title_slug', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'label' => false,
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notification Text</label>
@@ -45,41 +59,29 @@ echo $this->Html->script(array(
                     </div>
                 </div>
 
+
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Link</label>
-                    <div class="col-sm-7">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
                         <?php
-                        echo $this->Form->input('link', array(
-                            'class' => 'form-control',
-                            'placeholder' => 'Link',
-                            'label' => false,
-                            'type' => 'textbox'
+                        echo $this->Form->button(__('Save'), array(
+                            'class' => 'btn btn-primary btn-flat',
+                            'type' => 'submit'
+                        ));
+                        ?>
+
+                        <?php
+                        echo $this->Form->button(__('Cancel'), array(
+                            'class' => 'btn btn-default btn-flat',
+                            'type' => 'button',
+                            'onclick' => 'goBack()',
                         ));
                         ?>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                            <?php
-                            echo $this->Form->button(__('Save'), array(
-                                'class' => 'btn btn-primary btn-flat',
-                                'type' => 'submit'
-                            ));
-                            ?>
-
-                            <?php
-                            echo $this->Form->button(__('Cancel'), array(
-                                'class' => 'btn btn-default btn-flat',
-                                'type' => 'button',
-                                'onclick' => 'goBack()',
-                            ));
-                            ?>
-                        </div>
-                    </div>
-
-
-                    <?php echo $this->Form->end(); ?>
                 </div>
+
+
+                <?php echo $this->Form->end(); ?>
+
             </div>
 
         </div>

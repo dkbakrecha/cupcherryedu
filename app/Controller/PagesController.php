@@ -10,7 +10,7 @@ class PagesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', "aboutus", "features", 'req_complete', 'sync', 'getEvents'
+        $this->Auth->allow('index', "aboutus", "features","teacher","student", 'req_complete', 'sync', 'getEvents'
                 , 'add_lesson_opening', 'addr', 'search', 'getlibraries', 'getlist', 'apiindex', 'addbooking', 'contact');
 
         $this->Gcal->c_id = "406644858249-sa671ja4v9uc9td5cbclfqmcpci5sm42.apps.googleusercontent.com";
@@ -99,7 +99,7 @@ class PagesController extends AppController {
     }
 
     public function contact() {
-		$this->loadModel('Contact');
+        $this->loadModel('Contact');
         $this->loadModel('EmailContent');
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -107,9 +107,9 @@ class PagesController extends AppController {
             $this->Contact->create($data);
             if ($this->Contact->validates()) {
                 $this->Contact->save();
-				$data['Contact']['name'] = $data['Contact']['first_name'] . " " . $data['Contact']['last_name'];
-				$data['Contact']['subject'] = "Contact From Cupcherry";
-				
+                $data['Contact']['name'] = $data['Contact']['first_name'] . " " . $data['Contact']['last_name'];
+                $data['Contact']['subject'] = "Contact From Cupcherry";
+
                 $this->EmailContent->contactUsMail($data['Contact']['name'], $data['Contact']['email'], $data['Contact']['subject'], $data['Contact']['message']);
                 $this->Session->setFlash(__('Thanks for contact us. Soon one of our team member replay you back :)'), 'default', array('class' => 'alert alert-success'));
                 $this->redirect(array('controller' => 'pages', 'action' => 'contact'));
@@ -118,7 +118,7 @@ class PagesController extends AppController {
                         __('Error! While saving. Please fill all required field.'), 'default', array('class' => 'alert alert-danger')
                 );
             }
-        }        
+        }
     }
 
     public function sync() {
@@ -133,7 +133,7 @@ class PagesController extends AppController {
                     'Event.status' => 1,
                     'Event.gcal_id IS NULL',
                 ),
-            ));
+                    ));
 
             $calender_id = "fche971pa3ooq69o9lqoaq8e30@group.calendar.google.com"; //Test Secondary
 
@@ -163,7 +163,7 @@ class PagesController extends AppController {
                     'Event.status' => 2,
                     'Event.gstatus' => 1,
                 ),
-            ));
+                    ));
 
             if (!empty($eventTrush)) {
                 foreach ($eventTrush as $event) {
@@ -202,7 +202,7 @@ class PagesController extends AppController {
                         'Event.from_time <= ' => date('Y-m-d 23:59:59', $request->query['end']),
                     ),
                     'fields' => array('Event.*')
-                ));
+                        ));
 
                 //prd($eventList);
 
@@ -467,7 +467,7 @@ class PagesController extends AppController {
             'conditions' => array('title like' => '%' . $searchterm . '%'),
             'fields' => array('count(id) as r_count', 'lib_id'),
             'group' => array('lib_id'),
-        ));
+                ));
 
         $countArr = array();
         foreach ($resList as $res) {
@@ -595,20 +595,42 @@ class PagesController extends AppController {
         $this->loadModel('CmsPage');
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'ABOUT_US'
-        )));
+                )));
 
         $this->set('homeContent', $homeContent);
     }
 
     public function features() {
         $this->loadModel('CmsPage');
-        
+
         $featuresContent = $this->CmsPage->find('all', array('conditions' => array(
                 'parent_key' => 'FEATURES'
-        )));
-        
-		$this->set('removeBreadcrumb', 1);
+                )));
+
+        $this->set('removeBreadcrumb', 1);
         $this->set('featuresContent', $featuresContent);
+    }
+
+    public function student() {
+        $this->loadModel('CmsPage');
+
+        $content = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'HOWITWORKSTUDENT'
+                )));
+
+        $this->set('removeBreadcrumb', 1);
+        $this->set('content', $content);
+    }
+    
+    public function teacher() {
+        $this->loadModel('CmsPage');
+
+        $content = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'HOWITWORKTEACHER'
+                )));
+
+        $this->set('removeBreadcrumb', 1);
+        $this->set('content', $content);
     }
 
 }

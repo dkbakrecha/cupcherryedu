@@ -53,10 +53,40 @@
                     <?php
                 } else {
                     ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book"></i>Learn <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
 
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>"><i class="fa fa-desktop"></i> About Cupcherry</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+                            <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index')); ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How it Works <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'student')); ?>"><i class="fa fa-desktop"></i> For Learner</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'teacher')); ?>"><i class="fa fa-desktop"></i> For Instructor</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teaching Resources <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exams <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
                             <?php
                             foreach ($examList as $exam) {
                                 ?>
@@ -67,12 +97,9 @@
                         </ul>
                     </li>
 
-                                                                                <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                    <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                         ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Articles</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact</a></li>
+
                     <?php
                 }
                 ?>
@@ -81,8 +108,8 @@
                 <?php
                 if (empty($LoggedinUser)) {
                     ?>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>"><i class="fa fa-lock"></i> Login</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>"><i class="fa fa-user"></i> New Profile</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Login</a></li>
+                    <li><a class="btn btn-primary" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Sign Up</a></li>
                     <?php
                 } else {
                     ?>
@@ -152,7 +179,7 @@
 
                                                                             <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                         ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                     ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>

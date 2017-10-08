@@ -1,12 +1,3 @@
-<style>
-/*    .m-bottom2 {
-        margin-bottom: 20px;
-    }
-    .m-top4 {
-        margin-top: 40px;
-    }*/
-</style>
-
 <div class="row">
     <div class="col-lg-8">
         <?php
@@ -19,11 +10,11 @@
                     <div class="col-lg-4">
                         <?php if (!empty($postData['Post']['cover_image'])) {
                             ?>
-                        <div class="row"><?php echo $this->html->image('/files/images/' . $postData['Post']['cover_image'], array('class' => 'img-responsive')); ?></div>
-                        <?php }else{
+                            <div class="row"><?php echo $this->html->image('/files/images/' . $postData['Post']['cover_image'], array('class' => 'img-responsive')); ?></div>
+                        <?php } else {
                             ?>
-                                <div class="row"><?php echo $this->html->image('/files/images/post_default.png', array('class' => 'img-responsive')); ?></div>
-                                <?php
+                            <div class="row"><?php echo $this->html->image('/files/images/post_default.png', array('class' => 'img-responsive')); ?></div>
+                            <?php
                         }
                         ?>
                     </div>
@@ -32,9 +23,9 @@
                             <h1 class=""><?php echo $postData['Post']['title']; ?></h1>
                         </a>
                         <div class="post-content">
-                        <?php
-                        echo $this->Classy->short_description($postData['Post']['content'], $_linkUrl);
-                        ?>
+                            <?php
+                            echo $this->Classy->short_description($postData['Post']['content'], $_linkUrl);
+                            ?>
                         </div>
                         <div class="post-info m-top2 m-bottom5">
                             <i class="fa fa-user"></i> <a href="#">By <?php echo $postData['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postData['Post']['created'])) ?> 
@@ -69,14 +60,38 @@
     </div>
     <div class="col-lg-4">
         <!--<div class="fb-page" data-href="https://www.facebook.com/cupcherry" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/cupcherry"><a href="https://www.facebook.com/cupcherry">Cupcherry</a></blockquote></div></div>-->
-        
-        <div class="box">
+        <div class="box sidebar m-bottom15">
             <div class="box-header">
-                <h3 class="box-title">Dashboard</h3>
+                <h3 class="box-title">Stay Updated</h3>
             </div>
-
             <div class="box-content">
+                <p>Get daily articles in your inbox for free.</p>
+                <div id="home_subscribe" >
+
+                    <form role="form" id="hr-subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="hr-subscribe-form">
+                        <div class="input-group input-group-lg">
+                            <?php
+                            echo $this->Form->input('email_address', array(
+                                'type' => 'email',
+                                'class' => 'form-control',
+                                'placeholder' => 'Email address...',
+                                'label' => false,
+                                'div' => false
+                            ));
+                            ?>
+                            <span class="input-group-btn">
+                                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary">Subscribe!</button>
+                            </span>
+                        </div>
+                        <div id="responses">
+                            <div class="response" id="mce-response" style="display:none"></div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
+        <?php echo $this->element('sidebar/topposts'); ?>
+        <?php echo $this->element('sidebar/newnotes'); ?>
     </div>
 </div>

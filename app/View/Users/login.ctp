@@ -7,7 +7,7 @@
     <div class="col-lg-4 ">
         <div class="users box-form">
             <?php echo $this->Session->flash('auth'); ?>
-            <?php echo $this->Form->create('User'); ?>
+            <?php echo $this->Form->create('User',  array('class' => 'site-from')); ?>
             <fieldset>
                 <?php
                 echo $this->Form->input('email', array('label' => false, 'placeholder' => 'Username or Email'));

@@ -12,4 +12,34 @@ class CommonHelper extends AppHelper {
         return $categoryInfo['Category']['title'];
     }
 
+    function get_topposts() {
+        App::import("Model", "Post");
+        $model = new Post();
+        $postList = $model->find("all", array(
+            'limit' => '5',
+            'order' => 'Post.view_count DESC'
+                ));
+        return $postList;
+    }
+
+    function get_newposts() {
+        App::import("Model", "Post");
+        $model = new Post();
+        $postList = $model->find("all", array(
+            'limit' => '5',
+            'order' => 'Post.id DESC'
+                ));
+        return $postList;
+    }
+
+    function get_newnotes() {
+        App::import("Model", "Note");
+        $model = new Note();
+        $noteList = $model->find("all", array(
+            'limit' => '12',
+            'order' => 'Note.id DESC'
+                ));
+        return $noteList;
+    }
+
 }

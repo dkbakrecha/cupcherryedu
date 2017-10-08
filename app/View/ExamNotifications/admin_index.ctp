@@ -48,12 +48,12 @@
             "ajax": '<?php echo $this->Html->url(array("controller" => "exam_notifications", "action" => "examNotiGrid", "admin" => TRUE)); ?>',
             "columns": [
                 {"name": "ExamNotification.id", "orderable": false, "searchable": false, 'width': '5%', 'sClass': 'text-center'},
-                {"name": "ExamNotification.exam_id", 'width': '20%'},
+                {"name": "ExamNotification.title", 'width': '20%'},
                 {"name": "ExamNotification.notificaiton_text", 'width': '60%'},
                 {"name": "ExamNotification.common", "orderable": false, "searchable": false, 'width': '15%', 'sClass': 'text-center'},
             ],
             "order": [
-                [0, "asc"]//4 is here column name
+                [0, "desc"]//4 is here column name
             ],
             "language": {
                 "sLengthMenu": "Shows _MENU_",

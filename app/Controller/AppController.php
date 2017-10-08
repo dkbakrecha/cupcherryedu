@@ -75,6 +75,16 @@ class AppController extends Controller {
         //pr($LoggedinUser);
         $this->loggedinUser = $LoggedinUser;
         $this->set('LoggedinUser', $LoggedinUser);
+        
+        $_NotesType = array(
+            '1' => 'Text',
+            '2' => 'Vedio',
+            '3' => 'PDF',
+        );
+        
+        $this->_NotesType = $_NotesType;
+        $this->set('NotesType', $_NotesType);
+        
 
         $this->SiteSettings();
     }
@@ -108,6 +118,8 @@ class AppController extends Controller {
         Configure::write('ADMIN_MAIL', $adminEmail);
 
         $examList = $this->Exam->find('all', array(
+                        'conditions' => array('Exam.status' => '1'),
+
             'limits' => array('6'),
             'fields' => array('*')
                 ));

@@ -1,5 +1,5 @@
 <!--<meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />-->
-<!--<meta property="og:type"               content="article" />-->
+<meta property="og:type"               content="article" />
 <meta property="og:title"              content="CUPCHERRY : <?php echo $postDetail['Post']['title']; ?>" />
 <!--<meta property="og:description"        content="How much does culture influence creative thinking?" />-->
 <!--<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />-->
@@ -61,15 +61,8 @@
     </div>
 
     <div class="col-lg-4">
-        <!--<div class="fb-page" data-href="https://www.facebook.com/cupcherry" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/cupcherry"><a href="https://www.facebook.com/cupcherry">Cupcherry</a></blockquote></div></div>-->
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Related Posts</h3>
-            </div>
-
-            <div class="box-content">
-            </div>
-        </div>
+        <?php echo $this->element('sidebar/topposts'); ?>
+        <?php echo $this->element('sidebar/newnotes'); ?>
     </div>
 
 </div>

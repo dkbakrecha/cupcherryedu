@@ -1,37 +1,3 @@
-<?php
-//pr($this->Paginator->params());
-//pr($search_term);
-?>
-<div class="row top-buffer bottom-buffer">
-    <div class="col-md-12">
-        <?php
-        echo $this->Form->create('SearchForm', array('type' => 'get'));
-        ?>
-        <div class = "input-group input-group-lg">
-            <?php
-            echo $this->Form->input('q', array(
-                'div' => false,
-                'class' => 'form-control',
-                'label' => false,
-                'placeholder' => 'Search..',
-                'required' => true,
-                    //'name' => 'q'
-            ));
-            ?>
-            <span class="input-group-btn">
-                <?php
-                echo $this->Form->button('Submit', array(
-                    'type' => 'submit',
-                    'div' => false,
-                    'class' => 'btn btn-secondary',
-                ));
-                ?>  
-            </span>
-        </div>
-        <?php echo $this->Form->end(); ?> 
-    </div> 
-</div>
-
 <div class="row note_list">
 
     <div class="col-lg-8">

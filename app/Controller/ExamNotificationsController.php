@@ -4,6 +4,8 @@ App::uses('AppController', 'Controller');
 
 class ExamNotificationsController extends AppController {
 
+    public $components = array('Classy');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
@@ -19,9 +21,18 @@ class ExamNotificationsController extends AppController {
     }
 
     public function view($id) {
-        $notification = $this->ExamNotification->find('first', array(
+        
+        if(is_numeric($id)){
+            $notification = $this->ExamNotification->find('first', array(
             'conditions' => array('ExamNotification.id' => $id)
                 ));
+        }else{
+            $notification = $this->ExamNotification->find('first', array(
+            'conditions' => array('ExamNotification.title_slug' => $id)
+                ));
+        }
+        
+        
         //pr($notificationList);
         $this->set('notification', $notification);
     }
@@ -35,6 +46,7 @@ class ExamNotificationsController extends AppController {
     public function admin_add() {
         if (!empty($this->request->data)) {
             $data = $this->request->data;
+            $data['ExamNotification']['title_slug'] = $this->Classy->postslug($data['ExamNotification']['title']);
             //prd($data);
             if ($this->ExamNotification->save($data)) {
                 $this->Session->setFlash('Exam Notification added successfully.', 'default', array('class' => 'alert alert-success'));
@@ -49,6 +61,10 @@ class ExamNotificationsController extends AppController {
     public function admin_edit($id) {
         if (!empty($this->request->data)) {
             $data = $this->request->data;
+            if (empty($data['ExamNotification']['title_slug'])) {
+                $data['ExamNotification']['title_slug'] = $this->Classy->postslug($data['ExamNotification']['title']);
+            }
+
 
             if ($this->ExamNotification->save($data)) {
                 $this->Session->setFlash('Exam Notification added successfully.', 'default', array('class' => 'alert alert-success'));
@@ -132,7 +148,7 @@ class ExamNotificationsController extends AppController {
 
                     $return_result['data'][] = array(
                         $row['ExamNotification']['id'],
-                        $row['ExamNotification']['exam_id'],
+                        $row['ExamNotification']['title'],
                         $row['ExamNotification']['notification_text'],
                         $action
                     );

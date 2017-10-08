@@ -8,7 +8,7 @@ class NotesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index');
+        $this->Auth->allow('index', 'view');
     }
 
     public $components = array('Paginator');
@@ -20,7 +20,7 @@ class NotesController extends AppController {
     );
 
     public function index() {
-
+        $this->set('removeBreadcrumb', 1);
         if (!empty($this->request->query)) {
             $search_term = $this->request->query['q'];
 
@@ -31,7 +31,8 @@ class NotesController extends AppController {
             $this->Paginator->settings = array(
                 'conditions' => array($paginateCond),
                 'paramType' => 'querystring',
-                'limit' => 3
+                'limit' => 3,
+                'order' => array('id' => 'desc')
             );
 
             if (!empty($search_term)) {
@@ -50,7 +51,8 @@ class NotesController extends AppController {
             $this->Paginator->settings = array(
                 'conditions' => array($paginateCond),
                 //'paramType' => 'querystring',
-                'limit' => 5
+                'limit' => 5,
+                'order' => array('id' => 'desc')
             );
 
             $notesData = $this->Paginator->paginate('Note');
@@ -64,7 +66,7 @@ class NotesController extends AppController {
                 'Category.parent_id' => 0,
                 'Category.status' => 1
             )
-        ));
+                ));
         $this->set('cateList', $cateList);
     }
 
@@ -119,7 +121,7 @@ class NotesController extends AppController {
                     'SearchResult.id',
                     'SearchResult.search_words',
                     'SearchResult.hits'),
-            ));
+                    ));
             //  prd($allWords);
             $searchResult = array();
             foreach ($allWords as $words) {
@@ -167,7 +169,7 @@ class NotesController extends AppController {
                 'Note.id' => $id,
                 'Note.status' => 1
             )
-        ));
+                ));
         $this->set('noteData', $noteData);
 
         $this->loadModel('Category');
@@ -176,7 +178,7 @@ class NotesController extends AppController {
                 'Category.parent_id' => $noteData['Note']['category_id'],
                 'Category.status' => 1
             )
-        ));
+                ));
         $this->set('cateList', $cateList);
     }
 
@@ -190,8 +192,131 @@ class NotesController extends AppController {
 
         if (!empty($data)) {
             $data['Note']['user_id'] = $this->_getCurrentUserId();
-            $this->Note->save($data);
+            $data['Note']['status'] = 3;
+            if ($this->Note->save($data)) {
             $this->Session->setFlash("Note save successfully", "default", array('class' => 'alert alert-success'));
+            }  else {
+               $this->Session->setFlash("Please check again", "default", array('class' => 'alert alert-danger')); 
+            }
+        }
+    }
+    
+    public function edit($note_id) {
+        $request = $this->request;
+        $data = $request->data;
+
+        $this->loadModel('Category');
+        $cateList = $this->Category->find('list', array('conditions' => array('parent_id' => 0)));
+        $this->set('cateList', $cateList);
+
+        if (!empty($data)) {
+            $data['Note']['user_id'] = $this->_getCurrentUserId();
+            $data['Note']['status'] = 3;
+            if ($this->Note->save($data)) {
+            $this->Session->setFlash("Note save successfully", "default", array('class' => 'alert alert-success'));
+            }  else {
+               $this->Session->setFlash("Please check again", "default", array('class' => 'alert alert-danger')); 
+            }
+        }
+        
+        $quesData = $this->Note->findById($note_id);
+        $this->request->data = $quesData;
+    }
+
+    public function home() {
+        
+    }
+
+    public function noteGrid() {
+        $this->loadModel('Category');
+        $request = $this->request;
+        $this->autoRender = false;
+
+        if ($request->is('ajax')) {
+            $this->layout = 'ajax';
+
+            $page = $request->query('draw');
+            $limit = $request->query('length');
+            $start = $request->query('start');
+
+            //for order
+            $colName = $this->request->query['order'][0]['column'];
+            $orderby[$this->request->query['columns'][$colName]['name']] = $this->request->query['order'][0]['dir'];
+            //prd($this->request);          
+            $condition = array();
+
+            $condition['Note.user_id'] = $this->_getCurrentUserId();
+
+            //pr($this->request->query['columns']);
+            foreach ($this->request->query['columns'] as $column) {
+
+                if (isset($column['searchable']) && $column['searchable'] == 'true') {
+                    //pr($column);
+                    if ($column['name'] == 'User.date_added' && !empty($column['search']['value'])) {
+                        $condition['User.date_added LIKE '] = '%' . Sanitize::clean(date('Y-m-d', strtotime($column['search']['value']))) . '%';
+                    } elseif (isset($column['name']) && $column['search']['value'] != '') {
+                        $condition[$column['name'] . ' LIKE '] = '%' . Sanitize::clean($column['search']['value']) . '%';
+                    }
+                }
+            }
+
+            //prd($condition);
+            $total_records = $this->Note->find('count', array('conditions' => $condition));
+
+
+            $fields = array('Note.id', 'Note.title', 'Note.notes_type', 'Note.category_id', 'Note.sub_category_id', 'Note.user_id', 'Note.status');
+            $gridData = $this->Note->find('all', array(
+                'conditions' => $condition,
+                'fields' => $fields,
+                'order' => $orderby,
+                'limit' => $limit,
+                'offset' => $start
+                    ));
+            //prd($gridData);
+            $return_result['draw'] = $page;
+            $return_result['recordsTotal'] = $total_records;
+            $return_result['recordsFiltered'] = $total_records;
+
+            $return_result['data'] = array();
+            if (isset($gridData[0])) {
+                $i = $start + 1;
+                foreach ($gridData as $row) {
+                    $action = '';
+                    $status = '';
+
+                    if ($row['Note']['status'] == 0) {
+                        $status .= '<span class="label label-danger" title="Inactive">Inactive</span>';
+                    } else if ($row['Note']['status'] == 1) {
+                        $status .= '<span class="label label-success"  title="Active">Active</span>';
+                    } else if ($row['Note']['status'] == 3) {
+                        $status .= '<span class="label label-warning" title="Pending approval from Admin Team">Pending</span>';
+                    }
+
+                    //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
+
+                    $action .= $status . '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'notes/edit/' . $row['Note']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
+
+                    $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_note(' . $row['Note']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
+
+                    $chk = '<td><input type="checkbox" name="selected[]" class="chkBox" value="' . $row['Note']['id'] . '"/></td>';
+
+                    $return_result['data'][] = array(
+                        $row['Note']['id'],
+                        $row['Note']['title'],
+                        $this->Category->getNameByID($row['Note']['category_id']),
+                        $this->Category->getNameByID($row['Note']['sub_category_id']),
+                        $this->_NotesType[$row['Note']['notes_type']],
+                        $action
+                    );
+                    $i++;
+                }
+            }
+            // pr($return_result);
+            echo json_encode($return_result);
+            exit;
+        } else {
+            $this->set('title_for_layout', __('Access Denied'));
+            $this->render('/nodirecturl');
         }
     }
 
@@ -288,7 +413,7 @@ class NotesController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-            ));
+                    ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -343,7 +468,7 @@ class NotesController extends AppController {
             $data['Note']['id'] = $this->request->data['id'];
             $userdata = $this->Note->find('first', array('conditions' => array(
                     'Note.id' => $data['Note']['id'])
-            ));
+                    ));
 
             $data['Note']['status'] = $this->request->data['status'] == 3 ? 1 : ($this->request->data['status'] == 1 ? 0 : 1);
 

@@ -283,7 +283,7 @@ class UsersController extends AppController {
                 if ($this->User->validates()) {
                     $this->User->save($saveData);
 
-                    $this->Session->setFlash(__('Password has been updated.'), 'success');
+                    $this->Session->setFlash(__('Password has been updated.'), 'default', array('class' => 'alert alert-success'));
                     return $this->redirect(array('controller' => 'pages', 'action' => 'home'));
                 }
             }
@@ -370,6 +370,7 @@ class UsersController extends AppController {
         $this->loadModel('Category');
         $this->loadModel('Post');
         $this->loadModel('Exam');
+        $this->loadModel('Note');
         //$this->loadModel('TestType');
 
         /* $testInfo = $this->TestType->find('all', array(
@@ -406,6 +407,15 @@ class UsersController extends AppController {
             'fields' => array('*')
                 ));
 
+        $noteList = $this->Note->find('all', array(
+            'conditions' => array(
+                'Note.status' => 1,
+            ),
+            'order' => array('Note.id DESC'),
+            'limit' => 10,
+            'fields' => array('Note.title', 'Note.created')
+                ));
+
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOMEPAGE_LEFT'
                 )));
@@ -415,6 +425,8 @@ class UsersController extends AppController {
 
 
         //$this->set('testInfo', $testInfo);
+
+        $this->set('noteList', $noteList);
         $this->set('cateList', $cateList);
         $this->set('blogList', $blogList);
     }
@@ -437,7 +449,7 @@ class UsersController extends AppController {
 
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+            $this->Session->setFlash(__('Invalid username or password, try again'), 'default', array('class' => 'alert alert-danger'));
         }
     }
 
@@ -514,6 +526,8 @@ class UsersController extends AppController {
     public function admin_dashboard() {
         $this->loadModel('Test');
         $this->loadModel('Note');
+        $this->loadModel('Newsletter');
+        $this->loadModel('Comment');
         $this->loadModel('Question');
         $_user_statics = array();
         /* Active users */
@@ -526,11 +540,14 @@ class UsersController extends AppController {
         $_user_pending = $this->User->find('count', array('conditions' => array(
                 'role' => 2, 'status' => 3)));
 
+        $_user_statics['newsletter_all'] = $this->Newsletter->find('count', array('conditions' => array(
+                'status' => 3)));
+
         /* Notes and Questions */
-        $notes_pending = $this->Note->find('count', array('conditions' => array(
+        $_user_statics['notes_pending'] = $this->Note->find('count', array('conditions' => array(
                 'Note.status' => 3)));
 
-        $question_pending = $this->Question->find('count', array('conditions' => array(
+        $_user_statics['question_pending'] = $this->Question->find('count', array('conditions' => array(
                 'Question.status' => 3)));
 
         $_user_statics['active'] = $_user_active;
@@ -538,11 +555,14 @@ class UsersController extends AppController {
         $_user_statics['pending'] = $_user_pending;
 
 
-        $_user_statics['notes_pending'] = $notes_pending;
-        $_user_statics['question_pending'] = $question_pending;
 
         $this->set('user_statics', $_user_statics);
 
+        $_comment_list = $this->Comment->find('all', array(
+            'limit' => 5,
+                ));
+
+        $this->set('_comment_list', $_comment_list);
 
         $_lastlogin_list = $this->User->find('all', array(
             'conditions' => array(
@@ -694,7 +714,7 @@ class UsersController extends AppController {
         $request = $this->request;
 
         if (empty($id)) {
-            return $this->redirect(array('controller' => 'users', 'action' => 'students'));
+            return $this->redirect(array('controller' => 'users', 'action' => 'index'));
         }
 
         $userData = $this->User->findById($id);
@@ -705,13 +725,11 @@ class UsersController extends AppController {
                 unset($saveData['User']['confirm_password']);
             }
 
-            $saveData['User']['dob'] = $this->_dbDate($saveData['User']['dob']);
-
             if ($this->User->save($saveData)) {
-                $this->Session->setFlash(__('Profile has been updated.'), 'success');
-                return $this->redirect(array('action' => 'students'));
+                $this->Session->setFlash(__('Profile has been updated.'), 'default', array('class' => 'alert alert-success'));
+                return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to update your profile.'), 'error');
+            $this->Session->setFlash(__('Unable to update your profile.'), 'default', array('class' => 'alert alert-danger'));
         }
 
         $request->data = $userData;

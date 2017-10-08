@@ -360,6 +360,27 @@ class TestsController extends AppController {
         
     }
 
+    public function admin_create() {
+        $request = $this->request;
+        $this->loadModel('TestQuestion');
+
+        if ($request->is('post')) {
+            $data = $request->data;
+            $data['Test']['created_by'] = 1; /* 1 = Admin, Other Users */
+
+            $_date = date("Y-m-d H:i:s");
+            $data['Test']['unique_id'] = date("Y-m-d H:i:s");
+            $data['Test']['start_date'] = date("Y-m-d H:i:s");
+            $data['Test']['end_date'] = date("Y-m-d H:i:s", strtotime($_date) + 3600 * 24 * 30);
+            $data['Test']['modified'] = date("Y-m-d H:i:s");
+            $data['Test']['status'] = 1;  /* 1 in the case of admin. Other 3 for pending */
+
+            if ($resTest = $this->Test->save($data)) {
+                $this->Session->setFlash('Test create successfully', 'default', array('class' => 'alert alert-success'));
+            }
+        }
+    }
+
     public function admin_edit($id) {
         $testInfo = $this->Test->find('first', array(
             'conditions' => array(
@@ -368,6 +389,11 @@ class TestsController extends AppController {
                 ));
 
         $this->set('testInfo', $testInfo);
+    }
+
+    /* Question List in Current Test */
+    public function admin_editquestion($test_id) {
+       
     }
 
     public function admin_testGridData() {
@@ -390,9 +416,7 @@ class TestsController extends AppController {
 
             //pr($this->request->query['columns']);
             foreach ($this->request->query['columns'] as $column) {
-
                 if (isset($column['searchable']) && $column['searchable'] == 'true') {
-                    //pr($column);
                     if ($column['name'] == 'User.date_added' && !empty($column['search']['value'])) {
                         $condition['User.date_added LIKE '] = '%' . Sanitize::clean(date('Y-m-d', strtotime($column['search']['value']))) . '%';
                     } elseif (isset($column['name']) && $column['search']['value'] != '') {
@@ -431,7 +455,7 @@ class TestsController extends AppController {
                         $status .= '<i class="fa fa-dot-circle-o fa-lg clr-orange" onclick="changeUserStatus(' . $row['Test']['id'] . ',0)" title="Change Status"></i>';
                     }
 
-                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/tests/edit/' . $row['Test']['id'] . '" title="Edit Test"><i class="fa fa-pencil fa-lg"></i></a> ';
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/tests/questions/' . $row['Test']['id'] . '" title="Edit Test"><i class="fa fa-pencil fa-lg"></i></a> ';
 
                     $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_test(' . $row['Test']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
 
@@ -456,6 +480,10 @@ class TestsController extends AppController {
             $this->set('title_for_layout', __('Access Denied'));
             $this->render('/nodirecturl');
         }
+    }
+    
+    public function admin_questions($test_id){
+        
     }
 
 }

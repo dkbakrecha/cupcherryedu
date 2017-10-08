@@ -1,0 +1,1 @@
+ALTER TABLE `exam_notifications` ADD `title_slug` VARCHAR(255) NOT NULL AFTER `title`; 

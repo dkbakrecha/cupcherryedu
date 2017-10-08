@@ -71,7 +71,7 @@
                 {"name": "Test.common", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
             ],
             "order": [
-                [4, "desc"]//4 is here column name
+                [0, "desc"]//4 is here column name
             ],
             "language": {
                 "sLengthMenu": "Shows _MENU_",

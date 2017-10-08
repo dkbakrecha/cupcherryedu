@@ -18,13 +18,46 @@ class ApiController extends AppController
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
-		$this->Auth->allow();
+		$this->Auth->allow('notes','examnotification');
 	}
 
 	public function index($id)
 	{
 		
 	}
+        
+        public function notes(){
+           $this->loadModel('Notes'); 
+           $notesList = $this->Notes->find('all',array(
+               'conditions' => array(
+                   'Notes.status' => 1,
+                   
+               ),
+                'fields' => array('Notes.id' , 'Notes.title'),
+               'order' => array('Notes.id desc'),
+               'limit' => '10'
+           ));
+           
+           echo json_encode($notesList);
+           exit;
+        }
+        
+        public function examnotification(){
+           $this->loadModel('ExamNotification'); 
+           
+           $notificationList = $this->ExamNotification->find('all',array(
+               'conditions' => array(
+                   'ExamNotification.status' => 1,
+                   
+               ),
+               'fields' => array('ExamNotification.id' , 'ExamNotification.title'),
+               'order' => array('ExamNotification.id desc'),
+               'limit' => '5'
+           ));
+           
+           echo json_encode($notificationList);
+           exit;
+        }
 
 	public function login()
 	{

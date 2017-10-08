@@ -22,6 +22,7 @@
             'fontawesome/font-awesome.min',
             'site_ui',
             '/js/share/css/jquery.sharepage',
+            'dataTable_custom',
             'some_admin',
         ));
 
@@ -61,6 +62,10 @@
             if (empty($removeBreadcrumb)) {
                 echo $this->element('breadcrumb');
             }
+        }
+        
+        if($_body_class == 'notes-index'){
+            echo $this->element('search-notes');
         }
         ?>
 

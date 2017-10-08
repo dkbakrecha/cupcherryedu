@@ -60,7 +60,7 @@ class User extends AppModel {
                 'message' => 'Passwords do not match'
             ),
             'match' => array(
-                'rule' => 'checkpasswords',
+                'rule' => array('identicalPassword', 'password'),
                 'message' => 'Passwords do not match'
             )
         ),
@@ -73,20 +73,34 @@ class User extends AppModel {
 
         return true;
     }
-	
-	public function getInfo($email){
-		$conditions = array(
+
+    public function getInfo($email) {
+        $conditions = array(
             'conditions' => array('User.email' => $email, 'User.status' => 1), //array of conditions
             'recursive' => -1, //int
-			'fields' => array('id','name','email','role','status')
+            'fields' => array('id', 'name', 'email', 'role', 'status')
         );
-		
+
         $user_content = $this->find('first', $conditions);
         if (is_array($user_content) && !empty($user_content)) {
             return $user_content;
         } else {
             return false;
         }
-	}
+    }
+
+    public function identicalPassword($field = array(), $compare_field = null) {
+        foreach ($field as $k => $v) {
+            $v1 = $v;
+            $v2 = $this->data[$this->alias][$compare_field];
+
+            if ($v1 !== $v2) {
+                return false;
+            } else {
+                continue;
+            }
+        }
+        return true;
+    }
 
 }

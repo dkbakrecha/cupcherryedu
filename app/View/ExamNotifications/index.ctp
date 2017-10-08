@@ -10,7 +10,14 @@
                         ?>
 
                         <div class="bs-callout bs-callout-warning" > 
-                            <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $notifiation['ExamNotification']['id'])); ?>">
+                            <?php
+                            $_slug = $notifiation['ExamNotification']['id'];
+                            if(!empty($notifiation['ExamNotification']['title_slug'])){
+                                                            $_slug = $notifiation['ExamNotification']['title_slug'];
+
+                            }
+                            ?>
+                            <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>">
                             <h4><?php echo $notifiation['ExamNotification']['title']; ?>	</h4> 
                             </a>
                             

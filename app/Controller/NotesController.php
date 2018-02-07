@@ -13,7 +13,7 @@ class NotesController extends AppController {
 
     public $components = array('Paginator');
     public $paginate = array(
-        'limit' => 5,
+        'limit' => 10,
         'order' => array(
             'id' => 'asc'
         )
@@ -51,7 +51,7 @@ class NotesController extends AppController {
             $this->Paginator->settings = array(
                 'conditions' => array($paginateCond),
                 //'paramType' => 'querystring',
-                'limit' => 5,
+                'limit' => 10,
                 'order' => array('id' => 'desc')
             );
 

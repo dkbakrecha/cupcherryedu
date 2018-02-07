@@ -2,7 +2,7 @@
 <html>
     <head>
         <?php echo $this->Html->charset(); ?>
-        
+
         <?PHP
         /* <!--<link href='https://fonts.googleapis.com/css?family=Roboto:500,400' rel='stylesheet' type='text/css'>--> */
         echo $this->element('seo_title');
@@ -60,21 +60,23 @@
             echo $this->element('header');
             echo $this->element('shortcut-menu');
             if (empty($removeBreadcrumb)) {
-                echo $this->element('breadcrumb');
+                //echo $this->element('breadcrumb');
             }
         }
-        
-        if($_body_class == 'notes-index'){
+
+        if ($_body_class == 'notes-index') {
             echo $this->element('search-notes');
         }
         ?>
 
         <div class="site-content <?php echo (!empty($content_class)) ? $content_class : ""; ?>" id="content">
             <div class="container">
-                <?php
-                echo $this->Session->flash();
-                echo $this->fetch('content');
-                ?>
+                <div class="row">
+                    <?php
+                    echo $this->Session->flash();
+                    echo $this->fetch('content');
+                    ?>
+                </div>
             </div>
         </div>
 

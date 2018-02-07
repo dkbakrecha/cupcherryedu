@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<section class="page-control"><div class="container"><div class="page-info"><a href="/"><i class="icon fa fa-long-arrow-left"></i>
+<section class="page-control" style="display: none;"><div class="container"><div class="page-info"><a href="/"><i class="icon fa fa-long-arrow-left"></i>
                     Back to home
                 </a></div> <div class="page-view"><div class="mc-select"><button type="button" id="sortOrder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default dropdown-toggle sortbtn" style="box-shadow: none; text-transform: none;">
                                                     Sort by

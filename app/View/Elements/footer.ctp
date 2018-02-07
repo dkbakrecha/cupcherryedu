@@ -26,17 +26,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="col-lg-3 col-lg-12 nomobile" style="padding-top: 10px;">
-                        <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
+                     <div class="col-lg-3 col-lg-12 nomobile" style="padding-top: 10px;">
+                        <div class="m-bottom15 m-top2">
+                        <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
                             <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
                         </a>
-                    </div>
-
-
-
-                    <div class="col-lg-3 col-lg-offset-2 col-md-6 nomobile">
-                        <h3 class="widget-title">Contact Us</h3>
-                        <div class="textwidget">
+                            </div>
+                        <div>
                             <p> 
                                 <span class="fa fa-map-marker"> </span>
                                 <b>Address: </b>
@@ -52,24 +48,41 @@
                                     <b>Phone: </b>
                                     +91 94612 71720 (Whatapp Only)
                             </p>-->
-                        </div>
-                    </div>
+                        </div>                    </div>
 
-                    <div class="col-lg-2 col-lg-12">
+                    <div class="col-lg-2 col-lg-12 nomobile">
                         <h3 class="widget-title">
-                            Navigation
+                            About
                         </h3>
                         <div class="textwidget">
                             <ul class="side-nav">
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>">Submit a Note</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Blog</a></li>
+
                                 <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About Us</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Us</a></li>
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'terms')); ?>">Terms Conditions</a></li>
+
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'privacy')); ?>">Privacy Policy</a></li>
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Blog</a></li>
+
                             </ul>
                         </div>
                     </div>
+                    <div class="col-lg-2 col-lg-12 nomobile">
+                        <h3 class="widget-title">
+                            Help
+                        </h3>
+                        <div class="textwidget">
+                            <ul class="side-nav">
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index')); ?>">FAQ</a></li>
 
-                    <div class="col-lg-2 col-md-6">
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+
+
+
+                    <div class="col-lg-3 col-lg-offset-2 col-md-6">
                         <h3 class="widget-title">We are social</h3>
                         <div class="textwidget">
                             <ul class="social-media">
@@ -97,7 +110,7 @@
                                 ?>
                             </ul>
 
-                            <p class="social-media-text" style="display: none;">We can be supported here!</p>
+                            <p class="social-media-text" >We can be supported here!</p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +118,7 @@
         </div>
     </div>
 
-    <div class="footer-info">
+    <div class="footer-info nomobile">
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-6">
@@ -128,7 +141,7 @@
                                                             </ul>-->
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 <div class="col-lg-12">
                     CupCherry.com is a private non-lawyer website, and only offers general information, not legal advices. We are not affiliated with any government agency.
                 </div>

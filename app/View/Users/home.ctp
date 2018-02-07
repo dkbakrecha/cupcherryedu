@@ -96,136 +96,21 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     <div class="container">
         <!--<h3 class="sub-title be-center">Exam Study Guide</h3>-->
         <div class="row">
+            <div class="col-lg-8">
+                <div class="site-info-top-box">
+                    <h1>New Education Practice Tests 2018</h1>
+                    <?php echo $homeContent['CmsPage']['content']; ?>
+                </div>
+            </div>
             <div class="col-lg-4 nomobile">
                 <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
                 <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><div class="new-notification-home-box">New Exam Notifications</div></a>
             </div>
-            <div class="col-lg-8">
-                <div class="site-info-top-box">
-                    <h1>New Education Practice Tests 2017</h1>
-                    <?php echo $homeContent['CmsPage']['content']; ?>
-                </div>
-            </div>
+            
 
         </div>
-        <div class="row" style="">
-            <?php
-            foreach ($examList as $exam) {
-                //pr($exam);
-                ?>
-                <div class="col-lg-2 col-xs-6">
-
-                                    <!--<a href="<?php //echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id']));     ?>">-->
-                    <div class="exam-block">
-                        <div class="exam-img-wrap">
-                        <?php
-                        echo $this->Html->image('exams/' . $exam['Exam']['logo_pic'], array('class' => 'exam-cover'));
-                        ?>
-                        </div>
-                        <div><?php
-                    echo $exam['Exam']['title'];
-                        ?>
-                        </div>
-                    </div>
-
-                    <!--</a>-->
-
-                </div>
-                <?php
-            }
-            ?>
-
-        </div>
-    </div>    
-</div>
-<!--
-<div class="siteinfo-section">
-    <div class="color-overlay-light"></div>
-
-    <div class="container">
         
     </div>    
-</div>-->
-
-<?php /*
-
-  <div class="testlist-section">
-  <div class="container">
-  <h3 class="sub-title be-center">Try our free sample test</h3>
-  <div class="row">
-  <?php
-  foreach ($testInfo as $test) {
-  ?>
-  <div class="col-lg-4">
-  <div>
-  <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['TestType']['unique_id'])); ?>">
-  Test Here
-  </a>
-  </div>
-  </div>
-  <?php
-  }
-  ?>
-
-  </div>
-  </div>
-  </div>
- */ ?>
-<div class="category-section ">
-    <div class="container">
-        <h3 class="sub-title be-center" >Teaching Resources</h3>
-        <div class="section-description nomobile">The content matter is divided into many different categories and their sub categories based on the pattern of the examination and latest competitive tests.</div>
-        <div class="col-lg-6 nomobile">
-            <?php
-            foreach ($cateList as $category) {
-                ?>
-                <div class="col-lg-6 col-md-6">
-                    <h3 class="category-title"><?php echo $category['Category']['title']; ?></h3>
-                    <?php
-                    $i = 1;
-                    foreach ($category['SubCategories'] as $subCate) {
-                        ?>
-                        <h4 class="subcategory-title"> 
-                            <?php
-                            echo $subCate['title'];
-                            if ($i == 4) {
-                                echo "...";
-                            }
-                            ?> </h4>
-                        <?php
-                        $i++;
-                    }
-                    ?>
-                </div>
-                <?php
-            }
-            ?>
-        </div>   
-        <div class="col-lg-6">
-            <div class="col-lg-12">
-                <h3 class="category-title"><strong>Latest updates notes</strong></h3>
-                <?php
-                if (!empty($noteList)) {
-                    foreach ($noteList as $note) {
-                        $date = date("d.m.Y");
-                        $match_date = date('d.m.Y', strtotime($note['Note']['created']));
-                        $_letest = "";
-                        if ($date == $match_date) {
-                            $_letest = "letest_note";
-                        }
-                        ?>
-                        <h4 class="subcategory-title <?php echo $_letest; ?>"><?php echo $note['Note']['title'] ?> </h4>
-                        <?php
-                    }
-                }
-                ?>
-            </div>
-        </div>
-    </div>  
-    <div class="callToAction">
-        <a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><span class="btn btn-primary ">GK Bytes</span></a>
-        <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><span class="btn btn-primary ">Notes</span></a>
-    </div> 
 </div>
 
 <div class="recent-blogs" >

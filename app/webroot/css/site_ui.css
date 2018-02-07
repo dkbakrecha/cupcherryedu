@@ -64,8 +64,8 @@ h3 {
 
 .navbar-default .navbar-nav > li > a.btn-primary {
     color: #fff;
-    margin: 14px 0;
-    padding: 5px 10px;
+    margin: 9px auto;
+    padding: 10px 20px;
 }
 
 .navbar-default .navbar-nav > li > a.btn-primary:hover {
@@ -370,9 +370,6 @@ form.vertical-form input{
     padding-bottom: 10px;
 }
 
-#footer .footer-widgets img{
-    margin-bottom: 40px;
-}
 
 .footer-widgets .side-nav a {
     float: left;
@@ -856,6 +853,10 @@ a.aboutauthor {
     padding: 5px;
 }
 
+.note_list #pinBoot .list-box{
+    position: absolute;
+}
+
 .list-box .user-info{
     float: left;
     width: 95px;
@@ -885,8 +886,25 @@ a.aboutauthor {
 .note_list .list-box .meta-info {
     border-top: 1px solid #ddd;
     float: left;
-    padding: 5px 0 5px 95px;
+    padding: 5px 0 5px 5px;
     width: 100%;
+}
+
+.site-share-btn {
+    color: #FFF;
+    background: #DFDFDF;
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin: 2px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 2px;
+    border:1px solid transparent;
+}
+
+.site-share-btn:hover{
+    border:1px solid #337ab7;
 }
 
 .box{
@@ -934,6 +952,28 @@ a.aboutauthor {
     padding:15px 20px;
     margin: 0;
     width: 100%;
+    position: relative;
+}
+
+.box-title h3{
+    margin: 0;
+    color: #337ab7;
+    font-size: 24px;
+}
+
+.box-title h4{
+    margin: 0;
+    color: #888888;
+    font-size: 16px;
+}
+
+.cms-header-icon {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 60px;
+    color: #337ab7;
+    opacity: 0.5;
 }
 
 .box-widget-title {
@@ -1919,6 +1959,81 @@ form#SearchFormIndexForm {
     float: none;
     position: relative;
 }
+
+.box-header {
+    border-bottom: 1px solid #e5e5e5;
+    float: left;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.box-header .title {
+    font-size: 20px;
+    float: left;
+    margin-top: 15px;
+    color: #398439;
+}
+
+
+*::before, *::after {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+
+.header-topbar {
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.header-topbar .nav.navbar-nav {
+    margin: 0;
+    padding: 0;
+}
+
+.header-topbar .nav.navbar-nav > li{
+    border-right: 1px solid #f2f2f2;
+    color: #888888;
+    display: inline-block;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 20px;
+}
+
+.header-topbar .social-icon-list .nav.navbar-nav > li{
+    padding: 0px;
+}
+
+.header-topbar .social-icon-list .nav.navbar-nav > li a{
+    color: #888888;
+    padding: 10px 20px;
+}
+
+.header-topbar .nav.navbar-nav > li:first-child{
+    border-left: 1px solid #f2f2f2;
+}
+
+element {
+
+}
+.page-control .page-info a {
+
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #A5A5A5;
+    line-height: 50px;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+
+}
 @media (min-width : 1024px) and (max-width : 1199px) {
 
 
@@ -1942,6 +2057,8 @@ form#SearchFormIndexForm {
     }
     .menu-ipad{
         display: block;
+        
+        border-bottom: 1px solid #DEDEDE;
     }
     .mainmenucover .navbar-header{
         width: 100% !important;
@@ -1965,7 +2082,7 @@ form#SearchFormIndexForm {
         top: 58px;
         transition: all 0.5s ease-in-out 0s;
         width: 300px;
-        z-index: 999;
+        z-index: 98;
         height: 100%;
         overflow:auto;
         /*border-top:1px solid #333;*/
@@ -2061,7 +2178,8 @@ form#SearchFormIndexForm {
 @media only screen and (max-width: 768px) {
     .cd-top {
         right: 20px;
-        bottom: 20px;
+        bottom: 40px;
+        z-index: 98;
     }
 
 }
@@ -2076,6 +2194,40 @@ form#SearchFormIndexForm {
         display: inline-block;
         width: 100%;
     }
+    
+    .sidebar {
+    float: left;
+}
+
+.post-detail .post-header > h1{
+    padding: 125px 20px 10px 20px;
+}
+.site-content, .posts-view .col-lg-8{
+    margin: 0;
+    padding: 0;
+}
+
+.post-detail{
+    margin-top: 0;
+}
+    
+    .sidebar h2{
+        float: left;
+        width: 100%;
+    }
+
+    #footer{
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+    .navbar-toggle#fotterMnu{
+        margin: 0;
+        padding:  0;
+    }
+    form#SearchFormIndexForm {
+        padding: 15px 0;
+    }
 
     .home-text {
         padding: 0;
@@ -2088,10 +2240,19 @@ form#SearchFormIndexForm {
 
     .shortcut-menu {
         background: #337ab7 none repeat scroll 0 0;
-        border-bottom: 1px solid #fff;
+        border-top: 2px solid #fff;
         display: block;
         float: left;
         width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+
+
+        -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+        -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+        box-shadow: 0px 0px 10px rgba(0,0,0,.8);
     }
     .shortcut-menu a {
         color: #fff;
@@ -2104,21 +2265,21 @@ form#SearchFormIndexForm {
         float: left;
         list-style: outside none none;
         margin-bottom: 0;
-        padding: 0 15px;
+        padding: 0px;
         width: 100%;
     }
 
     .shortcut-nav > li {
         border-right: 1px solid #fff;
         float: left;
-        font-size: 16px;
+        font-size: 13px;
         text-align: center;
-        width: 24%;
+        width: 20%;
     }
 
     .shortcut-nav > li:last-child {
         border-right: medium none;
-        width: 28%;
+        /*width: 28%;*/
     }
 
     .shortcut-nav > li .fa {
@@ -2191,4 +2352,40 @@ form#SearchFormIndexForm {
 
 
 
+}
+.center-heading{
+    width: 100%;
+    float: left;
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+.site-hr-top {
+}
+
+.site-hr-top::before {
+    content: "";
+    width: 125px;
+    height: 2px;
+    background-color: #777;
+    top: 50%;
+    position: absolute;
+    left: 30px;
+
+    margin-top: -1px;
+}
+
+.site-hr-top::after {
+    content: "";
+    width: 125px;
+    height: 2px;
+    background-color: #777;
+    top: 50%;
+    position: absolute;
+    right: 30px;
+    margin-top: -1px;
+}
+
+.site-hr-top .fa-child {
+    font-size: 24px;
 }

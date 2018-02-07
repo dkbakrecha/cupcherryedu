@@ -196,6 +196,7 @@ class UsersController extends AppController {
 
     public function register() {
         $this->loadModel('EmailContent');
+        $this->set('removeBreadcrumb', 1);
 
         $this->set("title_for_layout", "Student Profile");
         $_role = 2;
@@ -413,7 +414,7 @@ class UsersController extends AppController {
             ),
             'order' => array('Note.id DESC'),
             'limit' => 10,
-            'fields' => array('Note.title', 'Note.created')
+            'fields' => array('Note.id', 'Note.title', 'Note.created')
                 ));
 
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(

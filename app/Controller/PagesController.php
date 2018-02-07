@@ -10,7 +10,7 @@ class PagesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', "aboutus", "features","teacher","student", 'req_complete', 'sync', 'getEvents'
+        $this->Auth->allow('index', "aboutus","terms", "features","teacher","student", 'req_complete', 'sync', 'getEvents',"privacy"
                 , 'add_lesson_opening', 'addr', 'search', 'getlibraries', 'getlist', 'apiindex', 'addbooking', 'contact');
 
         $this->Gcal->c_id = "406644858249-sa671ja4v9uc9td5cbclfqmcpci5sm42.apps.googleusercontent.com";
@@ -599,6 +599,29 @@ class PagesController extends AppController {
 
         $this->set('homeContent', $homeContent);
     }
+    
+    public function privacy() {
+        $this->set("title_for_layout", "Privacy Policy");
+
+        $this->loadModel('CmsPage');
+        $content = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'PRIVACY'
+                )));
+
+        $this->set('content', $content);
+    }
+    
+     public function terms() {
+        $this->set("title_for_layout", "Terms and Conditions");
+
+        $this->loadModel('CmsPage');
+        $content = $this->CmsPage->find('first', array('conditions' => array(
+                'unique_key' => 'TERMS'
+                )));
+
+        $this->set('content', $content);
+    }
+
 
     public function features() {
         $this->loadModel('CmsPage');

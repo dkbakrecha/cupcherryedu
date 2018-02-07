@@ -2,6 +2,7 @@
 echo $this->Html->script(array(
     'ckeditor/ckeditor',
     'ckeditor/adapters/jquery',
+    'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min',
 ));
 ?>
 <div class="warper container-fluid">
@@ -18,27 +19,11 @@ echo $this->Html->script(array(
                 echo $this->Form->hidden('id');
                 ?>  
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Title</label>
                     <div class="col-sm-7">
                         <?php
                         echo $this->Form->input('title', array(
                             'class' => 'form-control',
                             'placeholder' => 'Title',
-                            'label' => false,
-                            'type' => 'textbox'
-                        ));
-                        ?>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Title Slug</label>
-                    <div class="col-sm-7">
-                        <?php
-                        echo $this->Form->input('title_slug', array(
-                            'class' => 'form-control',
-                            'placeholder' => 'Title',
-                            'label' => false,
                             'type' => 'textbox'
                         ));
                         ?>
@@ -46,13 +31,120 @@ echo $this->Html->script(array(
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Notification Text</label>
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('title_slug', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('notification_board', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('qualification', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('remark', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('source', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('state', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <?php
+                        echo $this->Form->input('city', array(
+                            'class' => 'form-control',
+                            'placeholder' => 'Title',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+                
+
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <?php
+                        echo $this->Form->input('post_date', array(
+                            'class' => 'form-control form_datetime',
+                            'placeholder' => 'Title',
+                            'label' => 'Post Date',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <?php
+                        echo $this->Form->input('lastapply_date', array(
+                            'class' => 'form-control form_datetime',
+                            'placeholder' => 'Title',
+                            'label' => 'Last Apply Date',
+                            'type' => 'textbox'
+                        ));
+                        ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-7">
                         <?php
                         echo $this->Form->input('notification_text', array(
                             'class' => 'form-control',
                             'placeholder' => 'Notification Text',
-                            'label' => false,
                             'type' => 'textarea'
                         ));
                         ?>
@@ -91,5 +183,7 @@ echo $this->Html->script(array(
 <script>
     $(document).ready(function () {
         $('textarea#ExamNotificationNotificationText').ckeditor();
+        $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii',todayBtn: true});
+
     });
 </script>

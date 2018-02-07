@@ -38,5 +38,12 @@
             ?>
 
         </li>
+        
+        <li id="fotterMnu" class="navbar-toggle">
+            <a href="#">
+                <i class="fa fa-cogs"></i>
+                <span>Menu</span>
+            </a>
+        </li>
     </ul>
 </section>

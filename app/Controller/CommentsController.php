@@ -8,7 +8,7 @@ class CommentsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('update');
+        $this->Auth->allow('update', "create");
     }
 
     public function update() {
@@ -52,7 +52,9 @@ class CommentsController extends AppController {
     }
 
     public function create() {
+        $this->layout = "ajax";
         $request = $this->request;
+        
         if ($request->is('post')) {
             $testData = $request->data;
 
@@ -66,8 +68,8 @@ class CommentsController extends AppController {
             }
         }
 
-        echo json_encode($returnData);
-        exit;
+        //echo json_encode($returnData);
+        //exit;
     }
 
     /*  ==========  ADMIN SECTION  ==========  */

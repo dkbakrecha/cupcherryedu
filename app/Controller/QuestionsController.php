@@ -21,7 +21,7 @@ class QuestionsController extends AppController {
 
     public function index() {
         $request = $this->request;
-        
+
 
         $this->paginate['conditions']['Question.status'] = 1;
         $this->paginate['order'] = array('id' => 'DESC');
@@ -32,7 +32,7 @@ class QuestionsController extends AppController {
         }
 
         $this->Paginator->settings = $this->paginate;
-        
+
         $all_questions = $this->Paginator->paginate('Question');
         $this->set('allQuestions', $all_questions);
     }
@@ -250,6 +250,7 @@ class QuestionsController extends AppController {
         }
 
         $quesData = $this->Question->findById($ques_id);
+        //prd($quesData);
         $this->request->data = $quesData;
     }
 

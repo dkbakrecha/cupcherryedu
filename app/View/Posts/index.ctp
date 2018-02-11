@@ -29,7 +29,11 @@
                         </div>
                         <div class="post-info m-top2 m-bottom5">
                             <i class="fa fa-user"></i> <a href="#">By <?php echo $postData['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postData['Post']['created'])) ?> 
-                            <!--<span class="pull-right"><i class="fa fa-comments"></i> <a href="#">2456</a> &nbsp;/&nbsp; <a href="#">Business</a> - <a href="#">UX</a> - <a href="#">Web Design</a> - <a href="#">UI</a> - <a href="#">Social Media</a></span>--> 
+                            <span class="pull-right">
+                                <!--<i class="fa fa-comments"></i> <a href="#">2456</a>--> 
+                                <i class="fa fa-eye"></i> <?php echo $postData['Post']['view_count']; ?>
+                                <!--&nbsp;/&nbsp; <a href="#">Business</a> - <a href="#">UX</a> - <a href="#">Web Design</a> - <a href="#">UI</a> - <a href="#">Social Media</a>-->
+                            </span> 
                         </div>
                     </div>
 

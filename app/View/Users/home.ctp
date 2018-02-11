@@ -19,8 +19,12 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     .exam_section, .footer-subscribe
     {
         background : #337ab7;
-        background-image: url("<?php echo $this->webroot; ?>img/bg-bricks.png");
+        background-image: url("<?php echo $this->webroot; ?>img/bs-docs-masthead-pattern.png");
         background-position: 50% 0;
+    }
+
+    .bedgeforyear{
+        background-image: url("<?php echo $this->webroot; ?>img/bs-docs-masthead-pattern.png");
     }
 
     .recent-blogs{
@@ -106,11 +110,27 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
                 <?php echo $this->Html->image('home-img1.png', array('class' => 'img-responsive')); ?>
                 <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><div class="new-notification-home-box">New Exam Notifications</div></a>
             </div>
-            
+
 
         </div>
-        
+
     </div>    
+</div>
+
+<div class="bedgeforyear">
+    <div class="container">
+        <div class="col-xs-12 col-sm-3 col-md-1">
+            <div class="row">    
+                <?php echo $this->Html->image('1YearW.png', array('class' => 'img-responsive pull-right')); ?>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-11">
+            <div class="bedgetext">
+                Find Right Knowledge! Right Time! Right Place!
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Join Free</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="recent-blogs" >
@@ -150,7 +170,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     </div>
 </div>
 
-<div class="footer-subscribe">
+<div class="footer-subscribe" style="background-color: #a5122b;">
     <div class="container text-center">
         <h5>Subscribe to our mailing list to receive an update when new exam notification arrive!</h5>
         <div id="home_subscribe" class="col-lg-6 col-lg-offset-3">

@@ -19,15 +19,8 @@
 
                         </div>
                         <div class="note-short">
-                            <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['sub_category_id']); ?></a>
                             <h2><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'view', $note['Note']['id'])); ?>"><?php echo $note['Note']['title']; ?></a></h2>
                             <?php echo substr(strip_tags($note['Note']['description']), 0, 150); ?>
-
-                            <div class="meta-info">
-
-                                <a href="#">By <?php echo $note['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($note['Note']['created'])) ?> 
-
-                            </div>
                         </div>
                         <?php /* <div class="note-rigntinfo">
 
@@ -35,9 +28,8 @@
                           <span><i class="fa fa-eye"></i> View</span>
 
                           </div> */ ?>
-
-
-                        <div class="note-footer">
+                        <div class="meta-info">
+                            <?php //pr($note);       ?>
                             <div class="contendlastimagdiv">
                                 <?php
                                 $SHORT_URL = $ShareProductUrl = $this->Html->url(array('controller' => 'notes', 'action' => 'view', $note['Note']['id']), true);
@@ -56,9 +48,8 @@
                                 <div class="contendlastsocialimage"> <?php echo $this->General->pinterestShareButtonLink("ui_images/images/pinterest-copy.jpg", $ShareProductUrl, $ShareImagePath, $pinDescriptionwant, $shareSummary); ?> </div>
 
                             </div>
-                            <div class="">
-                                <i class="fa fa-heart-o pull-right"></i>
-                            </div>
+                            <a href="#">By <?php echo $note['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($note['Note']['created'])) ?> | 
+                            <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['sub_category_id']); ?></a>
                         </div>
                     </div>
 
@@ -140,7 +131,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#pinBoot').pinterest_grid({
-            no_columns: 2,
+            no_columns: 3,
             padding_x: 10,
             padding_y: 10,
             margin_bottom: 50,

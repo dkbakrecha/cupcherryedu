@@ -26,12 +26,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                     <div class="col-lg-3 col-lg-12 nomobile" style="padding-top: 10px;">
+                    <div class="col-lg-3 col-lg-12 nomobile" style="padding-top: 10px;">
                         <div class="m-bottom15 m-top2">
-                        <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
-                            <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
-                        </a>
-                            </div>
+                            <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
+                                <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
+                            </a>
+                        </div>
                         <div>
                             <p> 
                                 <span class="fa fa-map-marker"> </span>
@@ -61,7 +61,7 @@
                                 <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'terms')); ?>">Terms Conditions</a></li>
 
                                 <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'privacy')); ?>">Privacy Policy</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Blog</a></li>
+                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog</a></li>
 
                             </ul>
                         </div>
@@ -78,7 +78,7 @@
                             </ul>
                         </div>
                     </div>
-                   
+
 
 
 

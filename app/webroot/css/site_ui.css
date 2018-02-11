@@ -568,6 +568,34 @@ ul.social-media > li:hover a {
     margin: 10px 20px;
 }
 
+.bedgeforyear {
+    background: #a5122b;
+    border-top: 4px solid #f7a300;
+    border-bottom: 4px solid #f7a300;
+    padding: 10px;
+}
+
+.bedgeforyear img {
+    width: 120px;
+}
+
+.bedgetext {
+    color: #FFF;
+    font-size: 24px;
+    line-height: 24px;
+    padding-top: 35px;
+    padding-left: 15px;
+}
+
+.bedgeforyear .btn-primary {
+    font-size: 22px;
+    line-height: 22px;
+    padding: 15px 70px;
+    float: right;
+    margin-top: -15px;
+    border: 1px solid;
+}
+
 
 .be-center{
     text-align: center;
@@ -713,7 +741,6 @@ ul.social-media > li:hover a {
     float: left;
     background: #fff none repeat scroll 0 0;
     padding: 10px;
-    margin-top: -90px;
 }
 
 .post-detail .post-header{
@@ -850,7 +877,6 @@ a.aboutauthor {
     background: #FFF;
     margin-bottom: 15px;
     border: 1px solid #ddd;
-    padding: 5px;
 }
 
 .note_list #pinBoot .list-box{
@@ -878,16 +904,18 @@ a.aboutauthor {
     margin-top: 10px;
 }
 
-.list-box .note-rigntinfo{
-    float: left;
-    width: 10%;
-}
 
 .note_list .list-box .meta-info {
     border-top: 1px solid #ddd;
     float: left;
     padding: 5px 0 5px 5px;
     width: 100%;
+}
+.note-footer {
+    float: left;
+    width: 100%;
+    background: #F6F6F6;
+    padding: 5px;
 }
 
 .site-share-btn {
@@ -1803,11 +1831,27 @@ a.nodecor{
     margin-bottom: 10px;
 }
 
+
 .nav-tabs.register li {
-    border-bottom: 1px solid #ddd;
     text-align: center;
     width: 50%;
+    font-size: 18px;
+    background: #F3F6F9;
 }
+
+.nav-tabs.register li a:hover{
+    background: #F3F6F9;
+}
+
+.nav-tabs.register li div{
+    line-height:  55px;
+}
+
+.nav-tabs.register li img{
+    width: 45px;
+    float: left;
+}
+
 
 .nav-tabs.register li.active a {
     background: #355c7d none repeat scroll 0 0;
@@ -2057,7 +2101,7 @@ element {
     }
     .menu-ipad{
         display: block;
-        
+
         border-bottom: 1px solid #DEDEDE;
     }
     .mainmenucover .navbar-header{
@@ -2194,23 +2238,23 @@ element {
         display: inline-block;
         width: 100%;
     }
-    
+
     .sidebar {
-    float: left;
-}
+        float: left;
+    }
 
-.post-detail .post-header > h1{
-    padding: 125px 20px 10px 20px;
-}
-.site-content, .posts-view .col-lg-8{
-    margin: 0;
-    padding: 0;
-}
+    .post-detail .post-header > h1{
+        padding: 125px 20px 10px 20px;
+    }
+    .site-content, .posts-view .col-lg-8{
+        margin: 0;
+        padding: 0;
+    }
 
-.post-detail{
-    margin-top: 0;
-}
-    
+    .post-detail{
+        margin-top: 0;
+    }
+
     .sidebar h2{
         float: left;
         width: 100%;
@@ -2343,6 +2387,66 @@ element {
         padding-right: 5px;
     }
 
+    .nav-tabs.register li.active a{
+        text-align: center;
+    }
+
+    .nav-tabs.register li img {
+        float: none;
+        display: inline-block;
+        min-height: 55px;
+    }
+
+    .nav-tabs.register li div {
+        line-height: 25px;
+        font-size: 14px;
+        padding-top: 4px;
+    }
+
+    .bedgeforyear {
+        display: inline-block;
+        padding: 0;
+        text-align: center;
+    }
+
+    .bedgeforyear img {
+        display: inline-block;
+        float: none !important;
+        padding: 10px;
+    }
+
+    .bedgetext {
+        font-size: 18px;
+        padding-top: 5px;
+        padding-left: 0;
+    }
+
+    .bedgeforyear .btn-primary {
+        padding: 14px;
+        margin: 15px 0;
+        width: 100%;
+    }
+
+
+    .note_list {
+        margin: 0 !important;
+    }
+
+    .note_list .col-lg-9 {
+        padding: 0;
+    }
+
+    .note_list .list-box{
+        width: 100% !important;
+    }
+
+    .list-box .note-short{
+        padding: 5px;
+    }
+
+    .note_list .col-lg-8 {
+        padding: 0;
+    }
 }
 
 @media only screen and (max-width: 320px) {

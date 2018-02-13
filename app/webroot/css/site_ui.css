@@ -2447,6 +2447,10 @@ element {
     .note_list .col-lg-8 {
         padding: 0;
     }
+    
+    fieldset{
+        min-width: calc;
+    }
 }
 
 @media only screen and (max-width: 320px) {

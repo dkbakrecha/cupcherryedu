@@ -12,18 +12,16 @@
         <div class="users box-form">
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User', array('class' => 'site-from')); ?>
-            <fieldset>
                 <?php
                 echo $this->Form->input('email', array('label' => false, 'placeholder' => 'Username or Email'));
                 echo $this->Form->input('password', array('label' => false, 'placeholder' => 'Password'));
                 ?>
-            </fieldset>
 
             <div class="row">
                 <div class="col-lg-5">
                     <?php echo $this->Form->submit(__('Login')); ?>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-7" style="display: none;">
                     <div class="btn btn-default fb_login"><i class="fa fa-facebook"></i>Sign in with Facebook</div>
                 </div>
             </div>
@@ -34,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 ">
+    <div class="col-lg-3 " style="display: none;">
         <div class="loginSupportContainer">
             <h4>Need a Study.com Account?</h4>
             <ul class="benefitsList">

@@ -11,6 +11,13 @@ $_linkUrl = $this->Html->url(array('controller' => 'exam_notifications', 'action
             <div class="share-article"></div>
             <div class="content-text">
                 <p> <?php echo $notification['ExamNotification']['notification_text']; ?></p>
+                <?php
+                if (!empty($notification['ExamNotification']['source'])) {
+                    ?>
+                    <a class="btn btn-primary btn-lg" target="_BLANK" href="<?php echo $notification['ExamNotification']['source']; ?>">Open Notification Here</a>    
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div class="box-header">
         <h3 class="box-title">Tests
             <a class='btn btn-success btn-sm pull-right' href='<?php
-            echo $this->Html->url(array('controller' => 'test_types', 'action' => 'create',
+            echo $this->Html->url(array('controller' => 'tests', 'action' => 'create',
                 'admin' => true));
             ?>'>Create Test</a>
         </h3>

@@ -10,14 +10,72 @@ $_linkUrl = $this->Html->url(array('controller' => 'exam_notifications', 'action
             </h3> 
             <div class="share-article"></div>
             <div class="content-text">
-                <p> <?php echo $notification['ExamNotification']['notification_text']; ?></p>
-                <?php
-                if (!empty($notification['ExamNotification']['source'])) {
-                    ?>
-                    <a class="btn btn-primary btn-lg" target="_BLANK" href="<?php echo $notification['ExamNotification']['source']; ?>">Open Notification Here</a>    
-                    <?php
+                <div class="bs-callout bs-callout-warning" > 
+                    <div class="row">
+                        <div class="col-md-3 ">
+                            <label>Post Date</label>
+                            <div class="clr-orange"><?php
+                if ($notification['ExamNotification']['post_date'] != "0000-00-00") {
+                    echo $notification['ExamNotification']['post_date'];
+                } else {
+                    echo "Not mation yet";
                 }
-                ?>
+                ?></div>
+                        </div>
+
+                        <div class="col-md-3 ">
+                            <label>Last Apply Date</label>
+                            <div class="clr-orange"><?php
+                                if ($notification['ExamNotification']['lastapply_date'] != "0000-00-00") {
+                                    echo $notification['ExamNotification']['lastapply_date'];
+                                } else {
+                                    echo "Not mation yet";
+                                }
+                ?></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Exam Date </label>
+                            <div class="clr-orange"><?php
+                                if ($notification['ExamNotification']['exam_date'] != "0000-00-00") {
+                                    echo $notification['ExamNotification']['exam_date'];
+                                } else {
+                                    echo "Not mation yet";
+                                }
+                ?></div>
+                        </div>
+                    </div>
+                </div>
+                <p> <?php echo $notification['ExamNotification']['notification_text']; ?></p>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <?php
+                        if (!empty($notification['ExamNotification']['source'])) {
+                            ?>
+                            <a class="btn btn-primary btn-lg" target="_BLANK" href="<?php echo $notification['ExamNotification']['source']; ?>">Notification Here</a>    
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?php
+                        if (!empty($notification['ExamNotification']['syllabus_url'])) {
+                            ?>
+                            <a class="btn btn-primary btn-lg" target="_BLANK" href="<?php echo $notification['ExamNotification']['syllabus_url']; ?>">Syllabus Here</a>    
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?php
+                        if (!empty($notification['ExamNotification']['official_url'])) {
+                            ?>
+                            <a class="btn btn-primary btn-lg" target="_BLANK" href="<?php echo $notification['ExamNotification']['official_url']; ?>">Official Link</a>    
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

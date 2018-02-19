@@ -2,7 +2,7 @@
     <div class="box-header">
         <div class="panel-heading">
             <h1>Test Questions</h1>
-            <a class='btn btn-purple btn-sm pull-right' href='<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add', 'admin' => true)); ?>'>Add New Post</a>
+            <a class='btn btn-purple btn-sm pull-right' href='<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'addfromdb', 'admin' => true, $test_id)); ?>'>Add Question from DB</a>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
             "lengthMenu": [10, 20, 50, 100], //[[2,3,10, 25, 50, -1], [2,3,10, 25, 50, "All"]],
             "pageLength": 10,////echo $record_pr_pg;,
             //"filter":false,        
-            "ajax": '<?php echo $this->Html->url(array("controller" => "questions", "action" => "questionGrid", "admin" => TRUE)); ?>',
+            "ajax": '<?php echo $this->Html->url(array("controller" => "test_questions", "action" => "grid", "admin" => TRUE)); ?>',
             "columns": [
                 {"name": "Question.id", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
                 {"name": "Question.question", 'width': '65%'},

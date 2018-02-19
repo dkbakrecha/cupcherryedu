@@ -6,97 +6,21 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Edit Question
-			<a class='btn btn-purple btn-sm pull-right' href='<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'index','admin' => true)); ?>'>Back</a>
+			<a class='btn btn-purple btn-sm pull-right' href='<?php
+			echo $this->Html->url(array('controller' => 'questions', 'action' => 'index',
+				'admin' => true));
+			?>'>Back</a>
 		</div>
 		<div class="panel-body">
 			<div class="form-horizontal" >
-<?php 
-echo $this->Form->create('Question', array("role" => "form"));
-echo $this->Form->hidden('id');
-?>  
-				
-				
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Title</label>
-					<div class="col-sm-7">
-						<?php
-						echo $this->Form->input('question', array(
-							'class' => 'form-control',
-							'placeholder' => 'Description',
-							'label' => false,
-							'placeholder' => 'Post Title'
-						));
-						?>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Description</label>
-					<div class="col-sm-7">
-						<?php
-						echo $this->Form->input('description', array(
-							'class' => 'form-control',
-							'placeholder' => 'Description',
-							'label' => false,
-							'placeholder' => 'Post Title'
-						));
-						?>
-					</div>
-				</div>
-
-				<hr class="dotted">
-
-
-				<div id="question_box">
-
-
-					<div class="form-group">
-						<div class="col-md-2 col-sm-4 col-xs-12 control-label">
-							<span><?php echo __("Options") ?></span>
-						</div>
-                                            <?php pr($this); ?>
-						<div class="col-md-5 col-sm-6 col-xs-12">
-							<input id="option1" type="radio" value="1" class="r-green fa fa-dot-circle-o" name="data[Question][correct_option]" checked="checked" required="required">
-							<?php
-							echo $this->Form->input('Answer.option1', array(
-								'label' => false,
-								'placeholder' => 'Option 1',
-								'class' => 'form-control',
-								'div' => array('class' => 'col-md-11 col-sm-10 col-xs-11 pull-right padd0'),
-								'required' => true
-							));
-							?>
-						</div>
-					</div>
-					
-				</div>
-				<hr class="dotted">
-				<div class="form-group">
-					<div class="col-md-2 col-sm-4 col-xs-12 control-label">
-						<span></span>
-					</div>
-					<div class="col-md-5 col-sm-6 col-xs-12">
-						<?=
-						$this->Form->button(__('Save'), array(
-							'class' => 'btn btn-primary btn-flat',
-							'type' => 'submit'
-						));
-						?>
-						&nbsp;
-						<?=
-						$this->Form->button(__('Cancel'), array(
-							'class' => 'btn btn-default btn-flat',
-							'type' => 'button',
-							'onclick' => 'goBack()',
-						));
-						?>
-					</div>
-				</div>
-
-
-<?php echo $this->Form->end(); ?>
+				<?php
+				echo $this->Form->create('Question', array("role" => "form"));
+				echo $this->Form->hidden('id');
+				echo $this->render("_adminquestionForm", false);
+				echo $this->Form->end();
+				?>
 			</div>
 		</div>
 
 	</div>
-	<!-- Warper Ends Here (working area) -->    
+	<!-- Warper Ends Here (working area) --> 

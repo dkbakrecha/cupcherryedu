@@ -83,7 +83,7 @@
 
         <?php
         if (!isset($this->request->params['admin'])) {
-            echo $this->element('social');
+            //echo $this->element('social');
             echo $this->element('footer');
             echo $this->element('_site_js');
         }

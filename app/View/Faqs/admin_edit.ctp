@@ -3,8 +3,8 @@ $this->assign('title', $title);
 
 $breadCrumb = array(
     array('name' => 'FAQ\'s Manager', 'url' => array('controller' => 'faqs', 'action' => 'topic')),
-	array('name' => 'Manage FAQ\'s', 'url' => array('controller' => 'faqs', 'action' => 'index',$topic_id)),
-    array('name' => 'Add Question', 'url' => null),
+	array('name' => 'Manage FAQ\'s', 'url' => array('controller' => 'faqs', 'action' => 'index',$faqData['Faq']['faq_topic_id'])),
+    array('name' => 'Edit Question', 'url' => null),
 );
 $this->set("breadcrumb", $breadCrumb);
 ?>
@@ -17,7 +17,8 @@ $this->set("breadcrumb", $breadCrumb);
     <div class="box-body">
         <?php 
         echo $this->Form->create('Faq', array('class' => 'form-horizontal')); 
-        echo $this->Form->hidden('faq_topic_id',array('value' => $topic_id));
+        echo $this->Form->hidden('id',array('value' => $faqData['Faq']['id']));
+        echo $this->Form->hidden('faq_topic_id',array('value' => $faqData['Faq']['faq_topic_id']));
         ?>
         <div class="form-group">
             <div class="col-md-2 col-sm-4 col-xs-12 control-label">
@@ -58,7 +59,7 @@ $this->set("breadcrumb", $breadCrumb);
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <?=
-                $this->Form->button(__('Save'), array(
+                $this->Form->button(__('Update'), array(
                     'class' => 'btn btn-primary btn-flat',
                     'type' => 'submit'
                 ));
@@ -68,7 +69,7 @@ $this->set("breadcrumb", $breadCrumb);
                 $this->Form->button(__('Cancel'), array(
                     'class' => 'btn btn-default btn-flat',
                     'type' => 'button',
-                    'onclick' => 'goBack()',
+                    'onclick' => 'goBack()'
                 ));
                 ?>
             </div>
@@ -83,6 +84,6 @@ $this->set("breadcrumb", $breadCrumb);
     });
     
     function goBack() {
-        window.top.location = "<?php echo $this->Html->url(array('action' => 'index',$topic_id), true); ?>";
+        window.top.location = "<?php echo $this->Html->url(array('action' => 'index',$faqData['Faq']['faq_topic_id']), true); ?>";
     }
 </script>

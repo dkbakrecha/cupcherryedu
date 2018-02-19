@@ -74,9 +74,19 @@ class ExamNotificationsController extends AppController {
 
             $this->redirect(array('controller' => 'exam_notifications', 'action' => 'index'));
         }
-
+		
+		$stateList = $this->getStateList();
+		$this->set('stateList',$stateList);
+		
         $this->request->data = $this->ExamNotification->findById($id);
     }
+	
+	function getStateList(){
+		$this->loadModel('State');
+		$stateList = $this->State->find('list',
+			array('fields' => array('id', 'state_name')));
+		return $stateList;
+	}
 
     public function admin_examNotiGrid() {
         $request = $this->request;
@@ -94,6 +104,7 @@ class ExamNotificationsController extends AppController {
             $orderby[$this->request->query['columns'][$colName]['name']] = $this->request->query['order'][0]['dir'];
             //prd($this->request);          
             $condition = array();
+			$condition['status'] = 1;
 
             //pr($this->request->query['columns']);
             foreach ($this->request->query['columns'] as $column) {

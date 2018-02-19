@@ -1158,8 +1158,7 @@ label.error{
 }
 
 .navbar-default .navbar-brand {
-
-    padding: 5px 15px;
+    padding: 0 15px;
     height: auto;
 }
 
@@ -1803,12 +1802,13 @@ label.error{
     padding: 20px;
 }
 
-.bs-callout-warning {
-    border-left-color: #aa6708;
+.bs-callout:hover{
+    border-color:#aa6708;
 }
 
-.bs-callout-warning h4 {
-    color: #aa6708;
+.bs-callout-warning {
+    border-left-color: #aa6708;
+    background: #F9F9F9;
 }
 
 .dashboard-box {
@@ -2078,6 +2078,107 @@ element {
     transition: all 0.3s ease 0s;
 
 }
+
+
+
+.faqouter-leftpannal {
+	float: left;
+	width: 100%;
+}
+.faq-mainpannal-outer {
+	background: #f2f2f2 none repeat scroll 0 0;
+	float: left;
+	width: 100%;
+}
+.faq-headpannal {
+	float: left;
+	width: 100%;
+}
+.faqbuttom.faq-headpannal-contantpannal {
+	float: left;
+	margin-bottom: 48px;
+	width: 100%;
+}
+.faq-leftpannalouter {
+	float: left;
+	width: 70%;
+}
+.faq-leftpannalouter .smk_accordion .accordion_in {
+	border: medium none;
+	border-radius: 5px !important;
+	margin: 0 0 12px;
+}
+.faq-rightpannalouter {
+	float: right;
+	width: 27%;
+}
+.faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_head, .faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_content {
+	color: #4c4c4c;
+	font-size: 14px;
+	line-height: 26px;
+	padding: 14px 20px;
+	background: #ffffff;
+}
+.faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_content {
+	color: #333333;
+}
+.faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in.acc_active .acc_head {
+	color: #333333;
+	font-size: 15px;
+	font-weight: 600;
+}
+.faq-rightpannalouter .faqbuttom_righttitle {
+	color: #262626;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 16px;
+	margin-bottom: 10px;
+	vertical-align: top;
+	width: 100%;
+}
+.faq-rightpannalouter .faqbuttom_rightmenu {
+	float: left;
+	width: 100%;
+}
+.faq-rightpannalouter .faqbuttom_rightmenu ul {
+	list-style: outside none none;
+	padding: 0;
+}
+.faq-rightpannalouter .faqbuttom_rightmenu ul li {
+	background: #fff none repeat scroll 0 0;
+	border-radius: 5px;
+	color: #4c4c4c;
+	font-size: 14px;
+	height: 45px;
+	margin-top: 10px;
+	padding: 12px;
+}
+.faqbuttom_rightfirst_nu.faqright-curcle {
+	background: #1caad9 none repeat scroll 0 0;
+	border-radius: 50%;
+	color: #fff;
+	float: right;
+	font-size: 13px;
+	height: 20px;
+	text-align: center;
+	width: 20px;
+}
+.faq-rightpannalouter .faqbuttom_rightmenu ul li:hover, .faq-rightpannalouter .faqbuttom_rightmenu ul li.active {
+	background: #1caad9;
+	color: #fff;
+}
+.faq-rightpannalouter .faqbuttom_rightmenu ul li:hover .faqbuttom_rightfirst_nu.faqright-curcle, .faq-rightpannalouter .faqbuttom_rightmenu ul li.active .faqbuttom_rightfirst_nu.faqright-curcle {
+	background: #fff none repeat scroll 0 0;
+	color: #1caad9;
+}
+.faq-leftpannalouter .smk_accordion .accordion_in.acc_active > .acc_head {
+	background: #ffffff none repeat scroll 0 0;
+}
+.faq-leftpannalouter .faqtabtextdiv p {
+	margin: 0 0 20px;
+}
+
 @media (min-width : 1024px) and (max-width : 1199px) {
 
 
@@ -2225,6 +2326,22 @@ element {
         bottom: 40px;
         z-index: 98;
     }
+    
+    
+.faq-leftpannalouter {
+   width: 100%;
+}
+
+.faq-rightpannalouter {
+    float: left;
+    margin: 15px 0 0;
+    width: 100%;
+}
+
+.smk_accordion .accordion_in .acc_head .acc_icon_expand {
+    right: 10px !important;
+}
+
 
 }
 

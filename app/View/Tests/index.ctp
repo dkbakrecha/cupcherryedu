@@ -18,9 +18,9 @@
                 ?>
                 <div class="col-lg-4">
                     <div class="panel" >
-                        <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['TestType']['unique_id'])); ?>">
+                        <a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'view', $test['Test']['id'])); ?>">
                             <div class="panel-heading" style="background-color: <?php echo $color[$onecolor]; ?>; color:#ffffff;">
-                                <?php echo $test['TestType']['name']; ?>
+                                <?php echo $test['Test']['name']; ?>
                             </div>
                             <div class="panel-body">
                                 Access hundreds of free podcasts

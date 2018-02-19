@@ -12,8 +12,8 @@ class Question extends AppModel {
     );*/
 	
 	public $hasMany = array(
-        'Answers' => array(
-            'className' => 'Answer',
+        'Options' => array(
+            'className' => 'Option',
             'foreignKey' => 'question_id'
         )
     );

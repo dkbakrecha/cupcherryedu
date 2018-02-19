@@ -3,8 +3,7 @@ $this->assign('title', $title);
 
 $breadCrumb = array(
     array('name' => 'FAQ\'s Manager', 'url' => array('controller' => 'faqs', 'action' => 'topic')),
-	array('name' => 'Manage FAQ\'s', 'url' => array('controller' => 'faqs', 'action' => 'index',$topic_id)),
-    array('name' => 'Add Question', 'url' => null),
+	array('name' => 'Edit Topic', 'url' => null),
 );
 $this->set("breadcrumb", $breadCrumb);
 ?>
@@ -16,37 +15,21 @@ $this->set("breadcrumb", $breadCrumb);
     </div>
     <div class="box-body">
         <?php 
-        echo $this->Form->create('Faq', array('class' => 'form-horizontal')); 
-        echo $this->Form->hidden('faq_topic_id',array('value' => $topic_id));
+        echo $this->Form->create('FaqTopic', array('class' => 'form-horizontal')); 
+        echo $this->Form->hidden('id',array('value' => $faqTopicData['FaqTopic']['id']));
         ?>
         <div class="form-group">
             <div class="col-md-2 col-sm-4 col-xs-12 control-label">
-                <span><?php echo __("Question") ?></span>
+                <span><?php echo __("Topic Title") ?></span>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <?php 
-                echo $this->Form->input('question', array(
+                echo $this->Form->input('name', array(
                     'label' => false,
                     'required' => true,
                     'class' => 'form-control',
-                    'placeholder' => __('Question'),
+                    'placeholder' => __('Topic Title'),
                     'type' => 'text'
-                ))
-                ?>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-md-2 col-sm-4 col-xs-12 control-label">
-                <span><?php echo __("Answer") ?></span>
-            </div>
-            <div class="col-md-9 col-sm-6 col-xs-12">
-                <?php 
-                echo $this->Form->input('answer', array(
-                    'label' => false,
-                    'required' => true,
-                    'class' => 'form-control',
-                    'placeholder' => __('Answer')
                 ))
                 ?>
             </div>
@@ -58,7 +41,7 @@ $this->set("breadcrumb", $breadCrumb);
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <?=
-                $this->Form->button(__('Save'), array(
+                $this->Form->button(__('Update'), array(
                     'class' => 'btn btn-primary btn-flat',
                     'type' => 'submit'
                 ));
@@ -68,7 +51,7 @@ $this->set("breadcrumb", $breadCrumb);
                 $this->Form->button(__('Cancel'), array(
                     'class' => 'btn btn-default btn-flat',
                     'type' => 'button',
-                    'onclick' => 'goBack()',
+                    'onclick' => 'goBack()'
                 ));
                 ?>
             </div>
@@ -83,6 +66,6 @@ $this->set("breadcrumb", $breadCrumb);
     });
     
     function goBack() {
-        window.top.location = "<?php echo $this->Html->url(array('action' => 'index',$topic_id), true); ?>";
+        window.top.location = "<?php echo $this->Html->url(array('action' => 'topic'), true); ?>";
     }
 </script>

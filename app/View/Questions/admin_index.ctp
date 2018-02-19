@@ -13,6 +13,7 @@
                             <th style="min-width: 22px;">#ID</th>
                             <th>Question</th>
                             <th>Category</th>
+							<th>Sub Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -20,6 +21,8 @@
                         <tr class="filter">
                             <td></td>
                             <td>
+                                <input class="search_init" type="text" value="" placeholder="Search Name" name="fname"></td>
+							<td>
                                 <input class="search_init" type="text" value="" placeholder="Search Name" name="fname"></td>
                             <td valign="top">
                                 <input type="button" id="search_button" class="btn btn-success btn-xs" value="Search">
@@ -46,8 +49,9 @@
             "ajax": '<?php echo $this->Html->url(array("controller" => "questions", "action" => "questionGrid", "admin" => TRUE)); ?>',
             "columns": [
                 {"name": "Question.id", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
-                {"name": "Question.question", 'width': '65%'},
+                {"name": "Question.question", 'width': '40%'},
                 {"name": "Question.category_id", 'width': '15%'},
+				{"name": "Question.sub_category_id", 'width': '15%'},
                 {"name": "Question.common", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
             ],
             "order": [
@@ -101,7 +105,7 @@
         bootbox.confirm("Are you sure want to Delete selected Question ?", function (r) {
             if (r == true) {
 
-                URL = '<?php echo $this->Html->url(array("controller" => "users", "action" => "deleteUser", "admin" => TRUE)); ?>';
+                URL = '<?php echo $this->Html->url(array("controller" => "questions", "action" => "delete", "admin" => TRUE)); ?>';
 
                 $.ajax({
                     url: URL,
@@ -109,7 +113,7 @@
                     data: ({id: id}),
                     success: function (data) {
                         if (data == 1) {
-                            $("#reset_button").click();
+                            table.draw();
                         } else {
                             bootbox.alert("Error while deleting the user.", function () {
                             });

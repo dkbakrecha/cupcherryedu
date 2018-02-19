@@ -53,7 +53,7 @@
 
         <div class="row">
             <div class="col-lg-8">
-                <?php echo $this->Form->submit('Post It!'); ?>
+                <?php echo $this->Form->submit('Post It!', array('class' => 'btn btn-primary')); ?>
             </div>
         </div>
 

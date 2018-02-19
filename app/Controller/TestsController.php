@@ -14,60 +14,24 @@ class TestsController extends AppController {
     public function index() {
         $this->loadModel('TestType');
 
-        $testInfo = $this->TestType->find('all', array(
+        $testInfo = $this->Test->find('all', array(
             'conditions' => array(
-                'TestType.status' => 1,
+                'Test.status' => 1,
                 )));
 
         $this->set('testInfo', $testInfo);
     }
 
     public function view($unique_id) {
-        $this->loadModel('TestType');
-        $this->loadModel("TestQuestion");
 
         //$quizSession = $this->Session->read('QUIZ_GLOBLE');
-        $testData = $this->TestType->find('first', array(
+        $testData = $this->Test->find('first', array(
             'conditions' => array(
-                'TestType.unique_id' => $unique_id
+                'Test.id' => id
             )
                 ));
 
-        $testDetails = $this->Test->find('first', array(
-            'conditions' => array(
-                'user_id' => $this->loggedinUser['id'],
-                'test_code' => 'TA',
-                'test_type_id' => $testData['TestType']['id'],
-                'test_status' => 1
-            )
-                ));
-
-        if (!empty($testDetails)) {
-            $questionSummary = json_decode($testDetails['Test']['question_summery'], TRUE);
-            //prd($questionSummary);
-        } else {
-            /* Create row for Test user */
-            $testArr = array();
-            $testArr['Test']['user_id'] = $this->loggedinUser['id'];
-            $testArr['Test']['test_code'] = 'TA';
-            $testArr['Test']['test_type_id'] = $testData['TestType']['id'];
-            $testArr['Test']['test_status'] = 1;
-
-            $this->Test->create();
-            $testDetails = $this->Test->save($testArr);
-        }
-
-        //$uniqueTestId = $testData['TestType']['unique_id'];
-
-        $testQuestions = $this->TestQuestion->find('all', array(
-            'conditions' => array(
-                'TestQuestion.test_id' => $testData['TestType']['id']
-            )
-                ));
-
-        $this->set('questionSummary', $questionSummary);
-        $this->set('testQuestions', $testQuestions);
-        $this->set('test_id', $testDetails['Test']['id']);
+        $this->set('testData', $testData);
     }
 
     public function showquestion() {
@@ -392,8 +356,9 @@ class TestsController extends AppController {
     }
 
     /* Question List in Current Test */
+
     public function admin_editquestion($test_id) {
-       
+        
     }
 
     public function admin_testGridData() {
@@ -481,9 +446,13 @@ class TestsController extends AppController {
             $this->render('/nodirecturl');
         }
     }
-    
-    public function admin_questions($test_id){
-        
+
+    public function admin_questions($test_id) {
+        $this->set("test_id", $test_id);
+    }
+
+    public function admin_addfromdb($test_id) {
+        $this->set("test_id", $test_id);
     }
 
 }

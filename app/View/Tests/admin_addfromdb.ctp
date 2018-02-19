@@ -1,16 +1,21 @@
-<div class="warper container-fluid">
-    <div class="panel panel-default">
+<div class="box">
+    <div class="box-header">
         <div class="panel-heading">
-            Exam Notifications <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'add', 'admin' => true)); ?>">Add New</a>
+            <h1>Test Questions</h1>
+            <a class='btn btn-purple btn-sm pull-right' href='<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'addfromdb', 'admin' => true, $test_id)); ?>'>Add Question from DB</a>
         </div>
+    </div>
+
+    <div class="box-content">
         <div class="panel-body">
             <div class="dataTable_wrapper">
                 <table class="table table-striped table-bordered table-hover" id="dataTables-users">
                     <thead>
                         <tr class="heading" >
                             <th style="min-width: 22px;">#ID</th>
-                            <th>Title</th>
-                            <th>Content</th>
+                            <th>Question</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -18,11 +23,9 @@
                         <tr class="filter">
                             <td></td>
                             <td>
-                                <input class="search_init" type="text" value="" placeholder="Search Name" name="fname">
-                            </td>
+                                <input class="search_init" type="text" value="" placeholder="Search Name" name="fname"></td>
                             <td>
-                                <input class="search_init" type="text" value="" placeholder="Search Name" name="fname">
-                            </td>
+                                <input class="search_init" type="text" value="" placeholder="Search Name" name="fname"></td>
                             <td valign="top">
                                 <input type="button" id="search_button" class="btn btn-success btn-xs" value="Search">
                                 <input type="button" id="reset_button" class="btn btn-danger btn-xs" value="Reset">
@@ -43,14 +46,15 @@
             "processing": true,
             "serverSide": true,
             "lengthMenu": [10, 20, 50, 100], //[[2,3,10, 25, 50, -1], [2,3,10, 25, 50, "All"]],
-            "pageLength": 10, ////echo $record_pr_pg;,
+            "pageLength": 50,////echo $record_pr_pg;,
             //"filter":false,        
-            "ajax": '<?php echo $this->Html->url(array("controller" => "exam_notifications", "action" => "examNotiGrid", "admin" => TRUE)); ?>',
+            "ajax": '<?php echo $this->Html->url(array("controller" => "questions", "action" => "gridfortest", "admin" => TRUE, $test_id)); ?>',
             "columns": [
-                {"name": "ExamNotification.id", "orderable": false, "searchable": false, 'width': '5%', 'sClass': 'text-center'},
-                {"name": "ExamNotification.title", 'width': '20%'},
-                {"name": "ExamNotification.notificaiton_text", 'width': '60%'},
-                {"name": "ExamNotification.common", "orderable": false, "searchable": false, 'width': '15%', 'sClass': 'text-center'},
+                {"name": "Question.id", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
+                {"name": "Question.question", 'width': '65%'},
+                {"name": "Question.category_id", 'width': '15%'},
+                {"name": "Question.sub_category_id", 'width': '15%'},
+                {"name": "Question.common", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
             ],
             "order": [
                 [0, "desc"]//4 is here column name
@@ -98,27 +102,34 @@
         $(".dataTables_filter").remove();
 
     });
+	
+    function addtotest(id,test_id, cate_id, subcate_id) {
+        //bootbox.confirm("Are you sure want to add test Question ?", function (r) {
+        // if (r == true) {
 
-    function delete_question(id) {
-        bootbox.confirm("Are you sure want to Delete selected Question ?", function (r) {
-            if (r == true) {
+        URL = '<?php echo $this->Html->url(array("controller" => "questions", "action" => "addtotest", "admin" => TRUE)); ?>';
 
-                URL = '<?php echo $this->Html->url(array("controller" => "users", "action" => "deleteUser", "admin" => TRUE)); ?>';
-
-                $.ajax({
-                    url: URL,
-                    type: 'POST',
-                    data: ({id: id}),
-                    success: function (data) {
-                        if (data == 1) {
-                            $("#reset_button").click();
-                        } else {
-                            bootbox.alert("Error while deleting the user.", function () {
-                            });
-                        }
-                    }
-                });
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: ({
+                id: id,
+                test_id: test_id,
+                cate_id:cate_id,
+                subcate_id:subcate_id
+            }),
+            success: function (data) {
+                if (data == 1) {
+                    $("#reset_button").click();
+                } else {
+                    bootbox.alert("Error while add question.", function () {
+                    });
+                }
             }
         });
+        // }
+        // });
     }
 </script>
+<!-- Warper Ends Here (working area) -->    
+

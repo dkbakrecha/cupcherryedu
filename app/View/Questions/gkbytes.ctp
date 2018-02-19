@@ -49,7 +49,7 @@
                     </div>
                     <div class="question_option">
                         <?php
-                        foreach ($questionData['Answers'] as $optList) {
+                        foreach ($questionData['Options'] as $optList) {
                             //pr($optList);
                             $_cls = ($optList['correct'] == 1) ? "correct_ans" : "";
                             ;

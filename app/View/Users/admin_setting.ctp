@@ -47,7 +47,7 @@
 			"processing": true,
 			"serverSide": true,
 			"lengthMenu": [10, 20, 50, 100], //[[2,3,10, 25, 50, -1], [2,3,10, 25, 50, "All"]],
-			"pageLength": <?php echo $record_pr_pg; ?>,
+			"pageLength": 50,
 			//"filter":false,        
 			"ajax": '<?php echo $this->Html->url(array("controller" => "users", "action" => "settingData", "admin" => TRUE)); ?>',
 			"columns": [

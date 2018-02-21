@@ -80,6 +80,11 @@
             </div>
         </div>
 
+        <?php
+        if (empty($LoggedinUser)) {
+            echo $this->element("_calltologin");
+        }
+        ?>
 
         <?php
         if (!isset($this->request->params['admin'])) {

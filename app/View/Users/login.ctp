@@ -5,17 +5,18 @@
     </h3> 
     <div class="center-heading">
         <div class="col-lg-4 col-lg-offset-4">
-    <span class="site-hr-top"> <i class="fa fa-child" aria-hidden="true"></i> </span>
+            <span class="site-hr-top"> <i class="fa fa-child" aria-hidden="true"></i> </span>
         </div>
     </div>
-    <div class="col-lg-4 col-lg-offset-3">
-        <div class="users box-form">
+
+    <div class="users box-form">
+        <div class="col-lg-3 col-lg-offset-3">
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User', array('class' => 'site-from')); ?>
-                <?php
-                echo $this->Form->input('email', array('label' => false, 'placeholder' => 'Username or Email'));
-                echo $this->Form->input('password', array('label' => false, 'placeholder' => 'Password'));
-                ?>
+            <?php
+            echo $this->Form->input('email', array('label' => false, 'placeholder' => 'Username or Email'));
+            echo $this->Form->input('password', array('label' => false, 'placeholder' => 'Password'));
+            ?>
 
             <div class="row">
                 <div class="col-lg-5">
@@ -26,24 +27,29 @@
                 </div>
             </div>
             <?php echo $this->Form->end(); ?>
-            <div class="box-form-action">
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Register</a> | 
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'lost_password')); ?>">Lost Password</a>
+
+        </div>
+
+        <div class="col-lg-3 ">
+            <div class="loginSupportContainer">
+                <h4>Need a Cupcherry Account?</h4>
+                <ul class="benefitsList">
+                    <li><span class="fa fa-check"></span> Filter Exam Notifications with Personal Calender</li>
+                    <li><span class="fa fa-check"></span> Access notes and share with friend</li>
+                    <li><span class="fa fa-check"></span> Exam related Mock Tests share leaderboard among friends</li>
+                </ul>
+                
+
+
+
             </div>
         </div>
-    </div>
-    <div class="col-lg-3 " style="display: none;">
-        <div class="loginSupportContainer">
-            <h4>Need a Study.com Account?</h4>
-            <ul class="benefitsList">
-                <li><span class="fa fa-check"></span> Simple &amp; engaging videos to help you learn</li>
-                <li><span class="icon-ok"></span> Unlimited access to 70,000+ lessons</li>
-                <li><span class="icon-ok"></span> The lowest-cost way to earn college credit</li>
-            </ul>
-            <a data-cname="login_page_create_account" test-id="login_page_create_account" href="/academy/plans.html" class="btn btn-cta cta-gold btn-lg btn-block">Create Account</a>
-
-
-            
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="box-form-action ">
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Register</a> | 
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'lost_password')); ?>">Lost Password</a>
+                <!--<a href="<?php echo $this->Html->url(array("controller" => "users", "action" => "register")); ?>" class="btn btn-primary pull-right">Create Account</a>-->
+            </div>
         </div>
     </div>
 </div>

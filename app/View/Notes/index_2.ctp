@@ -1,5 +1,5 @@
 <div class="row note_list" style="width: 100%;">
-    <div class="col-lg-12">
+    <div class="col-lg-9">
         <div  id="pinBoot">
             <?php
             if (!empty($notesData)) {
@@ -96,17 +96,51 @@
     </div>
 
 
+    <div class="col-lg-3 side-bar-section">
+        <?php
+        if (!empty($LoggedinUser)) {
+            ?>
+            <div class="box">
+                <div class="box-content">
+                    <ul class="side-links">
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'home')); ?>">My Notes</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>">Submit a Note</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'favorite')); ?>">My Favorite Notes</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <?php
+        }
+        ?>
+
+
+        <div class="box">
+            <div class="box-widget-title">
+                <h4>Main Categories</h4>
+            </div>
+            <div class="box-content">
+                <ul class="side-links">
+                    <?php
+                    if (!empty($cateList)) {
+                        foreach ($cateList as $cate) {
+                            ?>
+                            <li><?php echo $cate; ?></li>
+                            <?php
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+
+    </div>
 </div>
-
-
-
-
 
 <script type="text/javascript">
     $(document).ready(function() {
         $('#pinBoot').pinterest_grid({
-            no_columns: 3,
+            no_columns: 2,
             padding_x: 10,
             padding_y: 10,
             margin_bottom: 50,

@@ -27,6 +27,7 @@
 
                 <div class="social-icon-list">
                     <ul class="nav navbar-nav pull-right">
+                        <li><a href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>
                         <li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>
 
                         <?php
@@ -36,6 +37,7 @@
                         $_url_linkedin = Configure::read('Site.linkedin');
                         $_url_google_plus = Configure::read('Site.google_plus');
                         $_url_youtube = Configure::read('Site.youtube');
+                        $_url_instagram = Configure::read('Site.instagram');
 
                         if (!empty($_url_facebook)) {
                             ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
@@ -49,6 +51,10 @@
 
                     if (!empty($_url_youtube)) {
                             ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                    }
+
+                    if (!empty($_url_instagram)) {
+                            ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
                     }
                         ?>
 
@@ -96,7 +102,7 @@
                     <?php
                 } else {
                     ?>
-                    
+
 
                     <!--                    <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
@@ -133,7 +139,7 @@
                     <?php
                     foreach ($examList as $exam) {
                         ?>
-                                                            <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                                                <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
                         <?php
                     }
                     ?>
@@ -149,7 +155,7 @@
                 <?php
                 if (empty($LoggedinUser)) {
                     ?>
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
 
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><i class="fa fa-bell-o"></i> Exam Alert</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Articles</a></li>
@@ -228,7 +234,7 @@
 
                                                                             <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                         ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                          ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>

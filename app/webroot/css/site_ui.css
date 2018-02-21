@@ -587,6 +587,10 @@ ul.social-media > li:hover a {
     padding-left: 15px;
 }
 
+.bedgeforyear.loginbar .bedgetext{
+    padding: 25px;
+}
+
 .bedgeforyear .btn-primary {
     font-size: 22px;
     line-height: 22px;
@@ -596,6 +600,9 @@ ul.social-media > li:hover a {
     border: 1px solid;
 }
 
+.benefitsList{
+    list-style: none;
+}
 
 .be-center{
     text-align: center;
@@ -1800,6 +1807,8 @@ label.error{
     border-width: 1px 1px 1px 5px;
     margin: 20px 0;
     padding: 20px;
+    float: left;
+    width: 100%;
 }
 
 .bs-callout:hover{

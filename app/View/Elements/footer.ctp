@@ -93,6 +93,7 @@
                                 $_url_linkedin = Configure::read('Site.linkedin');
                                 $_url_google_plus = Configure::read('Site.google_plus');
                                 $_url_youtube = Configure::read('Site.youtube');
+                                $_url_instagram = Configure::read('Site.instagram');
 
                                 if (!empty($_url_facebook)) {
                                     ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
@@ -106,6 +107,10 @@
 
                             if (!empty($_url_youtube)) {
                                     ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                            }
+                            
+                            if (!empty($_url_instagram)) {
+                                    ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
                             }
                                 ?>
                             </ul>

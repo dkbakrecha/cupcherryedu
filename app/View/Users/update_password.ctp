@@ -29,11 +29,11 @@
             ));
             ?>
 
-            
-            <?php echo $this->Form->end('Submit') ?>
-            
+            <?php echo $this->Form->submit('Update password', array('class' => 'btn btn-primary')); ?>
+            <?php echo $this->Form->end() ?>
+
             <div class="box-form-action">
-                    <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Back to login</a>               
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Back to login</a>               
             </div>
         </div>
     </div>

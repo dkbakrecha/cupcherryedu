@@ -31,6 +31,7 @@
             'jquery.min',
             'bootstrap.min',
             'jquery.form',
+            'bootbox.min',
             'jquery.validate.min',
             'fullcalendar.min',
             'share/js/jquery.sharepage',
@@ -63,33 +64,37 @@
                 //echo $this->element('breadcrumb');
             }
         }
-
+        //pr($_body_class);
         if ($_body_class == 'notes-index') {
             echo $this->element('search-notes');
+        }
+        if($_body_class == "users-profile"){
+            echo $this->element('profile-top');
         }
         ?>
 
         <div class="site-content <?php echo (!empty($content_class)) ? $content_class : ""; ?>" id="content">
             <div class="container">
-                <div class="row">
                     <?php
                     echo $this->Session->flash();
                     echo $this->fetch('content');
                     ?>
-                </div>
             </div>
         </div>
 
         <?php
-        if (empty($LoggedinUser)) {
-            echo $this->element("_calltologin");
-        }
-        ?>
-
-        <?php
         if (!isset($this->request->params['admin'])) {
+            if (empty($LoggedinUser) && $_act != "login") {
+                echo $this->element("_calltologin");
+            }
             //echo $this->element('social');
-            echo $this->element('footer');
+            
+            if(!empty($LoggedinUser)){
+                
+            }else{
+                echo $this->element('footer');
+            }
+            
             echo $this->element('_site_js');
         }
         //echo $this->element('sql_dump');

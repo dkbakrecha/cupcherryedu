@@ -1,24 +1,44 @@
+<?php
+$sm_notes = $sm_alert = $sm_gkbyte = $sm_login = "";
+
+if($this->request->params['controller'] == "notes"){
+    $sm_notes = "active";
+}
+
+if($this->request->params['controller'] == "exam_notifications"){
+    $sm_alert = "active";
+}
+
+if($this->request->params['controller'] == "questions"){
+    $sm_gkbyte = "active";
+}
+
+if($this->request->params['controller'] == "users" && $this->request->params['action'] == "login" ){
+    $sm_login = "active";
+}
+?>
+
 <section class="shortcut-menu">
     <ul class="shortcut-nav">
-        <li>
+        <li class="<?php echo $sm_notes; ?>">
             <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">
                 <i class="fa fa-file-text-o"></i>
                 <span>Notes</span>
             </a>
         </li>
-        <li>
+        <li class="<?php echo $sm_alert; ?>">
             <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
                 <i class="fa fa-bell-o"></i>
                 <span>Alert</span>
             </a>
         </li>
-        <li>
+        <li class="<?php echo $sm_gkbyte; ?>">
             <a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>">
                 <i class="fa fa-file-text"></i>
                 <span>GK bytes</span>
             </a>
         </li>
-        <li>
+        <li class="<?php echo $sm_login; ?>">
             <?php
             if (empty($LoggedinUser)) {
                 ?>

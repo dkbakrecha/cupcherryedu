@@ -34,6 +34,75 @@ class TestsController extends AppController {
         $this->set('testData', $testData);
     }
 
+    public function practice($cate_id = NULL, $subcate_id = NULL) {
+        $this->loadModel('Category');
+        $this->loadModel('Question');
+        
+
+
+        $cateList = $this->Category->find('list', array(
+            'conditions' => array(
+                'status' => 1,
+                'parent_id' => 0
+            )
+                ));
+
+        $this->set('cateList', $cateList);
+
+
+
+        if (!empty($cate_id)) {
+            $this->set('cate_id', $cate_id);
+
+            $subcateList = $this->Category->find('list', array(
+                'conditions' => array(
+                    'status' => 1,
+                    'parent_id' => $cate_id
+                )
+                    ));
+
+            $this->set('subcateList', $subcateList);
+        }
+
+
+
+        if (!empty($subcate_id)) {
+            $this->set('subcate_id', $subcate_id);
+
+            /* Random single Question */
+            $practiceQuestion = $this->Question->find('first', array(
+                'conditions' => array(
+                    'sub_category_id' => $subcate_id
+                ),
+                'fields' => array('Question.*', 'Option.*'),
+                'order' => 'rand()',
+                'joins' => array(
+                    array(
+                        'table' => 'options',
+                        'alias' => 'Option',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'Option.question_id = Question.id',
+                            'Option.correct = 1'
+                        )
+                    )
+                )
+                    ));
+
+            $this->set("practiceQuestion", $practiceQuestion);
+        }
+
+
+        /* //$quizSession = $this->Session->read('QUIZ_GLOBLE');
+          $testData = $this->Test->find('first', array(
+          'conditions' => array(
+          'Test.id' => id
+          )
+          ));
+
+          $this->set('testData', $testData); */
+    }
+
     public function showquestion() {
         $this->layout = FALSE;
         $requestData = $this->request->data;

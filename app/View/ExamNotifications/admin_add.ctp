@@ -1,3 +1,16 @@
+<?php
+echo $this->Html->css(array(
+    '/js/datepicker/css/datepicker'
+));
+
+echo $this->Html->script(array(
+	'ckeditor/ckeditor',
+	'ckeditor/adapters/jquery',
+	'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min',
+	'datepicker/js/bootstrap-datepicker'
+));
+?>
+
 <div class="warper container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -50,5 +63,9 @@ echo $this->Html->url(array('controller' => 'faqs',
         <script>
             $(document).ready(function () {
                 $('textarea#ExamNotificationNotificationText').ckeditor();
+                		$(".form_datetime").datepicker({format: 'yyyy-mm-dd',
+                                "setDate": new Date(),
+        "autoclose": true});
+
             });
         </script>

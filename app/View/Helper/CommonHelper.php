@@ -9,7 +9,7 @@ class CommonHelper extends AppHelper {
         App::import("Model", "Category");
         $model = new Category();
         $categoryInfo = $model->findById($cate_id);
-        return $categoryInfo['Category']['title'];
+        return (!empty($categoryInfo['Category']['title']))?$categoryInfo['Category']['title']:"";
     }
 
     function get_topposts() {

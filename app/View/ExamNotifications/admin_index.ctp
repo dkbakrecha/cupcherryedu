@@ -1,7 +1,7 @@
 <div class="warper container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Exam Notifications <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'add', 'admin' => true)); ?>">Add New</a>
+            Exam Notifications <a class="btn btn-primary pull-right" href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'add', 'admin' => true)); ?>">Add New</a>
         </div>
         <div class="panel-body">
             <div class="dataTable_wrapper">
@@ -99,16 +99,19 @@
 
     });
 
-    function delete_question(id) {
-        bootbox.confirm("Are you sure want to Delete selected Question ?", function (r) {
+    function changeEnStatus(id,status) {
+        bootbox.confirm("Are you sure want to Change status ?", function (r) {
             if (r == true) {
 
-                URL = '<?php echo $this->Html->url(array("controller" => "users", "action" => "deleteUser", "admin" => TRUE)); ?>';
+                URL = '<?php echo $this->Html->url(array("controller" => "exam_notifications", "action" => "updatestatus", "admin" => TRUE)); ?>';
 
                 $.ajax({
                     url: URL,
                     type: 'POST',
-                    data: ({id: id}),
+                    data: ({
+                        id: id,
+                        status: status
+                    }),
                     success: function (data) {
                         if (data == 1) {
                             $("#reset_button").click();

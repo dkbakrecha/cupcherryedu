@@ -52,16 +52,16 @@
 
                     <div class="col-lg-2 col-lg-12 nomobile">
                         <h3 class="widget-title">
-                            About
+                            About US
                         </h3>
                         <div class="textwidget">
                             <ul class="side-nav">
 
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About Us</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'terms')); ?>">Terms Conditions</a></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About Cupcherry</a></h4></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'terms')); ?>">Terms and Conditions</a></h4></li>
 
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'privacy')); ?>">Privacy Policy</a></li>
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog</a></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'privacy')); ?>">Privacy Policy</a></h4></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Articles</a></h4></li>
 
                             </ul>
                         </div>
@@ -72,9 +72,9 @@
                         </h3>
                         <div class="textwidget">
                             <ul class="side-nav">
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index')); ?>">FAQ</a></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index')); ?>">FAQ</a></h4></li>
 
-                                <li ><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Support</a></li>
+                                <li ><h4><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Support</a></h4></li>
                             </ul>
                         </div>
                     </div>

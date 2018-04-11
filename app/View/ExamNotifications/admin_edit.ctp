@@ -1,4 +1,8 @@
 <?php
+echo $this->Html->css(array(
+    '/js/datepicker/css/datepicker'
+));
+
 echo $this->Html->script(array(
 	'ckeditor/ckeditor',
 	'ckeditor/adapters/jquery',

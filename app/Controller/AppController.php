@@ -33,9 +33,11 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class AppController extends Controller {
 
+    
     public $components = array(
         'Auth',
         'Session',
+        //'Captcha.Captcha'=>array('field'=>'security_code')
     );
     public $_quiz_globle = array();
     public $loggedinUser = array();

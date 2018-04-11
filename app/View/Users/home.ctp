@@ -135,7 +135,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
 <div class="recent-blogs" >
     <div class="container">
-        <h3 class="sub-title be-center">Recent Articles</h3>
+        <h2 class="sub-title be-center">Recent Articles</h2>
         <div class="section-description">Articles are for user to spread their thoughts and collection of matter to users and updates for currents news.</div>
         <div id="resentPost">
             <?php
@@ -145,13 +145,21 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'view', $blogpost['Post']['title_slug'])); ?>">
                         <?php
                         if (!empty($blogpost['Post']['cover_image'])) {
-                            echo $this->Html->image('/files/images/' . $blogpost['Post']['cover_image'], array('class' => 'img-responsive'));
+                            echo $this->Html->image('/files/images/' . $blogpost['Post']['cover_image'], array(
+                                'class' => 'img-responsive',
+                                'title' => $blogpost['Post']['title'],
+                                'alt' => $blogpost['Post']['title']
+                            ));
                         } else {
-                            echo $this->Html->image('/files/images/post_default.png', array('class' => 'img-responsive'));
+                            echo $this->Html->image('/files/images/post_default.png', array(
+                                'class' => 'img-responsive',
+                                'title' => $blogpost['Post']['title'],
+                                'alt' => $blogpost['Post']['title']
+                            ));
                         }
                         ?>
                         <div class="cardcontainer">
-                            <p><?php echo $blogpost['Post']['title']; ?></p>
+                            <h3><?php echo $blogpost['Post']['title']; ?></h3>
                             <div class="post-author">
                                 By <?php echo $blogpost['User']['name']; ?>
                             </div>
@@ -170,26 +178,38 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     </div>
 </div>
 
-<div class="footer-subscribe" style="background-color: #a5122b;">
-    <div class="container text-center">
-        <h5>Subscribe to our mailing list to receive an update when new exam notification arrive!</h5>
-        <div id="home_subscribe" class="col-lg-6 col-lg-offset-3">
-            <form role="form" id="hr-subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="hr-subscribe-form">
-                <div class="input-group input-group-lg">
-                    <?php
-                    echo $this->Form->input('email_address', array(
-                        'type' => 'email',
-                        'class' => 'form-control',
-                        'placeholder' => 'Email address...',
-                        'label' => false,
-                        'div' => false
-                    ));
-                    ?>
-                    <!--<input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="">-->
-                    <span class="input-group-btn">
-                        <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary">Subscribe!</button>
-                    </span>
-                </div>
+<div class="footer-subscribe" >
+    <div class="container">
+        <div class="col-lg-2">
+             <?php echo $this->html->image('email_fly.png'); ?>
+        </div>
+        <div class="col-lg-5">
+        <h2>Newsletter Updates</h2>
+       
+        <h3>Subscribe to our mailing list to receive an update when new exam notification arrive!</h3>
+        </div>
+        <div id="home_subscribe" class="col-lg-4">
+            <form role="form" id="subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="site-from box-form">
+                <?php
+                echo $this->Form->input('name', array(
+                    'type' => 'text',
+                    'placeholder' => 'Your Name...',
+                    'label' => false,
+                    'div' => false
+                ));
+
+                echo $this->Form->input('email_address', array(
+                    'type' => 'email',
+                    'placeholder' => 'Your Email address...',
+                    'label' => false,
+                    'div' => false
+                ));
+
+                //$this->Captcha->render(array('type'=>'image'));
+                ?>
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-lg">Subscribe!</button>
+
+
                 <div id="responses">
                     <div class="response" id="mce-response" style="display:none"></div>
                 </div>
@@ -197,3 +217,15 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
+
+<script>
+    jQuery('.creload').on('click', function() {
+        var mySrc = $(this).prev().attr('src');
+        var glue = '?';
+        if(mySrc.indexOf('?')!=-1)  {
+            glue = '&';
+        }
+        $(this).prev().attr('src', mySrc + glue + new Date().getTime());
+        return false;
+    });
+</script>

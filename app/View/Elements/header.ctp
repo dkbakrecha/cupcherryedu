@@ -15,54 +15,62 @@
 </style>
 
 <nav class="navbar navbar-default menu-desktopmobile">
-    <div class="header-topbar">
-        <div class="container">
-            <div class="row">
-                <div class="contact-info">
-                    <ul class="nav navbar-nav">
-                        <li class="mobilehide" title="whatapp only" ><i class="fa fa-whatsapp"></i> +91 9461 271 720</li>
-                        <li><i class="fa fa-envelope-o"></i> hello@cupcherry.com</li>
-                    </ul>
-                </div>
+    <?php
+    if (empty($LoggedinUser)) {
+        ?>
 
-                <div class="social-icon-list">
-                    <ul class="nav navbar-nav pull-right">
-                        <li><a href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>
-                        <li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>
+        <div class="header-topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="contact-info">
+                        <ul class="nav navbar-nav">
+                            <li class="mobilehide" title="whatapp only" ><i class="fa fa-whatsapp"></i> +91 9461 271 720</li>
+                            <li><i class="fa fa-envelope-o"></i> hello@cupcherry.com</li>
+                        </ul>
+                    </div>
 
-                        <?php
-                        $_url_facebook = Configure::read('Site.facebook');
-                        $_url_twitter = Configure::read('Site.twitter');
-                        $_url_pinterest = Configure::read('Site.pinterest');
-                        $_url_linkedin = Configure::read('Site.linkedin');
-                        $_url_google_plus = Configure::read('Site.google_plus');
-                        $_url_youtube = Configure::read('Site.youtube');
-                        $_url_instagram = Configure::read('Site.instagram');
+                    <div class="social-icon-list">
+                        <ul class="nav navbar-nav pull-right">
+                            <li><a class="glowbtn" href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>
+                            <li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>
 
-                        if (!empty($_url_facebook)) {
-                            ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
+                            <?php
+                            $_url_facebook = Configure::read('Site.facebook');
+                            $_url_twitter = Configure::read('Site.twitter');
+                            $_url_pinterest = Configure::read('Site.pinterest');
+                            $_url_linkedin = Configure::read('Site.linkedin');
+                            $_url_google_plus = Configure::read('Site.google_plus');
+                            $_url_youtube = Configure::read('Site.youtube');
+                            $_url_instagram = Configure::read('Site.instagram');
+
+                            if (!empty($_url_facebook)) {
+                                ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
                     }
                     if (!empty($_url_google_plus)) {
-                            ?> <li><a href="<?php echo $_url_google_plus; ?>" target="_BLANK" class="fa fa-google-plus"></a></li> <?php
+                                ?> <li><a href="<?php echo $_url_google_plus; ?>" target="_BLANK" class="fa fa-google-plus"></a></li> <?php
                     }
                     if (!empty($_url_twitter)) {
-                            ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
+                                ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
                     }
 
                     if (!empty($_url_youtube)) {
-                            ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                                ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
                     }
 
                     if (!empty($_url_instagram)) {
-                            ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
+                                ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
                     }
-                        ?>
+                            ?>
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <?php
+    }
+    ?>
 
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -95,11 +103,11 @@
             <ul class="nav navbar-nav">
                 <?php
                 if (!empty($LoggedinUser)) {
-                    ?>
+                    /* ?>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Questions</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'words', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Words Jumble</a></li>
-                    <?php
+                    <?php */
                 } else {
                     ?>
 
@@ -139,7 +147,7 @@
                     <?php
                     foreach ($examList as $exam) {
                         ?>
-                                                                <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                                                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
                         <?php
                     }
                     ?>
@@ -234,7 +242,7 @@
 
                                                                             <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                          ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                           ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>

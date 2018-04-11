@@ -21,18 +21,18 @@ class ExamNotificationsController extends AppController {
     }
 
     public function view($id) {
-        
-        if(is_numeric($id)){
+
+        if (is_numeric($id)) {
             $notification = $this->ExamNotification->find('first', array(
-            'conditions' => array('ExamNotification.id' => $id)
-                ));
-        }else{
+                'conditions' => array('ExamNotification.id' => $id)
+                    ));
+        } else {
             $notification = $this->ExamNotification->find('first', array(
-            'conditions' => array('ExamNotification.title_slug' => $id)
-                ));
+                'conditions' => array('ExamNotification.title_slug' => $id)
+                    ));
         }
-        
-        
+
+
         //pr($notificationList);
         $this->set('notification', $notification);
     }
@@ -56,6 +56,9 @@ class ExamNotificationsController extends AppController {
 
             $this->redirect(array('controller' => 'exam_notifications', 'action' => 'index'));
         }
+
+        $stateList = $this->getStateList();
+        $this->set('stateList', $stateList);
     }
 
     public function admin_edit($id) {
@@ -74,19 +77,19 @@ class ExamNotificationsController extends AppController {
 
             $this->redirect(array('controller' => 'exam_notifications', 'action' => 'index'));
         }
-		
-		$stateList = $this->getStateList();
-		$this->set('stateList',$stateList);
-		
+
+
+
         $this->request->data = $this->ExamNotification->findById($id);
+        $stateList = $this->getStateList();
+        $this->set('stateList', $stateList);
     }
-	
-	function getStateList(){
-		$this->loadModel('State');
-		$stateList = $this->State->find('list',
-			array('fields' => array('id', 'state_name')));
-		return $stateList;
-	}
+
+    function getStateList() {
+        $this->loadModel('State');
+        $stateList = $this->State->find('list', array('fields' => array('id', 'state_name')));
+        return $stateList;
+    }
 
     public function admin_examNotiGrid() {
         $request = $this->request;
@@ -104,7 +107,7 @@ class ExamNotificationsController extends AppController {
             $orderby[$this->request->query['columns'][$colName]['name']] = $this->request->query['order'][0]['dir'];
             //prd($this->request);          
             $condition = array();
-			$condition['status'] = 1;
+            $condition['ExamNotification.status !='] = 2;
 
             //pr($this->request->query['columns']);
             foreach ($this->request->query['columns'] as $column) {
@@ -143,25 +146,21 @@ class ExamNotificationsController extends AppController {
 
                     $action = '';
                     $status = '';
-                    /*
-                      if ($row['Question']['status'] == 0)
-                      {
-                      $status .= '<i class="fa fa-dot-circle-o fa-lg clr-red" onclick="changeUserStatus(' . $row['Question']['id'] . ',0)" title="Change Status"></i>';
-                      }
-                      else if ($row['Question']['status'] == 1)
-                      {
-                      $status .= '<i class="fa fa-dot-circle-o fa-lg clr-green" onclick="changeUserStatus(' . $row['Question']['id'] . ',1)" title="Change Status"></i>';
-                      }
-                     */
-                    //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
+                    if ($row['ExamNotification']['status'] == 0) {
+                        $status .= '<i class="fa fa-dot-circle-o fa-lg clr-red" onclick="changeEnStatus(' . $row['ExamNotification']['id'] . ',0)" title="Change Status"></i>';
+                    } else if ($row['ExamNotification']['status'] == 1) {
+                        $status .= '<i class="fa fa-dot-circle-o fa-lg clr-green" onclick="changeEnStatus(' . $row['ExamNotification']['id'] . ',1)" title="Change Status"></i>';
+                    }
+                    
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . '/exam_notifications/view/' . $row['ExamNotification']['id'] . '" target="_BLANK"><i class="fa fa-eye fa-lg"></i></a> ';
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/exam_notifications/edit/' . $row['ExamNotification']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
                     $return_result['data'][] = array(
                         $row['ExamNotification']['id'],
                         $row['ExamNotification']['title'],
                         $row['ExamNotification']['notification_text'],
-                        $action
+                        $status . $action
                     );
                     $i++;
                 }
@@ -173,6 +172,22 @@ class ExamNotificationsController extends AppController {
             $this->set('title_for_layout', __('Access Denied'));
             $this->render('/nodirecturl');
         }
+    }
+
+    public function admin_updatestatus() {
+        $request = $this->request;
+        if ($request->is('post')) {
+            $testData = $request->data;
+            $testData['ExamNotification']['id'] = $testData['id'];
+            $testData['ExamNotification']['status'] = ($testData['status'] == 3 || $testData['status'] == 0) ? 1 : 0;
+
+            if ($this->ExamNotification->save($testData)) {
+                echo 1;
+            } else {
+                echo 0;
+            }
+        }
+        exit;
     }
 
 }

@@ -257,7 +257,7 @@ class UsersController extends AppController {
                 $this->EmailContent->forgetPassword($name, $email, $key);
 
                 $this->Session->setFlash('Please check your mail for reset password link.', 'default', array('class' => 'alert alert-success'));
-                return $this->redirect(array('action' => 'home'));
+                return $this->redirect(array('action' => 'login'));
             }
             $this->Session->setFlash(
                     __('The user could not be saved. Please, try again.')
@@ -560,7 +560,9 @@ class UsersController extends AppController {
         $this->set('user_statics', $_user_statics);
 
         $_comment_list = $this->Comment->find('all', array(
+            'conditions' => array('status' => 3),
             'limit' => 5,
+            'order' => array('id desc')
                 ));
 
         $this->set('_comment_list', $_comment_list);

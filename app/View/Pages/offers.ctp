@@ -10,11 +10,12 @@
     <div class="box-content">
         <div class="row">
             <div class="box-body">
-                <div class="col-lg-10 col-lg-offset-1" style="padding-top: 20px;">
+                <div class="col-lg-10 col-lg-offset-1" >
                     <?php
+                    echo $this->Html->image('offer.jpg',array('class' => 'img-responsive'));
                     foreach ($content as $offer) {
                         ?>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9" style="padding-top: 20px;">
                             <h2><?php echo $offer['CmsPage']['title']; ?></h2>
                             <div><?php echo $offer['CmsPage']['content']; ?></div>
                         </div>

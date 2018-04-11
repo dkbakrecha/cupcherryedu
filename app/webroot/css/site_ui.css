@@ -36,7 +36,6 @@ h3 {
 }
 
 #header a, #footer a{
-    color: #86999b;
     font-weight: normal;
 }
 
@@ -370,12 +369,21 @@ form.vertical-form input{
     padding-bottom: 10px;
 }
 
+.footer-widgets .side-nav h4{
+    margin: 0;
+    padding: 0;
+}
 
 .footer-widgets .side-nav a {
     float: left;
     font-size: 14px;
     line-height: 15px;
-    padding: 0 20px;
+    padding: 0;
+}
+
+.footer-widgets .side-nav a:hover{
+    color: #355c7d;
+    text-decoration: underline;
 }
 
 #footer .textwidget {
@@ -851,9 +859,9 @@ a.aboutauthor {
     padding: 10px;
 }
 
-.cardcontainer > p {
-    font-size: 15px;
-    min-height: 45px;
+.cardcontainer > h3 {
+    font-size: 16px;
+    min-height: 50px;
 }
 
 .post-author {
@@ -908,8 +916,43 @@ a.aboutauthor {
 }
 
 .note_list .note-short h2 {
-    margin-top: 10px;
+    margin: 4px 0px;
+    line-height: 20px;
 }
+
+.cardbox .list-box:hover{
+    border: 1px solid #337ab7;
+    box-shadow: 1px 1px 1px 0px #337ab7;
+    cursor: pointer;
+}
+
+.cardbox .list-box:hover .notes-title a{
+    color: #337ab7;
+}
+
+.cardbox .notes-category a{
+    color: #B8B8B8;
+}
+
+.cardbox .notes-title a {
+    color: #505050;
+    font-size: 16px;
+}
+
+.cardbox .list-box .note-short{
+    width: 100%;
+    padding: 15px;
+    min-height: 200px;
+}
+
+.cardbox .notes-shortdesc {
+    color: #777777;
+    line-height: 18px;
+    font-size: 14px;
+    height: 60px;
+    margin-top: 15px;
+}
+
 
 
 .note_list .list-box .meta-info {
@@ -922,7 +965,20 @@ a.aboutauthor {
     float: left;
     width: 100%;
     background: #F6F6F6;
-    padding: 5px;
+    padding: 10px 8px;
+    border-top: 1px solid #ddd;
+}
+
+.note-footer .notes-action {
+    border-right: 2px solid #666666;
+    color: #666666;
+    padding: 0px 10px;
+}
+
+.note-footer .notes-action i {
+    font-size: 18px;
+    padding: 5px 0px;
+    line-height: 18px;
 }
 
 .site-share-btn {
@@ -1561,9 +1617,16 @@ label.error{
 .footer-subscribe > div{
     margin: 30px auto;
 }*/
-.footer-subscribe h5 {
+.footer-subscribe h2{
+    margin-top: 0px;
+    color: #f8b54d;
+    font-size: 40px;
+    font-family: 'Bubblegum Sans', cursive;
+}
+
+.footer-subscribe h3 {
     color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     margin-bottom: 30px;
 }
@@ -1802,11 +1865,11 @@ label.error{
     -moz-border-top-colors: none;
     border-color: #eee;
     border-image: none;
-    border-radius: 3px;
+    border-radius: 0;
     border-style: solid;
-    border-width: 1px 1px 1px 5px;
-    margin: 20px 0;
-    padding: 20px;
+    border-width: 2px 1px 1px 1px;
+    margin: 0;
+    padding: 15px;
     float: left;
     width: 100%;
 }
@@ -1816,8 +1879,8 @@ label.error{
 }
 
 .bs-callout-warning {
-    border-left-color: #aa6708;
-    background: #F9F9F9;
+    border-top-color: #D2D2D2;
+    background: #FBFBFB;
 }
 
 .dashboard-box {
@@ -1888,7 +1951,7 @@ a.nodecor{
 
 .note_list {
     float: left;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .site-pagination {
@@ -2091,101 +2154,187 @@ element {
 
 
 .faqouter-leftpannal {
-	float: left;
-	width: 100%;
+    float: left;
+    width: 100%;
 }
 .faq-mainpannal-outer {
-	background: #f2f2f2 none repeat scroll 0 0;
-	float: left;
-	width: 100%;
+    background: #f2f2f2 none repeat scroll 0 0;
+    float: left;
+    width: 100%;
 }
 .faq-headpannal {
-	float: left;
-	width: 100%;
+    float: left;
+    width: 100%;
 }
 .faqbuttom.faq-headpannal-contantpannal {
-	float: left;
-	margin-bottom: 48px;
-	width: 100%;
+    float: left;
+    margin-bottom: 48px;
+    width: 100%;
 }
 .faq-leftpannalouter {
-	float: left;
-	width: 70%;
+    float: left;
+    width: 70%;
 }
 .faq-leftpannalouter .smk_accordion .accordion_in {
-	border: medium none;
-	border-radius: 5px !important;
-	margin: 0 0 12px;
+    border: medium none;
+    border-radius: 5px !important;
+    margin: 0 0 12px;
 }
 .faq-rightpannalouter {
-	float: right;
-	width: 27%;
+    float: right;
+    width: 27%;
 }
 .faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_head, .faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_content {
-	color: #4c4c4c;
-	font-size: 14px;
-	line-height: 26px;
-	padding: 14px 20px;
-	background: #ffffff;
+    color: #4c4c4c;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 14px 20px;
+    background: #ffffff;
 }
 .faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in .acc_content {
-	color: #333333;
+    color: #333333;
 }
 .faq-leftpannalouter .smk_accordion.acc_with_icon .accordion_in.acc_active .acc_head {
-	color: #333333;
-	font-size: 15px;
-	font-weight: 600;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 600;
 }
 .faq-rightpannalouter .faqbuttom_righttitle {
-	color: #262626;
-	float: left;
-	font-size: 20px;
-	font-weight: bold;
-	line-height: 16px;
-	margin-bottom: 10px;
-	vertical-align: top;
-	width: 100%;
+    color: #262626;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 16px;
+    margin-bottom: 10px;
+    vertical-align: top;
+    width: 100%;
 }
 .faq-rightpannalouter .faqbuttom_rightmenu {
-	float: left;
-	width: 100%;
+    float: left;
+    width: 100%;
 }
 .faq-rightpannalouter .faqbuttom_rightmenu ul {
-	list-style: outside none none;
-	padding: 0;
+    list-style: outside none none;
+    padding: 0;
 }
 .faq-rightpannalouter .faqbuttom_rightmenu ul li {
-	background: #fff none repeat scroll 0 0;
-	border-radius: 5px;
-	color: #4c4c4c;
-	font-size: 14px;
-	height: 45px;
-	margin-top: 10px;
-	padding: 12px;
+    background: #fff none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #4c4c4c;
+    font-size: 14px;
+    height: 45px;
+    margin-top: 10px;
+    padding: 12px;
 }
 .faqbuttom_rightfirst_nu.faqright-curcle {
-	background: #1caad9 none repeat scroll 0 0;
-	border-radius: 50%;
-	color: #fff;
-	float: right;
-	font-size: 13px;
-	height: 20px;
-	text-align: center;
-	width: 20px;
+    background: #1caad9 none repeat scroll 0 0;
+    border-radius: 50%;
+    color: #fff;
+    float: right;
+    font-size: 13px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
 }
 .faq-rightpannalouter .faqbuttom_rightmenu ul li:hover, .faq-rightpannalouter .faqbuttom_rightmenu ul li.active {
-	background: #1caad9;
-	color: #fff;
+    background: #1caad9;
+    color: #fff;
 }
 .faq-rightpannalouter .faqbuttom_rightmenu ul li:hover .faqbuttom_rightfirst_nu.faqright-curcle, .faq-rightpannalouter .faqbuttom_rightmenu ul li.active .faqbuttom_rightfirst_nu.faqright-curcle {
-	background: #fff none repeat scroll 0 0;
-	color: #1caad9;
+    background: #fff none repeat scroll 0 0;
+    color: #1caad9;
 }
 .faq-leftpannalouter .smk_accordion .accordion_in.acc_active > .acc_head {
-	background: #ffffff none repeat scroll 0 0;
+    background: #ffffff none repeat scroll 0 0;
 }
 .faq-leftpannalouter .faqtabtextdiv p {
-	margin: 0 0 20px;
+    margin: 0 0 20px;
+}
+
+.site-squre-modal{
+    position: absolute;
+    border-radius: 0;
+}
+
+.site-squre-modal-content{
+    margin: 0;
+    padding: 0;
+}
+
+.site-squre-modal-content .close{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 40px;
+}
+
+.note-short img {
+    width: 100%;
+}
+
+@-webkit-keyframes glowing {
+    0% { background-color: #337ab7; -webkit-box-shadow: 0 0 3px #337ab7; }
+50% { background-color: #a5122b; -webkit-box-shadow: 0 0 5px #a5122b; }
+100% { background-color: #337ab7; -webkit-box-shadow: 0 0 3px #337ab7; }
+}
+
+@-moz-keyframes glowing {
+    0% { background-color: #337ab7; -moz-box-shadow: 0 0 3px #337ab7; }
+50% { background-color: #a5122b; -moz-box-shadow: 0 0 5px #a5122b; }
+100% { background-color: #337ab7; -moz-box-shadow: 0 0 3px #337ab7; }
+}
+
+@-o-keyframes glowing {
+    0% { background-color: #337ab7; box-shadow: 0 0 3px #337ab7; }
+50% { background-color: #a5122b; box-shadow: 0 0 5px #a5122b; }
+100% { background-color: #337ab7; box-shadow: 0 0 3px #337ab7; }
+}
+
+@keyframes glowing {
+    0% { background-color: #337ab7; box-shadow: 0 0 3px #337ab7; }
+50% { background-color: #a5122b; box-shadow: 0 0 5px #a5122b; }
+100% { background-color: #337ab7; box-shadow: 0 0 3px #337ab7; }
+}
+
+.glowbtn {
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+    color: #FFF !important;
+}
+
+.noline{
+    text-decoration: none !important;    
+}
+
+/* Option color when play */
+.a_option{
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.n_option{
+    color: red;
+}
+
+.y_option{
+    color: green;
+}
+
+.practice-category {
+    text-align: center;
+    background: #FAFAFA;
+    padding: 10px;
+    margin: 10px auto;
+    min-height: 100px;
+    color: #707070;
+    border: 1px solid #EEE;
+    font-size: 16px;
+}
+
+.practice-category:hover{
+    background: #EFEFEF;
 }
 
 @media (min-width : 1024px) and (max-width : 1199px) {
@@ -2335,21 +2484,21 @@ element {
         bottom: 40px;
         z-index: 98;
     }
-    
-    
-.faq-leftpannalouter {
-   width: 100%;
-}
 
-.faq-rightpannalouter {
-    float: left;
-    margin: 15px 0 0;
-    width: 100%;
-}
 
-.smk_accordion .accordion_in .acc_head .acc_icon_expand {
-    right: 10px !important;
-}
+    .faq-leftpannalouter {
+        width: 100%;
+    }
+
+    .faq-rightpannalouter {
+        float: left;
+        margin: 15px 0 0;
+        width: 100%;
+    }
+
+    .smk_accordion .accordion_in .acc_head .acc_icon_expand {
+        right: 10px !important;
+    }
 
 
 }
@@ -2357,6 +2506,17 @@ element {
 @media only screen and (max-width: 360px) {
     .nomobile{
         display: none;
+    }
+
+    .container, .row {
+        padding: 0px;
+        margin: 0;
+    }
+
+    .row.cardbox > div {
+        float: left;
+        margin: 0;
+        padding: 5px;   
     }
 
     .site-content, #footer, .exam_section, .recent-blogs, .footer-subscribe, .category-section {
@@ -2445,6 +2605,10 @@ element {
         font-size: 13px;
         text-align: center;
         width: 20%;
+    }
+
+    .shortcut-nav > li.active{
+        background: #a5122b;
     }
 
     .shortcut-nav > li:last-child {
@@ -2553,11 +2717,6 @@ element {
         width: 100%;
     }
 
-
-    .note_list {
-        margin: 0 !important;
-    }
-
     .note_list .col-lg-9 {
         padding: 0;
     }
@@ -2573,7 +2732,7 @@ element {
     .note_list .col-lg-8 {
         padding: 0;
     }
-    
+
     fieldset{
         min-width: calc;
     }

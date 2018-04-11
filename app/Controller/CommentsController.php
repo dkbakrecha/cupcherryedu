@@ -217,14 +217,17 @@ class CommentsController extends AppController {
         }
     }
 
+   
+    
+    
     public function admin_updatestatus() {
         $request = $this->request;
         if ($request->is('post')) {
             $testData = $request->data;
-            $testData['Exam']['id'] = $testData['id'];
-            $testData['Exam']['status'] = $testData['status'];
+            $testData['Comment']['id'] = $testData['id'];
+            $testData['Comment']['status'] = $testData['status'];
 
-            if ($this->Exam->save($testData)) {
+            if ($this->Comment->save($testData)) {
                 echo 1;
             } else {
                 echo 0;

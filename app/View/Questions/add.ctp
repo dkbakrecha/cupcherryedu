@@ -20,7 +20,10 @@ echo $this->Html->script(array(
             "role" => "form",
             'class' => 'site-from')
         );
+        
         ?>
+        
+        
         <div class="form-horizontal" >
             <div class="col-md-7">
                 <div class="row">
@@ -38,7 +41,7 @@ echo $this->Html->script(array(
                         echo $this->Form->input('sub_category_id', array(
                             'placeholder' => 'Sub Category',
                             'type' => 'select',
-                            'empty' => __('Select Sub Category'),
+                            'options' => $subcateList,
                             'require' => false
                         ));
                         ?>
@@ -75,7 +78,7 @@ echo $this->Html->script(array(
                             <div class="option_wrap">
                                 <input id="option1" type="radio" value="1" class="r-green fa fa-dot-circle-o" name="data[Question][correct_option]" checked="checked" required="required">
                                 <?php
-                                echo $this->Form->input('Answer.option1', array(
+                                echo $this->Form->input('Option.option1', array(
                                     'label' => false,
                                     'placeholder' => 'Option 1',
                                     'div' => array('class' => 'col-md-11 col-sm-10 col-xs-11 pull-right padd0'),
@@ -87,7 +90,7 @@ echo $this->Html->script(array(
                             <div class="option_wrap">
                                 <input id="option2" type="radio" value="2" class="r-green fa fa-dot-circle-o" name="data[Question][correct_option]" required="required">
                                 <?php
-                                echo $this->Form->input('Answer.option2', array(
+                                echo $this->Form->input('Option.option2', array(
                                     'label' => false,
                                     'placeholder' => 'Option 2',
                                     'div' => array('class' => 'col-md-11 col-sm-10 col-xs-11 pull-right padd0'),
@@ -99,7 +102,7 @@ echo $this->Html->script(array(
                             <div class="option_wrap">
                                 <input id="option3" type="radio" value="3" class="r-green fa fa-dot-circle-o" name="data[Question][correct_option]">
                                 <?php
-                                echo $this->Form->input('Answer.option3', array(
+                                echo $this->Form->input('Option.option3', array(
                                     'label' => false,
                                     'placeholder' => 'Option 3',
                                     'div' => array('class' => 'col-md-11 col-sm-10 col-xs-11 pull-right padd0')
@@ -111,7 +114,7 @@ echo $this->Html->script(array(
                             <div class="option_wrap">
                                 <input id="option4" type="radio" value="4" class="r-green fa fa-dot-circle-o" name="data[Question][correct_option]">
                                 <?php
-                                echo $this->Form->input('Answer.option4', array(
+                                echo $this->Form->input('Option.option4', array(
                                     'label' => false,
                                     'placeholder' => 'Option 4',
                                     'div' => array('class' => 'col-md-11 col-sm-10 col-xs-10 pull-right padd0')

@@ -8,7 +8,7 @@ class NotesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view');
+        $this->Auth->allow('index', 'view', 'hitview');
     }
 
     public $components = array('Paginator');
@@ -51,7 +51,7 @@ class NotesController extends AppController {
             $this->Paginator->settings = array(
                 'conditions' => array($paginateCond),
                 //'paramType' => 'querystring',
-                'limit' => 10,
+                'limit' => 12,
                 'order' => array('id' => 'desc')
             );
 
@@ -480,6 +480,65 @@ class NotesController extends AppController {
             exit;
         } else {
             
+        }
+    }
+    
+    public function hitview() {
+        $request = $this->request;
+        $this->loadModel('NoteHit');
+
+        if ($request->is("ajax")) {
+            $response = array(
+                "status" => 0,
+                "msg" => __("Invalid Request")
+            );
+            if ($request->is("post")) {
+                $note_id = $request->data("id");
+                $response["msg"] = __("Invalid pin Id");
+
+                if (!empty($note_id)) {
+                    $r_addr = $_SERVER['REMOTE_ADDR'];  //  store remote address
+                    $user_id = $this->_getCurrentUserId();
+                    if (empty($user_id)) {
+                        $user_id = 0;
+                    }
+
+                    $curr_date = date('Y-m-d');
+                    $condition = array();
+                    $condition['NoteHit.ip_addr'] = $r_addr;
+                    $condition['NoteHit.note_id'] = $note_id;
+                    $condition['NoteHit.user_id'] = $user_id;
+                    //$condition['DATE( Hit.createds )'] = 'CURDATE()';
+                    //$condition['DATE( BlogHit.created ) >='] = $curr_date;
+
+                    $dataView = $this->NoteHit->find("first", array(
+                        "conditions" => $condition,
+                            ));
+
+                    if (empty($dataView)) {
+                        $saveData = array();
+                        $saveData['NoteHit']['ip_addr'] = $r_addr;
+                        $saveData['NoteHit']['note_id'] = $note_id;
+                        $saveData['NoteHit']['user_id'] = $user_id;
+                        $saveData['NoteHit']['status'] = 1;
+
+                        if ($this->NoteHit->save($saveData)) {
+                            $this->Note->updateAll(
+                                    array('Note.view_count' => 'Note.view_count + 1'), array('Note.id' => $note_id));
+
+                            $response["status"] = 1;
+                            $response["msg"] = __("View note count add successfully");
+                        }
+                    } else {
+                        $response["status"] = 1;
+                        $response["msg"] = __("Postview alerdy added");
+                    }
+                }
+            }
+            echo json_encode($response);
+            exit;
+        } else {
+            $this->render('/nodirecturl');
         }
     }
 

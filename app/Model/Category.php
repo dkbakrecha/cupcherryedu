@@ -3,21 +3,27 @@
 App::uses('AppModel', 'Model');
 
 class Category extends AppModel {
-
     /*
-    public $virtualFields = array(
-        'questionsCount' => 'SELECT COUNT(*) FROM questions as ques WHERE ques.sub_category_id = Category.id'
-    );
+      public $virtualFields = array(
+      'questionsCount' => 'SELECT COUNT(*) FROM questions as ques WHERE ques.sub_category_id = Category.id'
+      );
      * 
      */
-    
-    /*public $hasMany = array(
-        'SubCategories' => array(
-            'className' => 'Category',
-            'foreignKey' => 'parent_id'
-        )
-    );*/
-    
+
+    /* public $hasMany = array(
+      'SubCategories' => array(
+      'className' => 'Category',
+      'foreignKey' => 'parent_id'
+      )
+      ); */
+
+//    public $hasMany = array(
+//        'Question' => array(
+//            'className' => 'Question',
+//            'foreignKey' => 'category_id'
+//        )
+//    );
+
     public function getNameByID($id) {
         $conditions = array(
             'conditions' => array('Category.id' => $id), //array of conditions

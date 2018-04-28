@@ -590,6 +590,10 @@ class UsersController extends AppController {
     public function admin_index() {
         
     }
+    
+    public function admin_students() {
+        
+    }
 
     public function admin_userGridData() {
         $request = $this->request;

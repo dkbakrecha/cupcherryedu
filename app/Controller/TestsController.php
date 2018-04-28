@@ -37,8 +37,6 @@ class TestsController extends AppController {
     public function practice($cate_id = NULL, $subcate_id = NULL) {
         $this->loadModel('Category');
         $this->loadModel('Question');
-        
-
 
         $cateList = $this->Category->find('list', array(
             'conditions' => array(
@@ -49,6 +47,18 @@ class TestsController extends AppController {
 
         $this->set('cateList', $cateList);
 
+
+        $catQues = $this->Question->find('all', array(
+            'conditions' => array(
+                'status' => 1
+            ),
+            'fields' => array('COUNT(Question.id) AS QuestionCount', 'Question.category_id')
+            ,
+            'group' => array('Question.category_id'),
+            'recursive' => 0,
+                ));
+        
+        $catQuesCount = Hash::combine($catQues, '{n}.Question.category_id', '{n}.0.QuestionCount');
 
 
         if (!empty($cate_id)) {
@@ -62,7 +72,27 @@ class TestsController extends AppController {
                     ));
 
             $this->set('subcateList', $subcateList);
+
+            $catQues = $this->Question->find('all', array(
+                'conditions' => array(
+                    'category_id' => $cate_id,
+                    'status' => 1
+                ),
+                'fields' => array('COUNT(Question.id) AS QuestionCount', 'Question.sub_category_id')
+                ,
+                'group' => array('Question.sub_category_id'),
+                'recursive' => 0,
+                    ));
+            
+            $catQuesCount = Hash::combine($catQues, '{n}.Question.sub_category_id', '{n}.0.QuestionCount');
         }
+
+
+
+        
+        $this->set('catQuesCount', $catQuesCount);
+
+
 
 
 
@@ -381,6 +411,11 @@ class TestsController extends AppController {
         } else {
             return "Invalid Question";
         }
+    }
+    
+    
+     public function practice_table() {
+        
     }
 
     /*     * ******** ADMIN SECTION  ********* */

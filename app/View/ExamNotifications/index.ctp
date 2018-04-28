@@ -1,5 +1,12 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-8 ">
+    <?php
+        if (empty($LoggedinUser)) {
+            $_notesclass = "col-lg-8";
+        }else{
+            $_notesclass = "col-lg-12";
+        }
+    ?>
+    <div class="col-xs-12 <?php echo $_notesclass; ?> ">
         <div class="box ">
             <div class="box-content">
                 <h3>Exam Notification</h3> 
@@ -52,7 +59,11 @@
         </div>
     </div>
 
+    <?php
+    if (empty($LoggedinUser)) {
+        ?>
     <div class="col-xs-12 col-sm-4">
         <?php echo $this->element('ask_question'); ?>
     </div>
+    <?php } ?>
 </div>

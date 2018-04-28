@@ -1,118 +1,92 @@
-<div class="col-lg-3">
-    <div class="box m-bottom15">
-        <div class="box-content">
-            <ul class="side-links">
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>"> View Profile </a></li>
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Change Password </a></li>
 
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Account Setting </a></li>
-
-            </ul>
-        </div>
+<div class="box ">
+    <div class="box-header">
+        <h3 class="box-title">Edit Profile</h3>
     </div>
 
-    <div class="box">
-        <div class="box-content">
-            <ul class="side-links">
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>"> Submit a Note </a></li>
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Submit a Question </a></li>
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'feedback')); ?>"> Make a Feedback </a></li>
-                <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'help')); ?>"> Help </a></li>
-            </ul>
+    <div class="box-content">
+
+        <?php
+        echo $this->Form->create('User', array(
+            'class' => 'site-from'
+        ));
+
+        echo $this->Form->hidden('id');
+        ?>
+
+        <div class="signuppanls-cover">
+            <label class="contact-label">Image</label>
+            <div class="contact-inputcover ImagePreviewBox">
+                <?php
+                $imgPathBig = $this->webroot . "img/no_user.jpg";
+                echo $this->Form->hidden('image');
+                if (isset($this->request->data["User"]["image"]) && !empty($this->request->data["User"]["image"])) {
+                    $imgPathBig = $this->webroot . "files/profile/" . $this->request->data["User"]["image"] . "?t=" . time();
+                }
+                ?>
+
+                <img src="<?php echo $imgPathBig; ?>" alt="Responsive image" width="100px;" />
+                <span class="signuppanls-addimgbtn" id="UserImages">Add Image</span>
+            </div>
         </div>
-    </div>
 
-</div>
-<div class="col-lg-9">
-    <div class="box ">
-        <div class="box-header">
-            <h3 class="box-title">Edit Profile</h3>
+        <div class="row">
+            <div class="col-lg-6">
+                <?php echo $this->Form->input('name'); ?>
+            </div>
         </div>
 
-        <div class="box-content">
-
-            <?php
-            echo $this->Form->create('User', array(
-                'class' => 'site-from'
-            ));
-
-            echo $this->Form->hidden('id');
-            ?>
-
-            <div class="signuppanls-cover">
-                <label class="contact-label">Image</label>
-                <div class="contact-inputcover ImagePreviewBox">
-                    <?php
-                    $imgPathBig = $this->webroot . "img/no_user.jpg";
-                    echo $this->Form->hidden('image');
-                    if (isset($this->request->data["User"]["image"]) && !empty($this->request->data["User"]["image"])) {
-                        $imgPathBig = $this->webroot . "files/profile/" . $this->request->data["User"]["image"] . "?t=" . time();
-                    }
-                    ?>
-
-                    <img src="<?php echo $imgPathBig; ?>" alt="Responsive image" width="100px;" />
-                    <span class="signuppanls-addimgbtn" id="UserImages">Add Image</span>
-                </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <?php
+                echo $this->Form->input('email', array(
+                    'readonly' => true
+                ));
+                ?>
             </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <?php echo $this->Form->input('name'); ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <?php
-                    echo $this->Form->input('email', array(
-                        'readonly' => true
-                    ));
-                    ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <?php
-                    echo $this->Form->input('address', array(
-                        'type' => 'text',
-                        'placeholder' => 'Enter your address',
-                    ));
-                    ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <?php
-                    echo $this->Form->input('profession', array(
-                        'type' => 'text',
-                        'placeholder' => 'What are you doing now?',
-                    ));
-                    ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <?php
-                    echo $this->Form->input('about', array(
-                        'placeholder' => 'Tell short about yourself',
-                    ));
-                    ?>
-                </div>
-            </div>
-
-
-
-            <div class="box-bottom-butngroup">
-                <?php echo $this->Form->submit('save', array('class' => 'box-submitbtn', 'div' => false)); ?>
-                <?php echo $this->Form->button('cancel', array('class' => 'box-cancelbtn')); ?>
-            </div>
-            <?php
-            echo $this->Form->end();
-            ?>
         </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <?php
+                echo $this->Form->input('address', array(
+                    'type' => 'text',
+                    'placeholder' => 'Enter your address',
+                ));
+                ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <?php
+                echo $this->Form->input('profession', array(
+                    'type' => 'text',
+                    'placeholder' => 'What are you doing now?',
+                ));
+                ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <?php
+                echo $this->Form->input('about', array(
+                    'placeholder' => 'Tell short about yourself',
+                ));
+                ?>
+            </div>
+        </div>
+
+
+
+        <div class="box-bottom-butngroup">
+            <?php echo $this->Form->submit('save', array('class' => 'box-submitbtn', 'div' => false)); ?>
+            <?php echo $this->Form->button('cancel', array('class' => 'box-cancelbtn')); ?>
+        </div>
+        <?php
+        echo $this->Form->end();
+        ?>
     </div>
 </div>
 <?php echo $this->element("profile-image", array('mode' => 'signup')); ?>

@@ -5,7 +5,14 @@
 <!--<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />-->
 
 <div class="row">
-    <div class="col-lg-8">
+    <?php
+        if (empty($LoggedinUser)) {
+            $_notesclass = "col-lg-8";
+        }else{
+            $_notesclass = "col-lg-12";
+        }
+    ?>
+    <div class="<?php echo $_notesclass; ?>">
         <?php
         if (!empty($postDetail)) {
             $_linkUrl = $this->Html->url(array('controller' => 'posts', 'action' => 'view', $postDetail['Post']['title_slug']), TRUE);
@@ -60,10 +67,16 @@
         ?> 
     </div>
 
+    <?php
+    if (empty($LoggedinUser)) {
+        ?>
     <div class="col-lg-4">
         <?php echo $this->element('sidebar/topposts'); ?>
         <?php echo $this->element('sidebar/newnotes'); ?>
     </div>
+    <?php
+    }
+    ?>
 
 </div>
 

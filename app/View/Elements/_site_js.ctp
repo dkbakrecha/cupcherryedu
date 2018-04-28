@@ -1,6 +1,30 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="siteModal"></div><!-- /.modal -->
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        $("#TablePracticePracticeTableForm").submit(function(){
+            var s_ans = $("#TablePracticeTblsysans").val(); 
+            var u_ans = $("#TablePracticeTableans").val(); 
+            
+            if(s_ans == u_ans){
+                /*bootbox.alert({
+                    message: "Your answer is correct",
+                    backdrop: true,
+                    size: 'small'
+                });*/
+            alert("Your answer is correct");
+            }else{
+                /*bootbox.alert({
+                    message: "Your answer is Incorrect. Correct one is " + s_ans,
+                    backdrop: true,
+                    size: 'small'
+                });*/
+            alert("Your answer is Incorrect. Correct one is " + s_ans);
+            }
+            $("#TablePracticeTableans").val();
+        }); 
+    });
+    
     $(function () {
         var _scv = '<?php echo Configure::read('Site.SCV'); ?>';
         var _x_scv = getCookie('server_cookie_ver');

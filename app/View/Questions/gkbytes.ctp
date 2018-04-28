@@ -1,6 +1,6 @@
 <div id="gkbytes" class="row gkbytes">
     <div class="col-lg-4">
-        <div class="box no-hight title">
+        <div class="box no-height title">
             <div class="box-content">
                 <h2>GK Bytes of <?php echo date('F Y'); ?></h2>
             </div>

@@ -33,11 +33,11 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class AppController extends Controller {
 
-    
     public $components = array(
         'Auth',
         'Session',
-        //'Captcha.Captcha'=>array('field'=>'security_code')
+        'Classy',
+            //'Captcha.Captcha'=>array('field'=>'security_code')
     );
     public $_quiz_globle = array();
     public $loggedinUser = array();
@@ -66,27 +66,36 @@ class AppController extends Controller {
         }
 
         //Check Quiz session and make globle Settings
-        /*$_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-        if (empty($_quiz_data)) {
-            $this->_quiz_globle['CurrentQuiz'] = "1";
-            $this->Session->write('QUIZ_GLOBLE', $this->_quiz_globle);
-        }*/
+        /* $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
+          if (empty($_quiz_data)) {
+          $this->_quiz_globle['CurrentQuiz'] = "1";
+          $this->Session->write('QUIZ_GLOBLE', $this->_quiz_globle);
+          } */
         /* END Check session */
+
+        $_cont = $this->request->params['controller'];
+        $_act = $this->request->params['action'];
+        $_body_class = $_cont . "-" . $_act;
+        $this->set('_body_class', $_body_class);
+
+        $_sysInfo = $this->Classy->systemInfo();
+        $this->set('_sysInfo', $_sysInfo);
+
 
         $LoggedinUser = $this->Session->read('Auth.User');
         //pr($LoggedinUser);
         $this->loggedinUser = $LoggedinUser;
         $this->set('LoggedinUser', $LoggedinUser);
-        
+
         $_NotesType = array(
             '1' => 'Text',
             '2' => 'Vedio',
             '3' => 'PDF',
         );
-        
+
         $this->_NotesType = $_NotesType;
         $this->set('NotesType', $_NotesType);
-        
+
 
         $this->SiteSettings();
     }
@@ -106,7 +115,7 @@ class AppController extends Controller {
     protected function SiteSettings() {
         $this->loadModel('Sitesetting');
         $this->loadModel('Exam');
-        
+
         $site_settings = $this->Sitesetting->find('all', array(
             'fields' => array('key', 'value'),
                 )
@@ -120,8 +129,7 @@ class AppController extends Controller {
         Configure::write('ADMIN_MAIL', $adminEmail);
 
         $examList = $this->Exam->find('all', array(
-                        'conditions' => array('Exam.status' => '1'),
-
+            'conditions' => array('Exam.status' => '1'),
             'limits' => array('6'),
             'fields' => array('*')
                 ));
@@ -130,25 +138,25 @@ class AppController extends Controller {
     }
 
     /*
-    public function __update_asnwer($unique_id, $question_id, $answer_status) {
-        $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-        $_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
+      public function __update_asnwer($unique_id, $question_id, $answer_status) {
+      $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
+      $_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
 
-        // Finding Next unread question
-        foreach ($_testArray as $_cateArr) {
-            if (!empty($_cateArr->cate_data)) {
-                foreach ($_cateArr->cate_data as $_quesArr) {
-                    if ($_quesArr->q_id == $question_id) {
-                        $_quesArr->status = $answer_status;
+      // Finding Next unread question
+      foreach ($_testArray as $_cateArr) {
+      if (!empty($_cateArr->cate_data)) {
+      foreach ($_cateArr->cate_data as $_quesArr) {
+      if ($_quesArr->q_id == $question_id) {
+      $_quesArr->status = $answer_status;
 
-                        break;
-                    }
-                }
-            }
-        }
-        $_quiz_data[$unique_id]['questions_summery'] = json_encode($_testArray);
-        $this->Session->write('QUIZ_GLOBLE', $_quiz_data);
-    }
+      break;
+      }
+      }
+      }
+      }
+      $_quiz_data[$unique_id]['questions_summery'] = json_encode($_testArray);
+      $this->Session->write('QUIZ_GLOBLE', $_quiz_data);
+      }
      * 
      */
 
@@ -157,7 +165,7 @@ class AppController extends Controller {
     public function __findQuestion($unique_id = NULL) {
         $this->loadModel('Question');
         //$_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-        
+
         if (!empty($unique_id)) {
             $this->loadModel('TestQuestion');
             $_ques_info = "";

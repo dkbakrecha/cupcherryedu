@@ -16,6 +16,8 @@ if($this->request->params['controller'] == "questions"){
 if($this->request->params['controller'] == "users" && $this->request->params['action'] == "login" ){
     $sm_login = "active";
 }
+//prd($_body_class);
+if($_body_class != "tests-practice_table"){
 ?>
 
 <section class="shortcut-menu">
@@ -67,3 +69,6 @@ if($this->request->params['controller'] == "users" && $this->request->params['ac
         </li>
     </ul>
 </section>
+<?php
+}
+?>

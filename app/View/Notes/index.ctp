@@ -1,9 +1,14 @@
 <div class="row note_list cardbox">
     <?php
+    if (empty($LoggedinUser)) {
+        $_notesclass = "col-lg-4";
+    } else {
+        $_notesclass = "col-lg-12";
+    }
     if (!empty($notesData)) {
         foreach ($notesData as $note) {
             ?>
-            <div class="col-lg-4">
+            <div class="<?php echo $_notesclass; ?>">
                 <div class="list-box ">
 
                     <div class="note-short">

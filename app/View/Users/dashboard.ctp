@@ -1,28 +1,28 @@
 
-<div class="row">
-    <div class="col-lg-3 ">
-        <?php echo $this->element("sidebar/dashboard_left"); ?>
+
+<div class="box">
+    <div class="box-content">
+        <?php
+        if ($_sysInfo['device'] == 'MOBILE') {
+            ?>
+            <a class="btn btn-primary info-box col-xs-12" href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'practice')); ?>"> 
+                <i class="fa fa-wrench info-box-icon"></i>
+                Practice Test HERE
+            </a>
+
+            <a class="btn btn-primary info-box col-xs-12" href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'practice_table')); ?>"> 
+                <i class="fa fa-table info-box-icon"></i>
+                Practice Table
+            </a>
+            <?php
+        }
+        ?>
     </div>
-
-    <div class="col-lg-6">
-        <div class="row">
-            <div class="box">
-                <div class="box-content">
-                    
-                </div>
-            </div>
-
-            
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <?php echo $this->element("sidebar/dashboard_right"); ?>
-
-
-
-    </div>
-
 </div>
+
+
+
+
 
 <script type="text/javascript">
     $(function () {

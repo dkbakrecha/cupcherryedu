@@ -103,11 +103,12 @@
             <ul class="nav navbar-nav">
                 <?php
                 if (!empty($LoggedinUser)) {
-                    /* ?>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Questions</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'words', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Words Jumble</a></li>
-                    <?php */
+                    ?>
+
+                    <?php
+                    /* <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
+                      <li><a href="<?php echo $this->Html->url(array('controller' => 'words', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Words Jumble</a></li>
+                      <?php */
                 } else {
                     ?>
 
@@ -147,7 +148,7 @@
                     <?php
                     foreach ($examList as $exam) {
                         ?>
-                                                                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                                                                            <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
                         <?php
                     }
                     ?>
@@ -176,6 +177,7 @@
                     <?php
                 } else {
                     ?>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notifications', 'action' => 'index')); ?>"><i class="fa fa-bell-o"></i></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle profile-mnu-wrapper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <?php
@@ -226,23 +228,19 @@
             <div class="ipad-responsive-menu-outer">
                 <div class="ipad-responsive-menu">
                     <ul class="mainmenuulli">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book"></i>Learn <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                        <?php
+                        if (!empty($LoggedinUser)) {
+                            ?>
+                            <li class="side-mobilemenuuser"><?php echo $this->element("widget-user"); ?></li>
 
-                                <?php
-                                foreach ($examList as $exam) {
-                                    ?>
-                                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
-                        </li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'edit_profile')); ?>"><i class="fa fa-user"></i> Edit Profile</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'tests', 'action' => 'practice')); ?>"><i class="fa fa-edit"></i> Practice Test</a></li>
 
-                                                                            <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
+                        <?php } ?>
+
+                                                    <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                           ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
+                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                                 ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>

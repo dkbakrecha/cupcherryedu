@@ -1,6 +1,6 @@
 <div id="exam_details" class="row gkbytes">
     <div class="col-lg-8">
-        <div class="box no-hight">
+        <div class="box no-height">
             <div class="box-content">
                 <h2>
                     <?php
@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <div class="box no-hight">
+        <div class="box no-height">
             <div class="box-content">
                 <div class="fb-page" data-href="<?php echo $examInfo['Exam']['fb_page']; ?>" data-tabs="messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                     <blockquote cite="<?php echo $examInfo['Exam']['fb_page']; ?>" class="fb-xfbml-parse-ignore">

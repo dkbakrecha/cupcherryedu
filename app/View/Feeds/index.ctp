@@ -1,94 +1,96 @@
-
-<div class="row">
-    <div class="col-lg-3">
-        <div class="box user-info m-bottom15">
-            <div class="box-content">
-                <a href="#">
+<div class="box no-height m-bottom5">
+    <div class="box-content feed-form">
+        <?php
+        echo $this->Form->create("Contact", array(
+            'id' => 'feedsAdd'
+        ));
+        ?>
+        <div id="FeedFormOuter">
+            <div class="tab-content">
+                <div id="feed-update" class="tab-pane fade in active">
                     <?php
-                    $imgPathBig = $this->webroot . "img/no_user.jpg";
-                    if (isset($LoggedinUser["image"]) && !empty($LoggedinUser["image"])) {
-                        $imgPathBig = $this->webroot . "files/profile/" . $LoggedinUser["image"] . "?t=" . time();
-                    }
-                    ?>
-
-                    <img src="<?php echo $imgPathBig; ?>" alt="Responsive image" class="img-thumbnail profile" >
-                    <div class="profile-name"><?php echo $LoggedinUser['name']; ?> </div>
-                </a>
-
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="box-content">
-                <ul class="side-links">
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>"> Submit a Note </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Submit a Question </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'feedback')); ?>"> Make a Feedback </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'help')); ?>"> Help </a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="row">
-            <div class="box">
-                <div class="box-content">
-                    <div class="btn btn-primary"> Post a Notes </div>
-                    <div class="btn btn-primary"> Post a Question </div>
-                    <div class="btn btn-primary"> Post a Query </div>
-                    
-                    <div id="FeedFormOuter">
-                    <?php
-                    echo $this->Form->create("Contact" , array(
-                        'name' => 'feedsQueryAdd',
-                        'id' => 'feedsQueryAdd'
-                    ));
-                    
-                    echo $this->Form->hidden("mail_type", array(
+                    echo $this->Form->hidden("feed_type", array(
                         'value' => 1,
                     ));
-                    
+
                     echo $this->Form->input("message", array(
                         'label' => false,
-                        'placeholder' => 'Enter your question or query here'
-                    ));
-                    
-                    echo $this->Form->submit("Save",array(
-                        'class' => 'btn btn-primary'
+                        'type' => 'textarea',
+                        'rows' => 3,
+                        'placeholder' => 'Write something ...'
                     ));
                     ?>
-                    </div>
                 </div>
-            </div>
-            
-            <div class="box">
-                <div class="box-content">
-                    <?php pr($feedsList); ?>
+                <div id="feed-notes" class="tab-pane fade">
+                    <h3>Menu 1</h3>
+                    <p>Some content in menu 1.</p>
                 </div>
             </div>
         </div>
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a data-toggle="pill" href="#feed-update">
+                    <i class="fa fa-pencil"></i> <span>Update</span>
+                </a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="#feed-notes">
+                    <i class="fa fa-book"></i> <span>Note</span>
+                </a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="#feed-notes">
+                    <i class="fa fa-list-ul"></i> <span>Question</span>
+                </a>
+            </li>
+            <li class="pull-right">
+                <?php
+                echo $this->Form->submit("Save", array(
+                    'class' => 'btn btn-primary ',
+                    'div' => false
+                ));
+                ?>
+            </li>
+        </ul>
+
+        <?php
+        $this->Form->end();
+        ?>
+
     </div>
-    <div class="col-lg-3">
-
-
-        <div class="box">
-            <div class="box-content">
-                <ul class="side-links">
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'add')); ?>"> Notes </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'add')); ?>"> Questions </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'feedback')); ?>"> Exams </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'help')); ?>"> Courses </a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'help')); ?>"> Students </a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
 </div>
+
+<div class="box">
+    <div class="box-content">
+        <?php pr($feedsList); ?>
+    </div>
+</div>
+
 
 <script type="text/javascript">
     $(function () {
-        $('#short').sortable();
+            -        
+        
+            $("#FeedFormOuter").on("submit", "#feedsAdd", function (e) {
+            e.preventDefault();
+            //var _formData = $("#QuizViewForm").serialize();
+            $(this).ajaxSubmit({
+                url: "<?php echo $this->Html->url(array('controller' => 'feeds', 'action' => 'add')) ?>",
+                type: "POST",
+                //data: {'formData': _formData},
+                success: function (rd) {
+                    $('#questionContent').html(rd);
+                    if (rd != 0) {
+                        var obj = jQuery.parseJSON(rd);
+
+                        $.each(obj, function (key, value) {
+                            $('#' + key).val(value);
+                        });
+                    }
+                },
+                error: function (xhr) {
+                }
+            });
+        });
     });
 </script>

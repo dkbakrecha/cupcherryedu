@@ -2,7 +2,12 @@
     GENERAL
 ========================*/
 body{
+    background: #f4f4f4;
     font-family: 'Roboto', 'Droid Serif', sans-serif;;
+}
+
+body.teacherlogin{
+    background: #fff3df;
 }
 
 .clear {
@@ -40,7 +45,6 @@ h3 {
 }
 
 .site-content{
-    background: #f4f4f4;
     padding: 10px 0;
 }
 
@@ -1006,13 +1010,21 @@ a.aboutauthor {
     min-height: 200px;
 }
 
-.box.no-hight{
+.box.no-height{
     min-height: auto;
 }
 
 .box.login-box {
     padding-top: 20px;
     min-height: 400px;
+}
+
+.box.thoughtofday {
+    background: #fffddd;
+    padding: 10px 0;
+    font-size: 16px;
+    font-style: italic;
+    color: #337ab7;
 }
 
 .side-bar-section .box{
@@ -1334,39 +1346,6 @@ label.error{
     margin-bottom: 20px;
 }
 
-.well {
-    margin-top:-20px;
-    background-color:#F8FDFF;
-    color: #007FBD;
-    border:1px solid #ccc;
-    text-align:center;
-    cursor:pointer;
-    font-size: 20px;
-    padding: 15px;
-    border-radius: 0px !important;
-    border-bottom : 2px solid #ccc;
-}
-
-.well:hover {
-    margin-top:-20px;
-    background-color:#0077B2;
-    color: #F8FDFF;
-    border:1px solid #0077B2;
-    text-align:center;
-    cursor:pointer;
-    font-size: 20px;
-    padding: 15px;
-    border-radius: 0px !important;
-    border-bottom : 2px solid rgba(97, 203, 255, 0.65);
-}
-
-.bg_blur
-{
-    background:rgba(155, 0, 0, 0) url('https://htmlstream.com/preview/unify-v1.9.8/assets/img/patterns/breadcrumbs.png')  repeat scroll 0 0;
-    height: 300px;
-    border: 1px solid #ccc;
-}
-
 .follow_btn, .message_btn {
     text-decoration: none;
     background-color: #007FBE;
@@ -1395,17 +1374,39 @@ label.error{
     margin-top: 10px;
 }
 
-.header{
-    color : #808080;
-    margin-top:70px;
+.user-profile-box {
+    position: relative;
+    height: 250px;
 }
 
-.picture{
-    height:150px;
-    width:150px;
-    position:absolute;
-    top: 60px;
-    left:100px;
+.profile-data {
+    position: absolute;
+    height: 100px;
+    background: #FFF;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+
+.header{
+    color : #808080;
+}
+
+.picture {
+    height: 180px;
+    width: 180px;
+    position: absolute;
+    top: -100px;
+    left: 70px;
+}
+
+.profile-name {
+    font-size: 24px;
+}
+
+.profile-occuption {
+    font-size: 16px;
 }
 
 .picture_mob{
@@ -1808,6 +1809,10 @@ label.error{
     margin-bottom: 15px;  
 }
 
+.m-top15{
+    margin-top: 15px;  
+}
+
 
 .menu-ipad{
     display: none;
@@ -1965,7 +1970,7 @@ a.nodecor{
 }
 
 .box.user-info .profile {
-    height: 80px;
+    height: 60px;
     margin-top: 10px;
     float: left;
 }
@@ -1975,13 +1980,18 @@ a.nodecor{
 }
 
 .user-info .profile-name {
-    border-bottom: 2px solid #9f9f9f;
     color: #666;
     float: left;
     font-size: 16px;
     margin-left: 5px;
-    margin-top: 30px;
+    margin-top: 15px;
     text-transform: capitalize;
+}
+
+.user-info .profile-role{
+    float: left;
+    margin-left: 5px;
+    color: #666;
 }
 
 .pagination li a {
@@ -2272,6 +2282,29 @@ element {
     width: 100%;
 }
 
+.box-content.feed-form {
+    padding: 0;
+}
+
+.feed-form .nav-pills{
+    background: #eaedf1;
+}
+
+.feed-form .nav-pills > li > a {
+    color: #707070;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.feed-form .nav-pills > li.active > a{
+    color: #FFF;
+    background: #707070;
+}
+
+.feed-form .nav-pills > li > a i{
+    padding: 0 5px;
+}
+
 @-webkit-keyframes glowing {
     0% { background-color: #337ab7; -webkit-box-shadow: 0 0 3px #337ab7; }
 50% { background-color: #a5122b; -webkit-box-shadow: 0 0 5px #a5122b; }
@@ -2337,6 +2370,27 @@ element {
     background: #EFEFEF;
 }
 
+.btn.info-box {
+    padding: 0;
+    font-size: 24px;
+    line-height: 80px;
+    margin: 15px 0;
+    background: #FFF;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.btn .info-box-icon {
+    height: 80px;
+    width: 80px;
+    float: left;
+    font-size: 40px;
+    line-height: 50px;
+    padding: 15px;
+    background: #dd4b39;
+    color: #FFF;
+}
+
 @media (min-width : 1024px) and (max-width : 1199px) {
 
 
@@ -2398,6 +2452,8 @@ element {
         position: fixed;
         right: 0;
         top: 58px;
+        padding: 0;
+        box-shadow: -5px 0 5px -5px #333;
         transition: all 0.5s ease-in-out 0s;
     }
     .ipad-responsive-menu-outer{
@@ -2426,6 +2482,17 @@ element {
         margin-top: 20px;
     }
 
+    .side-mobilemenuuser{
+        padding: 0 !important;
+        border-left: 0 !important;
+
+    }
+
+    .side-mobilemenuuser .box{
+        border: 0;
+        background: #EEE;
+
+    }
     /*HEADER*/
     .mainmenucover .navbar-header{
         width: 130px;
@@ -2517,6 +2584,10 @@ element {
         float: left;
         margin: 0;
         padding: 5px;   
+    }
+
+    .btn.info-box{
+        font-size: 18px;
     }
 
     .site-content, #footer, .exam_section, .recent-blogs, .footer-subscribe, .category-section {
@@ -2736,6 +2807,24 @@ element {
     fieldset{
         min-width: calc;
     }
+    
+    .feed-form .nav-pills > li > a span{
+        display: none;
+    }
+    
+    .feed-form .nav-pills > li.active > a span{
+        display: block;
+        float: right;
+    }
+    
+    .user-info .profile-name{
+        margin-top: 5px;;
+    }
+    
+    .user-info .profile-role{
+        line-height: 15px;
+    }
+
 }
 
 @media only screen and (max-width: 320px) {
@@ -2781,4 +2870,12 @@ element {
 
 .site-hr-top .fa-child {
     font-size: 24px;
+}
+
+#TablePracticePracticeTableForm label {
+    text-align: center;
+    float: left;
+    width: 100%;
+    font-size: 40px;
+    padding: 20px;
 }

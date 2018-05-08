@@ -181,7 +181,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 <div class="footer-subscribe" >
     <div class="container">
         <div class="col-lg-2">
-             <?php echo $this->html->image('email_fly.png'); ?>
+             <?php echo $this->html->image('newsletter.png'); ?>
         </div>
         <div class="col-lg-5">
         <h2>Newsletter Updates</h2>

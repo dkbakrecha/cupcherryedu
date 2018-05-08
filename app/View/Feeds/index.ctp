@@ -22,8 +22,24 @@
                     ?>
                 </div>
                 <div id="feed-notes" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
+                    <?php
+                    echo $this->Form->input("notes_detail", array(
+                        'label' => false,
+                        'type' => 'textarea',
+                        'rows' => 3,
+                        'placeholder' => 'Write Notes ...'
+                    ));
+                    ?>
+                </div>
+                <div id="feed-question" class="tab-pane fade">
+                    <?php
+                    echo $this->Form->input("question", array(
+                        'label' => false,
+                        'type' => 'textarea',
+                        'rows' => 3,
+                        'placeholder' => 'Write Question ...'
+                    ));
+                    ?>
                 </div>
             </div>
         </div>
@@ -39,7 +55,7 @@
                 </a>
             </li>
             <li>
-                <a data-toggle="pill" href="#feed-notes">
+                <a data-toggle="pill" href="#feed-question">
                     <i class="fa fa-list-ul"></i> <span>Question</span>
                 </a>
             </li>
@@ -69,9 +85,7 @@
 
 <script type="text/javascript">
     $(function () {
-            -        
-        
-            $("#FeedFormOuter").on("submit", "#feedsAdd", function (e) {
+           $(".box-content").on("submit", "#feedsAdd", function (e) {
             e.preventDefault();
             //var _formData = $("#QuizViewForm").serialize();
             $(this).ajaxSubmit({

@@ -57,7 +57,7 @@ class TestsController extends AppController {
             'group' => array('Question.category_id'),
             'recursive' => 0,
                 ));
-        
+
         $catQuesCount = Hash::combine($catQues, '{n}.Question.category_id', '{n}.0.QuestionCount');
 
 
@@ -83,13 +83,13 @@ class TestsController extends AppController {
                 'group' => array('Question.sub_category_id'),
                 'recursive' => 0,
                     ));
-            
+
             $catQuesCount = Hash::combine($catQues, '{n}.Question.sub_category_id', '{n}.0.QuestionCount');
         }
 
 
 
-        
+
         $this->set('catQuesCount', $catQuesCount);
 
 
@@ -412,10 +412,21 @@ class TestsController extends AppController {
             return "Invalid Question";
         }
     }
-    
-    
-     public function practice_table() {
+
+    public function practice_table() {
+        $requestData = $this->request->data;
+        //prd($requestData);
+        if(!empty($requestData['TablePracticeReset'])){
+            $this->Session->delete('Test.practice_table');
+        }
         
+        if (!empty($requestData['prepairTest'])) {
+            $_tblArr = array(
+                'number' => $requestData['prepairTest']['tblFor'],
+                'start' => '1'
+            );
+            $this->Session->write('Test.practice_table', $_tblArr);
+        }
     }
 
     /*     * ******** ADMIN SECTION  ********* */

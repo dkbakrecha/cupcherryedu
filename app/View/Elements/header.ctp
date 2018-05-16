@@ -31,7 +31,7 @@
 
                     <div class="social-icon-list">
                         <ul class="nav navbar-nav pull-right">
-                            <li><a class="glowbtn" href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>
+                            <!--<li><a class="glowbtn" href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>-->
                             <li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>
 
                             <?php

@@ -7,20 +7,20 @@
 
 <footer id="footer">
     <?php /*
-      <div class="footer-top-links">
-      <div class="container">
-      <ul class="menu" id="menu-another-menu">
-      <li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">Home</a></li>
-      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About</a></li>-->
-      <li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'test_types', 'action' => 'index')); ?>">Tests</a></li>
-      <li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'quiz', 'action' => 'leaderboard')); ?>">Leaderboard</a></li>
-      <li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Posts</a></li>
-      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contactus')); ?>">Contact</a></li>-->
-      </ul>
+    <div class="footer-top-links">
+        <div class="container">
+            EXAMS
+            <ul class="menu" id="menu-another-menu">
+                <li class="menu-item"><a href="#">LDC</a></li>
+                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About</a></li>-->
+                <li class="menu-item"><a href="#">IA</a></li>
+                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'quiz', 'action' => 'leaderboard')); ?>">Leaderboard</a></li>-->
+                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Posts</a></li>-->
+                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contactus')); ?>">Contact</a></li>-->
+            </ul>
 
-      </div>
-      </div>
-     */ ?>
+        </div>
+    </div> */ ?>
 
     <div class="footer-widgets">
         <div class="container">

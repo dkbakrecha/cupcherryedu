@@ -1,4 +1,3 @@
-<!--//app/View/Users/login.ctp-->
 <div class="box login-box">
     <h3 class="be-center">
         Log in to your account

@@ -127,7 +127,8 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         <div class="col-xs-12 col-sm-9 col-md-11">
             <div class="bedgetext">
                 Find Right Knowledge! Right Time! Right Place!
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Join Free</a>
+                <!--<a href="<?php //echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Join Free</a>-->
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Countinue</a>
             </div>
         </div>
     </div>
@@ -177,7 +178,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
     </div>
 </div>
-
+<?php /*
 <div class="footer-subscribe" >
     <div class="container">
         <div class="col-lg-2">
@@ -217,7 +218,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-
+*/ ?>
 <script>
     jQuery('.creload').on('click', function() {
         var mySrc = $(this).prev().attr('src');

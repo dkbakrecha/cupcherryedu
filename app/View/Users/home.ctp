@@ -2,7 +2,6 @@
 echo $this->Html->css('/js/owl-carousel/owl.carousel');
 echo $this->Html->script('owl-carousel/owl.carousel.min');
 ?>
-
 <style>
     .home_section
     {
@@ -127,8 +126,51 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         <div class="col-xs-12 col-sm-9 col-md-11">
             <div class="bedgetext">
                 Find Right Knowledge! Right Time! Right Place!
-                <!--<a href="<?php //echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Join Free</a>-->
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>" class="btn btn-primary">Countinue</a>
+
+                <div class="g-signin2 pull-right btn-googleHome" data-onsuccess="onSignIn" data-width="250" data-height="60" data-longtitle="true">
+                </div>
+
+                <?php //echo $this->Html->image('footersocial03.png', array('onclick' => 'click_gp();', 'class' => "pull-right btn-googleHome")); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="home-exam-list">
+    <div class="container">
+        <h2 class="sub-title be-center">UpComing Exams</h2>
+        <div class="col-xs-12 col-sm-9 col-md-8">
+            <div class="list-group">
+                <?php
+                foreach ($notificationList as $exam) {
+                    $_slug = $exam['ExamNotification']['title_slug'];
+                    ?>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>" class="list-group-item">
+                        <?php echo $exam['ExamNotification']['title']; ?> 
+                        <span class="pull-right">Last Date :
+                            <?php
+                            if ($exam['ExamNotification']['lastapply_date'] != "0000-00-00" && $exam['ExamNotification']['lastapply_date'] != "") {
+                                echo $exam['ExamNotification']['lastapply_date'];
+                            } else {
+                                echo 'Not Mation';
+                            }
+                            ?> 
+                        </span>
+                    </a>
+                <?php }
+                ?>
+
+
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-4">
+            <div class="exam-callaction backgroundSrudent">
+                <div class="layer">
+                    <h3>
+                        Subscribe to our mailing list to receive an update when new exam notification arrive!
+                    </h3>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'index')); ?>" class="btn btn-primary">Subscribe Here</a>
+                </div>
             </div>
         </div>
     </div>
@@ -178,55 +220,32 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 
     </div>
 </div>
-<?php /*
-<div class="footer-subscribe" >
-    <div class="container">
-        <div class="col-lg-2">
-             <?php echo $this->html->image('newsletter.png'); ?>
-        </div>
-        <div class="col-lg-5">
-        <h2>Newsletter Updates</h2>
-       
-        <h3>Subscribe to our mailing list to receive an update when new exam notification arrive!</h3>
-        </div>
-        <div id="home_subscribe" class="col-lg-4">
-            <form role="form" id="subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="site-from box-form">
-                <?php
-                echo $this->Form->input('name', array(
-                    'type' => 'text',
-                    'placeholder' => 'Your Name...',
-                    'label' => false,
-                    'div' => false
-                ));
 
-                echo $this->Form->input('email_address', array(
-                    'type' => 'email',
-                    'placeholder' => 'Your Email address...',
-                    'label' => false,
-                    'div' => false
-                ));
-
-                //$this->Captcha->render(array('type'=>'image'));
-                ?>
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-lg">Subscribe!</button>
+<?php
+echo $this->Form->create('social_response', array('url' => array('controller' => 'users', 'action' => 'socialResponse')));
+echo $this->Form->hidden('resData');
+echo $this->Form->hidden('resFrom');
+echo $this->Form->end();
+?>
 
 
-                <div id="responses">
-                    <div class="response" id="mce-response" style="display:none"></div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-*/ ?>
+
+
 <script>
-    jQuery('.creload').on('click', function() {
+    jQuery('.creload').on('click', function () {
         var mySrc = $(this).prev().attr('src');
         var glue = '?';
-        if(mySrc.indexOf('?')!=-1)  {
+        if (mySrc.indexOf('?') != -1) {
             glue = '&';
         }
         $(this).prev().attr('src', mySrc + glue + new Date().getTime());
         return false;
     });
+
+
+
+
+    function click_gp() {
+        $('#GoogleLogin').click();
+    }
 </script>

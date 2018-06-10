@@ -14,7 +14,8 @@ class ExamNotificationsController extends AppController {
     public function index() {
         $notificationList = $this->ExamNotification->find('all', array(
             'conditions' => array('ExamNotification.status' => 1),
-            'order' => array('id DESC')
+            'order' => array('id DESC'),
+            'limit' => 6
                 ));
         //pr($notificationList);
         $this->set('notificationList', $notificationList);

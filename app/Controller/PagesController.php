@@ -10,7 +10,7 @@ class PagesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', "aboutus", "terms", "features", "teacher", "student", 'req_complete', 'sync', 'getEvents', "privacy"
+        $this->Auth->allow('index', "captcha", "aboutus", "terms", "features", "teacher", "student", 'req_complete', 'sync', 'getEvents', "privacy"
                 , 'add_lesson_opening', 'offers', 'addr', 'search', 'getlibraries', 'getlist', 'apiindex', 'addbooking', 'contact');
 
         $this->Gcal->c_id = "406644858249-sa671ja4v9uc9td5cbclfqmcpci5sm42.apps.googleusercontent.com";
@@ -133,7 +133,7 @@ class PagesController extends AppController {
                     'Event.status' => 1,
                     'Event.gcal_id IS NULL',
                 ),
-                    ));
+            ));
 
             $calender_id = "fche971pa3ooq69o9lqoaq8e30@group.calendar.google.com"; //Test Secondary
 
@@ -163,7 +163,7 @@ class PagesController extends AppController {
                     'Event.status' => 2,
                     'Event.gstatus' => 1,
                 ),
-                    ));
+            ));
 
             if (!empty($eventTrush)) {
                 foreach ($eventTrush as $event) {
@@ -202,7 +202,7 @@ class PagesController extends AppController {
                         'Event.from_time <= ' => date('Y-m-d 23:59:59', $request->query['end']),
                     ),
                     'fields' => array('Event.*')
-                        ));
+                ));
 
                 //prd($eventList);
 
@@ -467,7 +467,7 @@ class PagesController extends AppController {
             'conditions' => array('title like' => '%' . $searchterm . '%'),
             'fields' => array('count(id) as r_count', 'lib_id'),
             'group' => array('lib_id'),
-                ));
+        ));
 
         $countArr = array();
         foreach ($resList as $res) {
@@ -595,7 +595,7 @@ class PagesController extends AppController {
         $this->loadModel('CmsPage');
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'ABOUT_US'
-                )));
+        )));
 
         $this->set('homeContent', $homeContent);
     }
@@ -606,7 +606,7 @@ class PagesController extends AppController {
         $this->loadModel('CmsPage');
         $content = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'PRIVACY'
-                )));
+        )));
 
         $this->set('content', $content);
     }
@@ -618,7 +618,7 @@ class PagesController extends AppController {
         $content = $this->CmsPage->find('all', array('conditions' => array(
                 'parent_key' => 'OFFERS',
                 'status' => 1
-                )));
+        )));
 
         $this->set('content', $content);
     }
@@ -629,7 +629,7 @@ class PagesController extends AppController {
         $this->loadModel('CmsPage');
         $content = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'TERMS'
-                )));
+        )));
 
         $this->set('content', $content);
     }
@@ -639,7 +639,7 @@ class PagesController extends AppController {
 
         $featuresContent = $this->CmsPage->find('all', array('conditions' => array(
                 'parent_key' => 'FEATURES'
-                )));
+        )));
 
         $this->set('removeBreadcrumb', 1);
         $this->set('featuresContent', $featuresContent);
@@ -650,7 +650,7 @@ class PagesController extends AppController {
 
         $content = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOWITWORKSTUDENT'
-                )));
+        )));
 
         $this->set('removeBreadcrumb', 1);
         $this->set('content', $content);
@@ -661,10 +661,33 @@ class PagesController extends AppController {
 
         $content = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOWITWORKTEACHER'
-                )));
+        )));
 
         $this->set('removeBreadcrumb', 1);
         $this->set('content', $content);
+    }
+
+    public function captcha() {
+        //$this->rander(FALSE);
+        $this->autoRender = false;
+
+        $string = substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5);
+        $this->Session->write('captcha', $string);
+        //prd($string);
+        $font = WWW_ROOT . "fonts" . DS . "LibreBaskerville-Regular.ttf";
+        $img = imagecreate(120, 30);
+
+        $white = imagecolorallocate($img, 53, 92, 125);
+        $background = imagecolorallocate($img, 250, 250, 250);
+        imagefilledrectangle($img, 0, 0, 120, 30, $background);
+        imagettftext($img, 16, 0, 10, 25, $white, $font, $string);
+
+        imageline($img, 0, 0, 30, 25, $white);
+        imageline($img, 0, 10, 90, 25, $white);
+
+        imagepng($img);
+        $this->response->type('image/png');
+        imagedestroy($img);
     }
 
 }

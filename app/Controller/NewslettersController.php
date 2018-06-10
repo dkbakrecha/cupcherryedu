@@ -8,26 +8,27 @@ class NewslettersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add');
+        $this->Auth->allow('index', 'thanks');
     }
 
-    public function add() {
+    public function index() {
+        $this->layout = "single_form";
         $request = $this->request;
         if ($request->is('post')) {
             $newsletterData = $request->data;
-            
-            $returnData = array();
-            if ($this->Newsletter->save($newsletterData)) {
-                $returnData['status'] = 1;
-                $returnData['msg'] = 'Your mail address is awaiting for your approval. It publish after review within 1 working day.';
-            } else {
-                $returnData['status'] = 0;
-                $returnData['msg'] = 'News not added! Please contact to admin or message on our facebook page.';
+            if ($res = $this->Newsletter->save($newsletterData)) {
+                //prd($res);
+                // Add newsletter notification
+                $this->addNotification("newsletter_add", 0, 0, $res['Newsletter']['id']);
+
+                $this->Session->setFlash('Please verify your mail id for complete!', 'default', array('class' => 'alert alert-success'));
+                return $this->redirect(array('action' => 'thanks'));
             }
         }
+    }
 
-        echo json_encode($returnData);
-        exit;
+    public function thanks() {
+        
     }
 
     public function view($exam_id) {
@@ -35,13 +36,13 @@ class NewslettersController extends AppController {
 
         $examInfo = $this->Exam->find('first', array(
             'conditions' => array('id' => $exam_id)
-                ));
+        ));
 
         $this->set('examInfo', $examInfo);
 
         $examposts = $this->ExamPost->find('all', array(
             'conditions' => array('exam_id' => $exam_id)
-                ));
+        ));
 
         $this->set('examposts', $examposts);
     }
@@ -82,7 +83,7 @@ class NewslettersController extends AppController {
 
         $examinfo = $this->Exam->find('first', array(
             'conditions' => array('id' => $id)
-                ));
+        ));
 
         $this->request->data = $examinfo;
     }
@@ -128,7 +129,7 @@ class NewslettersController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -141,7 +142,7 @@ class NewslettersController extends AppController {
 
                     $action = '';
                     $status = '';
-                   
+
                     if ($row['Newsletter']['status'] == 3) {
                         $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-info" onClick="changestatus(1,' . $row['Newsletter']['id'] . ')">Publish</span>';
                         $action .= '&nbsp;&nbsp;&nbsp;<span class="btn btn-sm btn-danger" onClick="changestatus(2,' . $row['Newsletter']['id'] . ')">Discard</span>';

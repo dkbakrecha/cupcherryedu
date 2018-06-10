@@ -1,12 +1,12 @@
 <a href="#0" class="cd-top">Top</a>
-<div id="new-notification-container">
+
+
+<footer id="footer">
+    <?php /*<div id="new-notification-container">
     <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
         <div id="new-notification-placeholder"><i class="glyphicon glyphicon-bell"></i></div>
     </a>
 </div>
-
-<footer id="footer">
-    <?php /*
     <div class="footer-top-links">
         <div class="container">
             EXAMS

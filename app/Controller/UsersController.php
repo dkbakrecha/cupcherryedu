@@ -8,7 +8,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'update_password', 'socialResponse', 'signup_process', 'profile');
+        $this->Auth->allow('home', 'register', 'verification', 'admin_login', 'lost_password', 'update_password', 'socialResponse', 'profile_process', 'signup_process', 'profile');
     }
 
     public function opauth_complete() {
@@ -34,30 +34,23 @@ class UsersController extends AppController {
                     $_socialInfo['social_res'] = $_data['social_response']['resData'];
                     $_socialInfo['social_from'] = $_data['social_response']['resFrom'];
                 } elseif ($_data['social_response']['resFrom'] == "GP") {
-                    $_socialInfo['id'] = $_resData->Ka;
-                    $_socialInfo['firstName'] = $_resData->Za;
-                    $_socialInfo['lastName'] = $_resData->Na;
-                    $_socialInfo['emailAddress'] = $_resData->hg;
+                    $_socialInfo['firstName'] = $_resData->ofa;
+                    $_socialInfo['lastName'] = $_resData->wea;
+                    $_socialInfo['emailAddress'] = $_resData->U3;
                     $_socialInfo['resData'] = $_resData;
+                    $_socialInfo['social_key'] = $_resData->Eea;
                     $_socialInfo['sr_from'] = $_data['social_response']['resFrom'];
                 }
-
+                // prd($_socialInfo);
                 /* Find profile in User table exist or not */
                 $this->loadModel("UserSocial");
                 $userData = $this->UserSocial->find('first', array(
                     'conditions' => array(
                         'UserSocial.social_key' => $_socialInfo['social_key']
-                        )));
+                )));
                 //prd($userData);
                 if (!empty($userData) && $userData['UserSocial']['user_id'] > 0) {
-                    /* if ($userData['User']['payment_status'] == 0) {
-                      /* When payment not done then Go To payment page * /
-                      $this->Session->setFlash('Please make payment for further process.', 'success');
-                      $this->redirect(array('controller' => 'users', 'action' => 'payment', $userData['User']['user_uniqueid']));
-                      } else { */
-                    /* Update Social Info */
-                    //pr($_socialInfo);
-                    //prd($userData);
+
                     $_tmpUser = array();
                     $_tmpUser['User']['id'] = $userData['UserSocial']['user_id'];
                     if ($_data['social_response']['resFrom'] == "IN") {
@@ -75,19 +68,18 @@ class UsersController extends AppController {
                         'conditions' => array(
                             'User.id' => $userData['User']['id']
                         )
-                            ));
+                    ));
 
                     $this->Session->write('Auth.User', $userData['User']);
                     $this->Session->setFlash('Welcome ' . $userData['User']['first_name'], 'default', array('class' => 'alert alert-success'));
                     $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-                    //}
                 } else {
                     /* Create user as a student account */
                     $this->Session->write('socialLogin_info', $_socialInfo);
                     if (empty($userData)) {
                         $this->UserSocial->save($_socialInfo);
                     }
-                    $this->redirect(array('controller' => 'users', 'action' => 'signup_process'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'profile_process'));
                 }
             }
         }
@@ -103,7 +95,7 @@ class UsersController extends AppController {
         $userData = $this->UserSocial->find('first', array(
             'conditions' => array(
                 'UserSocial.social_key' => $user_social['social_key']
-                )));
+        )));
 
         if ($request->is('post')) {
             $_data = $request->data;
@@ -112,7 +104,7 @@ class UsersController extends AppController {
                     'conditions' => array(
                         'User.email' => $_data['User']['email']
                     )
-                        ));
+                ));
 
                 if (!empty($userInfo)) {
                     /* Mail ID Already exist -- Need to confirm */
@@ -273,7 +265,7 @@ class UsersController extends AppController {
             'conditions' => array(
                 'User.verification_code' => $key
             )
-                ));
+        ));
 
         if (!empty($_site_user)) {
             if ($request->is(['post', 'put']) && !empty($request->data)) {
@@ -309,7 +301,7 @@ class UsersController extends AppController {
         $data = $this->User->find('first', array(
             'conditions' => array('User.verification_code' => $key),
             'fields' => array('id', 'email', 'status', 'verification_code')
-                ));
+        ));
         // prd($data);
         $saveData = array();
 
@@ -343,7 +335,7 @@ class UsersController extends AppController {
                 'conditions' => array(
                     'user.name' => $username
                 )
-                    ));
+            ));
 
             //pr($userData);
             $this->set('userData', $userData);
@@ -354,7 +346,7 @@ class UsersController extends AppController {
         $this->loadModel('CmsPage');
         $dashContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'WELCOMEDAASHBOARD'
-                )));
+        )));
 
         $this->set('dashContent', $dashContent);
     }
@@ -372,6 +364,7 @@ class UsersController extends AppController {
         $this->loadModel('Post');
         $this->loadModel('Exam');
         $this->loadModel('Note');
+        $this->loadModel('ExamNotification');
         //$this->loadModel('TestType');
 
         /* $testInfo = $this->TestType->find('all', array(
@@ -397,7 +390,7 @@ class UsersController extends AppController {
                 'Category.parent_id' => 0,
             ),
             'limit' => 4
-                ));
+        ));
 
         $blogList = $this->Post->find('all', array(
             'conditions' => array(
@@ -406,7 +399,7 @@ class UsersController extends AppController {
             'order' => array('Post.id DESC'),
             'limit' => 6,
             'fields' => array('*')
-                ));
+        ));
 
         $noteList = $this->Note->find('all', array(
             'conditions' => array(
@@ -415,15 +408,22 @@ class UsersController extends AppController {
             'order' => array('Note.id DESC'),
             'limit' => 10,
             'fields' => array('Note.id', 'Note.title', 'Note.created')
-                ));
+        ));
 
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOMEPAGE_LEFT'
-                )));
+        )));
 
         $this->set('homeContent', $homeContent);
 
 
+        $notificationList = $this->ExamNotification->find('all', array(
+            'conditions' => array('ExamNotification.status' => 1),
+            'order' => array('id DESC'),
+            'limit' => 5
+                ));
+        //pr($notificationList);
+        $this->set('notificationList', $notificationList);
 
         //$this->set('testInfo', $testInfo);
 
@@ -563,7 +563,7 @@ class UsersController extends AppController {
             'conditions' => array('status' => 3),
             'limit' => 5,
             'order' => array('id desc')
-                ));
+        ));
 
         $this->set('_comment_list', $_comment_list);
 
@@ -573,7 +573,7 @@ class UsersController extends AppController {
             'limit' => 5,
             'order' => array('last_login desc'),
             'fields' => array('email', 'last_login')
-                ));
+        ));
 
         $this->set('lastlogin_list', $_lastlogin_list);
 
@@ -582,7 +582,7 @@ class UsersController extends AppController {
             /* 'conditions' => array(), */
             'limit' => 5,
             'order' => array('Test.id desc'),
-                ));
+        ));
         //pr($_lastTest_list);
         $this->set('lastTest_list', $_lastTest_list);
     }
@@ -590,7 +590,7 @@ class UsersController extends AppController {
     public function admin_index() {
         
     }
-    
+
     public function admin_students() {
         
     }
@@ -632,7 +632,7 @@ class UsersController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -698,7 +698,7 @@ class UsersController extends AppController {
 
             $usermax = $this->User->find('first', array(
                 'fields' => array('MAX(User.unique_id) as userkey')
-                    ));
+            ));
 
             $parts = explode('@', $saveData['User']['email']);
             $saveData['User']['username'] = $parts[0];
@@ -769,7 +769,7 @@ class UsersController extends AppController {
             $data['User']['id'] = $this->request->data['id'];
             $userdata = $this->User->find('first', array('conditions' => array(
                     'User.id' => $data['User']['id'])
-                    ));
+            ));
 
             if ($this->request->data['status'] == 2) {
                 $this->loadModel("EmailContent");
@@ -839,7 +839,7 @@ class UsersController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -893,6 +893,54 @@ class UsersController extends AppController {
         } else {
             $this->request->data = $user_info;
         }
+    }
+
+    public function profile_process() {
+        $this->set('title_for_layout', 'Set Your Cupcherry Profile');
+        $request = $this->request;
+        /* Read Session Data */
+        $user_social = $this->Session->read('socialLogin_info');
+
+        if ($request->is(array('post', 'put')) && !empty($request->data)) {
+            $LoggedinUser = $this->Session->read('Auth.User');
+            $userData = $request->data;
+            $userData['User']['id'] = $LoggedinUser['id'];
+            $this->User->save($userData);
+            $this->Session->setFlash('Profile update successfully.', 'default', array('class' => 'alert alert-success'));
+            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+        }
+        if (!empty($user_social["emailAddress"])) {
+            /* Login user HERE */
+
+            $userData = $this->User->find('first', array(
+                'conditions' => array(
+                    'User.email' => $user_social["emailAddress"]
+                )
+            ));
+
+            if ($user_social['sr_from'] == "IN") {
+                $userData['User']['linkedin_id'] = $_socialInfo['id'];
+            } elseif ($user_social['sr_from'] == "GP") {
+                $userData['User']['gplus_id'] = $user_social['social_key'];
+            }
+            //prd($_tmpUser);
+            $userData['User']['last_login'] = date("Y-m-d H:i:s");
+            //prd($userData);
+            $this->User->save($userData);
+
+            $this->Session->write('Auth.User', $userData['User']);
+            $this->Session->setFlash('Welcome ' . $userData['User']['first_name'], 'default', array('class' => 'alert alert-success'));
+
+            if (!empty($userData['User']['qualification'])) {
+                $this->Session->delete('socialLogin_info');
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+            }else{
+                $this->redirect(array('controller' => 'users', 'action' => 'profile_process'));
+            }
+        }
+
+
+        //prd($user_social);
     }
 
 }

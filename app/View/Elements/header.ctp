@@ -13,8 +13,12 @@
         border-bottom:1px solid #eee;
     }
 </style>
+<?php
+echo $this->element('socialScripts');
 
-<nav class="navbar navbar-default menu-desktopmobile">
+
+?>
+<nav class="navbar navbar-default menu-desktopmobile navbar-fixed-top">
     <?php
     if (empty($LoggedinUser)) {
         ?>
@@ -24,15 +28,15 @@
                 <div class="row">
                     <div class="contact-info">
                         <ul class="nav navbar-nav">
-                            <li class="mobilehide" title="whatapp only" ><i class="fa fa-whatsapp"></i> +91 9461 271 720</li>
-                            <li><i class="fa fa-envelope-o"></i> hello@cupcherry.com</li>
+                            <!--<li class="mobilehide" title="whatapp only" ><i class="fa fa-whatsapp"></i> +91 9461 271 720</li>-->
+                            <li><i class="fa fa-envelope-o"></i> cupcherryeducation@gmail.com</li>
                         </ul>
                     </div>
 
                     <div class="social-icon-list">
                         <ul class="nav navbar-nav pull-right">
                             <!--<li><a class="glowbtn" href="<?php echo $this->html->url(array('controller' => 'pages', "action" => "offers")); ?>"><i class="fa fa-gift"></i>Offers</a></li>-->
-                            <li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>
+                            <!--<li><a href="#" class="ask_question"><i class="fa fa-pencil-square-o"></i>Have questions. Ask it now.</a></li>-->
 
                             <?php
                             $_url_facebook = Configure::read('Site.facebook');
@@ -195,7 +199,7 @@
                             <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'edit_profile')); ?>">Edit Profile</a></li>
                             <li><a href="#">Account Settings</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'logout')); ?>">LOGOUT</a></li>
+                            <li><a class="logoutUrl" href="#">LOGOUT</a></li>
                         </ul>
                     </li>
                     <?php

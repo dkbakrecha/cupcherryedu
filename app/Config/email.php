@@ -51,14 +51,15 @@ class EmailConfig {
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'cgtdharm@gmail.com',
-        'password' => '#Dharm123',
+        'password' => '#DharmCgt123',
         'transport' => 'Smtp'
     );
     public $default = array(
-        'transport' => 'Mail',
-        'from' => 'cgtdharm@gmail.com',
-            //'charset' => 'utf-8',
-            //'headerCharset' => 'utf-8',
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+        'username' => 'cgtdharm@gmail.com',
+        'password' => '#DharmCgt123',
+        'transport' => 'Smtp'
     );
     public $smtp = array(
         'host' => 'sg2plcpnl0173.prod.sin2.se',

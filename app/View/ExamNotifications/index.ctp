@@ -1,57 +1,93 @@
 <div class="row">
-    <?php
-        if (empty($LoggedinUser)) {
-            $_notesclass = "col-lg-8";
-        }else{
-            $_notesclass = "col-lg-12";
-        }
-    ?>
-    <div class="col-xs-12 <?php echo $_notesclass; ?> ">
+    <div class="col-xs-12 col-lg-8">
         <div class="box ">
-            <div class="box-content">
-                <h3>Exam Notification</h3> 
+            <div class="box-header dark-blue">
+                <div class="box-title">
+                    <h3>Exam Alerts</h3>
+                    <div class="toptext">
+                        Stay informed about the latest job openings in various government sectors. Get detailed information regarding important dates.                               
+                    </div>
+                    <i class="fa fa-shield pull-right cms-header-icon"></i>
+                </div>
+            </div>
+            <div class="box-content list-group">
 
                 <?php
                 foreach ($notificationList as $notifiation) {
-                    ?>
-
-
-                    <?php
                     $_slug = $notifiation['ExamNotification']['id'];
                     if (!empty($notifiation['ExamNotification']['title_slug'])) {
                         $_slug = $notifiation['ExamNotification']['title_slug'];
                     }
                     //pr($notifiation);
                     ?>
-                    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>">
-                        <div class="bs-callout bs-callout-warning" > 
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <h4 class="clr-orange"><?php echo $notifiation['ExamNotification']['title']; ?>	</h4> 
-                                </div>
-                                <div class="col-md-3 ">
-                                    <label>Last Apply Date</label>
-                                    <div class="clr-orange"><?php
-                if ($notifiation['ExamNotification']['lastapply_date'] != "0000-00-00") {
-                    echo $notifiation['ExamNotification']['lastapply_date'];
+                <div class="row bs-callout">
+                    <div class="clr-site en-post-date">
+                        <label>Post Date</label>
+                                <?php
+                        if ($notifiation['ExamNotification']['post_date'] != "0000-00-00") {
+                            ?><div class="date-day"><?php
+                            echo date("d",strtotime($notifiation['ExamNotification']['post_date']));
+                            ?></div><div class="date-month"><?php
+                            echo date("M",strtotime($notifiation['ExamNotification']['post_date']));
+                            ?></div><?php
+                        } 
+                    ?>
+
+                    </div>
+                    <div class="en-post-detail">
+                        <h4 class="clr-site">
+                            <a class="" href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>">
+<?php echo $notifiation['ExamNotification']['title']; ?>	</a></h4> 
+
+                        <div class="">
+                            
+                            <div class="clr-site"><label>Last Date</label> <?php
+                if ($notifiation['ExamNotification']['lastapply_date'] != "0000-00-00" && $notifiation['ExamNotification']['lastapply_date'] != "") {
+                    ?><?php
+                            echo date("d",strtotime($notifiation['ExamNotification']['lastapply_date']));
+                            ?><?php
+                            echo date("M",strtotime($notifiation['ExamNotification']['lastapply_date']));
+                            ?><?php
                 } else {
-                    echo "Not mation yet";
+                    echo "Not available";
                 }
                     ?></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Exam Date </label>
-                                    <div class="clr-orange"><?php
-                                    if ($notifiation['ExamNotification']['exam_date'] != "0000-00-00") {
-                                        echo $notifiation['ExamNotification']['exam_date'];
+                       
+                            
+                            <div class="clr-site"><label>Exam Date </label> <?php
+                           // pr($notifiation['ExamNotification']['exam_date']);
+                                    if ($notifiation['ExamNotification']['exam_date'] != "0000-00-00" && $notifiation['ExamNotification']['exam_date'] != "") {
+                                        ?><div class="date-day"><?php
+                            echo date("d",strtotime($notifiation['ExamNotification']['exam_date']));
+                            ?></div><div class="date-month"><?php
+                            echo date("M",strtotime($notifiation['ExamNotification']['exam_date']));
+                            ?></div><?php 
                                     } else {
-                                        echo "Not mation yet";
+                                        echo "Not available";
                                     }
                     ?></div>
-                                </div>
-                            </div>
                         </div>
-                    </a>
+                    </div>
+
+                    <div class="note-footer">
+                        <?php
+                        $SHORT_URL = $ShareProductUrl = $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug), true);
+                        $ShareImagePath = Router::url('/', true) . "img/no_user.png";
+                        //$ShareImagePath = $this->Html->image('user.png');
+                        $shareTitle = strip_tags($notifiation['ExamNotification']['title']);
+                        $shareSummary = substr(strip_tags($notifiation['ExamNotification']['notification_text']), 0, 150) . "...";
+
+                        //prd($ShareImagePath);
+                        $fbDescriptionwant = $shareSummary; //@$cmsDataProDetail[0]['Cmspage']['description'].' '.$shareSummary;
+                        $twDescriptionwant = ""; //@$cmsDataProDetail[2]['Cmspage']['description'];
+                        $pinDescriptionwant = $shareTitle; //@$cmsDataProDetail[1]['Cmspage']['description'].' '.$shareTitle;
+                        ?>
+                        <span class="pull-right btn btn-primary btn-sm"><i class="fa fa-bookmark-o"></i> Bookmark</span>
+                        <div class=""> <?php echo $this->General->fbShareButtonLink("ui_images/images/facebookcopy.jpg", $ShareProductUrl, $ShareImagePath, $shareTitle, $fbDescriptionwant); ?> </div>
+                        <div class=""> <?php echo $this->General->twitterShareButtonLink("ui_images/images/twitter-copy.jpg", $SHORT_URL, $twDescriptionwant); ?> </div>
+                        <div class=""> <?php echo $this->General->pinterestShareButtonLink("ui_images/images/pinterest-copy.jpg", $ShareProductUrl, $ShareImagePath, $pinDescriptionwant, $shareSummary); ?> </div>
+                    </div>
+                </div>
                     <?php
                 }
                 ?>
@@ -60,10 +96,11 @@
     </div>
 
     <?php
+    
     if (empty($LoggedinUser)) {
         ?>
     <div class="col-xs-12 col-sm-4">
         <?php echo $this->element('ask_question'); ?>
     </div>
-    <?php } ?>
+    <?php }  ?>
 </div>

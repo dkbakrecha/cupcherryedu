@@ -87,6 +87,9 @@ class AppController extends Controller {
         $this->loggedinUser = $LoggedinUser;
         $this->set('LoggedinUser', $LoggedinUser);
 
+        $this->user_id = $this->Session->read('Auth.User.id');
+        $this->set('user_id', $this->Session->read('Auth.User.id'));
+
         $_NotesType = array(
             '1' => 'Text',
             '2' => 'Vedio',
@@ -132,33 +135,10 @@ class AppController extends Controller {
             'conditions' => array('Exam.status' => '1'),
             'limits' => array('6'),
             'fields' => array('*')
-                ));
+        ));
 
         $this->set('examList', $examList);
     }
-
-    /*
-      public function __update_asnwer($unique_id, $question_id, $answer_status) {
-      $_quiz_data = $this->Session->read('QUIZ_GLOBLE');
-      $_testArray = json_decode($_quiz_data[$unique_id]['questions_summery']);
-
-      // Finding Next unread question
-      foreach ($_testArray as $_cateArr) {
-      if (!empty($_cateArr->cate_data)) {
-      foreach ($_cateArr->cate_data as $_quesArr) {
-      if ($_quesArr->q_id == $question_id) {
-      $_quesArr->status = $answer_status;
-
-      break;
-      }
-      }
-      }
-      }
-      $_quiz_data[$unique_id]['questions_summery'] = json_encode($_testArray);
-      $this->Session->write('QUIZ_GLOBLE', $_quiz_data);
-      }
-     * 
-     */
 
     /* Find Next Question on test */
 
@@ -195,7 +175,7 @@ class AppController extends Controller {
             if (!empty($_ques_info)) {
                 $question = $this->Question->find('first', array('conditions' => array(
                         'Question.id' => $_ques_info->q_id
-                        )));
+                )));
 
                 return $question;
             } else {
@@ -253,7 +233,7 @@ class AppController extends Controller {
 
         $latlng = '';
         foreach ($pos_array as $key => $value) {
-            $latlng .='|' . trim($value);
+            $latlng .= '|' . trim($value);
         }
 
         $latlng = urlencode($latlng);
@@ -446,6 +426,45 @@ class AppController extends Controller {
             $token .= $arr[$index];
         }
         return $token;
+    }
+
+    /**
+     * User id : 0 for Syster purpose
+     * $noti_for : 0 =  Use in admin, Other for user
+     * $detail_id : Related Row
+     * $type : Admin Graph Purpose
+     */
+    protected function addNotification($uniqueName = "", $user = 0, $noti_for = 0, $detail_id = 0, $type = 1) {
+        $this->loadModel("Notification");
+        $this->loadModel("NotificationText");
+
+        /* if (empty($sender))
+          $sender = $this->user_id;
+
+          if (empty($detail))
+          $detail = $sender;
+         */
+        //for proudct comment by user self
+        /* if ($user == $sender)
+          return true;
+         */
+        if (!empty($uniqueName)) {
+            $notDetail = $this->NotificationText->findByUniqueName($uniqueName);
+
+            //prd($notDetail);
+            if ($notDetail['NotificationText']['status'] == 1) {
+                $data = array();
+                $data['Notification']['noti_text_id'] = $notDetail['NotificationText']['id'];
+                $data['Notification']['user_id'] = $user;
+                $data['Notification']['noti_for'] = $noti_for;
+                $data['Notification']['noti_type_id'] = $type;
+                $data['Notification']['detail_id'] = $detail_id;
+                $data['Notification']['created'] = date("Y-m-d H:i:s");
+                $this->Notification->create();
+                $this->Notification->save($data);
+            }
+            return true;
+        }
     }
 
 }

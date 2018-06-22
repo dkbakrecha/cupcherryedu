@@ -4,7 +4,11 @@
 body{
     background: #f4f4f4;
     font-family: 'Roboto', 'Droid Serif', sans-serif;
-    padding-top: 110px;
+    margin-top: 105px;
+}
+
+body.admin{
+    margin-top: 0px;
 }
 
 body.teacherlogin{
@@ -1888,7 +1892,7 @@ label.error{
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
-    line-height: 40px;
+    line-height: 50px;
     text-decoration: none;
     width: 100%;
 }
@@ -2327,6 +2331,13 @@ element {
     padding: 0 5px;
 }
 
+.logo-wrapper {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+}
+
+
 @-webkit-keyframes glowing {
     0% { background-color: #337ab7; -webkit-box-shadow: 0 0 3px #337ab7; }
     50% { background-color: #a5122b; -webkit-box-shadow: 0 0 5px #a5122b; }
@@ -2458,7 +2469,7 @@ element {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
-.home-exam-list .list-group-item {
+.home-exam-list .list-group-item{
     padding: 20px;
 }
 
@@ -2501,6 +2512,104 @@ element {
     width: 80%;
     margin: 10%;
     font-size: 2em;
+}
+
+.practice-set-index .list-group{
+    margin-top: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+.practice-set-index .list-group-item{
+    padding: 20px;
+}
+
+/** ===================== Custom UI Radio ====================== **/
+/* The container */
+.practice-question .container-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.practice-question .container-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.practice-question .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.practice-question .container-radio:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.practice-question .container-radio input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.practice-question .container-radio.correct input:checked ~ .checkmark {
+    background-color: green;
+}
+
+.practice-question .container-radio.incorrect input:checked ~ .checkmark {
+    background-color: red;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.practice-question .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.practice-question .container-radio input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.practice-question .container-radio .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+/** ===================== Custom UI Radio ====================== **/
+
+
+.practice-set-view h1 {
+
+    font-size: 16px;
+    color: #888;
+
+}
+
+.practice-set-view h2 {
+
+    font-size: 20px;
+    font-family: unset;
+
 }
 @media (min-width : 1024px) and (max-width : 1199px) {
 
@@ -2657,6 +2766,10 @@ element {
 
 
 @media only screen and (max-width: 768px) {
+    body{
+        margin-top: 0;
+    }
+    
     .cd-top {
         right: 20px;
         bottom: 40px;
@@ -2689,6 +2802,19 @@ element {
     .container, .row {
         padding: 0px;
         margin: 0;
+    }
+    
+    .mobNoMargin{
+        padding: 0px;
+        margin: 0;
+    }
+    
+    .box-content{
+        padding: 10px;
+    }
+    
+    .practice-set-view h2{
+        font-size: 16px;
     }
 
     .row.cardbox > div {

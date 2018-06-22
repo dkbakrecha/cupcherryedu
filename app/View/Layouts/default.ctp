@@ -8,6 +8,7 @@
         echo $this->element('seo_title');
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#337ab7">
         <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet"> 
 
@@ -20,7 +21,7 @@
             'fullcalendar.print',
             '/js/iCheck/all',
             'fontawesome/font-awesome.min',
-            'site_ui',
+            'site_ui.css?var=20180623',
             '/js/share/css/jquery.sharepage',
             'dataTable_custom',
             'some_admin',

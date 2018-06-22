@@ -56,7 +56,7 @@ class AppController extends Controller {
         $this->Auth->logoutRedirect = array('admin' => false, 'controller' => 'users', 'action' => 'login');
 
         if (isset($this->request->params['admin'])) {
-            //$this->layout = 'admin';
+            $this->layout = 'admin_new';
             // to check session key if we not define this here then is will check with 'Auth.User' so dont remove it
             AuthComponent::$sessionKey = 'Auth.Admin';
 

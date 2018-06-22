@@ -24,8 +24,8 @@ $sessionUser = $this->Session->read('Auth.User');
                 <?php
                 if (isset($this->request->params['admin'])) {
                     ?>
-                    <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'questions', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Questions</a></li>
-                    <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'tests', 'action' => 'index')); ?>"><i class="fa fa-graduation-cap"></i> Tests</a></li>
+                    <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'questions', 'action' => 'index')); ?>"><i class="glyphicon glyphicon-list"></i> Questions</a></li>
+                    <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'tests', 'action' => 'index')); ?>"><i class="glyphicon glyphicon-list-alt"></i> Tests</a></li>
                     <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
                     <li ><a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'users', 'action' => 'index')); ?>"><i class="fa fa-user"></i> Users</a></li>
                     <li class="dropdown">

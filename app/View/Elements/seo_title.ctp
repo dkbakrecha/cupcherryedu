@@ -50,7 +50,7 @@ if (!empty($notification)) {
     <meta name="language" content="English, Hindi">
 
     <!--<meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />-->
-    <meta property="og:title" content="CUPCHERRY : <?php echo $noteData['Note']['title']; ?>" />
+    <meta property="og:title" content="<?php echo $noteData['Note']['title']; ?>" />
     <meta property="og:description" content="<?php echo strip_tags($noteData['Note']['description']); ?>" />
     <!--<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />-->
     <?php

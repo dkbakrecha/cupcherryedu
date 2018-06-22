@@ -35,9 +35,11 @@
     </head>
 
     <body class="site_single_form">
-        <?php
-        echo $this->element('header');
-        ?>
+        <div class="logo-wrapper">
+            <a class="logo-top" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'home')); ?>">
+                <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
+            </a>
+        </div>
         <div class="site-content <?php echo (!empty($content_class)) ? $content_class : ""; ?>" id="content">
             <div class="container">
                 <?php
@@ -45,11 +47,6 @@
                 echo $this->fetch('content');
                 ?>
             </div>
-        </div>
-        <?php
-        if (!isset($this->request->params['admin'])) {
-            //echo $this->element('_site_js');
-        }
-        ?>
+        </div>   
     </body>
 </html>

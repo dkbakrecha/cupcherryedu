@@ -40,7 +40,7 @@
         echo $this->fetch('script');
         ?>
     </head>
-    <body>
+    <body class="site-home-page">
 
         <?php
         echo $this->element('header');

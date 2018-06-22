@@ -13,53 +13,59 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
+    <head>
+        <?php echo $this->Html->charset(); ?>
+        <title>
+            <?php echo $cakeDescription ?>:
+            <?php echo $this->fetch('title'); ?>
+        </title>
+        <?php
+        echo $this->Html->meta('icon');
 
-		echo $this->Html->css(array(
+        echo $this->Html->css(array(
             'bootstrap/bootstrap',
             'admin/css',
             'admin/app'
-            ));
-        
+        ));
+
         echo $this->Html->script(array(
             'admin/jquery-1',
             'admin/bootstrap',
             'admin/jquery',
             'admin/wysihtml5-0',
             'admin/bootstrap3-wysihtml5',
-			'admin/jquery.dataTables.min',
-			'admin/dataTables.bootstrap.min',
+            'admin/jquery.dataTables.min',
+            'admin/dataTables.bootstrap.min',
+            //'ckeditor/ckeditor',
+            //'ckeditor/adapters/jquery',
+            'ckeditor5/ckeditor',
+            'ckeditor5/ckeditor.js.map',
             'admin/custom',
             'admin/table',
-            ));
+        ));
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-        <?php echo $this->element('admin/header'); ?>
-	    <section class="content">
+        echo $this->Html->script(array(
+        ));
+        echo $this->fetch('meta');
+        echo $this->fetch('css');
+        echo $this->fetch('script');
+        ?>
+    </head>
+    <body>
+        <?php echo $this->element('admin/header'); 
+        prd("ASd");?>
+        <section class="content">
             <?php echo $this->element('admin/topNav'); ?>
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->fetch('content'); ?>
+            <?php echo $this->Session->flash(); ?>
+            <?php echo $this->fetch('content'); ?>
             <?php echo $this->element('admin/footer'); ?>
-            
-		</section>
+
+        </section>
         <!-- Content Block Ends Here (right box)-->	
-</body>
+    </body>
 </html>

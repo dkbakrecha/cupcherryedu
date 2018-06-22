@@ -375,6 +375,8 @@ class QuestionsController extends AppController {
                      */
                     //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
+                    
+                    $action .= '&nbsp;&nbsp;&nbsp;<span data-question="' . $row['Question']['id'] . '" title="Add To Practice" class="btn btn-primary btn-sm addtopractice"><i class="glyphicon glyphicon-plus-sign"></i> Practice</sapn> ';
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/questions/edit/' . $row['Question']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
                     $action .= '&nbsp;&nbsp;&nbsp; <a onclick="delete_question(' . $row['Question']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';

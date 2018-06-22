@@ -2,26 +2,29 @@
 
 
 <footer id="footer">
-    <?php /*<div id="new-notification-container">
-    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
-        <div id="new-notification-placeholder"><i class="glyphicon glyphicon-bell"></i></div>
-    </a>
-</div>
-    <div class="footer-top-links">
-        <div class="container">
-            EXAMS
-            <ul class="menu" id="menu-another-menu">
-                <li class="menu-item"><a href="#">LDC</a></li>
-                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About</a></li>-->
-                <li class="menu-item"><a href="#">IA</a></li>
-                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'quiz', 'action' => 'leaderboard')); ?>">Leaderboard</a></li>-->
-                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Posts</a></li>-->
-                <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contactus')); ?>">Contact</a></li>-->
-            </ul>
+    <?php /* <div id="new-notification-container">
+      <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
+      <div id="new-notification-placeholder"><i class="glyphicon glyphicon-bell"></i></div>
+      </a>
+      </div>
+      <div class="footer-top-links">
+      <div class="container">
+      EXAMS
+      <ul class="menu" id="menu-another-menu">
+      <li class="menu-item"><a href="#">LDC</a></li>
+      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About</a></li>-->
+      <li class="menu-item"><a href="#">IA</a></li>
+      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'quiz', 'action' => 'leaderboard')); ?>">Leaderboard</a></li>-->
+      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Posts</a></li>-->
+      <!--<li class="menu-item"><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contactus')); ?>">Contact</a></li>-->
+      </ul>
 
-        </div>
-    </div> */ ?>
+      </div>
+      </div> */ ?>
 
+    <?php
+    // if ($_sysInfo['device'] != 'MOBILE' || $_body_class == "site-home-page") {
+    ?>
     <div class="footer-widgets">
         <div class="container">
             <div class="row">
@@ -97,22 +100,22 @@
 
                                 if (!empty($_url_facebook)) {
                                     ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
-                            }
-                            if (!empty($_url_google_plus)) {
+                                }
+                                if (!empty($_url_google_plus)) {
                                     ?> <li><a href="<?php echo $_url_google_plus; ?>" target="_BLANK" class="fa fa-google-plus"></a></li> <?php
-                            }
-                            if (!empty($_url_twitter)) {
-                                    ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
-                            }
+                                    }
+                                    if (!empty($_url_twitter)) {
+                                        ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
+                                    }
 
-                            if (!empty($_url_youtube)) {
-                                    ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
-                            }
-                            
-                            if (!empty($_url_instagram)) {
-                                    ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
-                            }
-                                ?>
+                                    if (!empty($_url_youtube)) {
+                                        ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                                    }
+
+                                    if (!empty($_url_instagram)) {
+                                        ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
+                                    }
+                                    ?>
                             </ul>
 
                             <p class="social-media-text" >We can be supported here!</p>
@@ -122,6 +125,10 @@
             </div>
         </div>
     </div>
+    <?php
+    // }
+    ?>
+
 
     <div class="footer-info nomobile">
         <div class="container"> 

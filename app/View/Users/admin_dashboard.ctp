@@ -17,6 +17,8 @@
                     <span class="badge"><?php echo $user_statics['newsletter_all']; ?></span> 
                     <a href="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'index')) ?>">NewsLetters</a>
                 </li> 
+
+                <li class="list-group-item"> <span class="badge">-</span> <a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')) ?>">Practice Sets</a> </li> 
             </ul>
         </div>
 
@@ -91,8 +93,8 @@
                                             <td><?php echo $comment['Comment']['email']; ?></td>
                                             <td><?php echo $comment['Comment']['created']; ?></td>
                                             <td>
-                                                <a href="#" class="btn btn-default" title="Delete Comment" onclick="updateComment(<?php echo $comment['Comment']['id']; ?>,2)"><i class="fa fa-trash-o"></i></a>
-                                                <a href="#" class="btn btn-default" title="Approve Comment" onclick="updateComment(<?php echo $comment['Comment']['id']; ?>,1)"><i class="fa fa-check"></i></a>
+                                                <a href="#" class="btn btn-default" title="Delete Comment" onclick="updateComment(<?php echo $comment['Comment']['id']; ?>, 2)"><i class="fa fa-trash-o"></i></a>
+                                                <a href="#" class="btn btn-default" title="Approve Comment" onclick="updateComment(<?php echo $comment['Comment']['id']; ?>, 1)"><i class="fa fa-check"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -129,7 +131,7 @@
                 type: 'POST',
                 data: ({
                     id: id,
-                    status : status
+                    status: status
                 }),
                 success: function (data) {
                     if (data == 1) {

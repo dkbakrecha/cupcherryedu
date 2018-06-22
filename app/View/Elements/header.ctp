@@ -15,8 +15,6 @@
 </style>
 <?php
 echo $this->element('socialScripts');
-
-
 ?>
 <nav class="navbar navbar-default menu-desktopmobile navbar-fixed-top">
     <?php
@@ -49,22 +47,22 @@ echo $this->element('socialScripts');
 
                             if (!empty($_url_facebook)) {
                                 ?> <li><a href="<?php echo $_url_facebook; ?>" target="_BLANK" class="fa fa-facebook"></a></li> <?php
-                    }
-                    if (!empty($_url_google_plus)) {
+                            }
+                            if (!empty($_url_google_plus)) {
                                 ?> <li><a href="<?php echo $_url_google_plus; ?>" target="_BLANK" class="fa fa-google-plus"></a></li> <?php
-                    }
-                    if (!empty($_url_twitter)) {
-                                ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
-                    }
+                                }
+                                if (!empty($_url_twitter)) {
+                                    ?> <li><a href="<?php echo $_url_twitter; ?>" target="_BLANK" class="fa fa-twitter"></a></li> <?php
+                                }
 
-                    if (!empty($_url_youtube)) {
-                                ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
-                    }
+                                if (!empty($_url_youtube)) {
+                                    ?> <li><a href="<?php echo $_url_youtube; ?>" target="_BLANK" class="fa fa-youtube"></a></li> <?php
+                                }
 
-                    if (!empty($_url_instagram)) {
-                                ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
-                    }
-                            ?>
+                                if (!empty($_url_instagram)) {
+                                    ?> <li><a href="<?php echo $_url_instagram; ?>" target="_BLANK" class="fa fa-instagram"></a></li> <?php
+                                }
+                                ?>
 
                         </ul>
                     </div>
@@ -152,7 +150,7 @@ echo $this->element('socialScripts');
                     <?php
                     foreach ($examList as $exam) {
                         ?>
-                                                                                            <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                                                                                                                        <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
                         <?php
                     }
                     ?>
@@ -168,12 +166,14 @@ echo $this->element('socialScripts');
                 <?php
                 if (empty($LoggedinUser)) {
                     ?>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
-
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><i class="fa fa-bell-o"></i> Exam Alert</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Articles</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">Exam Alert</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>">Practice Sets</a></li>
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Notes</a></li>
 
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'aboutus')); ?>">About Us</a></li>
+
+
+
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Us</a></li>
 
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Login</a></li>
@@ -242,12 +242,12 @@ echo $this->element('socialScripts');
 
                         <?php } ?>
 
-                                                    <!--<li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'features')); ?>"><i class="fa fa-desktop"></i> Features</a></li>-->
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
-                        <!--<li><a href="<?php //echo $this->Html->url(array('controller' => 'faqs', 'action' => 'index'));                                                 ?>"><i class="fa fa-list"></i> FAQ'S</a></li>-->
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Articles</a></li>
-                        <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'gkbytes')); ?>"><i class="fa fa-files-o"></i> GK Bytes</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Practice Sets</a></li>
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Exams Alerts</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Study Blog</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('controller' => 'testimonials', 'action' => 'index')); ?>"><i class="fa fa-comments-o"></i> Testimonials</a></li>
+
 
                     </ul>
                 </div>
@@ -265,8 +265,8 @@ echo $this->element('socialScripts');
 </div>
 
 <script>
-    $(document).ready(function(){
-        $(".navbar-toggle").click(function(){
+    $(document).ready(function () {
+        $(".navbar-toggle").click(function () {
             $(".ipad-responsive-menu").toggleClass("ipad-responsive-menu-show");
             $("body").toggleClass("no-scroll");
         });

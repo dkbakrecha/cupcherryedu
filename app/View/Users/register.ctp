@@ -1,6 +1,6 @@
 <div class="box login-box">
     <div class="col-lg-5 col-lg-offset-1">
-        <ul class="nav nav-tabs register">
+        <ul class="nav nav-tabs register" style="display: none;">
             <?php
             $_sel_teacher = $_sel_student = "";
             if ($role == 3) {

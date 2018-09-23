@@ -15,6 +15,13 @@
 </style>
 <?php
 echo $this->element('socialScripts');
+
+
+$mnuNotes = "";
+
+if ($this->request->params['controller'] == "notes") {
+    $mnuNotes = "active";
+}
 ?>
 <nav class="navbar navbar-default menu-desktopmobile navbar-fixed-top">
     <?php
@@ -169,7 +176,7 @@ echo $this->element('socialScripts');
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Articles</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">Exam Alert</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>">Practice Sets</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Notes</a></li>
+                    <li class="<?php echo $mnuNotes; ?>"><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Notes</a></li>
 
 
 

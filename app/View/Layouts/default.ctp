@@ -148,7 +148,10 @@
             //if (empty($LoggedinUser) && $_act != "login") {
             //    echo $this->element("_calltologin");
             // }
-            //echo $this->element('social');
+            if($this->webroot == "/"){
+                echo $this->element('social');
+            }
+            
 
             if (!empty($LoggedinUser)) {
                 

@@ -524,7 +524,6 @@ class UsersController extends AppController {
 
     public function admin_dashboard() {
         $this->loadModel('Test');
-        $this->loadModel('Note');
         $this->loadModel('Newsletter');
         $this->loadModel('Comment');
         $this->loadModel('Question');
@@ -541,10 +540,6 @@ class UsersController extends AppController {
 
         $_user_statics['newsletter_all'] = $this->Newsletter->find('count', array('conditions' => array(
                 'status' => 3)));
-
-        /* Notes and Questions */
-        $_user_statics['notes_pending'] = $this->Note->find('count', array('conditions' => array(
-                'Note.status' => 3)));
 
         $_user_statics['question_pending'] = $this->Question->find('count', array('conditions' => array(
                 'Question.status' => 3)));

@@ -10,7 +10,7 @@
                 <li class="list-group-item"> <span class="badge"><?php echo $user_statics['inactive']; ?></span> Inactive Users </li> 
 
                 <li class="list-group-item active"> Quick View</li> 
-                <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')) ?>"><li class="list-group-item"> <span class="badge"><?php echo $user_statics['notes_pending']; ?></span> Pending Notes </li></a> 
+                <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')) ?>"><li class="list-group-item"> Pending Notes </li></a> 
                 <li class="list-group-item"> <span class="badge"><?php echo $user_statics['question_pending']; ?></span> Pending Questions </li> 
 
                 <li class="list-group-item"> 

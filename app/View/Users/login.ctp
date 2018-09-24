@@ -1,6 +1,6 @@
-<div class="box login-box">
+<div class="">
     <h3 class="be-center">
-        Log in to your account
+        Login to your account
     </h3> 
     <div class="center-heading">
         <div class="col-lg-4 col-lg-offset-4">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="users box-form">
-        <div class="col-lg-3 col-lg-offset-3">
+        <div class="col-lg-4 col-lg-offset-4">
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User', array('class' => 'site-from')); ?>
             <?php
@@ -18,36 +18,19 @@
             ?>
 
             <div class="row">
-                <div class="col-lg-5">
-                    <?php echo $this->Form->submit(__('Login')); ?>
-                </div>
-                <div class="col-lg-7" style="display: none;">
-                    <div class="btn btn-default fb_login"><i class="fa fa-facebook"></i>Sign in with Facebook</div>
+                <div class="col-lg-12">
+                    <?php echo $this->Form->submit(__('Login'),array('class' => 'btn-block btn-info')); ?>
                 </div>
             </div>
             <?php echo $this->Form->end(); ?>
 
         </div>
 
-        <div class="col-lg-3 ">
-            <div class="loginSupportContainer">
-                <h4>Need a Cupcherry Account?</h4>
-                <ul class="benefitsList">
-                    <li><span class="fa fa-check"></span> Filter Exam Notifications with Personal Calender</li>
-                    <li><span class="fa fa-check"></span> Access notes and share with friend</li>
-                    <li><span class="fa fa-check"></span> Exam related Mock Tests share leaderboard among friends</li>
-                </ul>
-                
-
-
-
-            </div>
-        </div>
-        <div class="col-lg-6 col-lg-offset-3">
+       
+        <div class="col-lg-4 col-lg-offset-4">
             <div class="box-form-action ">
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Register</a> | 
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">Create a free account</a> | 
                 <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'lost_password')); ?>">Lost Password</a>
-                <!--<a href="<?php echo $this->Html->url(array("controller" => "users", "action" => "register")); ?>" class="btn btn-primary pull-right">Create Account</a>-->
             </div>
         </div>
     </div>

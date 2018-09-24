@@ -20,8 +20,8 @@
             'fullcalendar.min',
             'fullcalendar.print',
             '/js/iCheck/all',
-            'fontawesome/font-awesome.min',
-            'site_ui.css?var=20180623',
+            'font-awesome/css/font-awesome.min',
+            'site_ui.css?var=20180724',
             '/js/share/css/jquery.sharepage',
             'dataTable_custom',
             'some_admin',
@@ -78,7 +78,7 @@
             }
         }
 //pr($_body_class);
-        if ($_body_class == 'notes-index' AND empty($LoggedinUser)) {
+        if ($_body_class == 'posts-index' AND empty($LoggedinUser)) {
             echo $this->element('search-notes');
         }
         if ($_body_class == "users-profile") {

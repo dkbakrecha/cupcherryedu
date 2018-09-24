@@ -19,11 +19,22 @@ class PostsController extends AppController {
     }
 
     public function index() {
-        $this->paginate['conditions'] = array(
-            'Post.status' => '1'
+        $paginateCond = array();
+
+        if (!empty($this->request->query['q'])) {
+            $search_term = $this->request->query['q'];
+            $paginateCond['or'][] = array('Post.title LIKE' => "%$search_term%");
+        }
+
+        $paginateCond['Post.status'] = 1;
+
+        $this->Paginator->settings = array(
+            'conditions' => array($paginateCond),
+            'paramType' => 'querystring',
+            'limit' => 10,
+            'order' => array('id' => 'desc')
         );
 
-        $this->Paginator->settings = $this->paginate;
         $all_posts = $this->Paginator->paginate('Post');
         $this->set('all_posts', $all_posts);
     }
@@ -36,7 +47,7 @@ class PostsController extends AppController {
                 'conditions' => array(
                     'title_slug' => $titleslug
                 )
-                    ));
+            ));
         }
         $this->set('postDetail', $_postDetail);
 
@@ -98,11 +109,11 @@ class PostsController extends AppController {
 
         $userList = $this->User->find('list', array(
             'conditions' => array('User.status' => '1'),
-                ));
-        
+        ));
+
         $examList = $this->Exam->find('list', array(
             'conditions' => array('Exam.status' => '1'),
-                ));
+        ));
 
         $this->set('examList', $examList);
         $this->set('userList', $userList);
@@ -152,7 +163,7 @@ class PostsController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -234,7 +245,7 @@ class PostsController extends AppController {
 
                     $dataView = $this->BlogHit->find("first", array(
                         "conditions" => $condition,
-                            ));
+                    ));
 
                     if (empty($dataView)) {
                         $saveData = array();

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="col-lg-6 col-lg-offset-3">
                 <?php
-                echo $this->Form->create('SearchForm', array('type' => 'get'));
+                echo $this->Form->create('SearchForm', array('url' => array('controller' => 'posts', 'action' => 'index'),'type' => 'get'));
                 ?>
                 <div class = "input-group input-group-lg">
                     <?php

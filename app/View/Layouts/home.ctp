@@ -18,7 +18,7 @@
             'fullcalendar.min',
             'fullcalendar.print',
             '/js/iCheck/all',
-            'fontawesome/font-awesome.min',
+            'font-awesome/css/font-awesome.min',
             'site_ui',
             'some_admin',
         ));

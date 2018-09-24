@@ -11,6 +11,8 @@ defined('PATH_CMS_IMAGES') || define('PATH_CMS_IMAGES', WWW_ROOT . 'img' . DS . 
 
 defined('PATH_UPLOAD_BUGS_FILES') || define('PATH_UPLOAD_BUGS_FILES', WWW_ROOT . 'files' . DS . 'bugs' . DS);
 
+defined('PATH_JS') || define('PATH_JS', WWW_ROOT . 'JS');
+
 function dt($format = 'Y-m-d H:i:s') {
 	return date($format); 
 }

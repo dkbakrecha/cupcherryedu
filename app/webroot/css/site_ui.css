@@ -4,7 +4,6 @@
 body{
     background: #f4f4f4;
     font-family: 'Roboto', 'Droid Serif', sans-serif;
-    margin-top: 105px;
 }
 
 body.admin{
@@ -80,12 +79,26 @@ h3 {
     color: #337ab7;
 }
 
-.navbar-default .navbar-nav > li > a:hover{
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li.active > a{
     color: #707070;
     border-bottom: 3px solid #707070;
     background: #eff0f1;
     text-decoration: none;
     outline: none;
+}
+
+.notes-view .site-share-btn {
+    color: #333;
+    background: #FFF;
+    border: 1px solid #DDD;
+    font-size: 18px;
+    padding: 5px;
+    width: auto;
+    height: auto;
+    margin: 0px 5px 10px;
+    float: left;
+    min-width: 40px;
 }
 
 
@@ -218,16 +231,14 @@ textarea, select{
 
 .site-from input[type="submit"], 
 .site-from input[type="button"] {
-    background: #355c7d;
     color: #fff;
     border: medium none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     margin: 10px 0 0;
     padding: 11px 20px;
-    text-transform: uppercase;
-    border-radius: 4px;
+    border-radius: 2px;
     min-width: 130px;
 }
 
@@ -1189,7 +1200,7 @@ input[type="submit"].box-submitbtn{
 
 .box-form .box-form-action{
     margin:15px 0px;
-    padding:20px 25px;
+    padding:20px 8px;
     background:#f7f7f7;
     font-size:16px;
     line-height:1.7;
@@ -2043,7 +2054,7 @@ a.nodecor{
     font-weight: 600;
 }
 
-form#SearchFormIndexForm {
+form#SearchFormIndexForm, form#SearchFormHomeForm{
     padding: 60px 0;
 }
 
@@ -2611,6 +2622,67 @@ element {
     font-family: unset;
 
 }
+
+
+.site-content table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.site-content table td, .site-content table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.site-content table tr:nth-child(even){background-color: #f2f2f2;}
+
+.site-content table tr:hover {background-color: #ddd;}
+
+.site-content table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+.notes-view .box-header {
+    padding: 0;
+}
+
+.notes-view .box-header .title {
+    font-size: 26px;
+    text-align: left;
+    width: 100%;
+    margin: 35px 0px 20px;
+    padding: 0 50px;
+    line-height: 30px;
+    color: #666666;
+}
+
+.notes-view .meta-info {
+    font-size: 16px;
+    padding: 5px 50px;
+    border-top: 1px solid #EFEFEF;
+    float: left;
+    width: 100%;
+    color: #888888;
+}
+
+.notes-view a {
+    color: #565656;
+}
+
+.notes-view a:hover {
+    color: #337ab7;
+    font-weight: 600;
+}
+
+.notes-view .box-content {
+    padding: 30px 50px;
+}
+
 @media (min-width : 1024px) and (max-width : 1199px) {
 
 

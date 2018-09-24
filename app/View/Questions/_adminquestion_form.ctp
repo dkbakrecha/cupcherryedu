@@ -211,3 +211,54 @@ $this->Form->button(__('Save'), array(
         ?>
     </div>
 </div>
+
+
+<script>
+    /* $(document).ready(function () {
+     $('textarea#QuestionQuestion').ckeditor();
+     $('textarea#QuestionDescription').ckeditor();
+     });
+     ClassicEditor
+     .create(document.querySelector('#QuestionQuestion'))
+     .then(editor => {
+     console.log(editor);
+     })
+     .catch(error => {
+     console.error(error);
+     });
+     **/
+
+    $(document).ready(function () {
+        $('#QuestionQuestion').summernote();
+        $('#QuestionDescription').summernote();
+    });
+
+  
+
+    $('#QuestionCategoryId').change(function () {
+        if ($(this).val() == '') {
+            $('#QuestionSubCategoryId').html('<option value="">' + "<?php echo __('Select Sub Category'); ?>" + '</option>');
+        } else {
+            changeTopic($(this).val());
+        }
+    });
+
+    function changeTopic(topic) {
+        // Fire the ajax
+        $.ajax({
+            url: "<?php echo $this->Html->url(array('controller' => 'categories', 'action' => 'findSubCategory')); ?>",
+            type: "POST",
+            data: {category_id: topic},
+            success: function (retData, response) {
+                if (retData != '0') {
+                    $('#QuestionSubCategoryId').html(retData);
+                    //$('.selectpicker').selectpicker('refresh');
+                }
+            },
+            error: function (xhr) {
+                alert("<?php echo __('No Subtopic found for this Topic.'); ?>");
+            }
+        });
+    }
+
+</script>

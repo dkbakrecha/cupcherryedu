@@ -6,38 +6,33 @@
 
 <div class="row">
     <?php
-        if (empty($LoggedinUser)) {
-            $_notesclass = "col-lg-8";
-        }else{
-            $_notesclass = "col-lg-12";
-        }
+    if (empty($LoggedinUser)) {
+        $_notesclass = "col-lg-8";
+    } else {
+        $_notesclass = "col-lg-12";
+    }
     ?>
     <div class="<?php echo $_notesclass; ?>">
         <?php
         if (!empty($postDetail)) {
             $_linkUrl = $this->Html->url(array('controller' => 'posts', 'action' => 'view', $postDetail['Post']['title_slug']), TRUE);
             ?>
-            <div class="post-detail"> 
-                <div class='post-header'>
-                    <h1 class=""><?php echo $postDetail['Post']['title']; ?></h1>
-                    <div class="cover-image">
-                        <?php if (!empty($postDetail['Post']['cover_image'])) {
-                            ?>
-                            <?php echo $this->Html->image('/files/images/' . $postDetail['Post']['cover_image'], array('class' => 'img-responsive')); ?>
-                        <?php } else {
-                            ?>
-                            <?php echo $this->Html->image('/files/images/post_default.png', array('class' => 'img-responsive')); ?>
-                            <?php
-                        }
+            <div class="box notes-view"> 
+                <div class='box-header'>
+                    <h1 class="title"><?php echo $postDetail['Post']['title']; ?></h1>
+
+                    <?php if (!empty($postDetail['Post']['cover_image'])) {
                         ?>
+                        <div class="cover-image">
+                            <?php echo $this->Html->image('/files/images/' . $postDetail['Post']['cover_image'], array('class' => 'img-responsive')); ?>
+                        </div>                    
+                    <?php } ?>
+                    <div class="meta-info">
+                        <a href="#">By <?php echo $postDetail['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postDetail['Post']['created'])) ?> | 
+                        <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['sub_category_id']); ?></a>
                     </div>
                 </div>
 
-                <div class="post-info">
-                    <i class="fa fa-user"></i> <a href="#">By <?php echo $postDetail['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postDetail['Post']['created'])) ?> 
-                    <!--<span class="pull-right"><i class="fa fa-comments"></i> <a href="#">2456</a> &nbsp;/&nbsp; <a href="#">Business</a> - <a href="#">UX</a> - <a href="#">Web Design</a> - <a href="#">UI</a> - <a href="#">Social Media</a></span>--> 
-                </div>
-                <div class="share-article"></div>
                 <div class="post-content">
                     <?php
                     echo $postDetail['Post']['content'];
@@ -70,11 +65,11 @@
     <?php
     if (empty($LoggedinUser)) {
         ?>
-    <div class="col-lg-4">
-        <?php echo $this->element('sidebar/topposts'); ?>
-        <?php echo $this->element('sidebar/newnotes'); ?>
-    </div>
-    <?php
+        <div class="col-lg-4">
+            <?php echo $this->element('sidebar/topposts'); ?>
+            <?php //echo $this->element('sidebar/newnotes'); ?>
+        </div>
+        <?php
     }
     ?>
 
@@ -85,8 +80,8 @@
         var blog_id = '<?php echo $postDetail['Post']['id']; ?>';
         makeCount(blog_id);
     });
-    
-    $(document).ready(function(){
+
+    $(document).ready(function () {
         $(".share-article").sharepage({
             networks: ["facebook", "twitter", "googleplus", "linkedin"],
             url: "<?php echo $_linkUrl; ?>",

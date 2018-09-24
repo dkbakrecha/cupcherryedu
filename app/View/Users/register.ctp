@@ -1,30 +1,18 @@
-<div class="box login-box">
-    <div class="col-lg-5 col-lg-offset-1">
-        <ul class="nav nav-tabs register" style="display: none;">
-            <?php
-            $_sel_teacher = $_sel_student = "";
-            if ($role == 3) {
-                $_sel_teacher = "active";
-            } else {
-                $_sel_student = "active";
-            }
-            ?>
-            <li class="<?php echo $_sel_student; ?>">
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register')); ?>">
-                    <?php echo $this->Html->image('feature-icons/students_header.png', array('class' => 'img-responsive')) ?>
-                    <div>Join as Student</div>
-                </a>
-            </li>
-            <li class="<?php echo $_sel_teacher; ?>">
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'register', 'teacher')); ?>">
-                    <?php echo $this->Html->image('feature-icons/teacher_head_round.png', array('class' => 'img-responsive')) ?>
-                    <div>Join as Teacher</div>
-                </a>
-            </li>
-        </ul>
+<div class="">
+    <h3 class="be-center">
+        Create your account
+    </h3> 
+    <div class="center-heading">
+        <div class="col-lg-4 col-lg-offset-4">
+            <span class="site-hr-top"> <i class="fa fa-child" aria-hidden="true"></i> </span>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-lg-offset-4">
+
 
         <div class="users box-form">
-            <?php echo $this->Form->create('User'); ?>
+            <?php echo $this->Form->create('User', array('class' => 'site-from')); ?>
             <fieldset>
                 <?php
                 echo $this->Form->input('first_name', array('label' => false, 'placeholder' => 'First Name'));
@@ -34,12 +22,11 @@
                 ?>
             </fieldset>
             <?php
-            echo $this->Form->submit(__('Join Now'), array("class" => "btn btn-primary btn-lg"));
+            echo $this->Form->submit(__('Create my free account'), array("class" => "btn-block btn-info"));
             echo $this->Form->end();
             ?>
             <div class="box-form-action">
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Login</a> | 
-                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'lost_password')); ?>">Lost Password</a>
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Do you already have an account?</a>
             </div>
         </div>
     </div>

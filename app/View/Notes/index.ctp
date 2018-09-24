@@ -10,7 +10,6 @@
             ?>
             <div class="<?php echo $_notesclass; ?>">
                 <div class="list-box ">
-
                     <div class="note-short">
                         <div class="notes-category"><a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($note['Note']['sub_category_id']); ?></a></div>
                         <h2 class="notes-title">

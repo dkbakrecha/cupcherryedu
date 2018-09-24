@@ -8,9 +8,9 @@ class ClassyHelper extends AppHelper {
     function short_description($string, $linkurl) {
         $string = strip_tags($string);
 
-        if (strlen($string) > 250) {
+        if (strlen($string) > 160) {
             // truncate string
-            $stringCut = substr($string, 0, 250);
+            $stringCut = substr($string, 0, 160);
             // make sure it ends in a word so assassinate doesn't become ass...
             $string = substr($stringCut, 0, strrpos($stringCut, ' ')) . '... <a href="' . $linkurl . '">Read More</a>';
         }

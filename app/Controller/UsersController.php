@@ -188,8 +188,7 @@ class UsersController extends AppController {
 
     public function register() {
         $this->loadModel('EmailContent');
-        $this->set('removeBreadcrumb', 1);
-
+        $this->layout = "minimal";
         $this->set("title_for_layout", "Student Profile");
         $_role = 2;
         if (!empty($this->request->params['pass'][0]) && $this->request->params['pass'][0] == 'teacher') {
@@ -363,7 +362,7 @@ class UsersController extends AppController {
         $this->loadModel('Category');
         $this->loadModel('Post');
         $this->loadModel('Exam');
-        $this->loadModel('Note');
+        //$this->loadModel('Note');
         $this->loadModel('ExamNotification');
         //$this->loadModel('TestType');
 
@@ -401,14 +400,14 @@ class UsersController extends AppController {
             'fields' => array('*')
         ));
 
-        $noteList = $this->Note->find('all', array(
-            'conditions' => array(
-                'Note.status' => 1,
-            ),
-            'order' => array('Note.id DESC'),
-            'limit' => 10,
-            'fields' => array('Note.id', 'Note.title', 'Note.created')
-        ));
+        /* $noteList = $this->Note->find('all', array(
+          'conditions' => array(
+          'Note.status' => 1,
+          ),
+          'order' => array('Note.id DESC'),
+          'limit' => 10,
+          'fields' => array('Note.id', 'Note.title', 'Note.created')
+          )); */
 
         $homeContent = $this->CmsPage->find('first', array('conditions' => array(
                 'unique_key' => 'HOMEPAGE_LEFT'
@@ -421,19 +420,18 @@ class UsersController extends AppController {
             'conditions' => array('ExamNotification.status' => 1),
             'order' => array('id DESC'),
             'limit' => 5
-                ));
+        ));
         //pr($notificationList);
         $this->set('notificationList', $notificationList);
 
         //$this->set('testInfo', $testInfo);
-
-        $this->set('noteList', $noteList);
+        //$this->set('noteList', $noteList);
         $this->set('cateList', $cateList);
         $this->set('blogList', $blogList);
     }
 
     public function login() {
-        $this->set('removeBreadcrumb', 1);
+        $this->layout = "minimal";
 
         if (!empty($this->loggedinUser)) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -934,7 +932,7 @@ class UsersController extends AppController {
             if (!empty($userData['User']['qualification'])) {
                 $this->Session->delete('socialLogin_info');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-            }else{
+            } else {
                 $this->redirect(array('controller' => 'users', 'action' => 'profile_process'));
             }
         }

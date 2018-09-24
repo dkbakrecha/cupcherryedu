@@ -15,8 +15,15 @@
 </style>
 <?php
 echo $this->element('socialScripts');
+
+
+$mnuNotes = "";
+
+if ($this->request->params['controller'] == "notes") {
+    $mnuNotes = "active";
+}
 ?>
-<nav class="navbar navbar-default menu-desktopmobile navbar-fixed-top">
+<nav class="navbar navbar-default menu-desktopmobile">
     <?php
     if (empty($LoggedinUser)) {
         ?>
@@ -169,7 +176,6 @@ echo $this->element('socialScripts');
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'index')); ?>">Blog Articles</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">Exam Alert</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>">Practice Sets</a></li>
-                    <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">Notes</a></li>
 
 
 
@@ -199,7 +205,7 @@ echo $this->element('socialScripts');
                             <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'edit_profile')); ?>">Edit Profile</a></li>
                             <li><a href="#">Account Settings</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a class="logoutUrl" href="#">LOGOUT</a></li>
+                            <li><a class="" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'logout')); ?>">LOGOUT</a></li>
                         </ul>
                     </li>
                     <?php

@@ -116,6 +116,9 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
     </div>    
 </div>
 
+<?php 
+echo $this->element('search-notes');
+/* 
 <div class="bedgeforyear">
     <div class="container">
         <div class="col-xs-12 col-sm-3 col-md-1">
@@ -135,7 +138,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
         </div>
     </div>
 </div>
-
+*/ ?>
 <div class="home-exam-list">
     <div class="container">
         <h2 class="sub-title be-center">UpComing Exams</h2>

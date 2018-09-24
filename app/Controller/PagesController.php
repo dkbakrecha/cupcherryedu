@@ -20,6 +20,34 @@ class PagesController extends AppController {
         $this->Gcal->googleSettings();
     }
 
+    public function admin_index() {
+        $this->loadModel("Note");
+        $this->loadModel("Post");
+
+        $allNotes = $this->Note->find("all");
+        if (!empty($allNotes)) {
+            foreach ($allNotes as $note) {
+                //pr($note);
+
+                $postData = array();
+                $postData['Post']['title'] = $note['Note']['title'];
+                $postData['Post']['title_slug'] = $this->Classy->postslug($note['Note']['title']);
+                $postData['Post']['content'] = $note['Note']['description'];
+                $postData['Post']['user_id'] = $note['Note']['user_id'];
+                $postData['Post']['view_count'] = $note['Note']['view_count'];
+                $postData['Post']['post_type'] = 1;
+                $postData['Post']['category_id'] = $note['Note']['category_id'];
+                $postData['Post']['sub_category_id'] = $note['Note']['sub_category_id'];
+                $postData['Post']['created'] = $note['Note']['created'];
+                $postData['Post']['status'] = $note['Note']['status'];
+                //pr($postData);
+                $this->Post->create();
+                $this->Post->save($postData);
+            }
+        }
+        prd("==== **** ====");
+    }
+
     public function add_lesson_opening() {
         $this->layout = 'ajax';
         $request = $this->request;

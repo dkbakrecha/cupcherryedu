@@ -10,7 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet"> 
-
+        
+        <script src="/<?php echo JS_URL ;?>ckeditor5-basic/ckeditor"></script>
         <?php
         echo $this->Html->meta('icon');
 
@@ -22,6 +23,7 @@
             'fontawesome/font-awesome.min',
             'site_ui',
             '/js/share/css/jquery.sharepage',
+            '/js/summernote/summernote',
             'dataTable_custom',
             'some_admin',
         ));
@@ -37,16 +39,21 @@
             'share/js/jquery.sharepage',
             'lib/jquery-ui.custom.min',
             'iCheck/icheck.min',
-            'ckeditor5/ckeditor',
-            'ckeditor5/ckeditor.js.map',
+            'summernote/summernote',
             'admin/jquery.dataTables.min',
             'admin/dataTables.bootstrap.min',
         ));
+
+        echo $this->Html->script(array(
+            //'ckeditor5-basic/ckeditor',
+        ));
+
 
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
         ?>
+
     </head>
 
     <body class="admin">

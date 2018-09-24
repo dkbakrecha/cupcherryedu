@@ -1,10 +1,3 @@
-<?php
-echo $this->Html->script(array(
-    'ckeditor/ckeditor',
-    'ckeditor/adapters/jquery',
-));
-?>
-
 <div class="warper container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -107,9 +100,12 @@ echo $this->Html->script(array(
     <!-- Warper Ends Here (working area) -->    
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('textarea#NoteDescription').ckeditor();
+        
+          $(document).ready(function () {
+            $('#NoteDescription').summernote();
         });
+    
+        
     
     $('#NoteCategoryId').change(function () {
             if ($(this).val() == '') {

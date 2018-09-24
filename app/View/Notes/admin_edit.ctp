@@ -1,10 +1,3 @@
-<?php
-echo $this->Html->script(array(
-    'ckeditor/ckeditor',
-    'ckeditor/adapters/jquery',
-));
-?>
-
 <div class="warper container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -25,51 +18,51 @@ echo $this->Html->script(array(
                     <label class="col-sm-2 control-label">Category / Sub Category</label>
                     <div class="col-sm-7">
                         |
-                            <div class="col-md-5">
-                                <?php
-                                echo $this->Form->input('category_id', array(
-                                    'options' => $cateList,
-                                    'class' => 'form-control',
-                                    'placeholder' => 'Category',
-                                    'label' => false,
-                                    'placeholder' => 'Post Title'
-                                ));
-                                ?>
-                            </div>
-                            <div class="col-md-5">
-                                <?php
-                                echo $this->Form->input('sub_category_id', array(
-                                    'class' => 'form-control',
-                                    'placeholder' => 'Sub Category',
-                                    'label' => false,
-                                    'type' => 'select',
-                                    'empty' => __('Select Sub Category'),
-                                    'require' => false
-                                ));
-                                ?>
-                            </div> 
+                        <div class="col-md-5">
+                            <?php
+                            echo $this->Form->input('category_id', array(
+                                'options' => $cateList,
+                                'class' => 'form-control',
+                                'placeholder' => 'Category',
+                                'label' => false,
+                                'placeholder' => 'Post Title'
+                            ));
+                            ?>
+                        </div>
+                        <div class="col-md-5">
+                            <?php
+                            echo $this->Form->input('sub_category_id', array(
+                                'class' => 'form-control',
+                                'placeholder' => 'Sub Category',
+                                'label' => false,
+                                'type' => 'select',
+                                'empty' => __('Select Sub Category'),
+                                'require' => false
+                            ));
+                            ?>
+                        </div> 
 
-                            <div class="col-md-2">
-                                <?php
-                                $statusList = array(
-                                    '0' => 'Inactive',
-                                    '1' => 'Active',
-                                    '2' => 'Delete',
-                                    '3' => 'Pending'
-                                    );
+                        <div class="col-md-2">
+                            <?php
+                            $statusList = array(
+                                '0' => 'Inactive',
+                                '1' => 'Active',
+                                '2' => 'Delete',
+                                '3' => 'Pending'
+                            );
 
-                                echo $this->Form->input('status', array(
-                                    'class' => 'form-control',
-                                    'options' => $statusList,
-                                    'placeholder' => '',
-                                    'label' => false,
-                                    'type' => 'select',
-                                    'empty' => __('Select status'),
-                                    'require' => false
-                                ));
-                                ?>
-                            </div> 
-                       
+                            echo $this->Form->input('status', array(
+                                'class' => 'form-control',
+                                'options' => $statusList,
+                                'placeholder' => '',
+                                'label' => false,
+                                'type' => 'select',
+                                'empty' => __('Select status'),
+                                'require' => false
+                            ));
+                            ?>
+                        </div> 
+
                     </div>
                 </div>
 
@@ -130,11 +123,13 @@ echo $this->Html->script(array(
     <!-- Warper Ends Here (working area) -->    
 
     <script type="text/javascript">
+
         $(document).ready(function () {
-            $('textarea#NoteDescription').ckeditor();
+            $('#NoteDescription').summernote();
         });
-    
-    $('#NoteCategoryId').change(function () {
+      
+
+        $('#NoteCategoryId').change(function () {
             if ($(this).val() == '') {
                 $('#NoteSubCategoryId').html('<option value="">' + "<?php echo __('Select Sub Category'); ?>" + '</option>');
             } else {

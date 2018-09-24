@@ -177,9 +177,6 @@ if ($this->request->params['controller'] == "notes") {
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">Exam Alert</a></li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>">Practice Sets</a></li>
 
-
-
-
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'contact')); ?>">Contact Us</a></li>
 
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'login')); ?>">Login</a></li>

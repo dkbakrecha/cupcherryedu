@@ -12,9 +12,13 @@ class ExamNotificationsController extends AppController {
     }
 
     public function index() {
-        $notificationList = $this->ExamNotification->find('all', array(
-            'conditions' => array('ExamNotification.status' => 1),
-            'order' => array('id DESC'),
+        $this->loadModel("Post");
+        $notificationList = $this->Post->find('all', array(
+            'conditions' => array(
+                'Post.status' => 1,
+                'Post.post_type' => 3
+                ),
+            'order' => array('Post.id DESC'),
             'limit' => 6
                 ));
         //pr($notificationList);
@@ -22,14 +26,14 @@ class ExamNotificationsController extends AppController {
     }
 
     public function view($id) {
-
+        $this->loadModel("Post");
         if (is_numeric($id)) {
-            $notification = $this->ExamNotification->find('first', array(
-                'conditions' => array('ExamNotification.id' => $id)
+            $notification = $this->Post->find('first', array(
+                'conditions' => array('Post.id' => $id)
                     ));
         } else {
-            $notification = $this->ExamNotification->find('first', array(
-                'conditions' => array('ExamNotification.title_slug' => $id)
+            $notification = $this->Post->find('first', array(
+                'conditions' => array('Post.title_slug' => $id)
                     ));
         }
 

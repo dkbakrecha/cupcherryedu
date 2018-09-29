@@ -14,21 +14,28 @@
 
                 <?php
                 foreach ($notificationList as $notifiation) {
-                    $_slug = $notifiation['ExamNotification']['id'];
-                    if (!empty($notifiation['ExamNotification']['title_slug'])) {
-                        $_slug = $notifiation['ExamNotification']['title_slug'];
+                    $_slug = $notifiation['Post']['id'];
+                    if (!empty($notifiation['Post']['title_slug'])) {
+                        $_slug = $notifiation['Post']['title_slug'];
                     }
                     //pr($notifiation);
+                    
+                    $_meta = array();
+                    if(!empty($notifiation['PostMeta'])){
+                        foreach($notifiation['PostMeta'] as $metaValue){
+                            $_meta[$metaValue['meta_key']] = $metaValue['meta_value'];
+                        }
+                    }
                     ?>
                 <div class="row bs-callout">
                     <div class="clr-site en-post-date">
                         <label>Post Date</label>
                                 <?php
-                        if ($notifiation['ExamNotification']['post_date'] != "0000-00-00") {
+                        if ($_meta['post_date'] != "0000-00-00") {
                             ?><div class="date-day"><?php
-                            echo date("d",strtotime($notifiation['ExamNotification']['post_date']));
+                            echo date("d",strtotime($_meta['post_date']));
                             ?></div><div class="date-month"><?php
-                            echo date("M",strtotime($notifiation['ExamNotification']['post_date']));
+                            echo date("M",strtotime($_meta['post_date']));
                             ?></div><?php
                         } 
                     ?>
@@ -37,16 +44,16 @@
                     <div class="en-post-detail">
                         <h4 class="clr-site">
                             <a class="" href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>">
-<?php echo $notifiation['ExamNotification']['title']; ?>	</a></h4> 
+<?php echo $notifiation['Post']['title']; ?>	</a></h4> 
 
                         <div class="">
                             
                             <div class="clr-site"><label>Last Date</label> <?php
-                if ($notifiation['ExamNotification']['lastapply_date'] != "0000-00-00" && $notifiation['ExamNotification']['lastapply_date'] != "") {
+                if ($_meta['lastapply_date'] != "0000-00-00" && $_meta['lastapply_date'] != "") {
                     ?><?php
-                            echo date("d",strtotime($notifiation['ExamNotification']['lastapply_date']));
+                            echo date("d",strtotime($_meta['lastapply_date']));
                             ?><?php
-                            echo date("M",strtotime($notifiation['ExamNotification']['lastapply_date']));
+                            echo date("M",strtotime($_meta['lastapply_date']));
                             ?><?php
                 } else {
                     echo "Not available";
@@ -56,11 +63,11 @@
                             
                             <div class="clr-site"><label>Exam Date </label> <?php
                            // pr($notifiation['ExamNotification']['exam_date']);
-                                    if ($notifiation['ExamNotification']['exam_date'] != "0000-00-00" && $notifiation['ExamNotification']['exam_date'] != "") {
+                                    if (!empty($_meta['exam_date']) && $_meta['exam_date'] != "0000-00-00") {
                                         ?><div class="date-day"><?php
-                            echo date("d",strtotime($notifiation['ExamNotification']['exam_date']));
+                            echo date("d",strtotime($_meta['exam_date']));
                             ?></div><div class="date-month"><?php
-                            echo date("M",strtotime($notifiation['ExamNotification']['exam_date']));
+                            echo date("M",strtotime($_meta['exam_date']));
                             ?></div><?php 
                                     } else {
                                         echo "Not available";
@@ -74,8 +81,8 @@
                         $SHORT_URL = $ShareProductUrl = $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug), true);
                         $ShareImagePath = Router::url('/', true) . "img/no_user.png";
                         //$ShareImagePath = $this->Html->image('user.png');
-                        $shareTitle = strip_tags($notifiation['ExamNotification']['title']);
-                        $shareSummary = substr(strip_tags($notifiation['ExamNotification']['notification_text']), 0, 150) . "...";
+                        $shareTitle = strip_tags($notifiation['Post']['title']);
+                        $shareSummary = substr(strip_tags($notifiation['Post']['content']), 0, 150) . "...";
 
                         //prd($ShareImagePath);
                         $fbDescriptionwant = $shareSummary; //@$cmsDataProDetail[0]['Cmspage']['description'].' '.$shareSummary;

@@ -21,7 +21,118 @@ class PagesController extends AppController {
     }
 
     public function admin_index() {
-        
+        $this->loadModel('ExamNotification');
+        $this->loadModel('Post');
+        $this->loadModel('PostMeta');
+
+        $allExamNoti = $this->ExamNotification->find("all");
+        foreach ($allExamNoti as $examN) {
+
+            $postArr = array();
+            $postArr['Post']['title'] = $examN['ExamNotification']['title'];
+            $postArr['Post']['title_slug'] = $examN['ExamNotification']['title_slug'];
+            $postArr['Post']['content'] = $examN['ExamNotification']['notification_text'];
+            $postArr['Post']['view_count'] = $examN['ExamNotification']['click_count'];
+            $postArr['Post']['post_type'] = 3;
+            
+            //prd($examN);
+
+            $this->Post->create();
+            if ($p = $this->Post->save($postArr)) {
+                //prd($examN['ExamNotification']);
+                if (!empty($examN['ExamNotification']['notification_board'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'notification_board';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['notification_board'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['qualification'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'qualification';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['qualification'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['syllabus_url'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'syllabus_url';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['syllabus_url'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['official_url'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'official_url';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['official_url'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['state'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'state';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['state'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['city'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'city';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['city'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['post_date'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'post_date';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['post_date'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['lastapply_date'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'lastapply_date';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['lastapply_date'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['exam_date'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'exam_date';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['exam_date'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                if (!empty($examN['ExamNotification']['link'])) {
+                    $pMeta = array();
+                    $pMeta['PostMeta']['post_id'] = $p['Post']['id'];
+                    $pMeta['PostMeta']['meta_key'] = 'link';
+                    $pMeta['PostMeta']['meta_value'] = $examN['ExamNotification']['link'];
+                    $this->PostMeta->create();
+                    $this->PostMeta->save($pMeta);
+                }
+                
+                
+            }
+        }
         prd("==== **** ====");
     }
 

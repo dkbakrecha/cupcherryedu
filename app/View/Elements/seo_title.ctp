@@ -23,18 +23,18 @@ if ($_SERVER['HTTP_HOST'] == "cupcherry.com") {
 if (!empty($notification)) {
     ?>
     <title>
-        CupCherry Education : <?php echo $notification['ExamNotification']['title']; ?>
+        CupCherry Education : <?php echo $notification['Post']['title']; ?>
     </title>
 
-    <meta name="description" content="<?php echo strip_tags($notification['ExamNotification']['notification_text']); ?>">
+    <meta name="description" content="<?php echo strip_tags($notification['Post']['content']); ?>">
     <meta name="keywords" content="Online study, government exam practice, win exam like pro, ssc, ibps, ldc, exam tips, old papers">
     <meta name="robots" content="index, nofollow">
     <meta name="web_author" content="Dharmendra, Jay, Narveer, Shashank and Cupcherry Team">
     <meta name="language" content="English, Hindi">
 
     <!--<meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />-->
-    <meta property="og:title" content="CUPCHERRY : <?php echo $notification['ExamNotification']['title']; ?>" />
-    <meta property="og:description" content="<?php echo strip_tags($notification['ExamNotification']['notification_text']); ?>" />
+    <meta property="og:title" content="CUPCHERRY : <?php echo $notification['Post']['title']; ?>" />
+    <meta property="og:description" content="<?php echo strip_tags($notification['Post']['content']); ?>" />
     <!--<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />-->
     <?php
 } elseif (!empty($noteData)) {

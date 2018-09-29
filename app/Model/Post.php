@@ -11,5 +11,11 @@ class Post extends AppModel {
             'fields' => array('id','name','email')
         )
     );
+    
+    public $hasMany = array(
+        'PostMeta' => array(
+            'className' => 'PostMeta',
+        )
+    );
 
 }

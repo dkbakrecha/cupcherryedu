@@ -146,14 +146,22 @@ echo $this->element('search-notes');
             <div class="list-group">
                 <?php
                 foreach ($notificationList as $exam) {
-                    $_slug = $exam['ExamNotification']['title_slug'];
+                    
+                    $_meta = array();
+                    if(!empty($exam['PostMeta'])){
+                        foreach($exam['PostMeta'] as $metaValue){
+                            $_meta[$metaValue['meta_key']] = $metaValue['meta_value'];
+                        }
+                    }
+                   // prd($_meta);
+                    $_slug = $exam['Post']['title_slug'];
                     ?>
                     <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>" class="list-group-item">
-                        <?php echo $exam['ExamNotification']['title']; ?> 
+                        <?php echo $exam['Post']['title']; ?> 
                         <span class="pull-right">Last Date :
                             <?php
-                            if ($exam['ExamNotification']['lastapply_date'] != "0000-00-00" && $exam['ExamNotification']['lastapply_date'] != "") {
-                                echo $exam['ExamNotification']['lastapply_date'];
+                            if ($_meta['lastapply_date'] != "0000-00-00" && $_meta['lastapply_date'] != "") {
+                                echo $_meta['lastapply_date'];
                             } else {
                                 echo 'Not Mation';
                             }

@@ -363,7 +363,7 @@ class UsersController extends AppController {
         $this->loadModel('Post');
         $this->loadModel('Exam');
         //$this->loadModel('Note');
-        $this->loadModel('ExamNotification');
+        //$this->loadModel('ExamNotification');
         //$this->loadModel('TestType');
 
         /* $testInfo = $this->TestType->find('all', array(
@@ -416,9 +416,12 @@ class UsersController extends AppController {
         $this->set('homeContent', $homeContent);
 
 
-        $notificationList = $this->ExamNotification->find('all', array(
-            'conditions' => array('ExamNotification.status' => 1),
-            'order' => array('id DESC'),
+        $notificationList = $this->Post->find('all', array(
+            'conditions' => array(
+                'Post.status' => 1,
+                'Post.post_type' => 3,
+                ),
+            'order' => array('Post.id DESC'),
             'limit' => 5
         ));
         //pr($notificationList);

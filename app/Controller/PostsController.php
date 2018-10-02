@@ -40,8 +40,6 @@ class PostsController extends AppController {
     }
 
     public function view($titleslug) {
-
-
         if (!empty($titleslug)) {
             $_postDetail = $this->Post->find('first', array(
                 'conditions' => array(
@@ -54,6 +52,23 @@ class PostsController extends AppController {
         $this->set('title_for_layout', $_postDetail['Post']['title']);
         $this->set('type', 1);
         $this->set('type_id', $_postDetail['Post']['id']);
+    }
+
+    public function mylist() {
+        $paginateCond = array();
+
+
+        $paginateCond['Post.status'] = 1;
+
+        $this->Paginator->settings = array(
+            'conditions' => array($paginateCond),
+            'paramType' => 'querystring',
+            'limit' => 10,
+            'order' => array('id' => 'desc')
+        );
+
+        $all_posts = $this->Paginator->paginate('Post');
+        $this->set('all_posts', $all_posts);
     }
 
     public function admin_add() {
@@ -70,6 +85,58 @@ class PostsController extends AppController {
                     __('The post could not be saved. Please, try again.')
             );
         }
+    }
+
+    public function addEdit($post_id = null) {
+        $this->loadModel('Media');
+        $this->loadModel('User');
+        $this->loadModel('Exam');
+        
+        $this->loadModel('Category');
+        $cateList = $this->Category->find('list', array('conditions' => array('parent_id' => 0)));
+        $this->set('cateList', $cateList);
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $postData = $this->request->data;
+            $postData['Post']['title_slug'] = $this->Classy->postslug($postData['Post']['title']);
+
+            $postData['Post']['user_id'] = $this->loggedinUser['id'];
+            /*
+              if (!empty($postData['Post']['cover_image'])) {
+              $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
+              $postData['Post']['cover_image'] = $image_name;
+              }else{
+              unset($postData['Post']['cover_image']);
+              }
+             * 
+             */
+
+            if ($this->Post->save($postData)) {
+                $this->Session->setFlash(__('The Post has been Updated'));
+                return $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(
+                    __('The post could not be saved. Please, try again.')
+            );
+        }
+
+        $this->request->data = $this->Post->find('first', array('conditions' => array('Post.id' => $post_id)));
+
+        $mediaImages = $this->Media->find('list', array(
+            'conditions' => array('Media.type' => 'image'),
+            'fields' => array('Media.title', 'Media.title')));
+
+        $userList = $this->User->find('list', array(
+            'conditions' => array('User.status' => '1'),
+        ));
+
+        $examList = $this->Exam->find('list', array(
+            'conditions' => array('Exam.status' => '1'),
+        ));
+
+        $this->set('examList', $examList);
+        $this->set('userList', $userList);
+        $this->set('mediaImages', $mediaImages);
     }
 
     public function admin_edit($post_id) {
@@ -125,6 +192,14 @@ class PostsController extends AppController {
     }
 
     public function admin_postGridData() {
+        $this->_gridData();
+    }
+
+    public function postGridData() {
+        $this->_gridData();
+    }
+
+    function _gridData() {
         $request = $this->request;
         $this->autoRender = false;
 
@@ -141,6 +216,7 @@ class PostsController extends AppController {
             //prd($this->request);          
             $condition = array();
             $condition ['Post.status !='] = 2;
+            $condition ['Post.user_id'] = $this->loggedinUser['id'];
 
             foreach ($this->request->query['columns'] as $column) {
                 if (isset($column['searchable']) && $column['searchable'] == 'true') {
@@ -189,7 +265,7 @@ class PostsController extends AppController {
                     //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'posts/view/' . $row['Post']['title_slug'] . '" title="View Post" target="_BLANK"><i class="fa fa-eye fa-lg"></i></a> ';
-                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/posts/edit/' . $row['Post']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
+                    $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'posts/addedit/' . $row['Post']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
                     $action .= '&nbsp;&nbsp;&nbsp; <a href="#" onclick="delete_user(' . $row['Post']['id'] . ')" title="Delete User"><i class="fa fa-trash fa-lg"></i></a>';
 

@@ -23,6 +23,7 @@
             'font-awesome/css/font-awesome.min',
             'site_ui.css?var=20180724',
             '/js/share/css/jquery.sharepage',
+            '/js/summernote/summernote',
             'dataTable_custom',
             'some_admin',
         ));
@@ -40,6 +41,7 @@
             'iCheck/icheck.min',
             'admin/jquery.dataTables.min',
             'admin/dataTables.bootstrap.min',
+            'summernote/summernote',
         ));
 
         echo $this->fetch('meta');
@@ -99,7 +101,7 @@
                                 <?php echo $this->element("sidebar/dashboard_left"); ?>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-9">
                                 <?php
                             }
                             ?>
@@ -110,18 +112,18 @@
                                 echo $this->fetch('content');
                                 ?>
                             </div>
+                        </div>
+                        <?php
+                        /* if ($_sysInfo['device'] != 'MOBILE') {
+                          ?>
 
-                            <?php
-                            if ($_sysInfo['device'] != 'MOBILE') {
-                                ?>
-                            </div>
-                            <div class="col-lg-3">
-                                <?php echo $this->element("sidebar/dashboard_right"); ?>
+                          <div class="col-lg-3">
+                          <?php echo $this->element("sidebar/dashboard_right"); ?>
 
 
-                            </div>
-                            <?php
-                        }
+                          </div>
+                          <?php
+                          } */
                         ?>
                     </div>
                 </div>
@@ -148,10 +150,10 @@
             //if (empty($LoggedinUser) && $_act != "login") {
             //    echo $this->element("_calltologin");
             // }
-            if($this->webroot == "/"){
+            if ($this->webroot == "/") {
                 echo $this->element('social');
             }
-            
+
 
             if (!empty($LoggedinUser)) {
                 

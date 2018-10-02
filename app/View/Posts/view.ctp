@@ -35,6 +35,29 @@
 
                 <div class="post-content">
                     <?php
+                    if ($postDetail['Post']['post_type'] == 3) {
+                        $_meta = array();
+                        if (!empty($postDetail['PostMeta'])) {
+                            foreach ($postDetail['PostMeta'] as $metaValue) {
+                                $_meta[$metaValue['meta_key']] = $metaValue['meta_value'];
+                            }
+                        }
+                        ?>
+                        <table class="table">    
+                            <?php
+                            foreach ($_meta as $key => $value) {
+                                //pr($value);
+                                ?>
+                                <tr>
+                                    <td><?php echo $key; ?></td>
+                                    <td><?php echo $value; ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                        <?php
+                    }
                     echo $postDetail['Post']['content'];
                     ?>
                 </div>
@@ -67,7 +90,7 @@
         ?>
         <div class="col-lg-4">
             <?php echo $this->element('sidebar/topposts'); ?>
-            <?php //echo $this->element('sidebar/newnotes'); ?>
+            <?php //echo $this->element('sidebar/newnotes');  ?>
         </div>
         <?php
     }

@@ -1,30 +1,34 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="siteModal"></div><!-- /.modal -->
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#TablePracticePracticeTableForm").submit(function(){
-            var s_ans = $("#TablePracticeTblsysans").val(); 
-            var u_ans = $("#TablePracticeTableans").val(); 
-            
-            if(s_ans == u_ans){
+
+
+    $(document).ready(function () {
+        $("#TablePracticePracticeTableForm").submit(function () {
+            var s_ans = $("#TablePracticeTblsysans").val();
+            var u_ans = $("#TablePracticeTableans").val();
+
+            if (s_ans == u_ans) {
                 /*bootbox.alert({
-                    message: "Your answer is correct",
-                    backdrop: true,
-                    size: 'small'
-                });*/
-            alert("Your answer is correct");
-            }else{
+                 message: "Your answer is correct",
+                 backdrop: true,
+                 size: 'small'
+                 });*/
+                alert("Your answer is correct");
+            } else {
                 /*bootbox.alert({
-                    message: "Your answer is Incorrect. Correct one is " + s_ans,
-                    backdrop: true,
-                    size: 'small'
-                });*/
-            alert("Your answer is Incorrect. Correct one is " + s_ans);
+                 message: "Your answer is Incorrect. Correct one is " + s_ans,
+                 backdrop: true,
+                 size: 'small'
+                 });*/
+                alert("Your answer is Incorrect. Correct one is " + s_ans);
             }
             $("#TablePracticeTableans").val();
-        }); 
+        });
+
+        $('.richEditor').summernote();
     });
-    
+
     $(function () {
         var _scv = '<?php echo Configure::read('Site.SCV'); ?>';
         var _x_scv = getCookie('server_cookie_ver');
@@ -32,7 +36,7 @@
             setCookie('server_cookie_ver', _scv, 7);
             window.location.reload(true);
         }
-        
+
 
 
         $('input[type="radio"].r-green, input[type="checkbox"].r-green').iCheck({
@@ -45,13 +49,13 @@
             $("#resentPost").owlCarousel({
                 autoPlay: 10000, //Set AutoPlay to 3 seconds
                 items: 4,
-                
+
                 itemsDesktop: [1199, 3],
                 itemsDesktopSmall: [979, 3],
-                itemsMobile:[479, 1]
+                itemsMobile: [479, 1]
             });
         }
-        
+
         $("#TestWrapper").on("submit", "#QuizViewForm", function (e) {
             e.preventDefault();
             //var _formData = $("#QuizViewForm").serialize();
@@ -73,10 +77,10 @@
                 }
             });
         });
-        
+
         $(".comment_form").on("submit", "#commentForm", function (e) {
             e.preventDefault();
-            
+
             $(this).ajaxSubmit({
                 success: function (rd) {
                     var resData = $.parseJSON(rd);
@@ -90,10 +94,10 @@
                 }
             });
         });
-        
+
         $(".footer-subscribe").on("submit", "#hr-subscribe-form", function (e) {
             e.preventDefault();
-            
+
             $(this).ajaxSubmit({
                 success: function (rd) {
                     var resData = $.parseJSON(rd);
@@ -107,34 +111,34 @@
                 }
             });
         });
-        
+
         // browser window scroll (in pixels) after which the "back to top" link is shown
         var offset = 200,
-        //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
-        offset_opacity = 1200,
-        //duration of the top scrolling animation (in ms)
-        scroll_top_duration = 700,
-        //grab the "back to top" link
-        $back_to_top = $('.cd-top');
+                //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+                offset_opacity = 1200,
+                //duration of the top scrolling animation (in ms)
+                scroll_top_duration = 700,
+                //grab the "back to top" link
+                $back_to_top = $('.cd-top');
 
         //hide or show the "back to top" link
-        $(window).scroll(function(){
-            ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-            if( $(this).scrollTop() > offset_opacity ) { 
+        $(window).scroll(function () {
+            ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+            if ($(this).scrollTop() > offset_opacity) {
                 $back_to_top.addClass('cd-fade-out');
             }
         });
 
         //smooth scroll to top
-        $back_to_top.on('click', function(event){
+        $back_to_top.on('click', function (event) {
             event.preventDefault();
             $('body,html').animate({
-                scrollTop: 0 
+                scrollTop: 0
             }, scroll_top_duration
-        );
+                    );
         });
-        
-        
+
+
         //Edit Product model
         $(".ask_question").click(function () {
             $.ajax({
@@ -149,16 +153,16 @@
                 }
             });
         });
-        
-        $("#fotterMnu").click(function(){
+
+        $("#fotterMnu").click(function () {
             console.log("ss");
             $(".mainmenucover.menu-ipad .ipad-responsive-menu-outer").click();
 
-        } );
-        
-        
-        
-        
+        });
+
+
+
+
     });
 
 
@@ -194,50 +198,51 @@
             }
         }
     }
-    
-    
-    
-    
+
+
+
+
     /*
-Ref:
-Thanks to:
-http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Style-Grid-Layout-Pinterest-Grid.html
+     Ref:
+     Thanks to:
+     http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Style-Grid-Layout-Pinterest-Grid.html
      */
 
 
     /*
-    Pinterest Grid Plugin
-    Copyright 2014 Mediademons
-    @author smm 16/04/2014
-
-    usage:
-
+     Pinterest Grid Plugin
+     Copyright 2014 Mediademons
+     @author smm 16/04/2014
+     
+     usage:
+     
      $(document).ready(function() {
-
-        $('#blog-landing').pinterest_grid({
-            no_columns: 4
-        });
-
-    });
-
-
+     
+     $('#blog-landing').pinterest_grid({
+     no_columns: 4
+     });
+     
+     });
+     
+     
      */
-    ;(function ($, window, document, undefined) {
+    ;
+    (function ($, window, document, undefined) {
         var pluginName = 'pinterest_grid',
-        defaults = {
-            padding_x: 10,
-            padding_y: 10,
-            no_columns: 3,
-            margin_bottom: 50,
-            single_column_breakpoint: 700
-        },
-        columns,
-        $article,
-        article_width;
+                defaults = {
+                    padding_x: 10,
+                    padding_y: 10,
+                    no_columns: 3,
+                    margin_bottom: 50,
+                    single_column_breakpoint: 700
+                },
+                columns,
+                $article,
+                article_width;
 
         function Plugin(element, options) {
             this.element = element;
-            this.options = $.extend({}, defaults, options) ;
+            this.options = $.extend({}, defaults, options);
             this._defaults = defaults;
             this._name = pluginName;
             this.init();
@@ -245,74 +250,74 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
 
         Plugin.prototype.init = function () {
             var self = this,
-            resize_finish;
+                    resize_finish;
 
-            $(window).resize(function() {
+            $(window).resize(function () {
                 clearTimeout(resize_finish);
-                resize_finish = setTimeout( function () {
+                resize_finish = setTimeout(function () {
                     self.make_layout_change(self);
                 }, 11);
             });
 
             self.make_layout_change(self);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $(window).resize();
             }, 500);
         };
 
         Plugin.prototype.calculate = function (single_column_mode) {
             var self = this,
-            tallest = 0,
-            row = 0,
-            $container = $(this.element),
-            container_width = $container.width();
+                    tallest = 0,
+                    row = 0,
+                    $container = $(this.element),
+                    container_width = $container.width();
             $article = $(this.element).children();
 
-            if(single_column_mode === true) {
+            if (single_column_mode === true) {
                 article_width = $container.width() - self.options.padding_x;
             } else {
                 article_width = ($container.width() - self.options.padding_x * self.options.no_columns) / self.options.no_columns;
             }
 
-            $article.each(function() {
+            $article.each(function () {
                 $(this).css('width', article_width);
             });
 
             columns = self.options.no_columns;
 
-            $article.each(function(index) {
+            $article.each(function (index) {
                 var current_column,
-                left_out = 0,
-                top = 0,
-                $this = $(this),
-                prevAll = $this.prevAll(),
-                tallest = 0;
+                        left_out = 0,
+                        top = 0,
+                        $this = $(this),
+                        prevAll = $this.prevAll(),
+                        tallest = 0;
 
-                if(single_column_mode === false) {
+                if (single_column_mode === false) {
                     current_column = (index % columns);
                 } else {
                     current_column = 0;
                 }
 
-                for(var t = 0; t < columns; t++) {
-                    $this.removeClass('c'+t);
+                for (var t = 0; t < columns; t++) {
+                    $this.removeClass('c' + t);
                 }
 
-                if(index % columns === 0) {
+                if (index % columns === 0) {
                     row++;
                 }
 
                 $this.addClass('c' + current_column);
                 $this.addClass('r' + row);
 
-                prevAll.each(function(index) {
-                    if($(this).hasClass('c' + current_column)) {
+                prevAll.each(function (index) {
+                    if ($(this).hasClass('c' + current_column)) {
                         top += $(this).outerHeight() + self.options.padding_y;
                     }
                 });
 
-                if(single_column_mode === true) {
+                if (single_column_mode === true) {
                     left_out = 0;
                 } else {
                     left_out = (index % columns) * (article_width + self.options.padding_x);
@@ -320,7 +325,7 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
 
                 $this.css({
                     'left': left_out,
-                    'top' : top
+                    'top': top
                 });
             });
 
@@ -330,11 +335,11 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
 
         Plugin.prototype.tallest = function (_container) {
             var column_heights = [],
-            largest = 0;
+                    largest = 0;
 
-            for(var z = 0; z < columns; z++) {
+            for (var z = 0; z < columns; z++) {
                 var temp_height = 0;
-                _container.find('.c'+z).each(function() {
+                _container.find('.c' + z).each(function () {
                     temp_height += $(this).outerHeight();
                 });
                 column_heights[z] = temp_height;
@@ -345,7 +350,7 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
         };
 
         Plugin.prototype.make_layout_change = function (_self) {
-            if($(window).width() < _self.options.single_column_breakpoint) {
+            if ($(window).width() < _self.options.single_column_breakpoint) {
                 _self.calculate(true);
             } else {
                 _self.calculate(false);
@@ -356,7 +361,7 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
             return this.each(function () {
                 if (!$.data(this, 'plugin_' + pluginName)) {
                     $.data(this, 'plugin_' + pluginName,
-                    new Plugin(this, options));
+                            new Plugin(this, options));
                 }
             });
         }

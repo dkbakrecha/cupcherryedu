@@ -117,7 +117,7 @@ echo $this->Html->script('owl-carousel/owl.carousel.min');
 </div>
 
 <?php 
-echo $this->element('search-notes');
+echo $this->element('search-notes-home');
 /* 
 <div class="bedgeforyear">
     <div class="container">

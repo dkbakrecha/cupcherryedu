@@ -26,7 +26,10 @@
             $("#TablePracticeTableans").val();
         });
 
-        $('.richEditor').summernote();
+        if ($('.richEditor').length) {
+            $('.richEditor').summernote();
+        }
+
     });
 
     $(function () {

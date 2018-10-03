@@ -3,7 +3,7 @@
 ========================*/
 body{
     background: #f4f4f4;
-    font-family: 'Roboto', 'Droid Serif', sans-serif;
+    font-family: "Open Sans", 'Roboto', 'Droid Serif', sans-serif;
 }
 
 body.admin{
@@ -2054,8 +2054,12 @@ a.nodecor{
     font-weight: 600;
 }
 
-form#SearchFormIndexForm, form#SearchFormHomeForm{
+form#SearchFormIndexForm{
     padding: 60px 0;
+}
+
+form#SearchFormHomeForm{
+    padding: 30px 0 150px;
 }
 
 .notes-search{
@@ -2474,6 +2478,87 @@ element {
 
 .home-exam-list h2{
     margin-bottom: 40px;
+    margin-top: 40px;
+    float: left;
+    width: 100%;
+}
+
+.home-search-select {
+
+    width: 150px !important;
+    font-size: 16px;
+    padding: 18px;
+    height: 60px;
+    border: 0px;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+
+}
+
+.home-search-text{
+    padding: 18px !important;;
+    height: 60px !important;
+}
+
+select.home-search-select::-ms-expand {
+    display: none;
+}
+
+.home-search-button {
+    border: 0px;
+    background: #02b3e4;
+    color: #fff;
+    height: 60px !important;
+    width: 60px;
+}
+
+.slider-feature ul {
+    margin: 40px 0 0 0;
+    padding: 0;
+}
+
+.slider-feature ul li {
+    list-style: none;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+    margin-right: 30px;
+}
+
+.slider-feature ul li img {
+    height: auto;
+    width: 30px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.slider-feature ul li:nth-child(1) {
+    color: #02b3e4;
+}
+
+.slider-feature ul li:nth-child(2) {
+    color: #fb928b;
+}
+
+.notes-search.home p {
+    font-size: 20px;
+    margin-bottom: 0px;
+    line-height: 30px;
+    color: #FFF;
+    text-align: center;
+}
+
+.notes-search.home h3 {
+    font-size: 50px;
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 100px;
 }
 
 .home-exam-list .list-group{
@@ -2599,12 +2684,12 @@ element {
 
 /* Style the indicator (dot/circle) */
 .practice-question .container-radio .checkmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
 }
 /** ===================== Custom UI Radio ====================== **/
 
@@ -2841,7 +2926,7 @@ element {
     body{
         margin-top: 0;
     }
-    
+
     .cd-top {
         right: 20px;
         bottom: 40px;
@@ -2875,16 +2960,16 @@ element {
         padding: 0px;
         margin: 0;
     }
-    
+
     .mobNoMargin{
         padding: 0px;
         margin: 0;
     }
-    
+
     .box-content{
         padding: 10px;
     }
-    
+
     .practice-set-view h2{
         font-size: 16px;
     }

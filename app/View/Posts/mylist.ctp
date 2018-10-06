@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>Articles</span>
-                <a href="<?php echo $this->Html->url(array('admin' => true, 'controller' => 'posts', 'action' => 'add')); ?>" class="btn btn-success btn-xs pull-right">New Post</a>
+                <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'addedit')); ?>" class="btn btn-success btn-xs pull-right">New Post</a>
             </div>    
             <div class="panel-body">
                 <div class="dataTable_wrapper">
@@ -13,6 +13,7 @@
                                 <th style="min-width: 22px;"><input name="checkall" type="checkbox" class="checkall" value="ON" /></th>
                                 <th>Post Title</th>
                                 <th>View Count</th>                                
+                                <th>Type</th>                                
                                 <th>Join Date</th>                                
                                 <th>Status</th>
                                 <th>Action</th>
@@ -25,6 +26,7 @@
                                     <input class="search_init" type="text" value="" placeholder="Search Name" name="fname"></td>
                                 <td>
                                     <input class="search_init" type="text" value="" placeholder="Search Name" name="lname"></td>
+                                <td></td>
                                 <td></td>
                                 <td>
                                     <select class="search_init" type="text" value="" placeholder="Select" name="status"> 
@@ -54,8 +56,6 @@
     </div>
 </div>
 
-<?php $record_pr_pg = trim(Configure::read('Site.admin_record_per_page')); ?> 
-
 <script type="text/javascript">
 
     var table;
@@ -72,6 +72,7 @@
                 {"name": "Post.id", "orderable": false, "searchable": false, 'width': '4%', 'sClass': 'text-center'},
                 {"name": "Post.title", 'width': '40%'},
                 {"name": "Post.view_count", 'width': '12%'},
+                {"name": "Post.post_type", "orderable": true, "searchable": true, 'width': '12%'},
                 {"name": "Post.created", "orderable": true, "searchable": true, 'width': '12%'},
                 {"name": "Post.status", "orderable": false, "searchable": true, 'width': '8%', 'sClass': 'text-center'},
                 {"name": "Post.common", "orderable": false, "searchable": false, 'width': '10%', 'sClass': 'text-center'},
@@ -130,7 +131,7 @@
          minView: 2,
          bootcssVer: 3,
          forceParse: 0,
-         format: 'dd-mm-yyyy', //'<?php //echo Configure::read("Site.admin_date_time_format")   ?>'
+         format: 'dd-mm-yyyy', //'<?php //echo Configure::read("Site.admin_date_time_format")    ?>'
          //endDate: new Date(new Date().getFullYear()-15, 10 - 1, 25)
          });         
          */

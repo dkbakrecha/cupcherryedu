@@ -90,8 +90,8 @@ class PostsController extends AppController {
     public function addEdit($post_id = null) {
         $this->loadModel('Media');
         $this->loadModel('User');
-        $this->loadModel('Exam');
-        
+        $this->loadModel('PostMeta');
+
         $this->loadModel('Category');
         $cateList = $this->Category->find('list', array('conditions' => array('parent_id' => 0)));
         $this->set('cateList', $cateList);
@@ -101,19 +101,45 @@ class PostsController extends AppController {
             $postData['Post']['title_slug'] = $this->Classy->postslug($postData['Post']['title']);
 
             $postData['Post']['user_id'] = $this->loggedinUser['id'];
-            /*
-              if (!empty($postData['Post']['cover_image'])) {
-              $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
-              $postData['Post']['cover_image'] = $image_name;
-              }else{
-              unset($postData['Post']['cover_image']);
-              }
-             * 
-             */
 
-            if ($this->Post->save($postData)) {
+            /*if (!empty($postData['Post']['cover_image'])) {
+                $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
+                $postData['Post']['cover_image'] = $image_name;
+            } else {
+                unset($postData['Post']['cover_image']);
+            }*/
+
+//prd($postData);
+            if ($postData = $this->Post->save($postData)) {
+ //pr($postData);
+                if (!empty($postData['PostMeta'])) {
+                   
+                    foreach ($postData['PostMeta'] as $key => $value) {
+                        $postMetaData = $this->PostMeta->find('first',array(
+                            'conditions' => array(
+                                'meta_key' => $key,
+                                'post_id' => $postData['Post']['id']
+                            )
+                        ));
+                        //pr($postMetaData);
+                        $pdArr = array();
+                        $pdArr['post_id'] = $postData['Post']['id'];
+                        $pdArr['meta_key'] = $key;
+                        $pdArr['meta_value'] = $value;
+                        
+                        if(!empty($postMetaData)){
+                            //Update 
+                            $pdArr['id'] = $postMetaData['PostMeta']['id'];
+                        }else{
+                            //New
+                            $this->PostMeta->create();
+                        }
+                        $this->PostMeta->save($pdArr);
+                    }
+                }
+
                 $this->Session->setFlash(__('The Post has been Updated'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'addedit', $postData['Post']['id']));
             }
             $this->Session->setFlash(
                     __('The post could not be saved. Please, try again.')
@@ -130,11 +156,8 @@ class PostsController extends AppController {
             'conditions' => array('User.status' => '1'),
         ));
 
-        $examList = $this->Exam->find('list', array(
-            'conditions' => array('Exam.status' => '1'),
-        ));
+       
 
-        $this->set('examList', $examList);
         $this->set('userList', $userList);
         $this->set('mediaImages', $mediaImages);
     }
@@ -147,17 +170,6 @@ class PostsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $postData = $this->request->data;
             $postData['Post']['title_slug'] = $this->Classy->postslug($postData['Post']['title']);
-
-
-            /*
-              if (!empty($postData['Post']['cover_image'])) {
-              $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
-              $postData['Post']['cover_image'] = $image_name;
-              }else{
-              unset($postData['Post']['cover_image']);
-              }
-             * 
-             */
 
             if ($this->Post->save($postData)) {
                 $this->Session->setFlash(__('The Post has been Updated'));
@@ -232,7 +244,7 @@ class PostsController extends AppController {
             //prd($condition);
             $total_records = $this->Post->find('count', array('conditions' => $condition));
 
-            $fields = array('Post.id', 'Post.title', 'Post.title_slug', 'Post.content', 'Post.view_count', 'Post.created', 'Post.status');
+            $fields = array('Post.id', 'Post.title', 'Post.title_slug', 'Post.post_type', 'Post.content', 'Post.view_count', 'Post.created', 'Post.status');
             $userData = $this->Post->find('all', array(
                 'conditions' => $condition,
                 'fields' => $fields,
@@ -275,6 +287,7 @@ class PostsController extends AppController {
                         $chk, //$row['User']['id'],
                         $row['Post']['title'],
                         $row['Post']['view_count'],
+                        $row['Post']['post_type'],
                         date(Configure::read('Site.admin_date_format'), strtotime($row['Post']['created'])),
                         $status,
                         $action

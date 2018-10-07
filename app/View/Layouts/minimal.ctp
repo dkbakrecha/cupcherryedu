@@ -15,7 +15,7 @@
 
         echo $this->Html->css(array(
             'bootstrap/bootstrap.min',
-            'fontawesome/font-awesome.min',
+             'font-awesome/css/font-awesome.min',
             'site_ui',
         ));
 

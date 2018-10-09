@@ -394,6 +394,7 @@ class UsersController extends AppController {
         $blogList = $this->Post->find('all', array(
             'conditions' => array(
                 'Post.status' => 1,
+                'Post.post_type' => 0,
             ),
             'order' => array('Post.id DESC'),
             'limit' => 6,

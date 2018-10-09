@@ -156,7 +156,7 @@ echo $this->element('search-notes-home');
                    // prd($_meta);
                     $_slug = $exam['Post']['title_slug'];
                     ?>
-                    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'view', $_slug)); ?>" class="list-group-item">
+                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'view', $_slug)); ?>" class="list-group-item">
                         <?php echo $exam['Post']['title']; ?> 
                         <span class="pull-right">Last Date :
                             <?php

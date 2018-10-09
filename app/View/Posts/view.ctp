@@ -49,8 +49,18 @@
                                 //pr($value);
                                 ?>
                                 <tr>
-                                    <td><?php echo $key; ?></td>
-                                    <td><?php echo $value; ?></td>
+                                    <td><?php echo ucfirst(str_replace("_", " ", $key)); ?></td>
+                                    <td>
+                                        <?php
+                                        if (filter_var($value, FILTER_VALIDATE_URL) == true && $key == "official_url") {
+                                            echo "<a href=" . $value . " target='_BLANK'>Click Here For Official Info</a>";
+                                        } elseif(!empty(strtotime($value))) {
+                                            echo date('(l) d F, Y',strtotime($value));
+                                        }else{
+                                            echo $value;
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <?php
                             }

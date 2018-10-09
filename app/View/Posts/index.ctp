@@ -7,7 +7,8 @@
                 ?>
                 <div class="col-lg-6">
                     <div class="list-box">
-                        <?php if (!empty($postData['Post']['cover_image'])) {
+                        <?php
+                        if (!empty($postData['Post']['cover_image'])) {
                             echo $this->html->image('/files/images/' . $postData['Post']['cover_image'], array('class' => 'img-responsive'));
                         }
                         ?>
@@ -16,7 +17,7 @@
 
                             <h2 class="notes-title">
                                 <a href="<?php echo $_linkUrl; ?>">
-        <?php echo $postData['Post']['title']; ?>
+                                    <?php echo $postData['Post']['title']; ?>
                                 </a>
                             </h2>
                             <div class="notes-shortdesc">
@@ -53,27 +54,36 @@
                 </div>
                 <?php
             }
+            ?>
+            <div class="row site-pagination">
+                <div class="col-lg-6">
+                    <?php echo $this->Paginator->counter(); ?>
+                </div>
+                <div class="col-lg-6">
+                    <div class=" pull-right">
+                        <?php
+                        echo $this->Paginator->numbers(array(
+                            'before' => '<ul class="pagination">',
+                            'separator' => '',
+                            'currentTag' => 'a',
+                            'currentClass' => 'active',
+                            'tag' => 'li',
+                            'after' => '</ul>'
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>	
+            <?php
+        } else {
+            ?>
+            <div class="alert alert-info" role="alert">
+                Please try searching with other keyword!
+            </div>
+            <?php
         }
         ?>
-        <div class="row site-pagination">
-            <div class="col-lg-6">
-<?php echo $this->Paginator->counter(); ?>
-            </div>
-            <div class="col-lg-6">
-                <div class=" pull-right">
-                    <?php
-                    echo $this->Paginator->numbers(array(
-                        'before' => '<ul class="pagination">',
-                        'separator' => '',
-                        'currentTag' => 'a',
-                        'currentClass' => 'active',
-                        'tag' => 'li',
-                        'after' => '</ul>'
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>	
+
     </div>
 
     <?php
@@ -111,8 +121,8 @@
                 </div>
             </div>
 
-        <?php echo $this->element('sidebar/topposts'); ?>
-        <?php //echo $this->element('sidebar/newnotes'); ?>
+            <?php //echo $this->element('sidebar/topposts'); ?>
+            <?php //echo $this->element('sidebar/newnotes');  ?>
         </div>  
         <?php
     }

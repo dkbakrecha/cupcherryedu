@@ -28,8 +28,15 @@
                         </div>                    
                     <?php } ?>
                     <div class="meta-info">
-                        <a href="#">By <?php echo $postDetail['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postDetail['Post']['created'])) ?> | 
-                        <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['sub_category_id']); ?></a>
+                        <a href="#">By <?php echo $postDetail['User']['name']; ?></a> on <?php echo date(Configure::read('Site.front_date_format'), strtotime($postDetail['Post']['created'])) ?> 
+                        <?php
+                        if ($postDetail['Post']['post_type'] == 1) {
+                            ?>
+                            | <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['category_id']); ?></a> - <a href="#"><?php echo $this->Common->get_category_by_id($postDetail['Post']['sub_category_id']); ?></a>
+                            <?php
+                        }
+                        ?>
+
                     </div>
                 </div>
 
@@ -52,12 +59,16 @@
                                     <td><?php echo ucfirst(str_replace("_", " ", $key)); ?></td>
                                     <td>
                                         <?php
-                                        if (filter_var($value, FILTER_VALIDATE_URL) == true && $key == "official_url") {
-                                            echo "<a href=" . $value . " target='_BLANK'>Click Here For Official Info</a>";
-                                        } elseif(!empty(strtotime($value))) {
-                                            echo date('(l) d F, Y',strtotime($value));
-                                        }else{
-                                            echo $value;
+                                        if (!empty($value)) {
+                                            if (filter_var($value, FILTER_VALIDATE_URL) == true && $key == "official_url") {
+                                                echo "<a href=" . $value . " target='_BLANK'>Click Here For Official Info</a>";
+                                            } elseif (strtotime($value) == true) {
+                                                echo date('(l) d F, Y', strtotime($value));
+                                            } else {
+                                                echo $value;
+                                            }
+                                        } else {
+                                            echo "Not mention";
                                         }
                                         ?>
                                     </td>
@@ -100,7 +111,7 @@
         ?>
         <div class="col-lg-4">
             <?php echo $this->element('sidebar/topposts'); ?>
-            <?php //echo $this->element('sidebar/newnotes');  ?>
+            <?php //echo $this->element('sidebar/newnotes');   ?>
         </div>
         <?php
     }

@@ -11,30 +11,16 @@ class ExamNotificationsController extends AppController {
         $this->Auth->allow('index', 'view');
     }
 
-    public function index() {
-        $this->loadModel("Post");
-        $notificationList = $this->Post->find('all', array(
-            'conditions' => array(
-                'Post.status' => 1,
-                'Post.post_type' => 3
-                ),
-            'order' => array('Post.id DESC'),
-            'limit' => 6
-                ));
-        //pr($notificationList);
-        $this->set('notificationList', $notificationList);
-    }
-
     public function view($id) {
         $this->loadModel("Post");
         if (is_numeric($id)) {
             $notification = $this->Post->find('first', array(
                 'conditions' => array('Post.id' => $id)
-                    ));
+            ));
         } else {
             $notification = $this->Post->find('first', array(
                 'conditions' => array('Post.title_slug' => $id)
-                    ));
+            ));
         }
 
 
@@ -138,7 +124,7 @@ class ExamNotificationsController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -157,7 +143,7 @@ class ExamNotificationsController extends AppController {
                     } else if ($row['ExamNotification']['status'] == 1) {
                         $status .= '<i class="fa fa-dot-circle-o fa-lg clr-green" onclick="changeEnStatus(' . $row['ExamNotification']['id'] . ',1)" title="Change Status"></i>';
                     }
-                    
+
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . '/exam_notifications/view/' . $row['ExamNotification']['id'] . '" target="_BLANK"><i class="fa fa-eye fa-lg"></i></a> ';
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/exam_notifications/edit/' . $row['ExamNotification']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 

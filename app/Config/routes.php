@@ -25,6 +25,8 @@ Router::connect('/admin', array('controller' => 'users', 'action' => 'login', 'a
 Router::connect('/register_student', array('controller' => 'users', 'action' => 'register'));
 Router::connect('/register_teacher', array('controller' => 'users', 'action' => 'register', 'teacher'));
 Router::connect('/gkbytes', array('controller' => 'questions', 'action' => 'gkbytes'));
+Router::connect('/exam_notifications', array('controller' => 'posts', 'action' => 'exam_notifications'));
+
 
 
 //    Router::connect(

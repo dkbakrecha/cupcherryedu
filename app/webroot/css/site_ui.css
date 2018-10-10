@@ -493,7 +493,7 @@ ul.social-media > li:hover a {
     width: 100%;
 }
 
-.navbar-nav .fa {
+.navbar-nav .fa.fa-envelope-o {
     margin-right: 10px;
 }
 

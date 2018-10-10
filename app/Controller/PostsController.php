@@ -15,7 +15,7 @@ class PostsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'hitview');
+        $this->Auth->allow('index', 'view', 'hitview', 'exam_notifications');
     }
 
     public function index() {
@@ -24,6 +24,7 @@ class PostsController extends AppController {
         if (!empty($this->request->query['q'])) {
             $search_term = $this->request->query['q'];
             $paginateCond['or'][] = array('Post.title LIKE' => "%$search_term%");
+            $this->set('queryString', $search_term);
         }
 
         $paginateCond['Post.status'] = 1;
@@ -39,7 +40,22 @@ class PostsController extends AppController {
         $this->set('all_posts', $all_posts);
     }
 
+    public function exam_notifications() {
+        $this->loadModel("Post");
+        $notificationList = $this->Post->find('all', array(
+            'conditions' => array(
+                'Post.status' => 1,
+                'Post.post_type' => 3
+            ),
+            'order' => array('Post.id DESC'),
+            'limit' => 6
+        ));
+        //pr($notificationList);
+        $this->set('notificationList', $notificationList);
+    }
+
     public function view($titleslug) {
+
         if (!empty($titleslug)) {
             $_postDetail = $this->Post->find('first', array(
                 'conditions' => array(
@@ -102,20 +118,20 @@ class PostsController extends AppController {
 
             $postData['Post']['user_id'] = $this->loggedinUser['id'];
 
-            /*if (!empty($postData['Post']['cover_image'])) {
-                $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
-                $postData['Post']['cover_image'] = $image_name;
-            } else {
-                unset($postData['Post']['cover_image']);
-            }*/
+            /* if (!empty($postData['Post']['cover_image'])) {
+              $image_name = $this->_moveUploadFile($postData['Post']['cover_image'], PATH_UPLOAD_IMAGE);
+              $postData['Post']['cover_image'] = $image_name;
+              } else {
+              unset($postData['Post']['cover_image']);
+              } */
 
 //prd($postData);
             if ($postData = $this->Post->save($postData)) {
- //pr($postData);
+                //pr($postData);
                 if (!empty($postData['PostMeta'])) {
-                   
+
                     foreach ($postData['PostMeta'] as $key => $value) {
-                        $postMetaData = $this->PostMeta->find('first',array(
+                        $postMetaData = $this->PostMeta->find('first', array(
                             'conditions' => array(
                                 'meta_key' => $key,
                                 'post_id' => $postData['Post']['id']
@@ -126,11 +142,11 @@ class PostsController extends AppController {
                         $pdArr['post_id'] = $postData['Post']['id'];
                         $pdArr['meta_key'] = $key;
                         $pdArr['meta_value'] = $value;
-                        
-                        if(!empty($postMetaData)){
+
+                        if (!empty($postMetaData)) {
                             //Update 
                             $pdArr['id'] = $postMetaData['PostMeta']['id'];
-                        }else{
+                        } else {
                             //New
                             $this->PostMeta->create();
                         }
@@ -156,7 +172,7 @@ class PostsController extends AppController {
             'conditions' => array('User.status' => '1'),
         ));
 
-       
+
 
         $this->set('userList', $userList);
         $this->set('mediaImages', $mediaImages);

@@ -20,23 +20,19 @@ class QuestionsController extends AppController {
     );
 
     public function index() {
-         $request = $this->request;
+        $this->paginate['conditions']['Question.status'] = 1;
+        //$this->paginate['conditions']['Question.user_id'] != 1;
+        $this->paginate['order'] = array('id' => 'DESC');
 
+        if (!empty($this->request->params['named']['subcate'])) {
+            $_subcate = $this->request->params['named']['subcate'];
+            $this->paginate['conditions']['sub_category_id'] = $_subcate;
+        }
 
-          $this->paginate['conditions']['Question.status'] = 1;
-          $this->paginate['conditions']['Question.user_id'] = $this->_getCurrentUserId();
-          $this->paginate['order'] = array('id' => 'DESC');
+        $this->Paginator->settings = $this->paginate;
 
-          if (!empty($this->request->params['named']['subcate']))
-          {
-          $_subcate = $this->request->params['named']['subcate'];
-          $this->paginate['conditions']['sub_category_id'] = $_subcate;
-          }
-
-          $this->Paginator->settings = $this->paginate;
-
-          $all_questions = $this->Paginator->paginate('Question');
-          $this->set('allQuestions', $all_questions); 
+        $all_questions = $this->Paginator->paginate('Question');
+        $this->set('allQuestions', $all_questions);
     }
 
     public function getanswer() {
@@ -56,7 +52,7 @@ class QuestionsController extends AppController {
                     'answer.id' => $_answer_id,
                     'answer.question_id' => $_question_id
                 )
-                    ));
+            ));
 
             $testDetail = $this->Test->find('first', array('conditions' => array('id' => $_test_id)));
 
@@ -92,7 +88,7 @@ class QuestionsController extends AppController {
         $testQues = $this->TestQuestion->find('first', array('conditions' => array(
                 'TestQuestion.test_id' => $test_id,
                 'TestQuestion.question_id' => $question_id,
-                )));
+        )));
 
         $neighbors = $this->TestQuestion->find(
                 'neighbors', array('field' => 'id', 'value' => $testQues['TestQuestion']['id'])
@@ -100,7 +96,7 @@ class QuestionsController extends AppController {
         //prd($neighbors);
         $question = $this->Question->find('first', array('conditions' => array(
                 'Question.id' => $neighbors['next']['TestQuestion']['question_id']
-                )));
+        )));
 
         return $question;
     }
@@ -142,7 +138,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => 0
             )
-                ));
+        ));
 
 
 
@@ -152,7 +148,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => key($cateList)
             )
-                ));
+        ));
 
         $this->set('cateList', $cateList);
         $this->set('subcateList', $subcateList);
@@ -167,7 +163,7 @@ class QuestionsController extends AppController {
             'conditions' => array(
                 'parent_id' => 26
             )
-                ));
+        ));
 
         $this->set('subcateList', $subcateList);
 
@@ -211,7 +207,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => 0
             )
-                ));
+        ));
 
         $this->set('cateList', $cateList);
 
@@ -244,7 +240,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => key($cateList)
             )
-                ));
+        ));
 
         $this->set('subcateList', $subcateList);
     }
@@ -293,7 +289,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => 0
             )
-                ));
+        ));
 
         $this->set('cateList', $cateList);
 
@@ -302,7 +298,7 @@ class QuestionsController extends AppController {
                 'status' => 1,
                 'parent_id' => $quesData['Question']['category_id']
             )
-                ));
+        ));
 
         $this->set('subcateList', $subcateList);
         //prd($quesData);
@@ -350,7 +346,7 @@ class QuestionsController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;
@@ -375,7 +371,7 @@ class QuestionsController extends AppController {
                      */
                     //$action .= '&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye fa-lg"></i></a> ';
 
-                    
+
                     $action .= '&nbsp;&nbsp;&nbsp;<span data-question="' . $row['Question']['id'] . '" title="Add To Practice" class="btn btn-primary btn-sm addtopractice"><i class="glyphicon glyphicon-plus-sign"></i> Practice</sapn> ';
                     $action .= '&nbsp;&nbsp;&nbsp;<a href="' . $this->webroot . 'admin/questions/edit/' . $row['Question']['id'] . '" title="Edit uSER"><i class="fa fa-pencil fa-lg"></i></a> ';
 
@@ -444,7 +440,7 @@ class QuestionsController extends AppController {
                 'order' => $orderby,
                 'limit' => $limit,
                 'offset' => $start
-                    ));
+            ));
 
             $return_result['draw'] = $page;
             $return_result['recordsTotal'] = $total_records;

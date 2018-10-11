@@ -60,8 +60,13 @@
                                     <td>
                                         <?php
                                         if (!empty($value)) {
-                                            if (filter_var($value, FILTER_VALIDATE_URL) == true && $key == "official_url") {
-                                                echo "<a href=" . $value . " target='_BLANK'>Click Here For Official Info</a>";
+                                            if (filter_var($value, FILTER_VALIDATE_URL) == true && ($key == "official_url" || $key == "syllabus_url")) {
+                                                if($key == "official_url" ){
+                                                    echo "<a href=" . $value . " target='_BLANK'>Click Here For Official Info</a>";
+                                                }else{
+                                                    echo "<a href=" . $value . " target='_BLANK'>Click Here For Syllabus Info</a>";
+                                                }
+                                                
                                             } elseif (strtotime($value) == true) {
                                                 echo date('(l) d F, Y', strtotime($value));
                                             } else {

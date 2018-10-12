@@ -26,7 +26,7 @@ class PostsController extends AppController {
             $paginateCond['or'][] = array('Post.title LIKE' => "%$search_term%");
             $this->set('queryString', $search_term);
         }
-
+        $paginateCond['Post.post_type'] = array(0, 1);
         $paginateCond['Post.status'] = 1;
 
         $this->Paginator->settings = array(
@@ -41,17 +41,35 @@ class PostsController extends AppController {
     }
 
     public function exam_notifications() {
-        $this->loadModel("Post");
-        $notificationList = $this->Post->find('all', array(
-            'conditions' => array(
-                'Post.status' => 1,
-                'Post.post_type' => 3
-            ),
-            'order' => array('Post.id DESC'),
-            'limit' => 6
-        ));
+
+        $paginateCond = array();
+
+        if (!empty($this->request->query['q'])) {
+            $search_term = $this->request->query['q'];
+            $paginateCond['or'][] = array('Post.title LIKE' => "%$search_term%");
+            $this->set('queryString', $search_term);
+        }
+        $paginateCond['Post.post_type'] = 3;
+        $paginateCond['Post.status'] = 1;
+        /* $notificationList = $this->Post->find('all', array(
+          'conditions' => array(
+          'Post.status' => 1,
+          'Post.post_type' => 3
+          ),
+          'order' => array('Post.id DESC'),
+          'limit' => 6
+          )); */
+
+        $this->Paginator->settings = array(
+            'conditions' => array($paginateCond),
+            'paramType' => 'querystring',
+            'limit' => 10,
+            'order' => array('id' => 'desc')
+        );
+
+        $all_posts = $this->Paginator->paginate('Post');
         //pr($notificationList);
-        $this->set('notificationList', $notificationList);
+        $this->set('all_posts', $all_posts);
     }
 
     public function view($titleslug) {

@@ -18,6 +18,10 @@ body.teacherlogin{
     clear: both;
 }
 
+.no-padding {
+    padding: 0;
+}
+
 .hr-title h1, .hr-title h2, .hr-title h3, .hr-title h4, .hr-title h5, .hr-title h6, .widget-title h1, .widget-title h2, .widget-title h3, .widget-title h4, .widget-title h5, .widget-title h6 {
     display: table-cell;
     float: left;
@@ -964,7 +968,7 @@ a.aboutauthor {
 .cardbox .list-box .note-short{
     width: 100%;
     padding: 15px;
-    min-height: 200px;
+    min-height: 150px;
 }
 
 .cardbox .notes-shortdesc {

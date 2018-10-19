@@ -16,12 +16,17 @@ if ($this->request->params['controller'] == "practices") {
 if ($this->request->params['controller'] == "users" && $this->request->params['action'] == "login") {
     $sm_login = "active";
 }
+
+$_class = "";
+if (!empty($LoggedinUser)) {
+   $_class = "loggedin"; 
+}
 //prd($_body_class);
 if ($_body_class != "tests-practice_table") {
     ?>
 
     <section class="shortcut-menu">
-        <ul class="shortcut-nav">
+        <ul class="shortcut-nav <?php echo $_class; ?>">
             <li class="<?php echo $sm_gkbyte; ?>">
                 <a href="<?php echo $this->Html->url(array('controller' => 'practices', 'action' => 'index')); ?>">
                     <i class="fa fa-file-text"></i>
@@ -29,17 +34,36 @@ if ($_body_class != "tests-practice_table") {
                 </a>
             </li>
             <li class="<?php echo $sm_notes; ?>">
-                <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">
-                    <i class="fa fa-file-text-o"></i>
-                    <span>Notes</span>
-                </a>
+                <?php
+                if (empty($LoggedinUser)) {
+                    ?>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Notes</span>
+                    </a>
+                    <?php
+                } else {
+                    ?>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'wall')); ?>">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Wall</span>
+                    </a>
+                    <?php
+                }
+                ?>
             </li>
-            <li class="<?php echo $sm_alert; ?>">
-                <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
-                    <i class="fa fa-bell-o"></i>
-                    <span>Alert</span>
-                </a>
-            </li>
+            <?php
+            if (empty($LoggedinUser)) {
+                ?>
+                <li class="<?php echo $sm_alert; ?>">
+                    <a href="<?php echo $this->Html->url(array('controller' => 'exam_notifications', 'action' => 'index')); ?>">
+                        <i class="fa fa-bell-o"></i>
+                        <span>Alert</span>
+                    </a>
+                </li>
+                <?php
+            }
+            ?>
             <li class="<?php echo $sm_login; ?>">
                 <?php
                 if (empty($LoggedinUser)) {

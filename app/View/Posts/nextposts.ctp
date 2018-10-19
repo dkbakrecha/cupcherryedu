@@ -64,12 +64,14 @@ if (!empty($all_posts)) {
         <?php
     }
     ?>
-    <?php
-} else {
-    ?>
-    <div class="alert alert-info" role="alert">
-        Please try searching with other keyword!
-    </div>
+    <?php if ($postcount > 10) { ?>
+        <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
+            <span id="<?php echo $postID; ?>" class="show_more btn btn-info btn-full" title="Load more posts">Show more</span>
+            <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
+        </div>
+    <?php } ?>
+
     <?php
 }
 ?>
+

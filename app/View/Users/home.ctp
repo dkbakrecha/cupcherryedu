@@ -239,7 +239,33 @@ echo $this->Form->hidden('resFrom');
 echo $this->Form->end();
 ?>
 
-
+<div class="footer-subscribe">
+    <div class="container text-center">
+        <h5>Subscribe to our mailing list to receive an update when new exam notification arrive!</h5>
+        <div id="home_subscribe" class="col-lg-6 col-lg-offset-3">
+            <form role="form" id="hr-subscribe-form" action="<?php echo $this->Html->url(array('controller' => 'newsletters', 'action' => 'add')); ?>" method="post" name="hr-subscribe-form" novalidate="" class="hr-subscribe-form">
+                <div class="input-group input-group-lg">
+                    <?php
+                    echo $this->Form->input('email_address', array(
+                        'type' => 'email',
+                        'class' => 'form-control',
+                        'placeholder' => 'Email address...',
+                        'label' => false,
+                        'div' => false
+                    ));
+                    ?>
+                    <!--<input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="">-->
+                    <span class="input-group-btn">
+                        <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary">Subscribe!</button>
+                    </span>
+                </div>
+                <div id="responses">
+                    <div class="response" id="mce-response" style="display:none"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <script>
@@ -252,11 +278,4 @@ echo $this->Form->end();
         $(this).prev().attr('src', mySrc + glue + new Date().getTime());
         return false;
     });
-
-
-
-
-    function click_gp() {
-        $('#GoogleLogin').click();
-    }
 </script>

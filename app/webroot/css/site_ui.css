@@ -18,6 +18,14 @@ body.teacherlogin{
     clear: both;
 }
 
+.btn-full{
+    width: 100%;
+}
+
+.site-content {
+    margin-bottom: 80px;
+}
+
 .no-padding {
     padding: 0;
 }
@@ -2912,12 +2920,26 @@ select.home-search-select::-ms-expand {
         right: 10px !important;
     }
 
+    .cardcontainer > h3 {
+        font-size: 14px;
+        min-height: 60px;
+        margin-top: 0px;
+        margin-bottom: 0;
+    }
+
+    .cardcontainer .post-author{
+        font-size: 12px;
+    }
 
 }
 
 @media only screen and (max-width: 360px) {
     .nomobile{
         display: none;
+    }
+
+    .site-content{
+        margin-bottom: 80px;
     }
 
     .container, .row {
@@ -2964,6 +2986,7 @@ select.home-search-select::-ms-expand {
     .site-content, .posts-view .col-lg-8{
         margin: 0;
         padding: 0;
+        margin-bottom: 80px;
     }
 
     .post-detail{
@@ -3034,6 +3057,10 @@ select.home-search-select::-ms-expand {
         font-size: 13px;
         text-align: center;
         width: 20%;
+    }
+
+    .shortcut-nav.loggedin > li {
+        width: 25%;
     }
 
     .shortcut-nav > li.active{
@@ -3181,6 +3208,36 @@ select.home-search-select::-ms-expand {
 
     .user-info .profile-role{
         line-height: 15px;
+    }
+
+    .card img{
+        height: 100px;
+    }
+
+    .cardcontainer > h3 {
+        font-size: 14px;
+        min-height: 60px;
+        margin-top: 0px;
+        margin-bottom: 0;
+    }
+
+    .cardcontainer .post-author{
+        font-size: 12px;
+    }
+
+    .footer-subscribe h5 {
+        color: #FFF;
+        font-size: 18px;
+        padding: 0px 10px;
+        margin-top: 0;
+    }
+    
+    .home-exam-list{
+        padding: 0;
+    }
+    
+    .exam-callaction{
+        display: none;
     }
 
 }

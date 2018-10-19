@@ -1,7 +1,25 @@
 <div class="row note_list cardbox">
     <div class="col-lg-8">
-        <?php echo $this->element('post_tile');?>
-
+        <?php echo $this->element('post_tile'); ?>
+        <div class="row site-pagination">
+            <div class="col-lg-6">
+                <?php echo $this->Paginator->counter(); ?>
+            </div>
+            <div class="col-lg-6">
+                <div class=" pull-right">
+                    <?php
+                    echo $this->Paginator->numbers(array(
+                        'before' => '<ul class="pagination">',
+                        'separator' => '',
+                        'currentTag' => 'a',
+                        'currentClass' => 'active',
+                        'tag' => 'li',
+                        'after' => '</ul>'
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
 
     <?php

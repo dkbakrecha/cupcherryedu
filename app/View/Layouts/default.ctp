@@ -21,7 +21,7 @@
             'fullcalendar.print',
             '/js/iCheck/all',
             'font-awesome/css/font-awesome.min',
-            'site_ui.css?var=20180724',
+            'site_ui.css',
             '/js/share/css/jquery.sharepage',
             '/js/summernote/summernote',
             'dataTable_custom',

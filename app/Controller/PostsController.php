@@ -26,7 +26,10 @@ class PostsController extends AppController {
             $paginateCond['or'][] = array('Post.title LIKE' => "%$search_term%");
             $this->set('queryString', $search_term);
         }
-        $paginateCond['Post.post_type'] = array(0, 1);
+
+        if (empty($this->loggedinUser)) {
+            $paginateCond['Post.post_type'] = array(0, 1);
+        }
         $paginateCond['Post.status'] = 1;
 
         $this->Paginator->settings = array(
@@ -37,6 +40,43 @@ class PostsController extends AppController {
         );
 
         $all_posts = $this->Paginator->paginate('Post');
+        $this->set('all_posts', $all_posts);
+    }
+
+    public function wall() {
+        $all_posts = $this->Post->find('all', array(
+            'conditions' => array(
+                'Post.status' => 1
+            ),
+            'limit' => 10,
+            'order' => array('Post.id' => 'desc')
+        ));
+
+        $this->set('all_posts', $all_posts);
+    }
+
+    public function nextposts() {
+        $this->layout = false;
+        $data = $this->request->data;
+        if (!empty($data['id'])) {
+            $postcount = $this->Post->find('count', array(
+                'conditions' => array(
+                    'Post.status' => 1,
+                    'Post.id <' => $data['id']
+                )
+            ));
+            
+            $all_posts = $this->Post->find('all', array(
+                'conditions' => array(
+                    'Post.status' => 1,
+                    'Post.id <' => $data['id']
+                ),
+                'limit' => 10,
+                'order' => array('Post.id' => 'desc')
+            ));
+        }
+
+        $this->set('postcount', $postcount);
         $this->set('all_posts', $all_posts);
     }
 

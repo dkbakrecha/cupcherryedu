@@ -979,6 +979,13 @@ a.aboutauthor {
     min-height: 150px;
 }
 
+.cardbox .list-box .notes-image{
+    height: 200px;
+}
+.cardbox .list-box .notes-image img{
+    height: 100%;
+}
+
 .cardbox .notes-shortdesc {
     color: #777777;
     line-height: 18px;

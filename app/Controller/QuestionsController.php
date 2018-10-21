@@ -102,7 +102,6 @@ class QuestionsController extends AppController {
     }
 
     public function add() {
-        $this->loadModel('Option');
         $this->loadModel('Category');
         $request = $this->request;
 
@@ -152,6 +151,22 @@ class QuestionsController extends AppController {
 
         $this->set('cateList', $cateList);
         $this->set('subcateList', $subcateList);
+    }
+
+    public function plus() {
+        $request = $this->request;
+
+        if ($request->is(array('post', 'put')) && !empty($request->data)) {
+            //prd($request->data);
+            $_quesArray = array();
+            $_quesArray['Question'] = $request->data['Question'];
+            $_quesArray['Question']['user_id'] = $this->_getCurrentUserId();
+            $_quesArray['Question']['status'] = 3;
+            if ($this->Question->save($_quesArray)) {
+                $this->Session->setFlash("Question Saved Successfully");
+                $this->redirect(array('controller' => 'questions', 'action' => 'index'));
+            }
+        }
     }
 
     public function gkbytes() {

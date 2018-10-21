@@ -44,13 +44,25 @@ class PostsController extends AppController {
     }
 
     public function wall() {
+        $_cond = array();
+        $_cond['Post.status'] = 1;
+        if (!empty($this->request->query['q'])) {
+            $search_term = $this->request->query['q'];
+            $_cond['Post.title LIKE'] = "%$search_term%";
+            $this->set('search_term', $search_term);
+        }
+        
+        $postcount = $this->Post->find('count', array(
+                'conditions' => $_cond
+            ));
+
         $all_posts = $this->Post->find('all', array(
-            'conditions' => array(
-                'Post.status' => 1
-            ),
+            'conditions' => $_cond,
             'limit' => 10,
             'order' => array('Post.id' => 'desc')
         ));
+
+                $this->set('postcount', $postcount);
 
         $this->set('all_posts', $all_posts);
     }
@@ -58,19 +70,24 @@ class PostsController extends AppController {
     public function nextposts() {
         $this->layout = false;
         $data = $this->request->data;
+        $_cond = array();
+        $_cond['Post.status'] = 1;
+        $search_term = "";
+        if (!empty($data['q'])) {
+            $search_term = $data['q'];
+            $_cond['Post.title LIKE'] = "%$search_term%";
+        }
+        $this->set('search_term', $search_term);
+        
         if (!empty($data['id'])) {
+             $_cond['Post.id <'] = $data['id'];
+             
             $postcount = $this->Post->find('count', array(
-                'conditions' => array(
-                    'Post.status' => 1,
-                    'Post.id <' => $data['id']
-                )
+                'conditions' => $_cond
             ));
-            
+
             $all_posts = $this->Post->find('all', array(
-                'conditions' => array(
-                    'Post.status' => 1,
-                    'Post.id <' => $data['id']
-                ),
+                'conditions' => $_cond,
                 'limit' => 10,
                 'order' => array('Post.id' => 'desc')
             ));

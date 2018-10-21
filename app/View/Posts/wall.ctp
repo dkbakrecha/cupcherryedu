@@ -1,5 +1,5 @@
 <div class="row note_list cardbox">
-    <div class="col-lg-8 postList">
+    <div class="col-lg-10 postList">
         <?php
         if (!empty($all_posts)) {
             foreach ($all_posts as $postData) {
@@ -67,11 +67,12 @@
             }
         }
         ?>
-
-        <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
-            <span id="<?php echo $postID; ?>" class="show_more btn btn-info btn-full" title="Load more posts">Show more</span>
-            <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
-        </div>
+        <?php if ($postcount > 10) { ?>
+            <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
+                <span id="<?php echo $postID; ?>" data-term="<?php echo @$search_term; ?>" class="show_more btn btn-info btn-full" title="Load more posts">Show more</span>
+                <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
+            </div>
+        <?php } ?>
     </div>
 
 </div>
@@ -81,12 +82,13 @@
     $(document).ready(function () {
         $(document).on('click', '.show_more', function () {
             var ID = $(this).attr('id');
+            var q = $(this).data('term');
             $('.show_more').hide();
             $('.loding').show();
             $.ajax({
                 type: 'POST',
                 url: '<?php echo $this->html->url(array('controller' => 'posts', 'action' => 'nextposts'), true) ?>',
-                data: 'id=' + ID,
+                data: 'id=' + ID + "&q=" + q,
                 success: function (html) {
                     $('#show_more_main' + ID).remove();
                     $('.postList').append(html);

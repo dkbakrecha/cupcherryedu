@@ -355,7 +355,7 @@ class UsersController extends AppController {
         $this->layout = "home";
         //prd($this->loggedinUser);
         if (!empty($this->loggedinUser)) {
-            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+            $this->redirect(array('controller' => 'posts', 'action' => 'wall'));
         }
 
         $this->loadModel('CmsPage');

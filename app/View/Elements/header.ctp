@@ -94,7 +94,7 @@ if ($this->request->params['controller'] == "notes") {
             <?php
             if (!empty($LoggedinUser)) {
                 ?>
-                <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'dashboard')); ?>">
+                <a class="navbar-brand" href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'wall')); ?>">
                     <?php echo $this->Html->image('The-Most-Complete-Education-Solution.png'); ?>
                 </a>
             <?php } else {
@@ -113,7 +113,16 @@ if ($this->request->params['controller'] == "notes") {
                 <?php
                 if (!empty($LoggedinUser)) {
                     ?>
-
+                    <div class="col-sm-12 col-md-12">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="q" value="<?php echo @$search_term;?>">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <?php
                     /* <li><a href="<?php echo $this->Html->url(array('controller' => 'notes', 'action' => 'index')); ?>"><i class="fa fa-files-o"></i> Notes</a></li>
                       <li><a href="<?php echo $this->Html->url(array('controller' => 'words', 'action' => 'index')); ?>"><i class="fa fa-hdd-o"></i> Words Jumble</a></li>
@@ -157,7 +166,7 @@ if ($this->request->params['controller'] == "notes") {
                     <?php
                     foreach ($examList as $exam) {
                         ?>
-                                                                                                                                        <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
+                                                                                                                                                    <li><a href="<?php echo $this->Html->url(array('controller' => 'exams', 'action' => 'view', $exam['Exam']['id'])); ?>"><?php echo $exam['Exam']['title']; ?></a></li>
                         <?php
                     }
                     ?>
@@ -184,6 +193,17 @@ if ($this->request->params['controller'] == "notes") {
                     <?php
                 } else {
                     ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'add', 'article')); ?>">Article</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'add', 'notes')); ?>">Notes</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'add', 'examnitification')); ?>">Exam Notification</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'questions', 'action' => 'plus')); ?>">Question</a></li>
+                        </ul>
+                    </li>
                     <li><a href="<?php echo $this->Html->url(array('controller' => 'notifications', 'action' => 'index')); ?>"><i class="fa fa-bell-o"></i></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle profile-mnu-wrapper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

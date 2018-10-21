@@ -52,7 +52,7 @@ class AppController extends Controller {
         );
 
         $this->Auth->loginAction = array('admin' => false, 'controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('admin' => false, 'controller' => 'users', 'action' => 'dashboard');
+        $this->Auth->loginRedirect = array('admin' => false, 'controller' => 'posts', 'action' => 'wall');
         $this->Auth->logoutRedirect = array('admin' => false, 'controller' => 'users', 'action' => 'home');
 
         if (isset($this->request->params['admin'])) {

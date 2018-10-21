@@ -66,7 +66,7 @@ if (!empty($all_posts)) {
     ?>
     <?php if ($postcount > 10) { ?>
         <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
-            <span id="<?php echo $postID; ?>" class="show_more btn btn-info btn-full" title="Load more posts">Show more</span>
+            <span id="<?php echo $postID; ?>" data-term="<?php echo @$search_term;?>" class="show_more btn btn-info btn-full" title="Load more posts">Show more</span>
             <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
         </div>
     <?php } ?>
